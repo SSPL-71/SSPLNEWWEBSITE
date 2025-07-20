@@ -273,13 +273,13 @@
             <label for="pdf-files">Select PDF files to merge:</label>
             <input type="file" id="pdf-files" accept="application/pdf" multiple>
             <button id="merge-btn" style="margin-top: 20px;">Merge PDFs</button>
-            <div id="result" style="margin-top: 20px;"></div>
+            <div id="merge-result" style="margin-top: 20px;"></div>
         </div>
         <script>
             document.getElementById('merge-btn').addEventListener('click', async () => {
                 const files = document.getElementById('pdf-files').files;
                 if (files.length < 2) return alert('Select at least two PDFs.');
-                const resultDiv = document.getElementById('result');
+                const resultDiv = document.getElementById('merge-result');
                 resultDiv.innerHTML = '<p>Processing...</p>';
                 const mergedPdf = await PDFLib.PDFDocument.create();
                 for (const file of files) {
@@ -354,7 +354,7 @@
             <input type="range" id="quality-slider" min="10" max="90" value="60">
             <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
             <div id="compression-info" style="margin-top: 10px;"></div>
-            <div id="result" style="margin-top: 20px;"></div>
+            <div id="compress-result" style="margin-top: 20px;"></div>
         </div>
         <script>
             document.getElementById('quality-slider').addEventListener('input', e => {
@@ -365,7 +365,7 @@
                 const file = document.getElementById('pdf-file').files[0];
                 if (!file) return alert('Select a file');
                 const compressionInfo = document.getElementById('compression-info');
-                const resultDiv = document.getElementById('result');
+                const resultDiv = document.getElementById('compress-result');
                 resultDiv.innerHTML = '<p>Compressing...</p>';
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
