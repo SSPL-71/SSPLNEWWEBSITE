@@ -1245,7 +1245,63 @@ At Sarvasiddhanta Services Private Limited, we firmly believe in the values of I
 
 <!-- SECTION: BLOGS -->
 <section style="background-color: #f4f4f4; padding: 50px 20px;">
-  <div style="max-width: 600px; margin: auto;">
+  <div style="max-width: 600px; margin: auto;"><div class="blog-banner">
+  <h2 class="blog-title">BLOGS</h2>
+  <div class="floating-shapes">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<style>
+.blog-banner {
+  position: relative;
+  height: 200px;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blog-title {
+  font-size: 32px;
+  color: #333;
+  font-family: 'Georgia', serif;
+  z-index: 2;
+  text-shadow: 1px 1px 2px #ccc;
+}
+
+.floating-shapes span {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: rgba(100, 100, 255, 0.2);
+  border-radius: 50%;
+  animation: floatUp 6s infinite ease-in-out;
+}
+
+.floating-shapes span:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+}
+.floating-shapes span:nth-child(2) {
+  left: 50%;
+  animation-delay: 2s;
+}
+.floating-shapes span:nth-child(3) {
+  left: 80%;
+  animation-delay: 4s;
+}
+
+@keyframes floatUp {
+  0% { bottom: -20px; opacity: 0; }
+  50% { opacity: 1; }
+  100% { bottom: 100%; opacity: 0; }
+}
+</style>
     <h2 style="color: #333; text-align: center;">BLOGS</h2>
     
     <ul style="margin-top: 20px; padding-left: 20px; line-height: 1.6; font-size: 16px; font-family: 'Georgia', serif; color: #333;">
