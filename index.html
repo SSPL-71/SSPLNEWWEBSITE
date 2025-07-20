@@ -698,8 +698,9 @@
             color: #0056b3;
         }
     </style>
+</head>
 
-<div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
+<body>
     <h2> GPS CAMERA PRO! </h2>
     <h2><i> NO APP DOWNLOAD & ZERO ADS!</i></h2>
 <h2 style="color: #FF5733;"><strong><i>📸 NEW FEATURES ALERT!</i></strong></h2>
@@ -712,11 +713,10 @@
         <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Camera">
     </label>
     <input type="file" id="cameraInput" accept="image/*" capture="environment">
-    <center><div class="canvas-container" id="canvasContainer"></div></center>
-    <center><button id="mergeToPDF" onclick="mergeToPDF()">MERGE PDF</button></center>
+    <div class="canvas-container" id="canvasContainer"></div>
+    <button id="mergeToPDF" onclick="mergeToPDF()">MERGE PDF</button>
 
-  <!-- GPS Camera JS -->
-  <script>
+    <script>
         console.log("Page loaded and script running...");
         let uploadedImages = [];
         let gpsCoordinates = "Fetching GPS...";
@@ -966,7 +966,7 @@ function mergeToPDF() {
         const link = document.createElement("a");
         link.href = pdfURL;
         link.download = "Merged_Photos.pdf";
-        link.textContent = "Click to Download Merged PDF!";
+        link.textContent = "Right Click to Download Merged PDF!";
         const mergeButton = document.getElementById("mergeToPDF");
         mergeButton.insertAdjacentElement("afterend", link);
 
@@ -974,7 +974,7 @@ function mergeToPDF() {
     }).catch(error => {
         console.error("Error merging PDF:", error);
     });
-} </script>
+ </script>
 </section>
 <!-- END SECTION: GPS Camera Tool --><br>
 
