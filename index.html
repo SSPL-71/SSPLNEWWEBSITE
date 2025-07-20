@@ -910,10 +910,45 @@ function generatePDF(imageData, exifDate, count) {
 function mergeToPDF() {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF();
-    let selectedImages = uploadedImages.filter((image, index) => {
+
+    const selectedImages = uploadedImages.filter((image, index) => {
         const checkbox = document.getElementById(`checkbox_${index + 1}`);
-        return checkbox.checked;
+        return checkbox && checkbox.checked;
     });
+
+    // Sequential loading to avoid async race
+    let loadAndAddImage = (image, index, callback) => {
+        const img = new Image();
+        img.onload = () => {
+            const imgWidth = pdf.internal.pageSize.getWidth();
+            const imgHeight = (img.height * imgWidth) / img.width; // Maintain aspect ratio
+
+            if (index !== 0) pdf.addPage(); // Only add a new page after first
+
+            pdf.addImage(img, 'JPEG', 0, 0, imgWidth, imgHeight);
+            callback(); // Load next image
+        };
+        img.onerror = () => {
+            console.warn(`Image ${index + 1} failed to load.`);
+            callback(); // Skip and continue
+        };
+        img.src = image.dataURL; // Ensure this is a valid base64 string
+    };
+
+    let index = 0;
+    let next = () => {
+        if (index < selectedImages.length) {
+            loadAndAddImage(selectedImages[index], index, () => {
+                index++;
+                next();
+            });
+        } else {
+            pdf.save("merged_output.pdf");
+        }
+    };
+
+    next();
+}
 
     let imagePromises = selectedImages.map((image, index) => {
         return new Promise((resolve) => {
