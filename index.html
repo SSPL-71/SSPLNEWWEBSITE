@@ -620,8 +620,7 @@
 
 <!-- SECTION: GPS Camera Tool -->
 <section>
- 
-<title>Camera with GPS & Address Overlay</title>
+ <title>Camera with GPS & Address Overlay</title>
 <style>
         body {
             text-align: center;
@@ -699,6 +698,7 @@
             color: #0056b3;
         }
     </style>
+
 <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
     <h2> GPS CAMERA PRO! </h2>
     <h2><i> NO APP DOWNLOAD & ZERO ADS!</i></h2>
@@ -713,7 +713,7 @@
     </label>
     <input type="file" id="cameraInput" accept="image/*" capture="environment">
     <div class="canvas-container" id="canvasContainer"></div>
-    <button id="mergeToPDF" onclick="mergeToPDF()">MERGE PDF</button>
+    <center><button id="mergeToPDF" onclick="mergeToPDF()">MERGE PDF</button></center>
 
   <!-- GPS Camera JS -->
   <script>
@@ -966,7 +966,7 @@ function mergeToPDF() {
         const link = document.createElement("a");
         link.href = pdfURL;
         link.download = "Merged_Photos.pdf";
-        link.textContent = "Right Click to Download Merged PDF!";
+        link.textContent = "Click to Download Merged PDF!";
         const mergeButton = document.getElementById("mergeToPDF");
         mergeButton.insertAdjacentElement("afterend", link);
 
