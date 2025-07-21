@@ -388,7 +388,7 @@
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = `merged-${Date.now()}.pdf`;
-                link.textContent = 'Right-click to download your merged PDF';
+                link.textContent = 'Cick To Download Your Merged PDF / Long Press on Mobile';
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(link);
 		loader.style.display = 'none'; // 🔹 hide loader
@@ -516,7 +516,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
     const link = document.createElement('a');
     link.href = url;
     link.download = `compressed-${Date.now()}.pdf`;
-    link.textContent = 'Download Compressed PDF';
+    link.textContent = 'Click to Download Compressed PDF / Long Press On Mobile';
 
     resultDiv.innerHTML = '';
     resultDiv.appendChild(link);
@@ -691,7 +691,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
       const link = document.createElement('a');
       link.href = url;
       link.download = `sorted-${Date.now()}.pdf`;
-      link.textContent = 'Click here to download your sorted PDF';
+      link.textContent = 'Click To Download Your Sorted PDF / Long Press On Mobile';
       resultDiv.innerHTML = '';
       resultDiv.appendChild(link);
     });
@@ -1044,7 +1044,7 @@ function mergeToPDF() {
         const link = document.createElement("a");
         link.href = pdfURL;
         link.download = "Merged_Photos.pdf";
-        link.textContent = "Click to Download Merged PDF!";
+        link.textContent = "Click to Download Merged Images PDF/ Long Press On Mobile";
         const mergeButton = document.getElementById("mergeToPDF");
         mergeButton.insertAdjacentElement("afterend", link);
 
