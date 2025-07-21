@@ -372,6 +372,8 @@
                 const files = document.getElementById('pdf-files').files;
                 if (files.length < 2) return alert('Select at least two PDFs.');
                 const resultDiv = document.getElementById('merge-result');
+ 		const loader = document.getElementById('loader'); // 🔹 loader added
+   		loader.style.display = 'block'; // 🔹 show loader
                 resultDiv.innerHTML = '<p>Processing...</p>';
                 const mergedPdf = await PDFLib.PDFDocument.create();
                 for (const file of files) {
@@ -389,6 +391,8 @@
                 link.textContent = 'Right-click to download your merged PDF';
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(link);
+		loader.style.display = 'none'; // 🔹 hide loader
+
             });
         </script>
     </section>
