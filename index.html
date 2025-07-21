@@ -360,7 +360,7 @@
             <input type="file" id="pdf-files" accept="application/pdf" multiple>
             <button id="merge-btn" style="margin-top: 20px;">Merge PDFs</button>
             <div id="merge-result" style="margin-top: 20px;"></div>
-		<div class="loader" id="loader">
+		<div class="loader" id="merge-loader">
         	<p>Processing... Please wait</p>
         	<div class="dot"></div>
         	<div class="dot"></div>
@@ -372,7 +372,7 @@
                 const files = document.getElementById('pdf-files').files;
                 if (files.length < 2) return alert('Select at least two PDFs.');
                 const resultDiv = document.getElementById('merge-result');
- 		const loader = document.getElementById('loader'); // 🔹 loader added
+ 		const loader = document.getElementById('merge-loader'); // 🔹 loader added
    		loader.style.display = 'block'; // 🔹 show loader
                 resultDiv.innerHTML = '<p>Processing...</p>';
                 const mergedPdf = await PDFLib.PDFDocument.create();
@@ -476,7 +476,7 @@
             <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
             <div id="compression-info" style="margin-top: 10px;"></div>
             <div id="compress-result" style="margin-top: 20px;"></div>
-	    <div class="loader" id="loader">
+	    <div class="loader" id="compress-loader">
         	<p>Compressing... Please wait</p>
         	<div class="dot"></div>
         	<div class="dot"></div>
@@ -495,7 +495,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
 
   const compressionInfo = document.getElementById('compression-info');
   const resultDiv = document.getElementById('compress-result');
-  const loader = document.getElementById('loader'); // 🔹 loader added
+  const loader = document.getElementById('compress-loader'); // 🔹 loader added
    		loader.style.display = 'flex'; // 🔹 show loader
   resultDiv.innerHTML = '<p>Compressing...</p>';
 
