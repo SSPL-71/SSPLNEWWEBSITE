@@ -1,14 +1,12 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
 
-@app.route('/compress', methods=['POST'])
-def compress_pdf():
-    uploaded_file = request.files.get('pdf')
-    if not uploaded_file:
-        return "No file uploaded", 400
+@app.route('/')
+def serve_index():
+    return send_from_directory('.', 'index.html')
 
     input_path = 'input.pdf'
     output_path = 'compressed.pdf'
