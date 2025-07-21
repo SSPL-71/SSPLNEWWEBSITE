@@ -8,6 +8,10 @@ COPY . /site
 
 RUN apt-get update && apt-get install -y ghostscript
 
+COPY app.py .
+RUN pip install flask
+CMD ["python3", "app.py"]
+
 # Expose port 10000 for Render
 EXPOSE 10000
 
