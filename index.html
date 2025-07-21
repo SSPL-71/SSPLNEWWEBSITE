@@ -446,6 +446,8 @@
             display: none;
             margin-top: 30px;
             text-align: center;
+	   flex-direction: column;
+           align-items: center;
         }
         .dot {
             display: inline-block;
@@ -474,7 +476,7 @@
             <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
             <div id="compression-info" style="margin-top: 10px;"></div>
             <div id="compress-result" style="margin-top: 20px;"></div>
-		<div class="loader" id="loader">
+	    <div class="loader" id="loader">
         	<p>Compressing... Please wait</p>
         	<div class="dot"></div>
         	<div class="dot"></div>
@@ -494,7 +496,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   const compressionInfo = document.getElementById('compression-info');
   const resultDiv = document.getElementById('compress-result');
   const loader = document.getElementById('loader'); // 🔹 loader added
-   		loader.style.display = 'block'; // 🔹 show loader
+   		loader.style.display = 'flex'; // 🔹 show loader
   resultDiv.innerHTML = '<p>Compressing...</p>';
 
   const formData = new FormData();
@@ -523,7 +525,8 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
     compressionInfo.textContent =
       `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
   } catch (err) {
-    resultDiv.innerHTML = '<p style="color: red;">Compression failed.</p>';
+	loader.style.display = 'none'; // 🔹 hide loader   
+	resultDiv.innerHTML = '<p style="color: red;">Compression failed.</p>';
     console.error(err);
   }
 });
