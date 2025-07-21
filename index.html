@@ -421,37 +421,48 @@
             <div id="compression-info" style="margin-top: 10px;"></div>
             <div id="compress-result" style="margin-top: 20px;"></div>
         </div>
-        <script>
-            document.getElementById('quality-slider').addEventListener('input', e => {
-                document.getElementById('quality-value').textContent = `${e.target.value}%`;
-            });
+<script>
+document.getElementById('quality-slider').addEventListener('input', e => {
+  document.getElementById('quality-value').textContent = `${e.target.value}%`;
+});
 
-            document.getElementById('compress-btn').addEventListener('click', async () => {
-                const file = document.getElementById('pdf-file').files[0];
-                if (!file) return alert('Select a file');
-                const compressionInfo = document.getElementById('compression-info');
-                const resultDiv = document.getElementById('compress-result');
-                resultDiv.innerHTML = '<p>Compressing...</p>';
-                const arrayBuffer = await file.arrayBuffer();
-                const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
-                const newPdf = await PDFLib.PDFDocument.create();
-                for (const [i] of pdf.getPages().entries()) {
-                    const page = pdf.getPages()[i];
-                    const copiedPage = await newPdf.copyPages(pdf, [i]);
-                    newPdf.addPage(copiedPage[0]);
-                }
-                const bytes = await newPdf.save();
-                const blob = new Blob([bytes], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `compressed-${Date.now()}.pdf`;
-                link.textContent = 'Download Compressed PDF';
-                resultDiv.innerHTML = '';
-                resultDiv.appendChild(link);
-                compressionInfo.textContent = `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
-            });
-        </script>
+document.getElementById('compress-btn').addEventListener('click', async () => {
+  const file = document.getElementById('pdf-file').files[0];
+  if (!file) return alert('Select a file');
+
+  const compressionInfo = document.getElementById('compression-info');
+  const resultDiv = document.getElementById('compress-result');
+  resultDiv.innerHTML = '<p>Compressing...</p>';
+
+  const formData = new FormData();
+  formData.append('pdf', file);
+
+  try {
+    const response = await fetch('/compress', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('Compression failed');
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `compressed-${Date.now()}.pdf`;
+    link.textContent = 'Download Compressed PDF';
+
+    resultDiv.innerHTML = '';
+    resultDiv.appendChild(link);
+    compressionInfo.textContent =
+      `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
+  } catch (err) {
+    resultDiv.innerHTML = '<p style="color: red;">Compression failed.</p>';
+    console.error(err);
+  }
+});
+</script>
     </section>
     <!-- END SECTION: PDF Compression Tool --><br>
 
