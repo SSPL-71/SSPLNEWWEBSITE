@@ -6,6 +6,8 @@ WORKDIR /site
 # Copy all files into the container
 COPY . /site
 
+RUN apt-get update && apt-get install -y ghostscript
+
 # Expose port 10000 for Render
 EXPOSE 10000
 
