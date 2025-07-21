@@ -496,8 +496,8 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   const compressionInfo = document.getElementById('compression-info');
   const resultDiv = document.getElementById('compress-result');
   const loader = document.getElementById('compress-loader'); // 🔹 loader added
-   		loader.style.display = 'flex'; // 🔹 show loader
-  resultDiv.innerHTML = '<p>Compressing...</p>';
+   		loader.style.display = 'block'; // 🔹 show loader
+  resultDiv.innerHTML = '<p></p>';
 
   const formData = new FormData();
   formData.append('pdf', file);
