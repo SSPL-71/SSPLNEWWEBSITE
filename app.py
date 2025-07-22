@@ -8,6 +8,10 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 def serve_index():
     return send_from_directory('.', 'index.html')
 
+@app.route('/sw.js')
+def serve_sw():
+    return send_from_directory('.', 'sw.js')
+
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
     uploaded_file = request.files.get('pdf')
