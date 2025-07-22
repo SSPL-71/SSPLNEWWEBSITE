@@ -503,7 +503,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   formData.append('pdf', file);
 
   try {
-    const response = await fetch('/compress', {
+    const response = await fetch('https://ss-services.co.in/compress', {
       method: 'POST',
       body: formData
     });
