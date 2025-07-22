@@ -4,15 +4,6 @@ import os
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
-@app.route('/debug', methods=['POST'])
-def debug_upload():
-    uploaded_file = request.files.get('pdf')
-    print("DEBUG ROUTE HIT")
-    print("User-Agent:", request.headers.get('User-Agent'))
-    print("Received file:", uploaded_file.filename if uploaded_file else "No file")
-    print("Content-Type:", uploaded_file.content_type if uploaded_file else "N/A")
-    print("Content Length:", request.content_length)
-    return "Debug route received", 200
 
 @app.before_request
 def block_prefetch():
