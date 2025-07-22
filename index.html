@@ -496,13 +496,15 @@ document.getElementById('quality-slider').addEventListener('input', e => {
 });
 
 document.getElementById('compress-btn').addEventListener('click', async () => {
-  const file = document.getElementById('pdf-file').files[0];
+  const pdfInput = document.getElementById('pdf-file'); // 🔸 Added reference to file input
+  const file = pdfInput.files[0];                        // 🔸 Using the same variable name
+
   if (!file) return alert('Select a file');
 
   const compressionInfo = document.getElementById('compression-info');
   const resultDiv = document.getElementById('compress-result');
   const loader = document.getElementById('compress-loader'); // 🔹 loader added
-   		loader.style.display = 'block'; // 🔹 show loader
+  loader.style.display = 'block'; // 🔹 show loader
   resultDiv.innerHTML = '<p></p>';
 
   const formData = new FormData();
@@ -531,8 +533,9 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
     compressionInfo.textContent =
       `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
   } catch (err) {
-	loader.style.display = 'none'; // 🔹 hide loader   
-	resultDiv.innerHTML = '<p style="color: red;">Compression failed.</p>';
+    loader.style.display = 'none'; // 🔹 hide loader
+    resultDiv.innerHTML = '<p style="color: red;">Compression failed.</p>';
+    pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
     console.error(err);
   }
 });
