@@ -4,6 +4,11 @@ import os
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
+@app.before_request
+def block_prefetch():
+    if request.headers.get('Purpose') == 'prefetch':
+        return '', 403
+
 @app.route('/')
 def serve_index():
     return send_from_directory('.', 'index.html')
@@ -44,4 +49,4 @@ def compress_pdf():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, threaded=True)
