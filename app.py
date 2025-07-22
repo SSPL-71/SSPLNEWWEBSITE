@@ -23,6 +23,14 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
+ # 🔍 Logging diagnostics
+    print("User-Agent:", request.headers.get('User-Agent'))
+    print("Received file:", uploaded_file.filename)
+    print("Content-Type:", uploaded_file.content_type)
+    print("Content Length:", request.content_length)
+    print("Form field name:", 'pdf' in request.files)
+
+
     input_path = 'input.pdf'
     output_path = 'compressed.pdf'
     uploaded_file.save(input_path)
