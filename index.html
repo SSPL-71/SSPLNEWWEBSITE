@@ -1234,7 +1234,7 @@ function mergeToPDF() {
 
         document.getElementById('selectAll').addEventListener('change', function () {
             const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-            previewContainer.innerHTML = '';
+            
 
             checkboxes.forEach(async checkbox => {
                 checkbox.checked = this.checked;
