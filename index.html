@@ -1174,64 +1174,52 @@ function mergeToPDF() {
         return header === '%PDF-';
     }
 
-    document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-        const file = event.target.files[0];
-        if (!file) return;
+  document.getElementById('selectAll').addEventListener('change', function () {
+    const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+    previewContainer.innerHTML = '';
 
-        const zip = await JSZip.loadAsync(file);
-        const fileList = document.getElementById('fileList');
-        const previewContainer = document.getElementById('previewContainer');
-        fileList.innerHTML = '';
-        previewContainer.innerHTML = '';
+    checkboxes.forEach(async checkbox => {
+        checkbox.checked = this.checked;
 
-        Object.keys(zip.files).forEach(filename => {
-            const listItem = document.createElement('li');
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.dataset.filename = filename;
+        const filename = checkbox.dataset.filename;
+        const fileData = await zip.files[filename].async('blob');
+        const isPDF = await isBlobPDF(fileData);
 
-            listItem.appendChild(checkbox);
-            listItem.appendChild(document.createTextNode(filename));
-            fileList.appendChild(listItem);
+        let previewElement;
 
-            checkbox.addEventListener('change', async function () {
-                const zipFile = zip.files[filename];
-                const fileData = await zipFile.async('blob');
-                const isPDF = await isBlobPDF(fileData);
+        if (isPDF) {
+            previewElement = document.createElement('div');
+            previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
+        } else {
+            const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
+            const blob = new Blob([fileData], { type: mimeType });
+            const url = URL.createObjectURL(blob);
 
-                if (this.checked) {
-                    let previewElement;
+            const img = document.createElement('img');
+            img.src = url;
+            img.dataset.filename = filename;
 
-                    if (isPDF) {
-                        previewElement = document.createElement('div');
-                        previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
-                    } else {
-                        const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
-                        const blob = new Blob([fileData], { type: mimeType });
-                        const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.appendChild(img);
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
 
-                        const img = document.createElement('img');
-                        img.src = url;
-                        img.dataset.filename = filename;
+            previewElement = link;
+        }
 
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = filename;
-                        link.appendChild(img);
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
+        previewElement.dataset.filename = filename;
 
-                        previewElement = link;
-                    }
+        if (this.checked) {
+            previewContainer.appendChild(previewElement);
+        } else {
+            const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
+            if (existing) existing.remove();
+        }
+    });
+});
 
-                    previewElement.dataset.filename = filename;
-                    previewContainer.appendChild(previewElement);
-                } else {
-                    const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
-                    if (existing) existing.remove();
-                }
-            });
-        });
 
         document.getElementById('selectAll').addEventListener('change', function () {
             const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
