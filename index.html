@@ -1238,8 +1238,6 @@ document.getElementById('selectAll').addEventListener('change', function () {
     checkboxes.forEach(checkbox => {
         checkbox.checked = this.checked;
         checkbox.dispatchEvent(new Event('change'));
-    });
-});
 
 
                 const filename = checkbox.dataset.filename;
