@@ -1232,47 +1232,13 @@ function mergeToPDF() {
             });
         });
 
-        document.getElementById('selectAll').addEventListener('change', function () {
-            const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-            
-
-            checkboxes.forEach(async checkbox => {
-                checkbox.checked = this.checked;
-      checkbox.dispatchEvent(new Event('change'));
-
-                const filename = checkbox.dataset.filename;
-                const fileData = await zip.files[filename].async('blob');
-                const isPDF = await isBlobPDF(fileData);
-
-                let previewElement;
-
-                if (isPDF) {
-                    previewElement = document.createElement('div');
-                    previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
-                } else {
-                    const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
-                    const blob = new Blob([fileData], { type: mimeType });
-                    const url = URL.createObjectURL(blob);
-
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.dataset.filename = filename;
-
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = filename;
-                    link.appendChild(img);
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-
-                    previewElement = link;
-                }
-
-                previewElement.dataset.filename = filename;
-                previewContainer.appendChild(previewElement);
-            });
-        });
-    });
+       document.getElementById('selectAll').addEventListener('change', function () {
+  const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    cb.checked = this.checked;
+    cb.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+});
 </script>
 
 
