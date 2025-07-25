@@ -33,6 +33,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
@@ -1166,64 +1167,45 @@ function mergeToPDF() {
     </div>
 
 
-  <script>       document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-            const file = event.target.files[0];
-            if (!file) return;
+<script>
+    async function isBlobPDF(blob) {
+        const buffer = await blob.slice(0, 5).arrayBuffer();
+        const header = new TextDecoder().decode(buffer);
+        return header === '%PDF-';
+    }
 
-            const zip = await JSZip.loadAsync(file);
-            const fileList = document.getElementById('fileList');
-            const previewContainer = document.getElementById('previewContainer');
-            fileList.innerHTML = '';
-            previewContainer.innerHTML = '';
+    document.getElementById('zipFileInput').addEventListener('change', async function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
 
-            Object.keys(zip.files).forEach(filename => {
-                const listItem = document.createElement('li');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.dataset.filename = filename;
+        const zip = await JSZip.loadAsync(file);
+        const fileList = document.getElementById('fileList');
+        const previewContainer = document.getElementById('previewContainer');
+        fileList.innerHTML = '';
+        previewContainer.innerHTML = '';
 
-                listItem.appendChild(checkbox);
-                listItem.appendChild(document.createTextNode(filename));
-                fileList.appendChild(listItem);
+        Object.keys(zip.files).forEach(filename => {
+            const listItem = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.dataset.filename = filename;
 
-                checkbox.addEventListener('change', async function () {
-                    if (this.checked) {
-                        const fileData = await zip.files[filename].async('blob');
-                        const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
-                        const blob = new Blob([fileData], { type: mimeType });
-                        const url = URL.createObjectURL(blob);
+            listItem.appendChild(checkbox);
+            listItem.appendChild(document.createTextNode(filename));
+            fileList.appendChild(listItem);
 
-                        const img = document.createElement('img');
-                        img.src = url;
-                        img.dataset.filename = filename;
+            checkbox.addEventListener('change', async function () {
+                const zipFile = zip.files[filename];
+                const fileData = await zipFile.async('blob');
+                const isPDF = await isBlobPDF(fileData);
 
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = filename;
-                        link.appendChild(img);
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
+                if (this.checked) {
+                    let previewElement;
 
-                        previewContainer.appendChild(link);
+                    if (isPDF) {
+                        previewElement = document.createElement('div');
+                        previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
                     } else {
-                        const existingImg = previewContainer.querySelector(`img[data-filename='${filename}']`);
-                        if (existingImg) {
-                            existingImg.parentElement.remove();
-                        }
-                    }
-                });
-            });
-
-            document.getElementById('selectAll').addEventListener('change', function () {
-                const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-                previewContainer.innerHTML = '';
-
-                checkboxes.forEach(async checkbox => {
-                    checkbox.checked = this.checked;
-
-                    const filename = checkbox.dataset.filename;
-                    if (this.checked && (filename.endsWith('.png') || filename.endsWith('.jpg'))) {
-                        const fileData = await zip.files[filename].async('blob');
                         const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
                         const blob = new Blob([fileData], { type: mimeType });
                         const url = URL.createObjectURL(blob);
@@ -1239,12 +1221,60 @@ function mergeToPDF() {
                         link.target = '_blank';
                         link.rel = 'noopener noreferrer';
 
-                        previewContainer.appendChild(link);
+                        previewElement = link;
                     }
-                });
+
+                    previewElement.dataset.filename = filename;
+                    previewContainer.appendChild(previewElement);
+                } else {
+                    const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
+                    if (existing) existing.remove();
+                }
             });
         });
-    </script>
+
+        document.getElementById('selectAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+            previewContainer.innerHTML = '';
+
+            checkboxes.forEach(async checkbox => {
+                checkbox.checked = this.checked;
+
+                const filename = checkbox.dataset.filename;
+                const fileData = await zip.files[filename].async('blob');
+                const isPDF = await isBlobPDF(fileData);
+
+                let previewElement;
+
+                if (isPDF) {
+                    previewElement = document.createElement('div');
+                    previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
+                } else {
+                    const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
+                    const blob = new Blob([fileData], { type: mimeType });
+                    const url = URL.createObjectURL(blob);
+
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.dataset.filename = filename;
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = filename;
+                    link.appendChild(img);
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+
+                    previewElement = link;
+                }
+
+                previewElement.dataset.filename = filename;
+                previewContainer.appendChild(previewElement);
+            });
+        });
+    });
+</script>
+
 
 </section>
 <!-- END SECTION: ZIP Extractor Tool --><br>
