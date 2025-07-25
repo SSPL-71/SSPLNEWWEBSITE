@@ -1232,13 +1232,13 @@ function mergeToPDF() {
             });
         });
 
-document.getElementById('selectAll').addEventListener('change', function () {
-    const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-    
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = this.checked;
-        checkbox.dispatchEvent(new Event('change'));
+        document.getElementById('selectAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+            previewContainer.innerHTML = '';
 
+            checkboxes.forEach(async checkbox => {
+                checkbox.checked = this.checked;
+      checkbox.dispatchEvent(new Event('change'));
 
                 const filename = checkbox.dataset.filename;
                 const fileData = await zip.files[filename].async('blob');
