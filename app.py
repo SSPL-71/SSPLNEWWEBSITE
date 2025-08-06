@@ -18,6 +18,10 @@ def serve_index():
 def serve_sw():
     return send_from_directory('.', 'sw.js')
 
+@app.route('/robots.txt')
+def serve_robots():
+    return send_from_directory('.', 'robots.txt')
+
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
     uploaded_file = request.files.get('pdf')
