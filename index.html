@@ -704,27 +704,28 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
     });
 
     downloadButton.addEventListener('click', async () => {
-      const sortedIndices = Array.from(previewContainer.children).map(div => parseInt(div.getAttribute('data-index')));
-      const newPdf = await PDFLib.PDFDocument.create();
-      const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
+  const sortedIndices = Array.from(previewContainer.children).map(div => parseInt(div.getAttribute('data-index')));
+  const newPdf = await PDFLib.PDFDocument.create();
+  const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
 
-      copiedPages.forEach((page, i) => {
-        const rotationAngle = rotations[sortedIndices[i]] || 0;
-        page.setRotation(PDFLib.degrees(rotationAngle));
-        newPdf.addPage(page);
-      });
+  copiedPages.forEach((page, i) => {
+    const rotationAngle = rotations[sortedIndices[i]] || 0;
+    page.setRotation(PDFLib.degrees(rotationAngle));
+    newPdf.addPage(page);
+  });
 
-      const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
+  const pdfBytes = await newPdf.save();
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
 
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `sorted-${Date.now()}.pdf`;
-      link.textContent = 'Click To Download Your Sorted PDF / Long Press On Mobile';
-      resultDiv.innerHTML = '';
-      resultDiv.appendChild(link);
-    });
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `sorted-${Date.now()}.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url); // Clean up
+});
   </script>
 </section>
 <!-- END SECTION: PDF Page Sorter Tool --><br><br>
@@ -1465,7 +1466,7 @@ function mergeToPDF() {
 <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">   
 <h2>Privacy Policy</h2>
   <p>
-    SSPL is committed to protecting your privacy. We collect only the minimum personal information necessary to operate our tools and respond to inquiries. We do not share, sell, or misuse any user data. Uploaded PDFs are processed temporarily and deleted immediately after compression. For inquiries or data concerns, contact <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a>.
+    SSPL is committed to protecting your privacy. We collect only the minimum personal information necessary to operate our tools and respond to inquiries. We do not share, sell, or misuse any user data. PDFs are processed in users browser. For inquiries or data concerns, contact <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a>.
   </p></div>
 </section><br>
 
@@ -1484,8 +1485,8 @@ function mergeToPDF() {
 <div class="container" style="max-width: 800px; text align: justify; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
   <h2>📞 Contact Us</h2>
   <p style="font-size: 18px;">
-    📧 <strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a><br>
-    ☎️ <strong>Phone:</strong> <a href="tel:+919591177655">+91 99591177655</a>
+    📧 <strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in / ssservicespl@gmail.com </a><br>
+    ☎️ <strong>Phone:</strong> <a href="tel:+919591177655">+91 9591177655 </a>
   </p></div>
 </section><br>
 
