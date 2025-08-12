@@ -16,7 +16,29 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
+      position: relative;
     }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
     .container {
       background-color: #fff;
       color: #2c3e50;
@@ -25,15 +47,18 @@
       max-width: 600px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
+
     .container img {
       max-width: 120px;
       border-radius: 12px;
       margin-bottom: 20px;
     }
+
     .container h1 {
       font-size: 1.8em;
       margin-bottom: 10px;
     }
+
     .container p {
       font-size: 1.1em;
       line-height: 1.6;
@@ -41,12 +66,13 @@
   </style>
 </head>
 <body>
-<img src="New Logo.jpg" alt="SSPL" style="height: 50px;">        
-    <div style="text-align: center; margin-top: 30px;">
-  <a href="https://ss-services.co.in" style="color: #333; text-decoration: none; font-weight: bold;">
-    ← Back to SSPL Main Page
-  </a>
-</div>  
+
+  <div class="logo">
+    <img src="New Logo.jpg" alt="SSPL" style="height: 50px;">
+  </div>
+
+  <a href="https://ss-services.co.in" class="back-link">← Back to SSPL Main Page</a>
+
   <div class="container">
     <img src="SarvaSiddh_Anna.png" alt="SarvaSiddh Anna">
     <h1>Claims Tatva – Coming Soon</h1>
