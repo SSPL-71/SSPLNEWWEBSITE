@@ -13,26 +13,31 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
       text-align: center;
       position: relative;
+      padding-top: 80px;
     }
 
     .logo {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
+      z-index: 1000;
     }
 
     .back-link {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
+      z-index: 1000;
       color: #fff;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.95em;
+      font-size: 1em;
+      background-color: rgba(44, 62, 80, 0.8);
+      padding: 8px 12px;
+      border-radius: 6px;
     }
 
     .back-link:hover {
@@ -46,6 +51,7 @@
       border-radius: 12px;
       max-width: 600px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
     }
 
     .container img {
@@ -63,6 +69,13 @@
       font-size: 1.1em;
       line-height: 1.6;
     }
+
+    @media (max-width: 600px) {
+      .back-link {
+        font-size: 0.9em;
+        padding: 6px 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -76,18 +89,15 @@
   <div class="container">
     <img src="SarvaSiddh_Anna.png" alt="SarvaSiddh Anna">
     <h1>Claims Tatva – Simple Snippets !</h1>
-    <p>
-      
-  <h2>TP vs OD Claim - General Insurance</h2>
-  <p>
-    In General Insurance, a Third Party or TP insurance policy is a statuatory requirement under
-    the Motor Vehicle Act for all Vehicle Owners. It is a type of insurance cover which offers
-    protection against damage to the third-party vehicle, personal property and physical injury.
-  </p>
-  <p>
-    An own damage (OD) claim in vehicle insurance refers to a claim filed by the policyholder to cover damages to their own vehicle. This type of claim is typically used when the damage is a result of an accident, theft, fire, or natural disasters.
-  </p>
 
+    <h2>TP vs OD Claim - General Insurance</h2>
+    <p>
+      In General Insurance, a Third Party or TP insurance policy is a statutory requirement under
+      the Motor Vehicle Act for all Vehicle Owners. It is a type of insurance cover which offers
+      protection against damage to the third-party vehicle, personal property and physical injury.
+    </p>
+    <p>
+      An own damage (OD) claim in vehicle insurance refers to a claim filed by the policyholder to cover damages to their own vehicle. This type of claim is typically used when the damage is a result of an accident, theft, fire, or natural disasters.
     </p>
   </div>
 
