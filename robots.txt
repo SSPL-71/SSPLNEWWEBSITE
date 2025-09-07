@@ -3,3 +3,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://ss-services.co.in/main-sitemap.xml

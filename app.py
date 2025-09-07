@@ -22,10 +22,11 @@ def serve_sw():
 def serve_robots():
     return send_from_directory('.', 'robots.txt')
 
-@app.route('/sitemap.xml')
+@app.route('/main-sitemap.xml')
 def serve_sitemap():
+    import os
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    return send_from_directory(root_dir, 'sitemap.xml')
+    return send_from_directory(root_dir, 'main-sitemap.xml')
 
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
