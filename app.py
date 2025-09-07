@@ -20,7 +20,14 @@ def serve_sw():
 
 @app.route('/robots.txt')
 def serve_robots():
-    return send_from_directory('.', 'robots.txt', mimetype='text/plain')
+    import os
+    from flask import Response
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(root_dir, 'robots.txt')) as f:
+        content = f.read()
+    response = Response(content, mimetype='text/plain')
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @app.route('/main-sitemap.xml')
 def serve_sitemap():
