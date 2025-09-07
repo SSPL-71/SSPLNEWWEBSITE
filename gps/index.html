@@ -335,22 +335,39 @@ function mergeToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
 
-  let selectedImages = uploadedImages.filter((image, index) => {
+  // Filter selected images based on checkboxes
+  const selectedImages = uploadedImages.filter((image, index) => {
     const checkbox = document.getElementById(`checkbox_${index + 1}`);
-    return checkbox.checked;
+    return checkbox && checkbox.checked;
   });
 
-  let imagePromises = selectedImages.map((image, index) => {
+  // Optional: Preview selected images
+  const imageContainer = document.getElementById("imagePreview");
+  if (imageContainer) {
+    imageContainer.innerHTML = "";
+    selectedImages.forEach((image, index) => {
+      const imgElement = document.createElement("img");
+      imgElement.src = image.imageData;
+      imgElement.style.width = "100px";
+      imgElement.style.margin = "5px";
+      imgElement.alt = `Selected image ${index + 1}`;
+      imageContainer.appendChild(imgElement);
+    });
+  }
+
+  // Prepare image-to-PDF conversion
+  const imagePromises = selectedImages.map((image, index) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = image.imageData;
       img.onload = function () {
-        let pdfWidth = pdf.internal.pageSize.getWidth();
-        let pdfHeight = pdf.internal.pageSize.getHeight();
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
         let imgWidth = img.width;
         let imgHeight = img.height;
-        let aspectRatio = imgWidth / imgHeight;
+        const aspectRatio = imgWidth / imgHeight;
 
+        // Resize image to fit within PDF page
         if (imgWidth > imgHeight) {
           imgWidth = pdfWidth;
           imgHeight = pdfWidth / aspectRatio;
@@ -367,61 +384,58 @@ function mergeToPDF() {
           }
         }
 
+        // Add new page if not the first image
         if (index > 0) {
           pdf.addPage();
         }
 
-        let x = (pdfWidth - imgWidth) / 2;
-        let y = (pdfHeight - imgHeight) / 2;
+        const x = (pdfWidth - imgWidth) / 2;
+        const y = (pdfHeight - imgHeight) / 2;
         pdf.addImage(image.imageData, "JPEG", x, y, imgWidth, imgHeight);
         resolve();
       };
     });
   });
 
- Promise.all(imagePromises).then(() => {
-  // Convert PDF output to a proper Blob using arraybuffer
-  const pdfBlob = new Blob([pdf.output("arraybuffer")], { type: "application/pdf" });
-  const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
+  // Merge and upload
+  Promise.all(imagePromises).then(() => {
+    const pdfBlob = new Blob([pdf.output("arraybuffer")], { type: "application/pdf" });
+    const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
+    const selectedFolderId = document.getElementById("caseSelector").value;
 
-  const selectedFolderId = document.getElementById("caseSelector").value;
-  if (!selectedFolderId) {
-    alert("Please select a case before uploading.");
-    return;
-  }
+    if (!selectedFolderId) {
+      alert("Please select a case before uploading.");
+      return;
+    }
 
-  // Wrap the blob in a File object to preserve name and type
-  const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+    const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+    const formData = new FormData();
+    formData.append("folderId", selectedFolderId);
+    formData.append("fileName", fileName);
+    formData.append("file", file);
 
-  // Prepare FormData payload
-  const formData = new FormData();
-  formData.append("folderId", selectedFolderId);
-  formData.append("fileName", fileName);
-  formData.append("file", file);
+    console.log("Uploading file:", file.name);
+    console.log("File size:", file.size);
+    console.log("File type:", file.type);
 
-  // Optional: Log file details before sending
-  console.log("Uploading file:", file.name);
-  console.log("File size:", file.size);
-  console.log("File type:", file.type);
-
-  // Send to Apps Script Web App
-  fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
-    method: "POST",
-    body: formData
-  })
-    .then(response => response.text())
-    .then(result => {
-      console.log("Upload success:", result);
-      alert("✅ PDF uploaded successfully to Drive.");
+    fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
+      method: "POST",
+      body: formData
     })
-    .catch(error => {
-      console.error("Upload failed:", error);
-      alert("❌ Upload failed. Please try again.");
-    });
-}).catch(error => {
-  console.error("Error merging PDF:", error);
-});
-
+      .then(response => response.text())
+      .then(result => {
+        console.log("Upload success:", result);
+        alert("✅ PDF uploaded successfully to Drive.");
+      })
+      .catch(error => {
+        console.error("Upload failed:", error);
+        alert("❌ Upload failed. Please try again.");
+      });
+  }).catch(error => {
+    console.error("Error merging PDF:", error);
+    alert("❌ PDF merge failed. Please check your images and try again.");
+  });
+}
 </script>
 </section>
 <!-- END SECTION: GPS Camera Tool --><br>
