@@ -331,17 +331,27 @@ function generatePDF(imageData, exifDate, count) {
     };
 }
 
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result.split(',')[1]; // Remove data URL prefix
+      resolve(base64String);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
 function mergeToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
 
-  // Filter selected images based on checkboxes
   const selectedImages = uploadedImages.filter((image, index) => {
     const checkbox = document.getElementById(`checkbox_${index + 1}`);
     return checkbox && checkbox.checked;
   });
 
-  // Optional: Preview selected images
   const imageContainer = document.getElementById("imagePreview");
   if (imageContainer) {
     imageContainer.innerHTML = "";
@@ -355,7 +365,6 @@ function mergeToPDF() {
     });
   }
 
-  // Prepare image-to-PDF conversion
   const imagePromises = selectedImages.map((image, index) => {
     return new Promise((resolve) => {
       const img = new Image();
@@ -367,7 +376,6 @@ function mergeToPDF() {
         let imgHeight = img.height;
         const aspectRatio = imgWidth / imgHeight;
 
-        // Resize image to fit within PDF page
         if (imgWidth > imgHeight) {
           imgWidth = pdfWidth;
           imgHeight = pdfWidth / aspectRatio;
@@ -384,7 +392,6 @@ function mergeToPDF() {
           }
         }
 
-        // Add new page if not the first image
         if (index > 0) {
           pdf.addPage();
         }
@@ -397,10 +404,9 @@ function mergeToPDF() {
     });
   });
 
-  // Merge and upload
   Promise.all(imagePromises).then(() => {
     const pdfBlob = new Blob([pdf.output("arraybuffer")], { type: "application/pdf" });
-    const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
+    const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf";
     const selectedFolderId = document.getElementById("caseSelector").value;
 
     if (!selectedFolderId) {
@@ -408,34 +414,36 @@ function mergeToPDF() {
       return;
     }
 
-    const file = new File([pdfBlob], fileName, { type: "application/pdf" });
-    const formData = new FormData();
-    formData.append("folderId", selectedFolderId);
-    formData.append("fileName", fileName);
-    formData.append("file", file);
+    blobToBase64(pdfBlob).then(base64Data => {
+      const payload = {
+        folderId: selectedFolderId,
+        fileName: fileName,
+        base64: base64Data
+      };
 
-    console.log("Uploading file:", file.name);
-    console.log("File size:", file.size);
-    console.log("File type:", file.type);
-
-    fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
-      method: "POST",
-      body: formData
-    })
-      .then(response => response.text())
-      .then(result => {
-        console.log("Upload success:", result);
-        alert("✅ PDF uploaded successfully to Drive.");
+      fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
       })
-      .catch(error => {
-        console.error("Upload failed:", error);
-        alert("❌ Upload failed. Please try again.");
-      });
+        .then(response => response.text())
+        .then(result => {
+          console.log("Upload success:", result);
+          alert("✅ PDF uploaded successfully to Drive.");
+        })
+        .catch(error => {
+          console.error("Upload failed:", error);
+          alert("❌ Upload failed. Please try again.");
+        });
+    });
   }).catch(error => {
     console.error("Error merging PDF:", error);
     alert("❌ PDF merge failed. Please check your images and try again.");
   });
 }
+
 </script>
 </section>
 <!-- END SECTION: GPS Camera Tool --><br>
