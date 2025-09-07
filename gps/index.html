@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SS Services - GPS Camera Internal</title>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker registered'))
+      .catch(err => console.error('SW registration failed:', err));
+  }
+</script>
+
+   
+</head>
+<body>
+   
+
+
+
+<!-- SECTION: GPS Camera Tool -->
+<section>
+ <title>Camera with GPS & Address Overlay</title>
+<style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .camera-btn {
+            display: inline-block;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            background-color: #007bff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .camera-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .camera-btn img {
+            width: 50px;
+            height: 50px;
+            filter: invert(1);
+        }
+
+        #cameraInput {
+            display: none;
+        }
+
+      .canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Consistent vertical spacing between canvases */
+  margin-top: 20px;
+  padding: 10px;
+}
+
+        .downloadLink,
+        .checkbox {
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .downloadLink:hover,
+        #pdfDownloadLink:hover {
+            color: #0056b3;
+        }
+
+        #mergeToPDF {
+            display: none;
+            font-size: 16px;
+            margin-top: 15px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        #mergeToPDF:hover {
+            color: #0056b3;
+        }
+    </style>
+
+<div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
+    <h2> GPS CAMERA PRO! </h2>
+    <h2><i> NO APP DOWNLOAD & ZERO ADS!</i></h2>
+<h2 style="color: #FF5733;"><strong><i>📸 NEW FEATURES ALERT!</i></strong></h2>
+<h2 style="color: #33C1FF;"><strong><i>✅ Capture multiple images in one go</i></strong></h2>
+<h2 style="color: #33C1FF;"><strong><i>✅ Merge them into a single PDF with just one click!</i></strong></h2>
+
+
+
+<p><strong>Developed by SSPL</strong></p>
+    <p><strong><i>*Note: Please enable Location Tag on your Camera to ensure GPS display</strong></p>
+
+<div style="margin-bottom: 15px;">
+  <label for="caseSelector" style="font-weight: bold;">Select Case:</label>
+  <select id="caseSelector">
+    <option value="">-- Choose a case --</option>
+    <option value="1B4S4k5EtJzhQTO8SpVujxSx3L54C3F-n">597 – NALINAKSHACHARLU A N – OD</option>
+  </select>
+</div>
+
+    <label for="cameraInput" class="camera-btn">   
+   <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Camera">
+    </label>
+    
+
+
+
+    <input type="file" id="cameraInput" accept="image/*" capture="environment">
+    <center><div class="canvas-container" id="canvasContainer"></div></center>
+    <center><button id="mergeToPDF" onclick="mergeToPDF()">MERGE PDF</button></center>
+
+  <!-- GPS Camera JS -->
+  <script>
+        console.log("Page loaded and script running...");
+        let uploadedImages = [];
+        let gpsCoordinates = "Fetching GPS...";
+        let address = "Fetching Address...";
+        let imageCounter = 1;
+        document.getElementById("cameraInput").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            console.log("Image selected:", file.name);
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                let uploadedImage = new Image();
+                uploadedImage.onload = function () {
+                    readEXIFGPS(file, function (exifDate) {
+                        drawImageWithOverlay(uploadedImage, exifDate);
+                    });
+                };
+                uploadedImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function readEXIFGPS(file, callback) {
+            EXIF.getData(file, function () {
+                const lat = EXIF.getTag(this, "GPSLatitude");
+                const lon = EXIF.getTag(this, "GPSLongitude");
+                const latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";
+                const lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "E";
+
+                let exifDate = EXIF.getTag(this, "DateTimeOriginal");
+                if (exifDate) {
+                    exifDate = exifDate.replace(/:/g, "-").replace(" ", " @ ");
+                } else {
+                    exifDate = new Date().toLocaleString();
+                }
+
+                console.log("EXIF Date Extracted:", exifDate); // Debugging log
+
+                if (lat && lon) {
+                    const latitude = convertToDecimal(lat, latRef);
+                    const longitude = convertToDecimal(lon, lonRef);
+                    gpsCoordinates = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+                    fetchAddress(latitude, longitude, exifDate, callback); // Pass exifDate
+                } else {
+                    gpsCoordinates = "GPS not found!";
+                    address = "Address not available";
+                    callback(exifDate); // Directly call drawImageWithOverlay if no GPS
+                }
+            });
+        }
+
+        function convertToDecimal(coord, ref) {
+            let decimal = coord[0] + coord[1] / 60 + coord[2] / 3600;
+            return (ref === "S" || ref === "W") ? -decimal : decimal;
+        }
+
+        function fetchAddress(lat, lon, exifDate, callback) {
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(response => response.json())
+                .then(data => {
+                    address = data.display_name || "Address not found";
+                    callback(exifDate); // Use extracted EXIF date
+                })
+                .catch(() => {
+                    address = "Failed to fetch address";
+                    callback(exifDate); // Ensure EXIF date is used even on failure
+                });
+        }
+function drawImageWithOverlay(image, exifDate) {
+    const canvasContainer = document.getElementById("canvasContainer");
+
+    // Create a new canvas for each image
+    const canvas = document.createElement("canvas");
+    canvasContainer.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+
+    let maxWidth = window.innerWidth * 0.9;
+    let scaleFactor = maxWidth / image.width;
+    canvas.width = image.width * scaleFactor;
+    canvas.height = image.height * scaleFactor;
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, canvas.height - 120, canvas.width, 100);
+    ctx.fillStyle = "yellow";
+    ctx.font = "14px Arial";
+ctx.imageSmoothingEnabled = true;
+ctx.imageSmoothingQuality = "high";
+    let addressLines = splitText(ctx, address, canvas.width - 40);
+    ctx.fillText(`Date: ${exifDate}`, 20, canvas.height - 110);
+    ctx.fillText(`GPS: ${gpsCoordinates}`, 20, canvas.height - 90);
+    addressLines.forEach((line, index) => {
+        ctx.fillText(line, 20, canvas.height - 70 + index * 20);
+    });
+
+    // Generate image URL and set the download link
+    const imageData = canvas.toDataURL("image/jpeg");
+    let fileName = `GPS_Photo_${imageCounter}.jpg`;
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = imageData;
+    downloadLink.download = fileName;
+    downloadLink.classList.add("downloadLink");
+    downloadLink.textContent = `Download ${fileName}`;
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox");
+    checkbox.id = `checkbox_${imageCounter}`;
+    checkbox.value = imageCounter;
+    checkbox.style.display = "inline";
+
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            console.log(`Image ${imageCounter} selected.`);
+        } else {
+            console.log(`Image ${imageCounter} deselected.`);
+        }
+    });
+
+    canvasContainer.appendChild(checkbox);
+    canvasContainer.appendChild(downloadLink);
+
+    // Call PDF function
+    generatePDF(imageData, exifDate, imageCounter);
+
+    // Add image data to the array
+    uploadedImages.push({ imageData, fileName, checkbox });
+
+    // Show merge to PDF button if 2 or more images are uploaded
+    if (uploadedImages.length > 1) {
+        document.getElementById("mergeToPDF").style.display = "block";
+    }
+
+    // Increment counter for next image
+    imageCounter++;
+}
+
+function splitText(ctx, text, maxWidth) {
+    let words = text.split(" ");
+    let lines = [];
+    let line = "";
+    for (let word of words) {
+        let testLine = line + word + " ";
+        if (ctx.measureText(testLine).width > maxWidth) {
+            lines.push(line);
+            line = word + " ";
+        } else {
+            line = testLine;
+        }
+    }
+    lines.push(line);
+    return lines;
+}
+
+function generatePDF(imageData, exifDate, count) {
+    const { jsPDF } = window.jspdf;
+
+    const img = new Image();
+    img.src = imageData;
+    img.onload = function () {
+        let pdfWidth = 210; // A4 width in mm
+        let imgRatio = img.width / img.height;
+        let pdfHeight = pdfWidth / imgRatio;
+
+        const pdf = new jsPDF({
+            orientation: pdfHeight > pdfWidth ? "portrait" : "landscape",
+            unit: "mm",
+            format: [pdfWidth, pdfHeight],
+        });
+
+        pdf.addImage(imageData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+
+        let pdfFileName = `GPS_Photo_${count}.pdf`;
+
+        const pdfBlob = pdf.output("blob");
+        const pdfURL = URL.createObjectURL(pdfBlob);
+
+        // Create a download link for the generated PDF
+        const pdfDownloadLink = document.createElement("a");
+        pdfDownloadLink.href = pdfURL;
+        pdfDownloadLink.download = pdfFileName;
+        pdfDownloadLink.classList.add("downloadLink");
+        pdfDownloadLink.textContent = `Download ${pdfFileName}`;
+        document.getElementById("canvasContainer").appendChild(pdfDownloadLink);
+
+        console.log(`PDF created for ${pdfFileName}`);
+    };
+}
+
+function mergeToPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+
+  let selectedImages = uploadedImages.filter((image, index) => {
+    const checkbox = document.getElementById(`checkbox_${index + 1}`);
+    return checkbox.checked;
+  });
+
+  let imagePromises = selectedImages.map((image, index) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = image.imageData;
+      img.onload = function () {
+        let pdfWidth = pdf.internal.pageSize.getWidth();
+        let pdfHeight = pdf.internal.pageSize.getHeight();
+        let imgWidth = img.width;
+        let imgHeight = img.height;
+        let aspectRatio = imgWidth / imgHeight;
+
+        if (imgWidth > imgHeight) {
+          imgWidth = pdfWidth;
+          imgHeight = pdfWidth / aspectRatio;
+          if (imgHeight > pdfHeight) {
+            imgHeight = pdfHeight;
+            imgWidth = pdfHeight * aspectRatio;
+          }
+        } else {
+          imgHeight = pdfHeight;
+          imgWidth = pdfHeight * aspectRatio;
+          if (imgWidth > pdfWidth) {
+            imgWidth = pdfWidth;
+            imgHeight = pdfWidth / aspectRatio;
+          }
+        }
+
+        if (index > 0) {
+          pdf.addPage();
+        }
+
+        let x = (pdfWidth - imgWidth) / 2;
+        let y = (pdfHeight - imgHeight) / 2;
+        pdf.addImage(image.imageData, "JPEG", x, y, imgWidth, imgHeight);
+        resolve();
+      };
+    });
+  });
+
+  Promise.all(imagePromises).then(() => {
+    const pdfBlob = pdf.output("blob");
+    const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
+
+    const selectedFolderId = document.getElementById("caseSelector").value;
+    if (!selectedFolderId) {
+      alert("Please select a case before uploading.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("folderId", selectedFolderId);
+    formData.append("fileName", fileName);
+    formData.append("file", pdfBlob);
+
+    fetch("https://script.google.com/macros/s/AKfycbzZgfxw6kOgN_Y0i2dnpQ2rwVkj4ubtG7lxDXTkQGBMdvk3g1QnCEMxlpbUx0TeZV2w/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+      console.log("Upload success:", result);
+      alert("✅ PDF uploaded successfully to Drive.");
+    })
+    .catch(error => {
+      console.error("Upload failed:", error);
+      alert("❌ Upload failed. Please try again.");
+    });
+  }).catch(error => {
+    console.error("Error merging PDF:", error);
+  });
+}
+
+</script>
+</section>
+<!-- END SECTION: GPS Camera Tool --><br>
+
+
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
+  </footer>
+
+</body>
+</html>
+
