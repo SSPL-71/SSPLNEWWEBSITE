@@ -413,14 +413,14 @@ function mergeToPDF() {
       alert("Please select a case before uploading.");
       return;
     }
-
+console.log("PDF Blob size:", pdfBlob.size);
     blobToBase64(pdfBlob).then(base64Data => {
       const payload = {
         folderId: selectedFolderId,
         fileName: fileName,
         base64: base64Data
       };
-
+console.log("Base64 length:", base64Data.length);
       fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
         method: "POST",
         headers: {
