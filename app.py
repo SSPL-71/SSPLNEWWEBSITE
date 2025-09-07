@@ -24,7 +24,8 @@ def serve_robots():
 
 @app.route('/sitemap.xml')
 def serve_sitemap():
-    return send_from_directory('.', 'sitemap.xml')
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    return send_from_directory(root_dir, 'sitemap.xml')
 
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
