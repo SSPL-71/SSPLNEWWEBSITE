@@ -28,6 +28,10 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
+@app.route('/3ctool')
+def serve_3ctool():
+    return send_from_directory('3ctool', 'index.html')
+
  # 🔍 Logging diagnostics
     print("User-Agent:", request.headers.get('User-Agent'))
     print("Received file:", uploaded_file.filename)
