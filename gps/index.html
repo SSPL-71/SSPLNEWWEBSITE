@@ -380,8 +380,9 @@ function mergeToPDF() {
   });
 
  Promise.all(imagePromises).then(() => {
-  const pdfBlob = pdf.output("blob");
-  const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf";
+  // Convert PDF output to a proper Blob using arraybuffer
+  const pdfBlob = new Blob([pdf.output("arraybuffer")], { type: "application/pdf" });
+  const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
 
   const selectedFolderId = document.getElementById("caseSelector").value;
   if (!selectedFolderId) {
@@ -389,18 +390,25 @@ function mergeToPDF() {
     return;
   }
 
+  // Wrap the blob in a File object to preserve name and type
   const file = new File([pdfBlob], fileName, { type: "application/pdf" });
 
+  // Prepare FormData payload
   const formData = new FormData();
   formData.append("folderId", selectedFolderId);
   formData.append("fileName", fileName);
   formData.append("file", file);
 
+  // Optional: Log file details before sending
+  console.log("Uploading file:", file.name);
+  console.log("File size:", file.size);
+  console.log("File type:", file.type);
 
-    fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
-      method: "POST",
-      body: formData
-    })
+  // Send to Apps Script Web App
+  fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
+    method: "POST",
+    body: formData
+  })
     .then(response => response.text())
     .then(result => {
       console.log("Upload success:", result);
@@ -410,10 +418,9 @@ function mergeToPDF() {
       console.error("Upload failed:", error);
       alert("❌ Upload failed. Please try again.");
     });
-  }).catch(error => {
-    console.error("Error merging PDF:", error);
-  });
-}
+}).catch(error => {
+  console.error("Error merging PDF:", error);
+});
 
 </script>
 </section>
