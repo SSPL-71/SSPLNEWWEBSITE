@@ -20,7 +20,7 @@ def serve_sw():
 
 @app.route('/robots.txt')
 def serve_robots():
-    return send_from_directory('.', 'robots.txt')
+    return send_from_directory('.', 'robots.txt', mimetype='text/plain')
 
 @app.route('/main-sitemap.xml')
 def serve_sitemap():
