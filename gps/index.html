@@ -379,20 +379,23 @@ function mergeToPDF() {
     });
   });
 
-  Promise.all(imagePromises).then(() => {
-    const pdfBlob = pdf.output("blob");
-    const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf"; // You can make this dynamic
+ Promise.all(imagePromises).then(() => {
+  const pdfBlob = pdf.output("blob");
+  const fileName = "597_NALINAKSHACHARLU_GPS_Report.pdf";
 
-    const selectedFolderId = document.getElementById("caseSelector").value;
-    if (!selectedFolderId) {
-      alert("Please select a case before uploading.");
-      return;
-    }
+  const selectedFolderId = document.getElementById("caseSelector").value;
+  if (!selectedFolderId) {
+    alert("Please select a case before uploading.");
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append("folderId", selectedFolderId);
-    formData.append("fileName", fileName);
-    formData.append("file", pdfBlob);
+  const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+
+  const formData = new FormData();
+  formData.append("folderId", selectedFolderId);
+  formData.append("fileName", fileName);
+  formData.append("file", file);
+
 
     fetch("https://script.google.com/macros/s/AKfycbzPVOQlnhW0UHkkgVdzLOuh4M_3ArvXFE8UspbHRYwmU_t1IHrwta18dOIc87iDBcAl/exec", {
       method: "POST",
