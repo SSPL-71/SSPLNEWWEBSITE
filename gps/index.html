@@ -123,9 +123,25 @@
   <label for="caseSelector" style="font-weight: bold;">Select Case:</label>
   <select id="caseSelector">
     <option value="">-- Choose a case --</option>
-    <option value="1B4S4k5EtJzhQTO8SpVujxSx3L54C3F-n">597 – NALINAKSHACHARLU A N – OD</option>
   </select>
 </div>
+
+<script>
+  fetch("http://localhost:3000/list-cases")
+    .then(res => res.json())
+    .then(folders => {
+      const selector = document.getElementById("caseSelector");
+      folders.forEach(folder => {
+        const option = document.createElement("option");
+        option.value = folder.id;
+        option.textContent = folder.name;
+        selector.appendChild(option);
+      });
+    })
+    .catch(err => {
+      console.error("❌ Failed to load case folders:", err);
+    });
+</script>
 
     <label for="cameraInput" class="camera-btn">   
    <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Camera">
