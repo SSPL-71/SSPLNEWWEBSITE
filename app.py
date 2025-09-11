@@ -45,6 +45,10 @@ def compress_pdf():
 def serve_3ctool():
     return send_from_directory('3ctool', 'index.html')
 
+@app.route('/gpstool')
+def serve_gpstool():
+    return send_from_directory('gpstool', 'index.html')
+
  # 🔍 Logging diagnostics
     print("User-Agent:", request.headers.get('User-Agent'))
     print("Received file:", uploaded_file.filename)
