@@ -32,10 +32,18 @@ def serve_robots():
 @app.route('/site-index.xml')
 def serve_sitemap():
     import os
-    from flask import send_from_directory
+    from flask import Response
 
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    return send_from_directory(root_dir, 'site-index.xml', mimetype='application/xml')
+    sitemap_path = os.path.join(root_dir, 'site-index.xml')
+
+    with open(sitemap_path, 'r', encoding='utf-8') as f:
+        xml_content = f.read()
+
+    response = Response(xml_content)
+    response.headers['Content-Type'] = 'application/xml'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
