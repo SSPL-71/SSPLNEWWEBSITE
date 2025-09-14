@@ -98,13 +98,13 @@
 <body>
 
   <div class="logo">
-    <img src="New Logo.jpg" alt="SSPL" style="height: 50px;">
+    <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:50px;"> 
   </div>
 
   <a href="https://ss-services.co.in" class="back-link">← Back to SSPL Main Page</a>
 
   <div class="container">
-    <img src="SarvaSiddh_Anna.png" alt="SarvaSiddh Anna">
+    <img src="{{ url_for('static', filename='SarvaSiddh_Anna.png') }}"
     <h1>Claims Tatva – Simple Snippets !</h1>
 
 
