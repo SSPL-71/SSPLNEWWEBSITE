@@ -30,12 +30,20 @@ def serve_robots():
     return response
 
 from flask import Response
+import os
 
 @app.route('/sitemap.xml')
 def serve_sitemap():
-    with open(os.path.join(app.static_folder, 'site-index.xml'), encoding="utf-8") as f:
-        content = f.read()
-    return Response(content, mimetype='application/xml')
+    try:
+        file_path = os.path.join(app.static_folder, 'site-index.xml')
+        if not os.path.exists(file_path):
+            return "Sitemap file not found", 404
+        with open(file_path, encoding="utf-8") as f:
+            content = f.read()
+        return Response(content, mimetype="application/xml")
+    except Exception as e:
+        return f"Error serving sitemap: {e}", 500
+
 
 
 
