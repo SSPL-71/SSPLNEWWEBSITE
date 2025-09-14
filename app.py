@@ -29,9 +29,14 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-@app.route('/sitemap')
+from flask import Response
+
+@app.route('/sitemap.xml')
 def serve_sitemap():
-    return app.send_static_file('site-index.xml')
+    with open(os.path.join(app.static_folder, 'site-index.xml'), encoding="utf-8") as f:
+        content = f.read()
+    return Response(content, mimetype='application/xml')
+
 
 
 @app.route('/compress', methods=['POST'])
