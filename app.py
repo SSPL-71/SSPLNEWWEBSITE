@@ -40,10 +40,13 @@ def serve_sitemap():
     with open(sitemap_path, 'r', encoding='utf-8') as f:
         xml_content = f.read()
 
-    response = Response(xml_content)
-    response.headers['Content-Type'] = 'application/xml'
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    return response
+    return Response(
+        xml_content,
+        mimetype='application/xml',
+        headers={
+            'Cache-Control': 'no-cache, no-store, must-revalidate'
+        }
+    )
 
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
