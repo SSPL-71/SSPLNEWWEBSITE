@@ -29,11 +29,11 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
+from flask import Response
+
 @app.route('/site-index.xml')
 def serve_sitemap():
     import os
-    from flask import Response
-
     root_dir = os.path.dirname(os.path.abspath(__file__))
     sitemap_path = os.path.join(root_dir, 'site-index.xml')
 
