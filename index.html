@@ -120,7 +120,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         <div class="door left-door"></div>
         <div class="door right-door"></div>
         <div class="brand">
-	<img src="New Logo.jpg" alt="SSPL" style="height: 50px;">        
+	<img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:50px;">     
     <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
         </div>
     </div>
@@ -135,7 +135,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     <div style="flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 20px;">
       <!-- Image -->
       <div style="flex: 0 0 120px; text-align: center;">
-        <img src="Lord Ganesha winking.png" alt="OM SHRI GANESHAYA NAMAH:" style="height: 100px; max-width: 100%; margin-right: 20px;">
+        <img src="{{ url_for('static', filename='ganesha.png') }}" 
+     alt="OM SHRI GANESHAYA NAMAH:" 
+     style="height: 100px; max-width: 100%; margin-right: 20px;">
+
       </div>
 
       <!-- Text -->
@@ -150,7 +153,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 <!-- Right: PDF Tools Anchor -->
 <div style="flex: 1 1 100%; text-align: center;">
   <a href="#pdf-tools" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; font-size: 1.4rem; font-weight: 600; background-color: #4f4f4f; color: #ffffff; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-    <img src="PDFImage.png" alt="PDF Icon" style="width: 24px; height: auto;" />
+    <img src="{{ url_for('static', filename='PDFImage.png') }}" 
+     alt="PDF Icon" 
+     style="width: 24px; height: auto;">
+
     <span>Want To Jump Right To PDF Tools – Click Here</span>
   </a>
 </div>
@@ -176,7 +182,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 <section style="background-color: #2c3e50; padding: 50px 20px;">
   <div class="anna-container" style="background-color: #fff; border-radius: 12px; max-width: 800px; margin: auto; padding: 30px; text-align: center;">
     <a href="claims-tatva.html" style="text-decoration: none;">
-      <img src="SarvaSiddh_Anna.png" alt="SarvaSiddh Anna" style="max-width: 100px; border-radius: 12px;">
+      <img src="{{ url_for('static', filename='SarvaSiddh_Anna.png') }}" 
+     alt="SarvaSiddh Anna" 
+     style="max-width: 100px; border-radius: 12px;">
+
       <h2 style="font-family: 'Georgia', serif; color: #2c3e50; margin-top: 20px;">Namaskara. I am SarvaSiddh Anna.</h2>
       <p style="font-size: 1.1em; color: #555; line-height: 1.6; margin-top: 10px;">
       <strong>Claims Tatva</strong>—Click Here for some basics !
