@@ -2,7 +2,7 @@ from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__, static_folder='static')
 
 
 @app.before_request
@@ -29,19 +29,9 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-from flask import send_file
-
 @app.route('/site-index.xml')
 def serve_sitemap():
-    import os
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    sitemap_path = os.path.join(root_dir, 'site-index.xml')
-
-    return send_file(
-        sitemap_path,
-        mimetype='application/xml',
-        as_attachment=False
-    )
+    return app.send_static_file('site-index.xml')
 
 
 @app.route('/compress', methods=['POST'])
