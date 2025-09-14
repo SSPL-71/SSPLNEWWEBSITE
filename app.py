@@ -29,11 +29,13 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-@app.route('/main-sitemap.xml')
+@app.route('/site-index.xml')
 def serve_sitemap():
     import os
+    from flask import send_from_directory
+
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    return send_from_directory(root_dir, 'main-sitemap.xml')
+    return send_from_directory(root_dir, 'site-index.xml', mimetype='application/xml')
 
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
