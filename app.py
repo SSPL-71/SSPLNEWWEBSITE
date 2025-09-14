@@ -29,7 +29,7 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-from flask import Response
+from flask import send_file
 
 @app.route('/site-index.xml')
 def serve_sitemap():
@@ -37,15 +37,10 @@ def serve_sitemap():
     root_dir = os.path.dirname(os.path.abspath(__file__))
     sitemap_path = os.path.join(root_dir, 'site-index.xml')
 
-    with open(sitemap_path, 'r', encoding='utf-8') as f:
-        xml_content = f.read()
-
-    return Response(
-        xml_content,
+    return send_file(
+        sitemap_path,
         mimetype='application/xml',
-        headers={
-            'Cache-Control': 'no-cache, no-store, must-revalidate'
-        }
+        as_attachment=False
     )
 
 @app.route('/compress', methods=['POST'])
