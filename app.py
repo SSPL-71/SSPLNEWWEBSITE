@@ -16,6 +16,14 @@ from flask import render_template
 def serve_index():
     return render_template('index.html')
 
+@app.route('/claims-tatva')
+def claims_tatva():
+    return render_template('claims-tatva.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 @app.route('/sw.js')
 def serve_sw():
