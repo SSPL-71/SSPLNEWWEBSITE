@@ -10,9 +10,12 @@ def block_prefetch():
     if request.headers.get('Purpose') == 'prefetch':
         return '', 403
 
+from flask import render_template
+
 @app.route('/')
 def serve_index():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html')
+
 
 @app.route('/sw.js')
 def serve_sw():
