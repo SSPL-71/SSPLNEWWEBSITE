@@ -64,6 +64,24 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
+    input_path = 'input.pdf'
+    output_path = 'compressed.pdf'
+    uploaded_file.save(input_path)
+
+    try:
+        subprocess.run([
+            'gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+            '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
+            f'-sOutputFile={output_path}', input_path
+        ], check=True)
+        return send_file(output_path, as_attachment=True)
+    except Exception as e:
+        print(e)
+        return "Compression failed", 500
+    finally:
+        if os.path.exists(input_path): os.remove(input_path)
+        if os.path.exists(output_path): os.remove(output_path)
+
 @app.route('/3ctool')
 def serve_3ctool():
     return render_template('3ctool/index.html')
