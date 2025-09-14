@@ -4,5 +4,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ss-services.co.in/site-index.xml
+
 Sitemap: https://ss-services.co.in/sitemap.xml
