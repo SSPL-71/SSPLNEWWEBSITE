@@ -66,11 +66,11 @@ def compress_pdf():
 
 @app.route('/3ctool')
 def serve_3ctool():
-    return send_from_directory('3ctool', 'index.html')
+    return render_template('3ctool/index.html')
 
 @app.route('/gpstool')
 def serve_gpstool():
-    return send_from_directory('gpstool', 'index.html')
+    return render_template('gpstool/index.html')
 
  # 🔍 Logging diagnostics
     print("User-Agent:", request.headers.get('User-Agent'))
