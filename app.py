@@ -43,6 +43,7 @@ def serve_sitemap():
         as_attachment=False
     )
 
+
 @app.route('/compress', methods=['POST'])
 def compress_pdf():
     uploaded_file = request.files.get('pdf')
