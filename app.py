@@ -29,7 +29,7 @@ def serve_robots():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-@app.route('/site-index.xml')
+@app.route('/sitemap')
 def serve_sitemap():
     return app.send_static_file('site-index.xml')
 
