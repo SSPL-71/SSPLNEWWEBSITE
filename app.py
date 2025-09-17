@@ -29,14 +29,14 @@ def about():
 def serve_sw():
     return send_from_directory('.', 'sw.js')
 
+ROBOTS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'robots.txt')
+with open(ROBOTS_PATH, encoding='utf-8') as f:
+    ROBOTS_CONTENT = f.read()
+
 @app.route('/robots.txt')
 def serve_robots():
-    import os
     from flask import Response
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(root_dir, 'robots.txt')) as f:
-        content = f.read()
-    response = Response(content, mimetype='text/plain')
+    response = Response(ROBOTS_CONTENT, mimetype='text/plain')
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -91,38 +91,7 @@ def serve_gpstool():
     return render_template('gpstool/index.html')
 
 
-
- # 🔍 Logging diagnostics
-    print("User-Agent:", request.headers.get('User-Agent'))
-    print("Received file:", uploaded_file.filename)
-    print("Content-Type:", uploaded_file.content_type)
-    print("Content Length:", request.content_length)
-    print("Form field name:", 'pdf' in request.files)
-
-
-    input_path = 'input.pdf'
-    output_path = 'compressed.pdf'
-    uploaded_file.save(input_path)
-
-    try:
-        subprocess.run([
-            'gs',
-            '-sDEVICE=pdfwrite',
-            '-dCompatibilityLevel=1.4',
-            '-dPDFSETTINGS=/ebook',
-            '-dNOPAUSE',
-            '-dQUIET',
-            '-dBATCH',
-            f'-sOutputFile={output_path}',
-            input_path
-        ], check=True)
-
-        return send_file(output_path, as_attachment=True)
-    except subprocess.CalledProcessError:
-        return "Compression failed", 500
-    finally:
-        if os.path.exists(input_path): os.remove(input_path)
-        if os.path.exists(output_path): os.remove(output_path)
+   
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
