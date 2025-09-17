@@ -90,9 +90,7 @@ def serve_3ctool():
 def serve_gpstool():
     return render_template('gpstool/index.html')
 
-@app.route('/robots.txt')
-def serve_robots():
-    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'robots.txt')
+
 
  # 🔍 Logging diagnostics
     print("User-Agent:", request.headers.get('User-Agent'))
