@@ -1,4 +1,6 @@
+# Updated 17 Sept 2025 — clarity restored
+
 User-agent: *
 Disallow:
 
-Sitemap: https://ss-services.co.in/sitemap.xml
+Sitemap: https://ssplnewwebsite.com/sitemap.xml
