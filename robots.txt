@@ -1,8 +1,10 @@
 User-agent: Googlebot
-Allow: /
+Disallow:
+
+User-agent: bingbot
+Disallow:
 
 User-agent: *
-Allow: /
-
+Disallow:
 
 Sitemap: https://ss-services.co.in/sitemap.xml
