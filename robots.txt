@@ -1,4 +1,4 @@
-# Updated 17 Sept 2025 — clarity restored-ninamman
+# Updated 19 Sept 2025 — clarity restored
 
 User-agent: *
 Disallow:
