@@ -612,37 +612,43 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
 
 console.log('File name:', file?.name);
 console.log('File size:', file?.size);
-setTimeout(async () => {
-  try {
-    const response = await fetch('https://ss-services.co.in/compress', {
-      method: 'POST',
-      body: formData
-    });
 
-    if (!response.ok) throw new Error('Compression failed');
+loader.style.display = 'block'; // Show loader before sending
 
-    const blob = await response.blob();
+const xhr = new XMLHttpRequest();
+xhr.open('POST', 'https://ss-services.co.in/compress', true);
+xhr.responseType = 'blob';
+
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const blob = xhr.response;
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement('a');
     link.href = url;
     link.download = `compressed-${Date.now()}.pdf`;
     link.textContent = 'Click to Download Compressed PDF / Long Press On Mobile';
+    link.target = '_blank';
 
     resultDiv.innerHTML = '';
     resultDiv.appendChild(link);
-    loader.style.display = 'none'; // 🔹 hide loader
+    loader.style.display = 'none';
 
     compressionInfo.textContent =
       `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
-  } catch (err) {
-    loader.style.display = 'none'; // 🔹 hide loader
-    resultDiv.innerHTML = '<p style="color: red;">Compression failed.If you are seeing this message try a different browser</p>';
-    //pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
-    console.error(err);
+  } else {
+    loader.style.display = 'none';
+    resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
   }
-}, 100); // 🔹 Delay by 100ms
+};
 
+xhr.onerror = function () {
+  loader.style.display = 'none';
+  resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
+  console.error('XHR error');
+};
+
+xhr.send(formData);
 });
 </script>
     </section>
