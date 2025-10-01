@@ -610,6 +610,9 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   const formData = new FormData();
   formData.append('pdf', file);
 
+console.log('File name:', file?.name);
+console.log('File size:', file?.size);
+
   try {
     const response = await fetch('https://ss-services.co.in/compress', {
       method: 'POST',
