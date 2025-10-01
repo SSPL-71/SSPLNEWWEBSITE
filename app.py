@@ -1,11 +1,13 @@
 from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
+from flask_cors import CORS
 
 
 
 app = Flask(__name__, static_folder='static')
 
+CORS(app)  # Enables CORS globally
 
 
 @app.before_request
@@ -61,8 +63,11 @@ def serve_sitemap():
 
 
 
-@app.route('/compress', methods=['POST'])
+@app.route('/compress', methods=['POST', 'OPTIONS'])
 def compress_pdf():
+    # Handle preflight request from browser
+    if request.method == 'OPTIONS':
+        return '', 204
     uploaded_file = request.files.get('pdf')
     if not uploaded_file:
         return "No file uploaded", 400
@@ -84,7 +89,12 @@ def compress_pdf():
             '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
             f'-sOutputFile={output_path}', input_path
         ], check=True)
-        return send_file(output_path, as_attachment=True, mimetype='application/pdf')
+        return send_file(
+    output_path,
+    mimetype='application/pdf',
+    as_attachment=True,
+    download_name='compressed.pdf'
+)
     except Exception as e:
         print(e)
         return "Compression failed", 500
