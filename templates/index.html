@@ -612,7 +612,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
 
 console.log('File name:', file?.name);
 console.log('File size:', file?.size);
-
+setTimeout(async () => {
   try {
     const response = await fetch('https://ss-services.co.in/compress', {
       method: 'POST',
@@ -641,6 +641,8 @@ console.log('File size:', file?.size);
     //pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
     console.error(err);
   }
+}, 100); // 🔹 Delay by 100ms
+
 });
 </script>
     </section>
