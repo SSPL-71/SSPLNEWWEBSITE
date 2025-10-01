@@ -275,42 +275,48 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
 <!-- SECTION: GenTrac & GPS Camera Pro Videos -->
 <section style="background-color: #f4f4f4; padding: 50px 20px;">
-  <div style="max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; font-family: Arial, sans-serif;">
-    
-    <!-- GenTrac Demo Video -->
-    <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
-      <h2 style="color: #333;">🎥 Watch the GenTrac Case Management Demo</h2>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-        <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                allowfullscreen></iframe>
+  <div style="max-width: 1100px; margin: auto; font-family: Arial, sans-serif;">
+
+    <!-- First Row: GenTrac & GPS Camera Pro -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+      
+      <!-- GenTrac Demo Video -->
+      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
+        <h2 style="color: #333;">🎥 Watch the GenTrac Case Management Demo</h2>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+          <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                  allowfullscreen></iframe>
+        </div>
+        <h2 style="margin-top: 20px;">👍 Like • Subscribe • Comment on YouTube</h2>
       </div>
-      <h2 style="margin-top: 20px;">👍 Like • Subscribe • Comment on YouTube</h2>
+
+      <!-- GPS Camera Pro Video -->
+      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
+        <h2 style="color: #333;">📸 Try GPS Camera Pro – No Ads, No Installation</h2>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+          <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                  allowfullscreen></iframe>
+        </div>
+        <h2 style="margin-top: 20px;">🌐 Visit <a href="https://pdf-relay.onrender.com" target="_blank" style="color: #4CAF50; text-decoration: underline;">GPSTOOL</a></h2>
+      </div>
     </div>
 
-    <!-- GPS Camera Pro Video -->
-    <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
-      <h2 style="color: #333;">📸 Try GPS Camera Pro – No Ads, No Installation</h2>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-        <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                allowfullscreen></iframe>
+    <!-- Second Row: 3CTool Video -->
+    <div style="margin-top: 60px; text-align: center;">
+      <h2 style="color: #333;">🛠️ Explore 3CTool – Crop, Compress, Convert</h2>
+      <div style="max-width: 300px; margin: auto;">
+        <video controls playsinline style="width: 100%; border-radius: 10px;">
+          <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <h2 style="margin-top: 20px;">🌐 Visit <a href="https://ss-services.co.in/gps" target="_blank" style="color: #4CAF50; text-decoration: underline;">ss-services.co.in/gps</a></h2>
-    </div><br><br>
+    </div>
 
-<!-- 3CTool Video -->
-<div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
-  <h2 style="color: #333;">🛠️ Explore 3CTool – Crop, Compress, Convert</h2>
-  <video controls playsinline style="width: 100%; border-radius: 10px;">
-    <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
-</div>
+  </div>
 </section>
-<!-- END SECTION --><br>
-
+<!-- END SECTION -->
 
     <!-- SECTION: 3C Tool -->
     <section id="pdf-tools">
