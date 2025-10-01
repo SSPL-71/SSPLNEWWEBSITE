@@ -6,8 +6,9 @@ COPY . /site
 
 RUN apt-get update && apt-get install -y ghostscript
 
-COPY app.py .
-RUN pip install flask
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 # ✅ This is the only CMD you need
 CMD ["python3", "app.py"]
