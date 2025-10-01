@@ -2,10 +2,10 @@ from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
 
-from flask_cors import CORS
+
 
 app = Flask(__name__, static_folder='static')
-CORS(app, resources={r"/compress": {"origins": "https://ss-services.co.in"}}, expose_headers=["Content-Disposition"])
+
 
 
 @app.before_request
