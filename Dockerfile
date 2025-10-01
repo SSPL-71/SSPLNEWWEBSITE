@@ -2,12 +2,11 @@ FROM python:3.9-slim
 
 WORKDIR /site
 
-COPY requirements.txt .                 # ✅ Copy requirements first
-RUN pip install --no-cache-dir -r requirements.txt  # ✅ Install all dependencies
-
-COPY . /site                            # ✅ Then copy the rest of your app
+COPY . /site                            # ✅ Copy everything at once
 
 RUN apt-get update && apt-get install -y ghostscript
+
+RUN pip install --no-cache-dir -r requirements.txt  # ✅ Install dependencies after everything is copied
 
 CMD ["python3", "app.py"]
 
