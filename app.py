@@ -2,7 +2,10 @@ from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
 
+from flask_cors import CORS
+
 app = Flask(__name__, static_folder='static')
+CORS(app, resources={r"/compress": {"origins": "https://ss-services.co.in"}}, expose_headers=["Content-Disposition"])
 
 
 @app.before_request
@@ -64,6 +67,13 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
+ # 🔍 Debug logging starts here
+    print("User-Agent:", request.headers.get('User-Agent'))
+    print("File name:", uploaded_file.filename)
+    print("File size (bytes):", len(uploaded_file.read()))
+    uploaded_file.seek(0)  # Reset file pointer after reading
+
+
     input_path = 'input.pdf'
     output_path = 'compressed.pdf'
     uploaded_file.save(input_path)
@@ -74,7 +84,7 @@ def compress_pdf():
             '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
             f'-sOutputFile={output_path}', input_path
         ], check=True)
-        return send_file(output_path, as_attachment=True)
+        return send_file(output_path, as_attachment=True, mimetype='application/pdf')
     except Exception as e:
         print(e)
         return "Compression failed", 500
