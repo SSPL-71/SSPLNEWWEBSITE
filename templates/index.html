@@ -635,7 +635,7 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   } catch (err) {
     loader.style.display = 'none'; // 🔹 hide loader
     resultDiv.innerHTML = '<p style="color: red;">Compression failed.If you are seeing this message try a different browser</p>';
-    pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
+    //pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
     console.error(err);
   }
 });
