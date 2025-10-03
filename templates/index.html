@@ -56,78 +56,88 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
     <!-- SECTION: Embedded Styles -->
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: lightblue;
-      	    body {
- 	    overflow-x: hidden; /* horizontal locked */
-  	    overflow-y: auto;   /* vertical scroll enabled */
-		}
-            text-align: center;
-        }
-        .door-container {
-            position: relative;
-            width: 100vw;
-            height: 40vh;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .door {
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            background: #4A4A4A;
-            transition: transform 1.5s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 4vw;
-            color: white;
-            font-weight: bold;
-        }
-        .left-door {
-            left: 0;
-            transform-origin: left;
-        }
-        .right-door {
-            right: 0;
-            transform-origin: right;
-        }
-        .left-door::before { content: "SS"; }
-        .right-door::before { content: "PL"; }
-.brand {
-    position: absolute;
-    top: 20%;   /* instead of 50% */
-    left: 50%;
-    transform: translateX(-50%); /* remove translateY */
-    color: black;
-    font-size: 2vw;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: lightblue;
+        overflow-x: hidden; /* horizontal scroll locked */
+        overflow-y: auto;   /* vertical scroll enabled */
+        text-align: center;
+    }
 
-        @media (max-width: 600px) {
-            .brand { font-size: 4vw; }
-        }
-    </style>
+    .door-container {
+        position: relative;
+        width: 100vw;
+        min-height: 40vh; /* allows expansion if content is taller */
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+
+    .door {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: #4A4A4A;
+        transition: transform 1.5s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+        color: white;
+        font-weight: bold;
+    }
+
+    .left-door {
+        left: 0;
+        transform-origin: left;
+    }
+
+    .right-door {
+        right: 0;
+        transform-origin: right;
+    }
+
+    .left-door::before { content: "SS"; }
+    .right-door::before { content: "PL"; }
+
+    .brand {
+        position: absolute;
+        top: 50%;   /* vertical center */
+        left: 50%;
+        transform: translate(-50%, -50%); /* center content */
+        color: black;
+        font-size: 2vw;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        text-align: center;
+    }
+
+    .brand img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+        .brand { font-size: 4vw; }
+        .brand img { max-height: 50px; }
+    }
+</style>
 </head>
 <body>
    
 
 	 <!-- SECTION: SSPL Door Reveal -->
-   	<section>
-        <div class="door-container">
+<section>
+    <div class="door-container">
         <div class="door left-door"></div>
         <div class="door right-door"></div>
         <div class="brand">
-	<img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:100px;">     
-	<img src="{{ url_for('static', filename='Vaastu.png') }}" 
-   	  alt="Vaastu Symbol" 
-   	  style="height:50px; position:absolute; top:0; right:0;">
-
-
-    <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
+            <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:100px;">     
+            <img src="{{ url_for('static', filename='Vaastu.png') }}" 
+                alt="Vaastu Symbol" 
+                style="height:50px; position:absolute; top:0; right:0;">
+            <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
         </div>
     </div>
     </section>
