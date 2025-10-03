@@ -408,7 +408,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       transition: right 2s ease-out;
     }
     .avatar-video.video-visible {
-      right: calc(50% - 60px); /* Centered horizontally */
+      right: 200px; /* Stops just before center */
     }
     .avatar-video video {
       width: 100%;
@@ -447,7 +447,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         if (entry.isIntersecting) {
           avatar.classList.add('video-visible');
 
-          // Attempt to play with sound
+          // Enable sound and attempt playback
           video.muted = false;
           video.volume = 1.0;
           const playPromise = video.play();
