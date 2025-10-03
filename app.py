@@ -1,6 +1,8 @@
 from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
+import fitz  # PyMuPDF
+
 from flask_cors import CORS
 
 
@@ -69,30 +71,41 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
- # 🔍 Debug logging starts here
+    # Debug logging
     print("User-Agent:", request.headers.get('User-Agent'))
     print("File name:", uploaded_file.filename)
     print("File size (bytes):", len(uploaded_file.read()))
-    uploaded_file.seek(0)  # Reset file pointer after reading
-
+    uploaded_file.seek(0)  # Reset pointer
 
     input_path = 'input.pdf'
     output_path = 'compressed.pdf'
     uploaded_file.save(input_path)
 
     try:
-        subprocess.run([
-            'gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
-            '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
-            f'-sOutputFile={output_path}', input_path
-        ], check=True)
-        return send_file(output_path, as_attachment=True, mimetype='application/pdf')
+        # Open PDF with PyMuPDF
+        doc = fitz.open(input_path)
+
+        # Save compressed PDF, preserving metadata and images
+        doc.save(output_path, deflate=True, clean=True)
+        doc.close()
+
+        return send_file(
+            output_path,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f"compressed-{uploaded_file.filename}"
+        )
+
     except Exception as e:
         print(e)
         return "Compression failed", 500
+
     finally:
-        if os.path.exists(input_path): os.remove(input_path)
-        if os.path.exists(output_path): os.remove(output_path)
+        if os.path.exists(input_path):
+            os.remove(input_path)
+        if os.path.exists(output_path):
+            os.remove(output_path)
+
 
 @app.route('/3ctool')
 def serve_3ctool():
