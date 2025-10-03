@@ -69,10 +69,12 @@ def compress_pdf():
     if not uploaded_file:
         return "No file uploaded", 400
 
+ # 🔍 Debug logging starts here
     print("User-Agent:", request.headers.get('User-Agent'))
     print("File name:", uploaded_file.filename)
     print("File size (bytes):", len(uploaded_file.read()))
-    uploaded_file.seek(0)
+    uploaded_file.seek(0)  # Reset file pointer after reading
+
 
     input_path = 'input.pdf'
     output_path = 'compressed.pdf'
@@ -81,26 +83,16 @@ def compress_pdf():
     try:
         subprocess.run([
             'gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
-            '-dPDFSETTINGS=/screen', '-dNOPAUSE', '-dQUIET', '-dBATCH',
-            '-dAutoRotatePages=/None',
+            '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
             f'-sOutputFile={output_path}', input_path
         ], check=True)
-
-        return send_file(
-            output_path,
-            mimetype='application/pdf',
-            as_attachment=True,
-            download_name=f"compressed-{uploaded_file.filename}"
-        )
-
+        return send_file(output_path, as_attachment=True, mimetype='application/pdf')
     except Exception as e:
-        print("Compression failed:", e)
+        print(e)
         return "Compression failed", 500
-
     finally:
-        for f in [input_path, output_path]:
-            if os.path.exists(f):
-                os.remove(f)
+        if os.path.exists(input_path): os.remove(input_path)
+        if os.path.exists(output_path): os.remove(output_path)
 
 @app.route('/3ctool')
 def serve_3ctool():

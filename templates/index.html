@@ -592,49 +592,55 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
 <script>
 document.getElementById('quality-slider').addEventListener('input', e => {
-    document.getElementById('quality-value').textContent = `${e.target.value}%`;
+  document.getElementById('quality-value').textContent = `${e.target.value}%`;
 });
 
-document.getElementById('compress-btn').addEventListener('click', () => {
-    const pdfInput = document.getElementById('pdf-file');
-    const file = pdfInput.files[0];
-    if (!file) return alert('Select a file');
+document.getElementById('compress-btn').addEventListener('click', async () => {
+  const pdfInput = document.getElementById('pdf-file'); // 🔸 Added reference to file input
+  const file = pdfInput.files[0];                        // 🔸 Using the same variable name
 
-    const compressionInfo = document.getElementById('compression-info');
-    const resultDiv = document.getElementById('compress-result');
-    const loader = document.getElementById('compress-loader');
-    loader.style.display = 'block';
-    resultDiv.innerHTML = '<p></p>';
+  if (!file) return alert('Select a file');
 
-    compressionInfo.textContent = `Original size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+  const compressionInfo = document.getElementById('compression-info');
+  const resultDiv = document.getElementById('compress-result');
+  const loader = document.getElementById('compress-loader'); // 🔹 loader added
+  loader.style.display = 'block'; // 🔹 show loader
+  resultDiv.innerHTML = '<p></p>';
 
-    // ✅ Create a dynamic form to stream large PDF directly to browser
-    const form = document.createElement('form');
-    form.action = 'https://ss-services.co.in/compress';
-    form.method = 'POST';
-    form.enctype = 'multipart/form-data';
-    form.target = 'download-frame'; // hidden iframe for streaming
+  const formData = new FormData();
+  formData.append('pdf', file);
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.name = 'pdf';
-    input.files = pdfInput.files;
-    form.appendChild(input);
+  try {
+    const response = await fetch('https://ss-services.co.in/compress', {
+      method: 'POST',
+      body: formData
+    });
 
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    if (!response.ok) throw new Error('Compression failed');
 
-    // Hide loader after short delay, user sees download starting
-    setTimeout(() => {
-        loader.style.display = 'none';
-        resultDiv.innerHTML = '<p style="color: green;">Download should start automatically. If not, check your browser download folder.</p>';
-    }, 2000);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `compressed-${Date.now()}.pdf`;
+    link.textContent = 'Click to Download Compressed PDF / Long Press On Mobile';
+
+    resultDiv.innerHTML = '';
+    resultDiv.appendChild(link);
+    loader.style.display = 'none'; // 🔹 hide loader
+
+    compressionInfo.textContent =
+      `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
+  } catch (err) {
+    loader.style.display = 'none'; // 🔹 hide loader
+    resultDiv.innerHTML = '<p style="color: red;">Compression failed.If you are seeing this message try a different browser</p>';
+    pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
+    console.error(err);
+  }
 });
 </script>
 
-<!-- Hidden iframe for large file streaming -->
-<iframe name="download-frame" style="display:none;"></iframe>
 </section>
 <!-- END SECTION: PDF Compression Tool --><br>
 
