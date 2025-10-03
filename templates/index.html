@@ -96,16 +96,17 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         }
         .left-door::before { content: "SS"; }
         .right-door::before { content: "PL"; }
-        .brand {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: black;
-            font-size: 2vw;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+.brand {
+    position: absolute;
+    top: 20%;   /* instead of 50% */
+    left: 50%;
+    transform: translateX(-50%); /* remove translateY */
+    color: black;
+    font-size: 2vw;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
         @media (max-width: 600px) {
             .brand { font-size: 4vw; }
         }
@@ -122,8 +123,9 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         <div class="brand">
 	<img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:100px;">     
 	<img src="{{ url_for('static', filename='Vaastu.png') }}" 
-    	 alt="Vaastu Symbol" 
-     	style="height:50px; display:block; margin-left:0; margin-right:auto;">
+   	  alt="Vaastu Symbol" 
+   	  style="height:50px; position:absolute; top:0; right:0;">
+
 
     <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
         </div>
