@@ -339,7 +339,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 </section>
 <!-- END SECTION -->
 
-    <!-- SECTION: 3C Tool -->
+<!-- SECTION: 3C Tool -->
 <section id="pdf-tools">
   <title>3CTool</title>
   <style>
@@ -427,9 +427,9 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
          Open 3C Tool
       </a>
 
-      <!-- Avatar video moving from right to left -->
+      <!-- Avatar video moving from right to center -->
       <div class="avatar-video" id="animatedAvatar">
-        <video src="/static/videos/SSPL.mp4" autoplay muted playsinline></video>
+        <video src="/static/videos/SSPL.mp4" autoplay playsinline></video>
       </div>
     </div>
   </body>
@@ -440,19 +440,20 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       const container = document.querySelector('.container');
       const containerWidth = container.offsetWidth;
       const avatarWidth = avatar.offsetWidth;
-      const targetLeft = 30; // Final left margin
+      const targetCenter = (containerWidth - avatarWidth) / 2;
 
       let currentRight = -140;
       const speed = 2;
       let animationFrameId;
 
       function animateAvatar() {
-        if (currentRight < containerWidth - targetLeft - avatarWidth) {
+        const currentLeft = containerWidth - currentRight - avatarWidth;
+        if (currentLeft < targetCenter) {
           currentRight += speed;
           avatar.style.right = currentRight + 'px';
           animationFrameId = requestAnimationFrame(animateAvatar);
         } else {
-          avatar.style.right = containerWidth - targetLeft - avatarWidth + 'px';
+          avatar.style.right = containerWidth - targetCenter - avatarWidth + 'px';
           cancelAnimationFrame(animationFrameId);
         }
       }
