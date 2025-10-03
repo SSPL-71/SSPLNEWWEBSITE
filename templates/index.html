@@ -504,9 +504,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     </section>
     <!-- END SECTION: PDF Merger Tool --><br>
 
-    <!-- SECTION: PDF Compression Tool -->
+        <!-- SECTION: PDF Compression Tool -->
 <section>
 <title>PDF Compression Tool</title>
+
 <style>
     body {
         background-color: #87CEEB; /* Light blue background */
@@ -589,61 +590,88 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         <div class="dot"></div>
     </div>
 </div>
-
 <script>
-document.getElementById('quality-slider').addEventListener('input', e => {
-  document.getElementById('quality-value').textContent = `${e.target.value}%`;
-});
+        const qualitySlider = document.getElementById('quality-slider');
+        const qualityValue = document.getElementById('quality-value');
+        const compressionInfo = document.getElementById('compression-info');
 
-document.getElementById('compress-btn').addEventListener('click', async () => {
-  const pdfInput = document.getElementById('pdf-file'); // 🔸 Added reference to file input
-  const file = pdfInput.files[0];                        // 🔸 Using the same variable name
+        qualitySlider.addEventListener('input', () => {
+            qualityValue.textContent = `${qualitySlider.value}%`;
+        });
 
-  if (!file) return alert('Select a file');
+        document.getElementById('compress-btn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('pdf-file');
+            const resultDiv = document.getElementById('compress-result');
 
-  const compressionInfo = document.getElementById('compression-info');
-  const resultDiv = document.getElementById('compress-result');
-  const loader = document.getElementById('compress-loader'); // 🔹 loader added
-  loader.style.display = 'block'; // 🔹 show loader
-  resultDiv.innerHTML = '<p></p>';
+            if (fileInput.files.length === 0) {
+                alert('Please select a PDF file.');
+                return;
+            }
 
-  const formData = new FormData();
-  formData.append('pdf', file);
+            const file = fileInput.files[0];
+            const initialSize = file.size;
+            resultDiv.innerHTML = '<p>Compressing...</p>';
 
-  try {
-    const response = await fetch('https://ss-services.co.in/compress', {
-      method: 'POST',
-      body: formData
-    });
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-    if (!response.ok) throw new Error('Compression failed');
+                const compressedPdf = await PDFLib.PDFDocument.create();
+                const pdfData = new Uint8Array(arrayBuffer);
+                const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+                const pdf = await loadingTask.promise;
 
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
+                for (let i = 0; i < pdf.numPages; i++) {
+                    const page = await pdf.getPage(i + 1);
+                    const viewport = page.getViewport({ scale: 1.0 });
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `compressed-${Date.now()}.pdf`;
-    link.textContent = 'Click to Download Compressed PDF / Long Press On Mobile';
+                    const canvas = document.createElement("canvas");
+                    const context = canvas.getContext("2d");
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
 
-    resultDiv.innerHTML = '';
-    resultDiv.appendChild(link);
-    loader.style.display = 'none'; // 🔹 hide loader
+                    await page.render({ canvasContext: context, viewport }).promise;
 
-    compressionInfo.textContent =
-      `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
-  } catch (err) {
-    loader.style.display = 'none'; // 🔹 hide loader
-    resultDiv.innerHTML = '<p style="color: red;">Compression failed.If you are seeing this message try a different browser</p>';
-    pdfInput.value = '';            // 🔸 Reset file input to avoid stale reference
-    console.error(err);
-  }
-});
-</script>
+                    const compressionLevel = qualitySlider.value / 100;
+                    const compressedImg = canvas.toDataURL("image/jpeg", compressionLevel);
 
+                    const newPage = compressedPdf.addPage([viewport.width, viewport.height]);
+                    const jpgImage = await compressedPdf.embedJpg(compressedImg);
+                    newPage.drawImage(jpgImage, {
+                        x: 0,
+                        y: 0,
+                        width: viewport.width,
+                        height: viewport.height
+                    });
+                }
 
+                const compressedBytes = await compressedPdf.save();
+                const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+
+                const finalSize = blob.size;
+                const compressionRatio = ((1 - finalSize / initialSize) * 100).toFixed(2);
+
+                compressionInfo.innerHTML = `Original Size: ${(initialSize / 1024 / 1024).toFixed(2)} MB<br>
+                                             Compressed Size: ${(finalSize / 1024 / 1024).toFixed(2)} MB<br>
+                                             Compression: ${compressionRatio}%`;
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = url;
+                downloadLink.download = `compressed-${Date.now()}.pdf`;
+                downloadLink.textContent = 'Right-click to download your compressed PDF';
+
+                resultDiv.innerHTML = '';
+                resultDiv.appendChild(downloadLink);
+            } catch (error) {
+                console.error('Error compressing PDF:', error);
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
 </section>
 <!-- END SECTION: PDF Compression Tool --><br>
+
 
 
 <!-- SECTION: PDF Page Sorter Tool -->
