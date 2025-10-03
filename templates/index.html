@@ -337,14 +337,14 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
   </div>
 </section>
-<!-- END SECTION -->
+<!-- END SECTION --><br><br>
 
 <!-- SECTION: 3C Tool -->
 <section id="pdf-tools">
   <title>3CTool</title>
   <style>
     body {
-      background-color: #87CEEB; /* Light blue background */
+      background-color: #87CEEB;
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 20px;
@@ -359,7 +359,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       background: white;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      position: relative; /* Needed for avatar positioning */
+      position: relative;
       overflow: hidden;
     }
     .form-group {
@@ -400,11 +400,15 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     .avatar-video {
       position: absolute;
       bottom: 20px;
-      right: -140px; /* Start off-screen */
+      right: -140px;
       width: 120px;
       height: 120px;
       border-radius: 12px;
       overflow: hidden;
+      transition: right 2s ease-out;
+    }
+    .avatar-video.video-visible {
+      right: calc(50% - 60px); /* Centered horizontally */
     }
     .avatar-video video {
       width: 100%;
@@ -427,7 +431,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
          Open 3C Tool
       </a>
 
-      <!-- Avatar video moving from right to center -->
+      <!-- Avatar video -->
       <div class="avatar-video" id="animatedAvatar">
         <video src="/static/videos/SSPL.mp4" autoplay playsinline></video>
       </div>
@@ -435,34 +439,30 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   </body>
 
   <script>
-    window.addEventListener('load', () => {
-      const avatar = document.getElementById('animatedAvatar');
-      const container = document.querySelector('.container');
-      const containerWidth = container.offsetWidth;
-      const avatarWidth = avatar.offsetWidth;
-      const targetCenter = (containerWidth - avatarWidth) / 2;
+    const avatar = document.getElementById('animatedAvatar');
+    const video = avatar.querySelector('video');
 
-      let currentRight = -140;
-      const speed = 2;
-      let animationFrameId;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          avatar.classList.add('video-visible');
 
-      function animateAvatar() {
-        const currentLeft = containerWidth - currentRight - avatarWidth;
-        if (currentLeft < targetCenter) {
-          currentRight += speed;
-          avatar.style.right = currentRight + 'px';
-          animationFrameId = requestAnimationFrame(animateAvatar);
-        } else {
-          avatar.style.right = containerWidth - targetCenter - avatarWidth + 'px';
-          cancelAnimationFrame(animationFrameId);
+          // Play with sound (some browsers require user interaction)
+          video.muted = false;
+          video.play().catch(() => {
+            // fallback if autoplay with sound is blocked
+            console.warn('Autoplay with sound may be blocked by browser');
+          });
+
+          observer.unobserve(entry.target);
         }
-      }
+      });
+    }, { threshold: 0.5 });
 
-      animateAvatar();
-    });
+    observer.observe(document.querySelector('#pdf-tools'));
   </script>
 </section>
-<!-- END SECTION: 3C Tool -->
+<!-- END SECTION: 3C Tool --><br><br>
 
     <!-- SECTION: PDF Merger Tool -->
     <section>
