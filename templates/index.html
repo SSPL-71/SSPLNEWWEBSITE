@@ -406,15 +406,29 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       border-radius: 12px;
       overflow: hidden;
       transition: right 2s ease-out;
+      z-index: 0; /* Push behind content */
+      opacity: 0.8;
     }
     .avatar-video.video-visible {
-      right: 280px; /* Stops before center, leaving button visible */
+      right: 280px; /* Stops before center */
     }
     .avatar-video video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .avatar-video {
+        width: 80px;
+        height: 80px;
+        bottom: 10px;
+        right: -100px;
+      }
+      .avatar-video.video-visible {
+        right: 180px;
+      }
     }
   </style>
 
@@ -442,33 +456,24 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     const avatar = document.getElementById('animatedAvatar');
     const video = avatar.querySelector('video');
 
-    let hasPlayed = false;
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           avatar.classList.add('video-visible');
-
-          // Reset video and play with sound
           video.currentTime = 0;
           video.muted = false;
           video.volume = 1.0;
           video.play().catch(() => {
             console.warn('Autoplay with sound blocked. Waiting for user interaction.');
           });
-
-          hasPlayed = true;
         } else {
-          // Reset position when out of view
           avatar.classList.remove('video-visible');
-          hasPlayed = false;
         }
       });
     }, { threshold: 0.5 });
 
     observer.observe(document.querySelector('#pdf-tools'));
 
-    // Fallback: enable sound on user click
     document.body.addEventListener('click', () => {
       video.muted = false;
       video.volume = 1.0;
