@@ -620,24 +620,34 @@ xhr.open('POST', 'https://ss-services.co.in/compress', true);
 xhr.responseType = 'blob';
 
 xhr.onload = function () {
+  loader.style.display = 'none';
   if (xhr.status === 200) {
     const blob = xhr.response;
     const url = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `compressed-${Date.now()}.pdf`;
-    link.textContent = 'Click to Download Compressed PDF / Long Press On Mobile';
-    link.target = '_blank';
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
-    resultDiv.innerHTML = '';
-    resultDiv.appendChild(link);
-    loader.style.display = 'none';
+    if (isMobile) {
+      // Mobile Chrome fallback
+      const link = document.createElement('a');
+      link.href = url;
+      link.textContent = 'Open Compressed PDF (Tap here, then use Download option)';
+      link.target = '_blank';
+      resultDiv.innerHTML = '';
+      resultDiv.appendChild(link);
+    } else {
+      // Desktop
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `compressed-${Date.now()}.pdf`;
+      link.textContent = 'Download Compressed PDF';
+      resultDiv.innerHTML = '';
+      resultDiv.appendChild(link);
+    }
 
     compressionInfo.textContent =
       `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
   } else {
-    loader.style.display = 'none';
     resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
   }
 };
