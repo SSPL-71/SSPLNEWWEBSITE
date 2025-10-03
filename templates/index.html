@@ -447,12 +447,16 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         if (entry.isIntersecting) {
           avatar.classList.add('video-visible');
 
-          // Play with sound (some browsers require user interaction)
+          // Attempt to play with sound
           video.muted = false;
-          video.play().catch(() => {
-            // fallback if autoplay with sound is blocked
-            console.warn('Autoplay with sound may be blocked by browser');
-          });
+          video.volume = 1.0;
+          const playPromise = video.play();
+
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              console.warn('Autoplay with sound blocked. Waiting for user interaction.');
+            });
+          }
 
           observer.unobserve(entry.target);
         }
@@ -460,6 +464,13 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     }, { threshold: 0.5 });
 
     observer.observe(document.querySelector('#pdf-tools'));
+
+    // Fallback: enable sound on user click
+    document.body.addEventListener('click', () => {
+      video.muted = false;
+      video.volume = 1.0;
+      video.play();
+    });
   </script>
 </section>
 <!-- END SECTION: 3C Tool --><br><br>
