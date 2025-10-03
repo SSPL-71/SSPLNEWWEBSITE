@@ -549,15 +549,15 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         font-weight: bold;
     }
 
-.loader {
-    display: none;
-    margin-top: 30px;
-    text-align: center;
-    display: flex;              /* Ensure flex is active */
-    flex-direction: row;        /* 🔹 Make it horizontal */
-    justify-content: center;    /* 🔹 Center the dots */
-    align-items: center;
-}
+    .loader {
+        display: none;
+        margin-top: 30px;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
     .dot {
         display: inline-block;
         width: 14px;
@@ -596,7 +596,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         const qualitySlider = document.getElementById('quality-slider');
         const qualityValue = document.getElementById('quality-value');
         const compressionInfo = document.getElementById('compression-info');
-        const loader = document.getElementById('compress-loader'); // 🔹 Loader reference added
+        const loader = document.getElementById('compress-loader');
 
         qualitySlider.addEventListener('input', () => {
             qualityValue.textContent = `${qualitySlider.value}%`;
@@ -608,13 +608,14 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
             if (fileInput.files.length === 0) {
                 alert('Please select a PDF file.');
+                loader.style.display = 'none'; // 🔹 Ensure loader stays hidden
                 return;
             }
 
             const file = fileInput.files[0];
             const initialSize = file.size;
 
-            loader.style.display = 'flex'; // 🔹 Show loader
+            loader.style.display = 'flex'; // 🔹 Show loader only after file is selected
             resultDiv.innerHTML = '<p>Compressing...</p>';
 
             try {
