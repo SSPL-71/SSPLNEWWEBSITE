@@ -596,69 +596,59 @@ document.getElementById('quality-slider').addEventListener('input', e => {
 });
 
 document.getElementById('compress-btn').addEventListener('click', async () => {
-  const pdfInput = document.getElementById('pdf-file'); // 🔸 Added reference to file input
-  const file = pdfInput.files[0];                        // 🔸 Using the same variable name
+  const pdfInput = document.getElementById('pdf-file');
+  const file = pdfInput.files[0];
 
   if (!file) return alert('Select a file');
 
   const compressionInfo = document.getElementById('compression-info');
   const resultDiv = document.getElementById('compress-result');
-  const loader = document.getElementById('compress-loader'); // 🔹 loader added
-  loader.style.display = 'block'; // 🔹 show loader
+  const loader = document.getElementById('compress-loader');
+  loader.style.display = 'block';
   resultDiv.innerHTML = '<p></p>';
 
   const formData = new FormData();
   formData.append('pdf', file);
 
-console.log('File name:', file?.name);
-console.log('File size:', file?.size);
+  console.log('File name:', file?.name);
+  console.log('File size:', file?.size);
 
-loader.style.display = 'block'; // Show loader before sending
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://ss-services.co.in/compress', true);
+  xhr.responseType = 'blob';
 
-const xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://ss-services.co.in/compress', true);
-xhr.responseType = 'blob';
+  xhr.onload = function () {
+    loader.style.display = 'none';
+    if (xhr.status === 200) {
+      const blob = xhr.response;
+      const url = URL.createObjectURL(blob);
 
-xhr.onload = function () {
-  loader.style.display = 'none';
-  if (xhr.status === 200) {
-    const blob = xhr.response;
-    const url = URL.createObjectURL(blob);
-
-    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      // Mobile Chrome fallback
-      const link = document.createElement('a');
-      link.href = url;
-      link.textContent = 'Open Compressed PDF (Tap here, then use Download option)';
-      link.target = '_blank';
-      resultDiv.innerHTML = '';
-      resultDiv.appendChild(link);
-    } else {
-      // Desktop
+      // ✅ Always force direct download
       const link = document.createElement('a');
       link.href = url;
       link.download = `compressed-${Date.now()}.pdf`;
-      link.textContent = 'Download Compressed PDF';
-      resultDiv.innerHTML = '';
-      resultDiv.appendChild(link);
+      document.body.appendChild(link);
+      link.click(); // auto-trigger download
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      // Also show fallback message/link in UI
+      resultDiv.innerHTML = '<p style="color: green;">Download should start automatically. If not, <a href="' + url + '" download="compressed.pdf">click here</a>.</p>';
+
+      compressionInfo.textContent =
+        `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
+    } else {
+      resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try again.</p>';
     }
+  };
 
-    compressionInfo.textContent =
-      `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
-  } else {
+  xhr.onerror = function () {
+    loader.style.display = 'none';
     resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
-  }
-};
+    console.error('XHR error');
+  };
 
-xhr.onerror = function () {
-  loader.style.display = 'none';
-  resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
-  console.error('XHR error');
-};
-
-xhr.send(formData);
+  xhr.send(formData);
 });
 </script>
     </section>
