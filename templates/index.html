@@ -340,83 +340,128 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 <!-- END SECTION -->
 
     <!-- SECTION: 3C Tool -->
-    <section id="pdf-tools">
-    <title>3CTool</title>
-    <style>
-        body {
-            background-color: #87CEEB; /* Light blue background */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        input[type="file"] {
-            display: block;
-            margin: 10px auto;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-    <body>
-
-    <div class="container">
-        <h1>3C-Tool</h1>
-        <p><strong>Developed by SSPL</strong></p>
-        <div class="form-group">
-          <p><i><strong>  CROP, COMPRESS IMAGES / VIDEOS & CONVERT IMAGES TO PDF</i></strong></p>
-        </div>
-  <a href="https://image-pdf-tool.onrender.com/" 
-   class="button-link" 
-   title="Click to open the 3C Tool">
-   Open 3C Tool
-</a>
-
-<style>
+<section id="pdf-tools">
+  <title>3CTool</title>
+  <style>
+    body {
+      background-color: #87CEEB; /* Light blue background */
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative; /* Needed for avatar positioning */
+      overflow: hidden;
+    }
+    .form-group {
+      margin: 15px 0;
+    }
+    input[type="file"] {
+      display: block;
+      margin: 10px auto;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
     .button-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
     .button-link:hover {
-        background-color: #45a049;
+      background-color: #45a049;
     }
-</style>
 
+    .avatar-video {
+      position: absolute;
+      bottom: 20px;
+      right: -140px; /* Start off-screen */
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .avatar-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  </style>
 
+  <body>
+    <div class="container">
+      <h1>3C-Tool</h1>
+      <p><strong>Developed by SSPL</strong></p>
+      <div class="form-group">
+        <p><i><strong>CROP, COMPRESS IMAGES / VIDEOS & CONVERT IMAGES TO PDF</strong></i></p>
+      </div>
+      <a href="https://image-pdf-tool.onrender.com/"
+         class="button-link"
+         title="Click to open the 3C Tool">
+         Open 3C Tool
+      </a>
 
+      <!-- Avatar video moving from right to left -->
+      <div class="avatar-video" id="animatedAvatar">
+        <video src="/static/videos/SSPL.mp4" autoplay muted playsinline></video>
+      </div>
     </div>
-    </section>
-    <!-- END SECTION: 3C Tool --><br>
+  </body>
+
+  <script>
+    window.addEventListener('load', () => {
+      const avatar = document.getElementById('animatedAvatar');
+      const container = document.querySelector('.container');
+      const containerWidth = container.offsetWidth;
+      const avatarWidth = avatar.offsetWidth;
+      const targetLeft = 30; // Final left margin
+
+      let currentRight = -140;
+      const speed = 2;
+      let animationFrameId;
+
+      function animateAvatar() {
+        if (currentRight < containerWidth - targetLeft - avatarWidth) {
+          currentRight += speed;
+          avatar.style.right = currentRight + 'px';
+          animationFrameId = requestAnimationFrame(animateAvatar);
+        } else {
+          avatar.style.right = containerWidth - targetLeft - avatarWidth + 'px';
+          cancelAnimationFrame(animationFrameId);
+        }
+      }
+
+      animateAvatar();
+    });
+  </script>
+</section>
+<!-- END SECTION: 3C Tool -->
 
     <!-- SECTION: PDF Merger Tool -->
     <section>
