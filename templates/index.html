@@ -504,7 +504,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     </section>
     <!-- END SECTION: PDF Merger Tool --><br>
 
-        <!-- SECTION: PDF Compression Tool -->
+       <!-- SECTION: PDF Compression Tool -->
 <section>
 <title>PDF Compression Tool</title>
 
@@ -594,6 +594,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         const qualitySlider = document.getElementById('quality-slider');
         const qualityValue = document.getElementById('quality-value');
         const compressionInfo = document.getElementById('compression-info');
+        const loader = document.getElementById('compress-loader'); // 🔹 Loader reference added
 
         qualitySlider.addEventListener('input', () => {
             qualityValue.textContent = `${qualitySlider.value}%`;
@@ -610,6 +611,8 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 
             const file = fileInput.files[0];
             const initialSize = file.size;
+
+            loader.style.display = 'flex'; // 🔹 Show loader
             resultDiv.innerHTML = '<p>Compressing...</p>';
 
             try {
@@ -659,16 +662,18 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
                 const downloadLink = document.createElement('a');
                 downloadLink.href = url;
                 downloadLink.download = `compressed-${Date.now()}.pdf`;
-                downloadLink.textContent = 'Right-click to download your compressed PDF';
+                downloadLink.textContent = 'Click To Download Your Compressed PDF / Long Press On Mobile For Download';
 
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(downloadLink);
+                loader.style.display = 'none'; // 🔹 Hide loader after success
             } catch (error) {
                 console.error('Error compressing PDF:', error);
                 resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                loader.style.display = 'none'; // 🔹 Hide loader on error
             }
         });
-    </script>
+</script>
 </section>
 <!-- END SECTION: PDF Compression Tool --><br>
 
