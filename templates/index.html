@@ -505,154 +505,139 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     <!-- END SECTION: PDF Merger Tool --><br>
 
     <!-- SECTION: PDF Compression Tool -->
-    <section>
-    <title>PDF Compression Tool</title>
-    <style>
-        body {
-            background-color: #87CEEB; /* Light blue background */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        input[type="file"], input[type="range"] {
-            display: block;
-            margin: 10px auto;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #compression-info {
-            margin-top: 10px;
-            font-weight: bold;
-        }
+<section>
+<title>PDF Compression Tool</title>
+<style>
+    body {
+        background-color: #87CEEB; /* Light blue background */
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+        margin: 15px 0;
+    }
+    input[type="file"], input[type="range"] {
+        display: block;
+        margin: 10px auto;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #compression-info {
+        margin-top: 10px;
+        font-weight: bold;
+    }
 
-	.loader {
-            display: none;
-            margin-top: 30px;
-            text-align: center;
-	   flex-direction: column;
-           align-items: center;
-        }
-        .dot {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin: 5px;
-            background-color: #3498db;
-            animation: bounce 0.6s infinite alternate;
-            border-radius: 4px;
-        }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes bounce {
-            from { transform: translateY(0px); opacity: 0.6; }
-            to { transform: translateY(-12px); opacity: 1; }
-	}
+    .loader {
+        display: none;
+        margin-top: 30px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .dot {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin: 5px;
+        background-color: #3498db;
+        animation: bounce 0.6s infinite alternate;
+        border-radius: 4px;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+        from { transform: translateY(0px); opacity: 0.6; }
+        to { transform: translateY(-12px); opacity: 1; }
+    }
+</style>
 
-    </style>
-        <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
-            <h1>PDF Compression Tool</h1>
-            <p><strong>Developed by SSPL</strong></p>
-            <label for="pdf-file">Select a PDF file:</label>
-            <input type="file" id="pdf-file" accept="application/pdf">
-            <label for="quality-slider">Compression Quality: <span id="quality-value">60%</span></label>
-            <input type="range" id="quality-slider" min="10" max="90" value="60">
-            <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
-            <div id="compression-info" style="margin-top: 10px;"></div>
-            <div id="compress-result" style="margin-top: 20px;"></div>
-	    <div class="loader" id="compress-loader">
-        	<p>Compressing... Please wait</p>
-        	<div class="dot"></div>
-        	<div class="dot"></div>
-        	<div class="dot"></div>
-   		 </div>
-	         </div>
-        </div>
+<div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
+    <h1>PDF Compression Tool</h1>
+    <p><strong>Developed by SSPL</strong></p>
+    <label for="pdf-file">Select a PDF file:</label>
+    <input type="file" id="pdf-file" accept="application/pdf">
+    <label for="quality-slider">Compression Quality: <span id="quality-value">60%</span></label>
+    <input type="range" id="quality-slider" min="10" max="90" value="60">
+    <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
+    <div id="compression-info" style="margin-top: 10px;"></div>
+    <div id="compress-result" style="margin-top: 20px;"></div>
+    <div class="loader" id="compress-loader">
+        <p>Compressing... Please wait</p>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+</div>
+
 <script>
 document.getElementById('quality-slider').addEventListener('input', e => {
-  document.getElementById('quality-value').textContent = `${e.target.value}%`;
+    document.getElementById('quality-value').textContent = `${e.target.value}%`;
 });
 
-document.getElementById('compress-btn').addEventListener('click', async () => {
-  const pdfInput = document.getElementById('pdf-file');
-  const file = pdfInput.files[0];
+document.getElementById('compress-btn').addEventListener('click', () => {
+    const pdfInput = document.getElementById('pdf-file');
+    const file = pdfInput.files[0];
+    if (!file) return alert('Select a file');
 
-  if (!file) return alert('Select a file');
+    const compressionInfo = document.getElementById('compression-info');
+    const resultDiv = document.getElementById('compress-result');
+    const loader = document.getElementById('compress-loader');
+    loader.style.display = 'block';
+    resultDiv.innerHTML = '<p></p>';
 
-  const compressionInfo = document.getElementById('compression-info');
-  const resultDiv = document.getElementById('compress-result');
-  const loader = document.getElementById('compress-loader');
-  loader.style.display = 'block';
-  resultDiv.innerHTML = '<p></p>';
+    compressionInfo.textContent = `Original size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
 
-  const formData = new FormData();
-  formData.append('pdf', file);
+    // ✅ Create a dynamic form to stream large PDF directly to browser
+    const form = document.createElement('form');
+    form.action = 'https://ss-services.co.in/compress';
+    form.method = 'POST';
+    form.enctype = 'multipart/form-data';
+    form.target = 'download-frame'; // hidden iframe for streaming
 
-  console.log('File name:', file?.name);
-  console.log('File size:', file?.size);
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.name = 'pdf';
+    input.files = pdfInput.files;
+    form.appendChild(input);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://ss-services.co.in/compress', true);
-  xhr.responseType = 'blob';
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
 
-  xhr.onload = function () {
-    loader.style.display = 'none';
-    if (xhr.status === 200) {
-      const blob = xhr.response;
-      const url = URL.createObjectURL(blob);
-
-      // ✅ Always force direct download
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `compressed-${Date.now()}.pdf`;
-      document.body.appendChild(link);
-      link.click(); // auto-trigger download
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      // Also show fallback message/link in UI
-      resultDiv.innerHTML = '<p style="color: green;">Download should start automatically. If not, <a href="' + url + '" download="compressed.pdf">click here</a>.</p>';
-
-      compressionInfo.textContent =
-        `Original: ${(file.size / 1024 / 1024).toFixed(2)} MB • Compressed: ${(blob.size / 1024 / 1024).toFixed(2)} MB`;
-    } else {
-      resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try again.</p>';
-    }
-  };
-
-  xhr.onerror = function () {
-    loader.style.display = 'none';
-    resultDiv.innerHTML = '<p style="color: red;">Compression failed. Try a different browser or smaller file.</p>';
-    console.error('XHR error');
-  };
-
-  xhr.send(formData);
+    // Hide loader after short delay, user sees download starting
+    setTimeout(() => {
+        loader.style.display = 'none';
+        resultDiv.innerHTML = '<p style="color: green;">Download should start automatically. If not, check your browser download folder.</p>';
+    }, 2000);
 });
 </script>
-    </section>
-    <!-- END SECTION: PDF Compression Tool --><br>
+
+<!-- Hidden iframe for large file streaming -->
+<iframe name="download-frame" style="display:none;"></iframe>
+</section>
+<!-- END SECTION: PDF Compression Tool --><br>
+
 
 <!-- SECTION: PDF Page Sorter Tool -->
 <section>

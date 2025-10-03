@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
+import fitz  # PyMuPDF
 from flask_cors import CORS
 
 
@@ -63,44 +64,54 @@ def serve_sitemap():
 
 
 
-@app.route('/compress', methods=['POST', 'OPTIONS'])
+@app.route('/compress', methods=['POST'])
 def compress_pdf():
-    # Handle preflight request from browser
-    if request.method == 'OPTIONS':
-        return '', 204
     uploaded_file = request.files.get('pdf')
     if not uploaded_file:
         return "No file uploaded", 400
 
- # 🔍 Debug logging starts here
+    # 🔍 Debug logging
     print("User-Agent:", request.headers.get('User-Agent'))
     print("File name:", uploaded_file.filename)
     print("File size (bytes):", len(uploaded_file.read()))
-    uploaded_file.seek(0)  # Reset file pointer after reading
-
+    uploaded_file.seek(0)  # Reset file pointer
 
     input_path = 'input.pdf'
+    sanitized_path = 'sanitized.pdf'
     output_path = 'compressed.pdf'
     uploaded_file.save(input_path)
 
     try:
+        # 1️⃣ Sanitize PDF to prevent Ghostscript errors
+        doc = fitz.open(input_path)
+        doc.save(sanitized_path, deflate=True)
+        doc.close()
+
+        # 2️⃣ Compress PDF
         subprocess.run([
             'gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
-            '-dPDFSETTINGS=/ebook', '-dNOPAUSE', '-dQUIET', '-dBATCH',
-            f'-sOutputFile={output_path}', input_path
+            '-dPDFSETTINGS=/screen', '-dNOPAUSE', '-dQUIET', '-dBATCH',
+            '-dAutoRotatePages=/None',
+            f'-sOutputFile={output_path}', sanitized_path
         ], check=True)
+
+        # 3️⃣ Send PDF for download
         return send_file(
-    output_path,
-    mimetype='application/pdf',
-    as_attachment=True,
-    download_name='compressed.pdf'
-)
+            output_path,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f"compressed-{uploaded_file.filename}"
+        )
+
     except Exception as e:
-        print(e)
+        print("Compression failed:", e)
         return "Compression failed", 500
+
     finally:
-        if os.path.exists(input_path): os.remove(input_path)
-        if os.path.exists(output_path): os.remove(output_path)
+        # Cleanup temp files
+        for f in [input_path, sanitized_path, output_path]:
+            if os.path.exists(f):
+                os.remove(f)
 
 @app.route('/3ctool')
 def serve_3ctool():
