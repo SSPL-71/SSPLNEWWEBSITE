@@ -361,6 +361,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
+      z-index: 1;
     }
     .form-group {
       margin: 15px 0;
@@ -392,9 +393,8 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       border: none;
       cursor: pointer;
       transition: background-color 0.3s;
-    }
-    .button-link:hover {
-      background-color: #45a049;
+      position: relative;
+      z-index: 2;
     }
 
     .avatar-video {
@@ -406,11 +406,12 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
       border-radius: 12px;
       overflow: hidden;
       transition: right 2s ease-out;
-      z-index: 0; /* Push behind content */
-      opacity: 0.8;
+      z-index: 0; /* Behind all content */
+      opacity: 0.7;
+      pointer-events: none;
     }
     .avatar-video.video-visible {
-      right: 280px; /* Stops before center */
+      right: 160px; /* Stops just off the button */
     }
     .avatar-video video {
       width: 100%;
@@ -427,7 +428,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         right: -100px;
       }
       .avatar-video.video-visible {
-        right: 180px;
+        right: 100px; /* Adjusted for smaller screens */
       }
     }
   </style>
