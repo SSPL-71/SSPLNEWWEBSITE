@@ -549,13 +549,15 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         font-weight: bold;
     }
 
-    .loader {
-        display: none;
-        margin-top: 30px;
-        text-align: center;
-        flex-direction: column;
-        align-items: center;
-    }
+.loader {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    display: flex;              /* Ensure flex is active */
+    flex-direction: row;        /* 🔹 Make it horizontal */
+    justify-content: center;    /* 🔹 Center the dots */
+    align-items: center;
+}
     .dot {
         display: inline-block;
         width: 14px;
