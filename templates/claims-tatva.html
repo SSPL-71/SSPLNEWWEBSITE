@@ -92,6 +92,13 @@
       font-size: 1em;
       line-height: 1.6;
     }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #ccc;
+}
   }
 </style>
 </head>
@@ -104,7 +111,10 @@
   <a href="https://ss-services.co.in" class="back-link">← Back to SSPL Main Page</a>
 
   <div class="container">
-    <img src="{{ url_for('static', filename='SarvaSiddh_Anna.png') }}"
+    <video width="100%" controls>
+  <source src="{{ url_for('static', filename='videos/SSPL1.mp4') }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
     <h1>Claims Tatva – Simple Snippets !</h1>
 
 
