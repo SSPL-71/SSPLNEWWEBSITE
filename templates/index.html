@@ -524,7 +524,7 @@ async function fetchStats() {
   const res = await fetch(`${API_BASE}/stats`);
   const data = await res.json();
   document.getElementById("stats").textContent =
-    `👍 ${data.likeCount} likes | ⭐ ${data.averageRating.toFixed(1)} average (${data.ratingCount} ratings)`;
+    `👍 ${data.likeCount} likes | ⭐ ${(data.averageRating || 0).toFixed(1)} average (${data.ratingCount} ratings)`;
 }
 
 document.getElementById("like-button").addEventListener("click", async () => {
@@ -536,13 +536,18 @@ document.getElementById("like-button").addEventListener("click", async () => {
 document.querySelectorAll(".star").forEach(star => {
   star.addEventListener("click", async () => {
     const value = parseInt(star.getAttribute("data-value"));
-    await fetch(`${API_BASE}/star`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ value }),
-    });
-    document.getElementById("response-message").textContent = `Thanks for rating ${value}⭐!`;
-    fetchStats();
+    try {
+      await fetch(`${API_BASE}/star`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ value }),
+      });
+      document.getElementById("response-message").textContent = `Thanks for rating ${value}⭐!`;
+      fetchStats();
+    } catch (err) {
+      console.error("Star rating failed:", err);
+      document.getElementById("response-message").textContent = "Rating failed. Please try again.";
+    }
   });
 });
 
