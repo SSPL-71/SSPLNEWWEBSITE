@@ -484,7 +484,12 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   cursor: pointer;
   font-size: 1.5em;
   margin: 0 3px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, color 0.2s ease;
+  color: grey; /* default state */
+}
+
+#star-rating .star.selected {
+  color: gold; /* when selected */
 }
 
 #star-rating .star:hover {
@@ -496,7 +501,6 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   color: green;
   margin-top: 0.5em;
 }
-
   </style>
 
 <div id="feedback-widget">
@@ -533,9 +537,17 @@ document.getElementById("like-button").addEventListener("click", async () => {
   fetchStats();
 });
 
-document.querySelectorAll(".star").forEach(star => {
+// Star rating logic with visual selection
+document.querySelectorAll("#star-rating .star").forEach((star, index, stars) => {
   star.addEventListener("click", async () => {
     const value = parseInt(star.getAttribute("data-value"));
+
+    // Visual update: highlight selected stars
+    stars.forEach((s, i) => {
+      s.classList.toggle("selected", i <= index);
+    });
+
+    // Send rating to backend
     try {
       await fetch(`${API_BASE}/star`, {
         method: "POST",
@@ -553,7 +565,6 @@ document.querySelectorAll(".star").forEach(star => {
 
 fetchStats();
 </script>
-
     <div class="container">
       <h1>3CTool</h1>
       <p><strong>Developed by SSPL</strong></p>
