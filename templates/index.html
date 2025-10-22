@@ -626,34 +626,45 @@ fetchStats();
     </div>
   
 
-  <script>
-    const avatar = document.getElementById('animatedAvatar');
-    const video = avatar.querySelector('video');
+<script>
+  const avatar = document.getElementById('animatedAvatar');
+  const video = avatar.querySelector('video');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          avatar.classList.add('video-visible');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        avatar.classList.add('video-visible');
+
+        // Check if avatar has already spoken
+        if (!localStorage.getItem('hasSeenPdfToolAvatar')) {
           video.currentTime = 0;
           video.muted = false;
           video.volume = 1.0;
           video.play().catch(() => {
             console.warn('Autoplay with sound blocked. Waiting for user interaction.');
           });
-        } else {
-          avatar.classList.remove('video-visible');
+
+          // Mark as spoken
+          localStorage.setItem('hasSeenPdfToolAvatar', 'true');
         }
-      });
-    }, { threshold: 0.5 });
+      } else {
+        avatar.classList.remove('video-visible');
+      }
+    });
+  }, { threshold: 0.5 });
 
-    observer.observe(document.querySelector('#pdf-tools'));
+  observer.observe(document.querySelector('#pdf-tools'));
 
-    document.body.addEventListener('click', () => {
+  // Optional: allow manual unmute on click
+  document.body.addEventListener('click', () => {
+    if (!localStorage.getItem('hasSeenPdfToolAvatar')) {
       video.muted = false;
       video.volume = 1.0;
       video.play();
-    });
-  </script>
+      localStorage.setItem('hasSeenPdfToolAvatar', 'true');
+    }
+  });
+</script>
 </section>
 <!-- END SECTION: 3CTool --><br><br>
 
