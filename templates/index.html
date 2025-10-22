@@ -121,13 +121,44 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         .brand { font-size: 4vw; }
         .brand img { max-height: 50px; }
     }
+.floating-menu {
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  font-family: sans-serif;
+}
 
+.floating-menu a {
+  display: block;
+  margin: 8px 0;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.floating-menu a:hover {
+  color: #007bff;
+}
 
 </style>
 </head>
 <body>
    
-
+<div class="floating-menu">
+  <a href="#PMTOOL">📋 PDF MERGER TOOL</a>
+  <a href="#GPSTOOL">📍 GPS CAMERA PRO TOOL</a>
+  <a href="#ZIPTOOL">🗂 ZIP EXTRACTOR TOOL</a>
+  <a href="#Donate">💖 DONATE</a>
+  <a href="#Blog">📝 BLOGS</a>
+  <a href="#Contact">📬 CONTACT US</a>
+</div>
 	 <!-- SECTION: SSPL Door Reveal -->
 <section>
 <div class="door-container">
@@ -626,7 +657,7 @@ fetchStats();
 <!-- END SECTION: 3CTool --><br><br>
 
     <!-- SECTION: PDF Merger Tool -->
-    <section>
+    <section id= "PMTOOL">
     <title>PDF Merger Tool</title>
     <style>
         body {
@@ -736,7 +767,7 @@ fetchStats();
     <!-- END SECTION: PDF Merger Tool --><br>
 
        <!-- SECTION: PDF Compression Tool -->
-	<section>
+	<section id= "CMPRSTOOL">
 	<title>PDF Compression Tool</title>
 
 	<style>
@@ -913,7 +944,7 @@ fetchStats();
 
 
 <!-- SECTION: PDF Page Sorter Tool -->
-<section>
+<section id = "SORTERTOOL">
 <title>PDF Page Sorter Tool</title>
 <style>
     body {
@@ -1079,7 +1110,7 @@ fetchStats();
 <!-- END SECTION: PDF Page Sorter Tool --><br><br>
 
 <!-- SECTION: GPS Tool -->
-<section id="gps-tools">
+<section id="GPSTOOL">
   <style>
     body {
       background-color: #87CEEB;
@@ -1138,7 +1169,7 @@ fetchStats();
 <!-- END SECTION: GPS Tool --><br>
 
 <!-- SECTION: ZIP Extractor Tool -->
-<section>
+<section id = "ZIPTOOL">
   <title>ZIP Extractor</title>
     <style>
         body {
@@ -1329,7 +1360,7 @@ fetchStats();
 
 
 <!-- SECTION: Donate with PayPal -->
-<section style="background-color: #f8f9fa; padding: 60px 20px;">
+<section id = "Donate" style="background-color: #f8f9fa; padding: 60px 20px;">
   <div style="max-width: 800px; margin: auto; font-family: Georgia, serif; color: #333; text-align: center;">
 
     <h2 style="font-size: 24px;">Tools are free to use! Wish to help? Donate $1</h2>
@@ -1394,7 +1425,7 @@ fetchStats();
 
 
 <!-- SECTION: BLOGS -->
-<section style="background-color: #f4f4f4; padding: 50px 20px;">
+<section id = "BLOG" style="background-color: #f4f4f4; padding: 50px 20px;">
   <div style="max-width: 800px; margin: auto;">
     <div class="blog-banner">
       <h2 class="blog-title">BLOGS</h2>
@@ -1493,6 +1524,7 @@ fetchStats();
   </style>
 </section>
 <!-- END SECTION: BLOGS -->
+
 <section id="privacy-policy" style="padding: 30px;">
 <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">   
 <h2>Privacy Policy</h2>
@@ -1513,7 +1545,7 @@ fetchStats();
 <p><strong>Business Category:</strong> 1. Claims Investigation Services for Life insurance / General Insurance / Others<br>
                                        2. Software Development – Apps, Web Tools & Document Utilities</p></div>
 
-<section style="text-align: center; margin-top: 40px;">
+<section id = "CONTACT" style="text-align: center; margin-top: 40px;">
 <div class="container" style="max-width: 800px; text align: justify; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
   <h2>📞 Contact Us</h2>
   <p style="font-size: 18px;">
