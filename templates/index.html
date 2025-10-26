@@ -826,7 +826,7 @@ fetchStats();
 </style>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  const mergeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
