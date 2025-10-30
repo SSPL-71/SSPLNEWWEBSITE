@@ -197,12 +197,17 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     bottom: 10px;
     left: 10px;
     right: 10px;
-    background: linear-gradient(135deg, #ff69b4, #ffeb3b);
+    background: linear-gradient(135deg, #ff69b4, #ffeb3b); /* Dopamine gradient */
     padding: 16px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); /* Pink glow */
     font-family: 'Segoe UI', sans-serif;
-    border-left: 12px solid #007bff;
+    border-left: 12px solid #007bff; /* Blue ribbon effect */
+    z-index: 1000;
+  }
+
+  .floating-menu.show {
+    display: block;
   }
 
   .floating-toggle {
@@ -210,9 +215,17 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     position: fixed;
     bottom: 10px;
     right: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 1001;
   }
 }
-
 </style>
 </head>
 <body>
@@ -256,7 +269,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   const menu = document.getElementById('floatingMenu');
 
   toggleBtn.addEventListener('click', () => {
-    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    menu.classList.toggle('show');
   });
 </script>
 
