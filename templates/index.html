@@ -118,11 +118,9 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     }
 /* Desktop styles */
 .floating-menu {
-  display: block;
   position: fixed;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+  top: 100px; /* ✅ Visible on scroll */
+  right: 10px; /* ✅ Anchored to right */
   background: linear-gradient(135deg, #ff69b4, #ffeb3b);
   padding: 16px;
   border-radius: 12px;
@@ -130,12 +128,12 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   z-index: 1000;
   font-family: 'Segoe UI', sans-serif;
   border-left: 12px solid #007bff;
-  position: relative;
   max-width: 220px;
   width: auto;
+  position: relative;
 }
 
-/* Blue ribbon effect */
+/* Blue ribbon */
 .floating-menu::after {
   content: '';
   position: absolute;
@@ -148,7 +146,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   border-bottom-left-radius: 12px;
 }
 
-/* Header label */
+/* Header */
 .floating-header {
   font-size: 1em;
   font-weight: bold;
@@ -209,7 +207,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   .floating-toggle {
     display: block;
     position: fixed;
-    bottom: 60px; /* Raised for visibility */
+    bottom: 60px;
     right: 10px;
     background: #007bff;
     color: white;
