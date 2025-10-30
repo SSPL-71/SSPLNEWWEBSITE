@@ -117,10 +117,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         margin: 0 auto;
     }
 
-    @media (max-width: 600px) {
-        .brand { font-size: 4vw; }
-        .brand img { max-height: 50px; }
-    }
+/* Desktop styles */
 .floating-menu {
   position: fixed;
   top: 50%;
@@ -134,7 +131,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   font-family: 'Segoe UI', sans-serif;
   animation: slideFadeIn 0.6s ease-out;
   border-left: 12px solid #007bff; /* Blue ribbon effect */
+}
 
+.floating-menu.show {
+  display: block; /* Ensures toggle works globally */
 }
 
 .floating-menu::before {
@@ -170,6 +170,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     transform: translateY(-50%) translateX(0) rotate(-2deg);
   }
 }
+
 .floating-wrapper {
   position: fixed;
   top: 50%;
@@ -190,6 +191,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   cursor: pointer;
 }
 
+/* Mobile styles */
 @media (max-width: 600px) {
   .floating-menu {
     display: none;
@@ -204,10 +206,6 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     font-family: 'Segoe UI', sans-serif;
     border-left: 12px solid #007bff; /* Blue ribbon effect */
     z-index: 1000;
-  }
-
-  .floating-menu.show {
-    display: block;
   }
 
   .floating-toggle {
