@@ -117,95 +117,42 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         margin: 0 auto;
     }
 
-/* Desktop styles */
 .floating-menu {
-  position: fixed;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%) rotate(-2deg);
-  background: linear-gradient(135deg, #ff69b4, #ffeb3b); /* Dopamine gradient */
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); /* Pink glow */
-  z-index: 1000;
-  font-family: 'Segoe UI', sans-serif;
-  animation: slideFadeIn 0.6s ease-out;
-  border-left: 12px solid #007bff; /* Blue ribbon effect */
-}
-
-.floating-menu.show {
-  display: block; /* Ensures toggle works globally */
-}
-
-.floating-menu::before {
-  content: '📌';
-  position: absolute;
-  top: -12px;
-  left: 12px;
-  font-size: 1.2em;
-}
-
-.floating-menu a {
   display: block;
-  margin: 10px 0;
-  text-decoration: none;
-  text-align: left;
-  color: #333;
-  font-weight: bold;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.floating-menu a:hover {
-  color: #007bff; /* Blue hover */
-  transform: scale(1.05);
-}
-
-@keyframes slideFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(50px) rotate(-2deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) rotate(-2deg);
-  }
-}
-
-.floating-wrapper {
   position: fixed;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+  background: linear-gradient(135deg, #ff69b4, #ffeb3b);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
   z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+  border-left: 12px solid #007bff;
+}
+
+.floating-menu.show {
+  display: block;
 }
 
 .floating-toggle {
   display: none;
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 50%;
-  font-size: 18px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  cursor: pointer;
 }
 
-/* Mobile styles */
 @media (max-width: 600px) {
   .floating-menu {
-    display: none;
+    display: none !important;
     position: fixed;
     bottom: 10px;
     left: 10px;
     right: 10px;
-    background: linear-gradient(135deg, #ff69b4, #ffeb3b); /* Dopamine gradient */
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); /* Pink glow */
-    font-family: 'Segoe UI', sans-serif;
-    border-left: 12px solid #007bff; /* Blue ribbon effect */
-    z-index: 1000;
+    top: auto;
+    transform: none;
+  }
+
+  .floating-menu.show {
+    display: block !important;
   }
 
   .floating-toggle {
@@ -224,6 +171,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     z-index: 1001;
   }
 }
+
 </style>
 </head>
 <body>
