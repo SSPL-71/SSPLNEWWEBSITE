@@ -116,6 +116,48 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
         display: block;
         margin: 0 auto;
     }
+/* Desktop styles */
+.floating-menu {
+  display: block;
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #ff69b4, #ffeb3b);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+  border-left: 12px solid #007bff;
+  position: relative;
+  max-width: 220px;
+  width: auto;
+}
+
+/* Blue ribbon effect */
+.floating-menu::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 12px;
+  height: 100%;
+  background-color: #007bff;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+/* Header label */
+.floating-header {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #007bff;
+  text-align: left;
+}
+
+/* Menu links */
 .floating-menu a {
   display: block;
   width: 100%;
@@ -130,51 +172,12 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
 }
 
 .floating-menu a:hover {
-  color: #007bff;                    /* Blue text on hover */
-  background-color: rgba(0, 123, 255, 0.1); /* Soft blue background */
-  transform: scale(1.05);            /* Slight zoom */
-}
-.floating-menu {
-  display: block;
-  position: fixed;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #ff69b4, #ffeb3b);
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
-  z-index: 1000;
-  font-family: 'Segoe UI', sans-serif;
-  border-left: 12px solid #007bff;
-}
-.floating-menu {
-  position: relative; /* Needed for ribbon positioning */
-  /* existing styles... */
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+  transform: scale(1.05);
 }
 
-/* Blue ribbon effect */
-.floating-menu::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -12px;
-  width: 12px;
-  height: 100%;
-  background-color: #007bff; /* Ribbon blue */
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-}
-.floating-menu a {
-  display: block;         /* Forces each link to take full width */
-  width: 100%;            /* Optional: makes each link fill the container */
-  margin: 10px 0;
-  text-decoration: none;
-  text-align: left;
-  color: #333;
-  font-weight: bold;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
+/* Toggle visibility */
 .floating-menu.show {
   display: block;
 }
@@ -183,6 +186,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   display: none;
 }
 
+/* Mobile styles */
 @media (max-width: 600px) {
   .floating-menu {
     display: none !important;
@@ -192,6 +196,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     right: 10px;
     top: auto;
     transform: none;
+    border-left: none;
+    border-radius: 12px;
+    max-width: none;
+    width: auto;
   }
 
   .floating-menu.show {
@@ -201,7 +209,7 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   .floating-toggle {
     display: block;
     position: fixed;
-    bottom: 10px;
+    bottom: 60px; /* Raised for visibility */
     right: 10px;
     background: #007bff;
     color: white;
@@ -214,7 +222,6 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     z-index: 1001;
   }
 }
-
 </style>
 </head>
 <body>
