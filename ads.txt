@@ -1,1 +1,2 @@
+# Updated ads.txt on 31 Oct 2025
 google.com, pub-2931901961774543, DIRECT, f08c47fec0942fa0
