@@ -1504,7 +1504,7 @@ fetchStats();
     <p><strong>Developed by SSPL</strong></p>
 
     <label for="pdf-file">Select a PDF file:</label>
-    <input type="file" id="pdf-file" accept="application/pdf">
+   <input type="file" id="pdf2excel-file" accept="application/pdf">
 
     <div class="form-group">
       <label for="pdf-password">Password (if protected):</label>
@@ -1532,7 +1532,7 @@ fetchStats();
 
   <script>
     document.getElementById('convert-btn').addEventListener('click', async () => {
-      const fileInput = document.getElementById('pdf-file');
+     const fileInput = document.getElementById('pdf2excel-file');
       const password = document.getElementById('pdf-password').value;
       const mode = document.getElementById('sheet-mode').value;
       const resultDiv = document.getElementById('convert-result');
@@ -1573,8 +1573,7 @@ fetchStats();
 </section>
 <!-- END SECTION: PDF to Excel Tool -->
 
-</section>
-<!-- END SECTION: PDF to Excel Tool -->
+
   
 
 
