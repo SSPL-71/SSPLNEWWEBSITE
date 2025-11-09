@@ -2,3 +2,5 @@ flask
 flask-cors
 gunicorn
 PyMuPDF==1.26.4
+pdfplumber
+pandas
