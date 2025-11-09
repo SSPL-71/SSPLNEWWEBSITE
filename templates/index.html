@@ -1538,6 +1538,9 @@ fetchStats();
       const resultDiv = document.getElementById('convert-result');
       const loader = document.getElementById('convert-loader');
 
+   console.log("fileInput:", fileInput);
+   console.log("fileInput.files:", fileInput.files);
+   console.log("fileInput.files[0]:", fileInput.files[0]);
       if (!fileInput.files.length) return alert('Please select a PDF file.');
 
       const formData = new FormData();
