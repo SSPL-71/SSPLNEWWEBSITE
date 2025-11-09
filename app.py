@@ -2,6 +2,10 @@ from flask import Flask, request, send_file, send_from_directory
 import subprocess
 import os
 import fitz  # PyMuPDF
+import pdfplumber
+import pandas as pd
+import uuid
+import os
 
 from flask_cors import CORS
 
@@ -116,6 +120,54 @@ def serve_gpstool():
     return render_template('gpstool/index.html')
 
 
+@app.route("/pdf2excel", methods=["POST"])
+def pdf_to_excel():
+    file = request.files.get("pdf")
+    password = request.form.get("password") or None
+    mode = request.form.get("mode")  # "consolidated" or "separate"
+
+    if not file:
+        return "No PDF uploaded", 400
+
+    temp_pdf = f"/tmp/{uuid.uuid4()}.pdf"
+    output_xlsx = f"/tmp/{uuid.uuid4()}.xlsx"
+    file.save(temp_pdf)
+
+    try:
+        with pdfplumber.open(temp_pdf, password=password) as pdf:
+            all_tables = []
+            header = None
+
+            for page in pdf.pages:
+                tables = page.extract_tables()
+                for table in tables:
+                    if not table or len(table) < 2:
+                        continue
+                    if mode == "consolidated":
+                        if header is None:
+                            header = table[0]
+                        all_tables.extend(table[1:])
+                    else:
+                        df = pd.DataFrame(table[1:], columns=table[0])
+                        all_tables.append(df)
+
+        if mode == "consolidated":
+            df = pd.DataFrame(all_tables, columns=header)
+            df.to_excel(output_xlsx, index=False)
+        else:
+            with pd.ExcelWriter(output_xlsx) as writer:
+                for i, df in enumerate(all_tables):
+                    df.to_excel(writer, sheet_name=f"Page{i+1}", index=False)
+
+        return send_file(output_xlsx, as_attachment=True, download_name="output.xlsx")
+
+    except Exception as e:
+        return f"❌ Error: {str(e)}", 500
+    finally:
+        if os.path.exists(temp_pdf):
+            os.remove(temp_pdf)
+        if os.path.exists(output_xlsx):
+            os.remove(output_xlsx)
    
 
 if __name__ == '__main__':
