@@ -1319,11 +1319,36 @@ fetchStats();
     .button-link:hover {
       background-color: #45a049;
     }
+
+.scroll-banner {
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: #ffe0e0;
+  color: #b30000;
+  font-weight: bold;
+  padding: 8px;
+}
+.scroll-banner p {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 15s linear infinite;
+}
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
   </style>
 
   <div class="container">
     <h1>GPS Camera Pro</h1>
     <p><strong>Developed by SSPL</strong></p>
+
+<div class="scroll-banner">
+  <p>Clicking this button will take you to another site where it may take a few seconds to load as it is hosted on a free tier platform</p>
+</div>
+
     <div class="form-group">
       <p><strong><i>Capture images with GPS tag – Convert or Merge to PDF – Download!</i></strong></p>
     </div>
