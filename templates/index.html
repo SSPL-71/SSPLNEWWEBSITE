@@ -1001,6 +1001,11 @@ fetchStats();
         from { transform: translateY(0px); opacity: 0.6; }
         to { transform: translateY(-12px); opacity: 1; }
    	 }
+	html, body {
+  	overflow: visible !important;
+  	position: relative;
+  	z-index: 0;
+	}
 	</style>
 
 	<div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
@@ -1022,16 +1027,17 @@ fetchStats();
 </div>
 <script>
 
-  function launchRibbonsConfetti() {
+ function launchRibbonsConfetti() {
   console.log("🎉 Confetti function triggered!");
   confetti({
-    particleCount: 120,
-    spread: 100,
-    origin: { y: 0.6 },
-    colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
+    particleCount: 150,
+    spread: 160,
+    origin: { x: 0.5, y: 0.5 },
+    startVelocity: 30,
+    gravity: 0.8,
     scalar: 1.2,
-    ticks: 200,
-    shapes: ['square', 'circle'],
+    ticks: 250,
+    zIndex: 9999,
   });
 }
 
