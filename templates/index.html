@@ -1023,16 +1023,17 @@ fetchStats();
 <script>
 
   function launchRibbonsConfetti() {
-    confetti({
-      particleCount: 120,
-      spread: 100,
-      origin: { y: 0.6 },
-      colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
-      scalar: 1.2,
-      ticks: 200,
-      shapes: ['square', 'circle'],
-    });
-  }
+  console.log("🎉 Confetti function triggered!");
+  confetti({
+    particleCount: 120,
+    spread: 100,
+    origin: { y: 0.6 },
+    colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
+    scalar: 1.2,
+    ticks: 200,
+    shapes: ['square', 'circle'],
+  });
+}
 
         const qualitySlider = document.getElementById('quality-slider');
         const qualityValue = document.getElementById('quality-value');
