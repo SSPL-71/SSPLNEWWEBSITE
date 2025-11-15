@@ -1065,7 +1065,8 @@ fetchStats();
 
                 const compressedPdf = await PDFLib.PDFDocument.create();
                 const pdfData = new Uint8Array(arrayBuffer);
-                const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+	        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';                
+	        const loadingTask = pdfjsLib.getDocument({ data: pdfData });
                 const pdf = await loadingTask.promise;
 
                 for (let i = 0; i < pdf.numPages; i++) {
