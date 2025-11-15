@@ -880,7 +880,39 @@ fetchStats();
 		 </div>
         
 	    <script>
-            document.getElementById('merge-btn').addEventListener('click', async () => {
+             function launchRibbonsConfetti() {
+  console.log("🎉 Confetti function triggered!");
+
+  // Create a full-screen canvas if not already present
+  let canvas = document.getElementById('confetti-canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'confetti-canvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '9999';
+    document.body.appendChild(canvas);
+  }
+
+  const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+
+  myConfetti({
+    particleCount: 150,
+    spread: 120,
+    origin: { y: 0.6 },
+    colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
+    scalar: 1.2,
+    ticks: 200,
+    shapes: ['square', 'circle'],
+  });
+}
+
+
+                document.getElementById('merge-btn').addEventListener('click', async () => {
                 const files = document.getElementById('pdf-files').files;
                 if (files.length < 2) return alert('Select at least two PDFs.');
                 const resultDiv = document.getElementById('merge-result');
@@ -904,7 +936,7 @@ fetchStats();
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(link);
 		loader.style.display = 'none'; // 🔹 hide loader
-
+		launchRibbonsConfetti(); // 🎊 Celebrate merger success!
             });
         </script>
     </section>
