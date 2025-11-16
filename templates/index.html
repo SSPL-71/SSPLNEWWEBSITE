@@ -1214,9 +1214,11 @@ function launchRibbonsConfetti() {
         text-align: center;
         padding: 20px;
     }
+
     h1 {
         color: #333;
     }
+
     .container {
         max-width: 800px;
         margin: 0 auto;
@@ -1225,13 +1227,16 @@ function launchRibbonsConfetti() {
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     .form-group {
         margin: 15px 0;
     }
+
     input[type="file"] {
         display: block;
         margin: 10px auto;
     }
+
     button {
         background-color: #4CAF50;
         color: white;
@@ -1241,9 +1246,11 @@ function launchRibbonsConfetti() {
         border-radius: 5px;
         margin-top: 10px;
     }
+
     button:hover {
         background-color: #45a049;
     }
+
     #page-preview {
         display: flex;
         flex-wrap: wrap;
@@ -1251,17 +1258,25 @@ function launchRibbonsConfetti() {
         margin-top: 20px;
         gap: 10px;
     }
+
     .page-thumbnail {
         border: 1px solid #ccc;
         padding: 5px;
         background: #f9f9f9;
-        cursor: grab;
+        cursor: grab; /* 🖐️ Shows hand icon */
         position: relative;
+        user-select: none; /* Prevents accidental text selection */
     }
+
+    .page-thumbnail:active {
+        cursor: grabbing; /* ✊ Shows clenched hand while dragging */
+    }
+
     canvas {
         width: 120px;
         height: auto;
     }
+
     .rotate-icon {
         font-size: 20px;
         cursor: pointer;
@@ -1272,8 +1287,6 @@ function launchRibbonsConfetti() {
         padding: 5px;
         border-radius: 5px;
     }
-
-
 </style>
 
   <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
