@@ -131,7 +131,23 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
   border-left: 12px solid #007bff;
   max-width: 220px;
   width: auto;
- }
+
+  /* Scroll support */
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+/* Scrollbar styling */
+.floating-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.floating-menu::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+.floating-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 /* Blue ribbon */
 .floating-menu::after {
@@ -198,6 +214,10 @@ ool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private 
     border-radius: 12px;
     max-width: none;
     width: auto;
+
+    /* Scroll support for mobile */
+    overflow-y: auto;
+    max-height: 50vh;
   }
 
   .floating-menu.show {
