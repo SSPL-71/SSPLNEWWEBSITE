@@ -1580,18 +1580,19 @@ function launchRibbonsConfetti() {
     const previewContainer = document.getElementById('previewContainer');
     isBlobPDF(fileData).then(isPDF => {
       let previewElement;
-      if (isPDF) {
-        const url = URL.createObjectURL(fileData);
+if (isPDF) {
+  const url = URL.createObjectURL(fileData);
 
-        // ✅ Mini PDF viewer
-        previewElement = document.createElement('div');
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.width = "300";
-        iframe.height = "400";
-        iframe.style.border = "1px solid #ccc";
-        iframe.style.borderRadius = "6px";
-        iframe.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
+  // ✅ Mini PDF viewer
+  previewElement = document.createElement('iframe');
+  previewElement.src = url;
+  previewElement.width = "300";
+  previewElement.height = "400";
+  previewElement.style.border = "1px solid #ccc";
+  previewElement.style.borderRadius = "6px";
+  previewElement.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
+}
+
 
         // Optional download link
         const downloadLink = document.createElement('a');
