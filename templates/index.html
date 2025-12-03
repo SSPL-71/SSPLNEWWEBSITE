@@ -1558,7 +1558,7 @@ function launchRibbonsConfetti() {
         <p><strong>Developed by SSPL</strong></p>
         <p><strong><i>Ads Free- Hassle Free - Easy to view- If you need to download any image from preview, Just right-click!</strong></i></p>
 
-        <input type="file" id="zipFileInput" accept=".zip,.rar,.7z,.tar,.gz">
+        <input type="file" id="zipFileInput" accept=".zip">
         <br>
         <input type="checkbox" id="selectAll"> <label for="selectAll"><strong>Select All Images</strong></label>
         <div id="container">
@@ -1568,9 +1568,6 @@ function launchRibbonsConfetti() {
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/unrar-js/dist/unrar.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pako/dist/pako.min.js"></script>
-
 
 <script>
   let archive;
@@ -1664,28 +1661,6 @@ function launchRibbonsConfetti() {
           .filter(fn => !archive.files[fn].dir) // skip directories
           .filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
         getFileData = async (filename) => archive.files[filename].async('arraybuffer');
-      } else if (name.endsWith('.rar')) {
-        // ✅ RAR
-        const extractor = await unrar(arrayBuffer);
-        archive = extractor;
-        entries = extractor.files
-          .filter(f => !f.isDirectory)
-          .map(f => f.name)
-          .filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
-        getFileData = async (filename) => {
-          const f = extractor.files.find(x => x.name === filename);
-          return f ? f.extract() : null;
-        };
-      } else if (name.endsWith('.gz')) {
-        // ✅ GZIP (single file)
-        const decompressed = pako.inflate(arrayBuffer);
-        const filename = file.name.replace(/\.gz$/, '');
-        if (allowedExts.some(ext => filename.toLowerCase().endsWith(ext))) {
-          entries = [filename];
-          getFileData = async () => decompressed.buffer;
-        } else {
-          entries = []; // skip if not allowed extension
-        }
       } else {
         alert("Unsupported archive type");
         return;
