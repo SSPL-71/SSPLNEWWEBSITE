@@ -1568,93 +1568,109 @@ function launchRibbonsConfetti() {
 
 
 <script>
-    let zip;
+  let zip;
 
-    async function isBlobPDF(blob) {
-      const buffer = await blob.slice(0, 5).arrayBuffer();
-      const header = new TextDecoder().decode(buffer);
-      return header === '%PDF-';
-    }
+  async function isBlobPDF(blob) {
+    const buffer = await blob.slice(0, 5).arrayBuffer();
+    const header = new TextDecoder().decode(buffer);
+    return header === '%PDF-';
+  }
 
-    function createPreview(filename, fileData) {
-      const previewContainer = document.getElementById('previewContainer');
-      isBlobPDF(fileData).then(isPDF => {
-        let previewElement;
-        if (isPDF) {
-          previewElement = document.createElement('div');
-          previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
-        } else {
-          const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
-          const blob = new Blob([fileData], { type: mimeType });
-          const url = URL.createObjectURL(blob);
+  function createPreview(filename, fileData) {
+    const previewContainer = document.getElementById('previewContainer');
+    isBlobPDF(fileData).then(isPDF => {
+      let previewElement;
 
-          const img = document.createElement('img');
-          img.src = url;
-          img.dataset.filename = filename;
+      if (isPDF) {
+        const url = URL.createObjectURL(fileData);
 
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = filename;
-          link.appendChild(img);
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
+        // Mini PDF viewer (simple, no wrapper)
+        previewElement = document.createElement('iframe');
+        previewElement.src = url;
+        previewElement.width = "300";
+        previewElement.height = "400";
+        previewElement.style.border = "1px solid #ccc";
+        previewElement.style.borderRadius = "6px";
+        previewElement.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
+      } else {
+        // Image preview
+        const mimeType = filename.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
+        const blob = new Blob([fileData], { type: mimeType });
+        const url = URL.createObjectURL(blob);
 
-          previewElement = link;
+        const img = document.createElement('img');
+        img.src = url;
+        img.dataset.filename = filename;
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.appendChild(img);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+
+        previewElement = link;
+      }
+
+      previewElement.dataset.filename = filename;
+      previewContainer.appendChild(previewElement);
+    }).catch(err => {
+      console.error('Preview error:', err);
+    });
+  }
+
+  document.getElementById('zipFileInput').addEventListener('change', async function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    zip = await JSZip.loadAsync(file);
+    const fileList = document.getElementById('fileList');
+    const previewContainer = document.getElementById('previewContainer');
+    fileList.innerHTML = '';
+    previewContainer.innerHTML = '';
+
+    Object.keys(zip.files).forEach(filename => {
+      const fileEntry = zip.files[filename];
+
+      // Skip folders, list only files (including subfolders)
+      if (fileEntry.dir) return;
+
+      const listItem = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.dataset.filename = filename;
+
+      listItem.appendChild(checkbox);
+      listItem.appendChild(document.createTextNode(" " + filename));
+      fileList.appendChild(listItem);
+
+      checkbox.addEventListener('change', async function () {
+        const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
+        if (!this.checked && existing) {
+          existing.remove();
+          return;
         }
-        previewElement.dataset.filename = filename;
-        previewContainer.appendChild(previewElement);
-      });
-    }
 
-    document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      zip = await JSZip.loadAsync(file);
-      const fileList = document.getElementById('fileList');
-      const previewContainer = document.getElementById('previewContainer');
-      fileList.innerHTML = '';
-      previewContainer.innerHTML = '';
-
-      Object.keys(zip.files).forEach(filename => {
-        
-	const fileEntry = zip.files[filename];
-
-  		// ✅ Skip folders, but keep files inside them
-  		if (fileEntry.dir) return;
-
-	const listItem = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.dataset.filename = filename;
-
-        listItem.appendChild(checkbox);
-        listItem.appendChild(document.createTextNode(" " + filename));
-        fileList.appendChild(listItem);
-
-        checkbox.addEventListener('change', async function () {
-          const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
-          if (!this.checked && existing) {
-            existing.remove();
-            return;
-          }
-
-          if (this.checked) {
-            const fileData = await zip.files[filename].async('blob');
+        if (this.checked) {
+          try {
+            const fileData = await fileEntry.async('blob');
             createPreview(filename, fileData);
+          } catch (err) {
+            console.error(`Error loading ${filename}:`, err);
           }
-        });
+        }
       });
     });
+  });
 
-    document.getElementById('selectAll').addEventListener('change', function () {
-      const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-      checkboxes.forEach(cb => {
-        cb.checked = this.checked;
-        cb.dispatchEvent(new Event('change', { bubbles: true }));
-      });
+  document.getElementById('selectAll').addEventListener('change', function () {
+    const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      cb.checked = this.checked;
+      cb.dispatchEvent(new Event('change', { bubbles: true }));
     });
-  </script>
+  });
+</script>
 
 
 </section>
