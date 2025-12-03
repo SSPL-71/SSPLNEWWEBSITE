@@ -1617,7 +1617,13 @@ function launchRibbonsConfetti() {
       previewContainer.innerHTML = '';
 
       Object.keys(zip.files).forEach(filename => {
-        const listItem = document.createElement('li');
+        
+	const fileEntry = zip.files[filename];
+
+  		// ✅ Skip folders, but keep files inside them
+  		if (fileEntry.dir) return;
+
+	const listItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.dataset.filename = filename;
