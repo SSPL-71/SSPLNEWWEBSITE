@@ -45,6 +45,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
@@ -1557,7 +1558,7 @@ function launchRibbonsConfetti() {
         <p><strong>Developed by SSPL</strong></p>
         <p><strong><i>Ads Free- Hassle Free - Easy to view- If you need to download any image from preview, Just right-click!</strong></i></p>
 
-        <input type="file" id="zipFileInput" accept=".zip">
+        <input type="file" id="zipFileInput" accept=".zip,.rar,.7z,.tar,.gz">
         <br>
         <input type="checkbox" id="selectAll"> <label for="selectAll"><strong>Select All Images</strong></label>
         <div id="container">
@@ -1566,97 +1567,175 @@ function launchRibbonsConfetti() {
         </div>
     </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/unrar-js/dist/unrar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pako/dist/pako.min.js"></script>
+
 
 <script>
-    let zip;
+  let archive;
 
-    async function isBlobPDF(blob) {
-      const buffer = await blob.slice(0, 5).arrayBuffer();
-      const header = new TextDecoder().decode(buffer);
-      return header === '%PDF-';
-    }
+  async function isBlobPDF(blob) {
+    const buffer = await blob.slice(0, 5).arrayBuffer();
+    const header = new TextDecoder().decode(buffer);
+    return header === '%PDF-';
+  }
 
-    function createPreview(filename, fileData) {
-      const previewContainer = document.getElementById('previewContainer');
-      isBlobPDF(fileData).then(isPDF => {
-        let previewElement;
-        if (isPDF) {
-          previewElement = document.createElement('div');
-          previewElement.innerHTML = `<p><strong>[PDF]</strong> ${filename}</p>`;
+  function createPreview(filename, rawBlobOrArrayBuffer) {
+    const previewContainer = document.getElementById('previewContainer');
+
+    const toArrayBuffer = async (input) => {
+      if (input instanceof ArrayBuffer) return input;
+      return await input.arrayBuffer();
+    };
+
+    toArrayBuffer(rawBlobOrArrayBuffer).then(async (ab) => {
+      const probeBlob = new Blob([ab]);
+      const isPDF = await isBlobPDF(probeBlob);
+      let previewElement;
+      let url;
+
+      if (isPDF) {
+        // ✅ PDF viewer without side pane
+        const pdfBlob = new Blob([ab], { type: 'application/pdf' });
+        url = URL.createObjectURL(pdfBlob);
+
+        const embed = document.createElement('embed');
+        embed.src = url + "#toolbar=0&navpanes=0&scrollbar=0";
+        embed.type = 'application/pdf';
+        embed.style.width = '100%';
+        embed.style.height = 'auto';
+        previewElement = embed;
+      } else if (
+        filename.toLowerCase().endsWith('.png') ||
+        filename.toLowerCase().endsWith('.jpg') ||
+        filename.toLowerCase().endsWith('.jpeg') ||
+        filename.toLowerCase().endsWith('.gif') ||
+        filename.toLowerCase().endsWith('.webp')
+      ) {
+        // ✅ Image preview only
+        const mimeType = filename.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
+        const imgBlob = new Blob([ab], { type: mimeType });
+        url = URL.createObjectURL(imgBlob);
+
+        const img = document.createElement('img');
+        img.src = url;
+        img.dataset.filename = filename;
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        previewElement = img;
+      } else {
+        // ✅ Other file types (skipped from list, so normally won't reach here)
+        previewElement = document.createElement('div');
+        previewElement.textContent = `[File] ${filename}`;
+      }
+
+      previewElement.dataset.filename = filename;
+      if (url) previewElement.dataset.url = url;
+      previewContainer.appendChild(previewElement);
+    }).catch(err => {
+      console.error('Preview error:', err);
+    });
+  }
+
+  document.getElementById('zipFileInput').addEventListener('change', async function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const name = file.name.toLowerCase();
+    const arrayBuffer = await file.arrayBuffer();
+
+    const fileList = document.getElementById('fileList');
+    const previewContainer = document.getElementById('previewContainer');
+    fileList.innerHTML = '';
+    previewContainer.innerHTML = '';
+
+    let entries = [];
+    let getFileData;
+
+    // Allowed extensions
+    const allowedExts = ['.pdf', '.png', '.jpg', '.jpeg', '.gif', '.webp'];
+
+    try {
+      if (name.endsWith('.zip')) {
+        // ✅ ZIP
+        archive = await JSZip.loadAsync(file);
+        entries = Object.keys(archive.files)
+          .filter(fn => !archive.files[fn].dir) // skip directories
+          .filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
+        getFileData = async (filename) => archive.files[filename].async('arraybuffer');
+      } else if (name.endsWith('.rar')) {
+        // ✅ RAR
+        const extractor = await unrar(arrayBuffer);
+        archive = extractor;
+        entries = extractor.files
+          .filter(f => !f.isDirectory)
+          .map(f => f.name)
+          .filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
+        getFileData = async (filename) => {
+          const f = extractor.files.find(x => x.name === filename);
+          return f ? f.extract() : null;
+        };
+      } else if (name.endsWith('.gz')) {
+        // ✅ GZIP (single file)
+        const decompressed = pako.inflate(arrayBuffer);
+        const filename = file.name.replace(/\.gz$/, '');
+        if (allowedExts.some(ext => filename.toLowerCase().endsWith(ext))) {
+          entries = [filename];
+          getFileData = async () => decompressed.buffer;
         } else {
-          const mimeType = filename.endsWith('.png') ? 'image/png' : 'image/jpeg';
-          const blob = new Blob([fileData], { type: mimeType });
-          const url = URL.createObjectURL(blob);
-
-          const img = document.createElement('img');
-          img.src = url;
-          img.dataset.filename = filename;
-
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = filename;
-          link.appendChild(img);
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-
-          previewElement = link;
+          entries = []; // skip if not allowed extension
         }
-        previewElement.dataset.filename = filename;
-        previewContainer.appendChild(previewElement);
-      });
+      } else {
+        alert("Unsupported archive type");
+        return;
+      }
+    } catch (err) {
+      console.error("Error extracting archive:", err);
+      return;
     }
 
-    document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    // Build file list with checkboxes
+    entries.forEach(filename => {
+      const listItem = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.dataset.filename = filename;
 
-      zip = await JSZip.loadAsync(file);
-      const fileList = document.getElementById('fileList');
-      const previewContainer = document.getElementById('previewContainer');
-      fileList.innerHTML = '';
-      previewContainer.innerHTML = '';
+      listItem.appendChild(checkbox);
+      listItem.appendChild(document.createTextNode(' ' + filename));
+      fileList.appendChild(listItem);
 
-      Object.keys(zip.files).forEach(filename => {
-        
-	const fileEntry = zip.files[filename];
-
-  		// ✅ Skip folders, but keep files inside them
-  		if (fileEntry.dir) return;
-
-	const listItem = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.dataset.filename = filename;
-
-        listItem.appendChild(checkbox);
-        listItem.appendChild(document.createTextNode(" " + filename));
-        fileList.appendChild(listItem);
-
-        checkbox.addEventListener('change', async function () {
-          const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
-          if (!this.checked && existing) {
-            existing.remove();
-            return;
+      checkbox.addEventListener('change', async function () {
+        const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
+        if (!this.checked && existing) {
+          if (existing.dataset.url) {
+            URL.revokeObjectURL(existing.dataset.url);
           }
+          existing.remove();
+          return;
+        }
 
-          if (this.checked) {
-            const fileData = await zip.files[filename].async('blob');
-            createPreview(filename, fileData);
+        if (this.checked) {
+          try {
+            const ab = await getFileData(filename);
+            if (ab) createPreview(filename, ab);
+          } catch (err) {
+            console.error(`Error loading ${filename}:`, err);
           }
-        });
+        }
       });
     });
+  });
 
-    document.getElementById('selectAll').addEventListener('change', function () {
-      const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-      checkboxes.forEach(cb => {
-        cb.checked = this.checked;
-        cb.dispatchEvent(new Event('change', { bubbles: true }));
-      });
+  document.getElementById('selectAll').addEventListener('change', function () {
+    const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      cb.checked = this.checked;
+      cb.dispatchEvent(new Event('change', { bubbles: true }));
     });
-  </script>
-
-
+  });
+</script>
 </section>
 <!-- END SECTION: ZIP Extractor Tool --><br>
 
