@@ -1597,12 +1597,12 @@ function launchRibbonsConfetti() {
         const pdfBlob = new Blob([ab], { type: 'application/pdf' });
         url = URL.createObjectURL(pdfBlob);
 
-        const embed = document.createElement('embed');
-        embed.src = url + "#toolbar=0&navpanes=0&scrollbar=0";
-        embed.type = 'application/pdf';
-        embed.style.width = '100%';
-        embed.style.height = 'auto';
-        previewElement = embed;
+const iframe = document.createElement('iframe');
+iframe.src = url;
+iframe.type = 'application/pdf';
+iframe.style.width = '100%';
+iframe.style.height = '600px'; // fixed height for consistent viewing
+previewElement = iframe;
       } else if (
         filename.toLowerCase().endsWith('.png') ||
         filename.toLowerCase().endsWith('.jpg') ||
