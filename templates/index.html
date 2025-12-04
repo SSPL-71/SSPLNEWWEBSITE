@@ -245,37 +245,40 @@
 <body>
    
 
-	 <!-- SECTION: SSPL Door Reveal -->
+	
+<!-- SECTION: SSPL Door Reveal -->
 <section>
-<div class="door-container">
+  <div class="door-container">
     <div class="door left-door"></div>
     <div class="door right-door"></div>
 
     <!-- Company Logo + Heading -->
     <div class="brand">
-        <img src="{{ url_for('static', filename='new_logo.jpg') }}" 
-             alt="SSPL" style="max-height:90px; display:block; margin:0 auto;">     
-        <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
+      <img src="{{ url_for('static', filename='new_logo.jpg') }}"  
+           alt="SSPL" style="max-height:90px; display:block; margin:0 auto;">     
+      <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
     </div>
 
+    <!-- Vaastu Logo -->
+    <img src="{{ url_for('static', filename='Vaastu.png') }}"  
+         alt="Vaastu Symbol"  
+         style="height:50px; position:absolute; top:10px; right:10px;">
+  </div>
+</section>
+<!-- END SECTION: SSPL Door Reveal -->
+
+<!-- Confetti Script -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
-  window.onload = () => {
+  window.addEventListener("load", () => {
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 }
     });
-  };
+  });
 </script>
 
-    <!-- Vaastu Logo -->
-    <img src="{{ url_for('static', filename='Vaastu.png') }}" 
-         alt="Vaastu Symbol" 
-         style="height:50px; position:absolute; top:10px; right:10px;">
-</div>
-  </section>
-    <!-- END SECTION: SSPL Door Reveal --><br>
 
 <div class="floating-wrapper">
   <button id="menuToggle" class="floating-toggle">☰</button>
