@@ -167,7 +167,95 @@
     .center { text-align:center; }
     .muted { color:var(--muted); }
     .video-embed{border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(16,24,40,0.06);}
-    .scroll-banner{background:#fff3f3; padding:10px; border-radius:8px; color:#b30000; font-weight:700; overflow:hidden;}
+    .scroll-banner{background:#fff3f3; padding:10px; border-radius:8px; color:#b30000; font-weight:700; overflow:hid
+
+    /* Compact quality slider */
+    #quality-slider {
+      max-width: 320px;
+      width: 100%;
+      display: block;
+      margin-top: 6px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Floating menu refinements */
+    .floating-menu {
+      width: 200px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    @media (max-width:900px){
+      .floating-menu {
+        display: none;
+        right: 16px;
+        left: 16px;
+        top: auto;
+        bottom: 80px;
+      }
+      .floating-menu.show {
+        display: block;
+      }
+    }
+
+    /* Policies & contact width alignment */
+    #CONTACT,
+    #privacy-policy,
+    #refund-policy {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+ 
+
+  /* Top tabs styling */
+  .top-tabs {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 8px 0 16px;
+  }
+  .top-tabs .tab-button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(15,23,42,0.12);
+    background: rgba(255,255,255,0.8);
+    cursor: pointer;
+  }
+  .top-tabs .tab-button.active {
+    background: #0ea5e9;
+    color: #ffffff;
+    border-color: #0ea5e9;
+  }
+
+  .tab-sections {
+    margin-top: 8px;
+  }
+  .tab-section {
+    width: 100%;
+  }
+
+  /* Match quality slider width to primary button width */
+  .tool-primary {
+    width: 260px;
+    max-width: 100%;
+  }
+  #quality-slider {
+    width: 260px;
+    max-width: 100%;
+    display: block;
+    margin: 10px auto 0 auto;
+  }
+  @media (max-width: 480px){
+    .tool-primary,
+    #quality-slider {
+      width: 90%;
+      max-width: 260px;
+    }
+  }
+
   </style>
 </head>
 <body>
@@ -182,16 +270,23 @@
           <p class="muted" style="margin:4px 0 0; font-size:0.95rem;">
             Claims Investigations · App Development · SaaS Tools
           </p>
-          <p class="muted">Claims Investigation · PDF Tools · Image & ZIP utilities</p>
-        </div>
+                  </div>
       </div>
 
-      <nav class="muted" aria-label="top links">
-        <a href="#3CTool">3CTOOL</a> &nbsp; • &nbsp;
-        <a href="#PMTOOL">PDF MERGER</a> &nbsp; • &nbsp;
-        <a href="#ZIPTOOL">ZzpDwn</a>
-      </nav>
-    </header>
+          </header>
+    <nav class="top-tabs" aria-label="Primary">
+      <button class="tab-button active" data-target="tab-home">Home</button>
+      <button class="tab-button" data-target="tab-about">About Us</button>
+      <button class="tab-button" data-target="tab-claims">Claims Tatva</button>
+    </nav>
+
+    <div class="tab-sections">
+      <div id="tab-home" class="tab-section active">
+
+
+
+
+
 
     <!-- Door reveal / hero -->
     <section class="door-container" aria-hidden="false">
@@ -200,7 +295,7 @@
 
       <div class="brand" id="heroBrand">
         <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL logo">
-        <h2>Bestower of Skills & Wisdom — SARVASIDDHANTA</h2>
+        <h2>Bestower of Skills & Wisdom</h2>
       </div>
       <img src="{{ url_for('static', filename='Vaastu.png') }}" alt="Vaastu Symbol" style="height:48px; position:absolute; top:18px; right:28px;">
     </section>
@@ -262,14 +357,86 @@
         </div>
       </div>
     </section>
+<div style="text-align:center; margin:20px auto;">
+<a href="https://www.producthunt.com/products/zzpdwn?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-zzpdwn" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045156&theme=light&t=1764809305528" alt="ZzpDwn&#0033;&#0033; - Unzip&#0032;With&#0032;Ease | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+</div>
+
 
     <!-- About / GenTrac -->
     <section class="card" id="GenTrac">
-      <h2 class="center">We Designed & Built GenTrac</h2>
-      <p class="muted center">GenTrac is a comprehensive app for claim investigation and verification. Streamline case updates, assign staff, track progress, and generate reports.</p>
-      <div class="center" style="margin-top:12px;">
-        <a class="btn" href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" target="_blank" rel="noopener">Open GenTrac</a>
-      </div>
+<div style="text-align: center; margin-top: 30px; font-family: Arial, sans-serif;">
+        <h1 style="color: #333;">We Designed & Built GenTrac</h1>
+        <p style="font-size: 18px; color: #555; margin: 20px 50px;">
+            <strong>GenTrac</strong> is a comprehensive app designed & built by us specifically for claim investigation 
+            and verification process. With GenTrac we have streamlined our operations and enhanced efficiency 
+            across the entire claim investigation lifecycle.
+        </p>
+        <div style="text-align: justify; display: inline-block; margin-bottom: 30px;">
+            <ul style="font-size: 16px; line-height: 1.8; color: #555; text-align: left; margin-left: 20px;">
+                <li>Update and manage new cases seamlessly.</li>
+                <li>Assign cases to field staff for on-site verification.</li>
+                <li>Enable field staff to update records directly from the field.</li>
+                <li>Track case progress and status in real-time.</li>
+                <li>Generate detailed reports for updates and case summaries.</li>
+                <li>Streamline billing and invoicing processes.</li>
+                <li>Produce GST filing reports and vendor billing invoice details effortlessly.</li>
+            </ul>
+        </div>
+        <p style="font-size: 18px; color: #555;">
+
+<strong>Contact Us</strong> today to discover how GenTrac can streamline your operations and bring valuable benefits to your company.
+        </p>
+            Employee Login: <strong>Click To Open GenTrac</strong>.
+        </p>
+        <div style="margin-top: 20px;">
+           
+
+<style>
+    .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .button-link:hover {
+        background-color: #45a049;
+    }
+</style>
+<a href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" 
+   target="_blank" 
+   class="button-link" 
+   title="Click to open GenTrac">
+   GenTrac
+</a>
+
+<style>
+    .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .button-link:hover {
+        background-color: #45a049;
+    }
+</style>
+
+        </div>
+    </div>
     </section>
 
     
@@ -341,8 +508,8 @@
         <img src="{{ url_for('static', filename='3CTool.png') }}" alt="3CTool" style="height:72px;">
         <div style="flex:1;">
           <h3>3CTool — Crop • Compress • Convert</h3>
-          <p class="muted">Crop, compress images/videos & convert images to PDF. Tools are hosted on free tiers; links open in a new tab.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted">C-The Power Of Your Fingers !</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
         </div>
         <div style="text-align:center;">
           <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
@@ -360,7 +527,7 @@
       <div id="PMTOOL" class="card">
         <h3>PDF Merger Tool</h3>
         <p class="muted">Select multiple PDF files to merge into one document.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
         <input type="file" id="pdf-files" accept="application/pdf" multiple>
         <div style="margin-top:12px;"><button id="merge-btn" class="btn">Merge PDFs</button></div>
         <div id="merge-loader" style="display:none; margin-top:12px;">Processing... <span aria-hidden="true">⏳</span></div>
@@ -371,7 +538,7 @@
       <div id="CMPRSTOOL" class="card">
         <h3>PDF Compression Tool</h3>
         <p class="muted">Choose quality and compress PDF pages to images embedded in a new PDF (client-side).</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
         <input type="file" id="pdf-file" accept="application/pdf">
         <div style="margin-top:8px;">Quality: <span id="quality-value">60%</span></div>
         <input type="range" id="quality-slider" min="10" max="90" value="60" style="width:100%; margin-top:6px;">
@@ -385,7 +552,7 @@
       <div id="SORTERTOOL" class="card">
         <h3>PDF Page Sorter Tool</h3>
         <p class="muted">Upload a PDF, preview page thumbnails, drag to sort, rotate, then download a new ordered PDF.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
         <input type="file" id="pdf-sorter-file" accept="application/pdf">
         <div id="page-preview" style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap;"></div>
         <button id="download-sorted" style="display:none;" class="btn">Download Sorted PDF</button>
@@ -397,7 +564,7 @@
     <section id="GPSTOOL" class="card center">
       <h3>GPS Camera Pro</h3>
       <p class="muted">Capture images with GPS tags — convert or merge to PDF, download.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
       <a class="btn ghost" href="https://pdf-relay.onrender.com" target="_blank" rel="noopener">Open GPS Tool</a>
     </section>
 
@@ -406,16 +573,29 @@
       <img src="{{ url_for('static', filename='ZzpDwn.png') }}" alt="ZzpDwn" style="height:72px; display:block; margin:0 auto 8px;">
       <h3>ZzpDwn — ZIP Extractor Tool</h3>
       <p class="muted">Preview images & PDFs inside a ZIP without downloading everything. Right-click any preview to save the file.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL<br>No Ads · No Installation Required</p>
       <div style="margin-top:10px;">
         <input type="file" id="zipFileInput" accept=".zip">
-        <label style="margin-left:8px;"><input type="checkbox" id="selectAll"> Select All Images</label>
+        <label id="selectAllWrapper" style="margin-left:8px; display:none;"><input type="checkbox" id="selectAll"> Select All Images</label>
       </div>
       <div id="container" style="display:flex; gap:18px; margin-top:12px;">
         <ul id="fileList" style="flex:0 0 260px; list-style:none; padding:10px; background:#fff; border-radius:8px; max-height:400px; overflow:auto;"></ul>
         <div id="previewContainer" style="flex:1; display:flex; flex-wrap:wrap; gap:12px;"></div>
       </div>
     </section>
+<div style="text-align:center; margin:20px auto;">
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'f66a356edbc6cc51d42b25d286054923',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/f66a356edbc6cc51d42b25d286054923/invoke.js"></script>
+</div>
+
 
     <!-- Donate -->
     
@@ -593,24 +773,7 @@
     <!-- Footer small -->
     
     <!-- Contact Section (added) -->
-    <section id="CONTACT" class="card">
-      <h3>Contact Us</h3>
-      <p class="muted">
-        Sarvasiddhanta Services Private Limited (SSPL)
-      </p>
-      <p>
-        For any queries related to claim investigations or our free online tools (3CTool, PDF Merger, PDF Compressor,
-        PDF Sorter, GPS Camera Pro, ZzpDwn), you can reach us using the details below.
-      </p>
-      <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">
-        <li><strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a></li>
-        <li><strong>Location:</strong> Karnataka, India</li>
-      </ul>
-      <p class="muted" style="font-size:0.9rem;">
-        For detailed address and business discussions, please contact us by email first and we will respond with
-        appropriate contact details.
-      </p>
-    </section>
+    
 
     <!-- Privacy Policy Section (added) -->
     <section id="privacy-policy" class="card">
@@ -655,6 +818,59 @@
       </p>
     </section>
 
+<section id="CONTACT" class="card">
+      <h3>Contact Us</h3>
+      <p class="muted">
+        Sarvasiddhanta Services Private Limited (SSPL)
+      </p>
+      <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">
+        <li><strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a></li>
+        <li><strong>Location:</strong> Bangalore, India</li>
+      </ul>
+      <p class="muted" style="font-size:0.9rem;">
+        For detailed address and business discussions, please contact us by email first and we will respond with
+        appropriate contact details.
+      </p>
+    </section>
+
+
+      </div>
+      <div id="tab-about" class="tab-section" style="display:none;">
+<section style="background-color: #ffffff; padding: 50px 20px;">
+  <div style="max-width: 800px; margin: auto; font-family: Georgia, serif; color: #333;">
+    <h2 style="text-align: center;">About Us</h2>
+    <p style="text-align: justify; line-height: 1.6; font-size: 16px; margin-top: 20px;">
+      With over 18 years of experience, Sarvasiddhanta Services Private Limited has built a reputation for excellence in claims investigations across Karnataka. We are proud to be empaneled with ICICI Lombard and Magma GIC, and we continue to serve with integrity, quality, and professionalism.
+    </p>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="{{ url_for('about') }}">Learn More--→</a>
+    </div>
+  </div>
+
+</section>
+      </div>
+      <div id="tab-claims" class="tab-section" style="display:none;">
+
+
+  
+<section style="background-color: #2c3e50; padding: 50px 20px;">
+  <div class="anna-container" style="background-color: #fff; border-radius: 12px; max-width: 800px; margin: auto; padding: 30px; text-align: center;">
+    <a href="{{ url_for('claims_tatva') }}" style="text-decoration: none;">
+      <img src="{{ url_for('static', filename='SarvaSiddh_Anna.png') }}" 
+     alt="SarvaSiddh Anna" 
+     style="max-width: 100px; border-radius: 12px;">
+
+      <h2 style="font-family: 'Georgia', serif; color: #2c3e50; margin-top: 20px;">Namaskara. I am SarvaSiddh Anna.</h2>
+      <p style="font-size: 1.1em; color: #555; line-height: 1.6; margin-top: 10px;">
+      <strong>Claims Tatva</strong>—Click Here for some basics !
+      </p>
+    </a>
+  </div>
+ 
+
+
+      </div>
+    </div>
 <footer class="muted center" style="margin-top:18px; font-size:0.9rem;">
       <p>&copy; Sarvasiddhanta Services Private Limited — All Rights Reserved</p>
     </footer>
@@ -916,11 +1132,34 @@
     })();
   </script>
 
+
+<div style="text-align:center; margin:20px auto;">
   <!-- small ad script preserved -->
   <script type="text/javascript">
     atOptions = { 'key':'d76052090799493fc61caae4a413bb90','format':'iframe','height':60,'width':468,'params':{} };
   </script>
   <script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
+</div>
 
+
+
+
+  <script>
+    // Top tab switching
+    (function(){
+      var buttons = document.querySelectorAll('.top-tabs .tab-button');
+      var sections = document.querySelectorAll('.tab-section');
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var target = btn.getAttribute('data-target');
+          sections.forEach(function(sec){
+            sec.style.display = (sec.id === target) ? 'block' : 'none';
+          });
+          buttons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
