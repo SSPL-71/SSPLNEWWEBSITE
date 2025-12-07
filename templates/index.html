@@ -308,33 +308,23 @@ div.card {
       width: 100%;
     }
 
-    /* Default: hide all tab content */
-.tab-section {
-  display: none !important;
-}
-
-/* Only the active tab content should show */
-.tab-section.active {
-  display: block !important;
-}
-
-/* Home tab shows entire site normally */
-body.tab-home-active .site * {
-  display: revert !important;
-}
-
-/* About and Claims tabs hide all non-tab content except header, tabs, and floating menu */
+    /* Show only the selected tab content on About and Claims */
 body.tab-about-active .site > *:not(header):not(.top-tabs):not(.tab-sections),
 body.tab-claims-active .site > *:not(header):not(.top-tabs):not(.tab-sections) {
   display: none !important;
 }
 
-/* Ensure floating menu + toggle always stay visible */
-#floatingMenu,
-#menuToggle {
+/* Always keep floating quick menu visible */
+body.tab-about-active #floatingMenu,
+body.tab-claims-active #floatingMenu {
   display: block !important;
 }
 
+/* Always keep the toggle button visible */
+body.tab-about-active #menuToggle,
+body.tab-claims-active #menuToggle {
+  display: block !important;
+}
 
 
 
@@ -1246,32 +1236,36 @@ body.tab-claims-active .site > *:not(header):not(.top-tabs):not(.tab-sections) {
 
 
   <script>
-(function(){
-  const buttons = document.querySelectorAll('.top-tabs .tab-button');
-  const sections = document.querySelectorAll('.tab-section');
+    // Top tab switching (instant, no animation, Option A-2: Home = full site except About/Claims content)
+    (function(){
+      var buttons = document.querySelectorAll('.top-tabs .tab-button');
+      var sections = document.querySelectorAll('.tab-section');
 
-  // Default tab
-  document.body.classList.add('tab-home-active');
-  document.getElementById('tab-home').classList.add('active');
+      // Initial state
+      document.body.classList.add('tab-home-active');
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.target;
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var target = btn.getAttribute('data-target');
 
-      // Reset active states
-      buttons.forEach(b => b.classList.remove('active'));
-      sections.forEach(sec => sec.classList.remove('active'));
+          sections.forEach(function(sec){
+            sec.style.display = (sec.id === target) ? 'block' : 'none';
+          });
 
-      // Activate clicked tab
-      btn.classList.add('active');
-      document.getElementById(target).classList.add('active');
+          buttons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
 
-      // Update body state class
-      document.body.className = `tab-${target.replace("tab-","")}-active`;
-    });
-  });
-})();
-</script>
-
+          document.body.classList.remove('tab-home-active','tab-about-active','tab-claims-active');
+          if (target === 'tab-home') {
+            document.body.classList.add('tab-home-active');
+          } else if (target === 'tab-about') {
+            document.body.classList.add('tab-about-active');
+          } else if (target === 'tab-claims') {
+            document.body.classList.add('tab-claims-active');
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
