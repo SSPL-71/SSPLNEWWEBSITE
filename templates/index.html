@@ -259,6 +259,37 @@
       background: #0ea5e9;
       color: #ffffff;
       border-color: #0ea5e9;
+ 
+
+    /* Modern minimal segmented tabs */
+    .top-tabs {
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin:12px 0 18px;
+    }
+    .top-tabs .tab-button {
+      -webkit-appearance:none;
+      appearance:none;
+      background: transparent;
+      border-radius: 999px;
+      padding: 6px 18px;
+      border: 1px solid rgba(15,23,42,0.18);
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #0f172a;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    .top-tabs .tab-button:hover {
+      background: rgba(15,23,42,0.03);
+      box-shadow: 0 3px 10px rgba(15,23,42,0.12);
+      transform: translateY(-1px);
+    }
+    .top-tabs .tab-button.active {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0ea5e9;
+      box-shadow: 0 6px 18px rgba(14,165,233,0.35);
     }
 
   </style>
@@ -358,11 +389,79 @@
 
     <!-- About / GenTrac -->
     <section class="card" id="GenTrac">
-      <h2 class="center">We Designed & Built GenTrac</h2>
-      <p class="muted center">GenTrac is a comprehensive app for claim investigation and verification. Streamline case updates, assign staff, track progress, and generate reports.</p>
-      <div class="center" style="margin-top:12px;">
-        <a class="btn" href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" target="_blank" rel="noopener">Open GenTrac</a>
-      </div>
+<div style="text-align: center; margin-top: 30px; font-family: Arial, sans-serif;">
+        <h1 style="color: #333;">We Designed & Built GenTrac</h1>
+        <p style="font-size: 18px; color: #555; margin: 20px 50px;">
+            <strong>GenTrac</strong> is a comprehensive app designed & built by us specifically for claim investigation 
+            and verification process. With GenTrac we have streamlined our operations and enhanced efficiency 
+            across the entire claim investigation lifecycle.
+        </p>
+        <div style="text-align: justify; display: inline-block; margin-bottom: 30px;">
+            <ul style="font-size: 16px; line-height: 1.8; color: #555; text-align: left; margin-left: 20px;">
+                <li>Update and manage new cases seamlessly.</li>
+                <li>Assign cases to field staff for on-site verification.</li>
+                <li>Enable field staff to update records directly from the field.</li>
+                <li>Track case progress and status in real-time.</li>
+                <li>Generate detailed reports for updates and case summaries.</li>
+                <li>Streamline billing and invoicing processes.</li>
+                <li>Produce GST filing reports and vendor billing invoice details effortlessly.</li>
+            </ul>
+        </div>
+        <p style="font-size: 18px; color: #555;">
+
+<strong>Contact Us</strong> today to discover how GenTrac can streamline your operations and bring valuable benefits to your company.
+        </p>
+            Employee Login: <strong>Click To Open GenTrac</strong>.
+        </p>
+        <div style="margin-top: 20px;">
+           
+
+<style>
+    .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .button-link:hover {
+        background-color: #45a049;
+    }
+</style>
+<a href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" 
+   target="_blank" 
+   class="button-link" 
+   title="Click to open GenTrac">
+   GenTrac
+</a>
+
+<style>
+    .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .button-link:hover {
+        background-color: #45a049;
+    }
+</style>
+
+        </div>
+    </div>
     </section>
 
     
