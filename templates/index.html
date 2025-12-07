@@ -130,6 +130,9 @@
       width:220px;
       border-left:8px solid var(--accent);
       font-weight:600;
+      width: 220px;
+      max-height: 70vh;
+      overflow-y: auto;
     }
     .floating-header{color:var(--accent); font-size:0.95rem; margin-bottom:8px;}
     .floating-menu a{display:block; padding:8px 6px; color:#0f1724; border-radius:8px; margin:6px 0; font-size:0.95rem;}
@@ -153,14 +156,27 @@
 
     /* Responsive */
     @media (max-width:900px){
-      
       .site{padding:12px;}
       header{flex-direction:column; align-items:flex-start; gap:8px;}
       .brand img{height:64px;}
     }
     @media (max-width:600px){
       .door {font-size:34px;}
-      .floating-toggle{display:block; position:fixed; bottom:18px; right:18px; z-index:1001; background:var(--accent); color:white; border-radius:50%; width:54px; height:54px; border:none; font-size:22px; box-shadow:0 8px 20px rgba(14,165,164,0.25);}
+      .floating-toggle{
+        display:block;
+        position:fixed;
+        bottom:18px;
+        right:18px;
+        z-index:1001;
+        background:var(--accent);
+        color:white;
+        border-radius:50%;
+        width:54px;
+        height:54px;
+        border:none;
+        font-size:22px;
+        box-shadow:0 8px 20px rgba(14,165,164,0.25);
+      }
     }
 
     /* Utility */
@@ -184,7 +200,6 @@
     }
 
     /* Policies & contact width alignment */
-    #CONTACT,
     #privacy-policy,
     #refund-policy {
       max-width: 900px;
@@ -193,11 +208,6 @@
     }
 
     /* Floating menu refinement */
-    .floating-menu {
-      width: 220px;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
     @media (max-width:900px){
       .floating-menu {
         display: none;
@@ -205,37 +215,18 @@
         left: 16px;
         top: auto;
         bottom: 80px;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 0.25s ease, opacity 0.25s ease;
       }
       .floating-menu.show {
         display: block;
+        transform: translateY(0);
+        opacity: 1;
       }
- 
-
-    .top-tabs .tab-button {
-      -webkit-appearance:none;
-      appearance:none;
-      background: transparent;
-      border-radius: 999px;
-      padding: 6px 18px;
-      border: 1px solid rgba(15,23,42,0.18);
-      font-size: 0.9rem;
-      cursor: pointer;
-      color: #0f172a;
-      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
     }
-    .top-tabs .tab-button:hover {
-      background: rgba(15,23,42,0.03);
-      box-shadow: 0 3px 10px rgba(15,23,42,0.12);
-      transform: translateY(-1px);
-    }
-    .top-tabs .tab-button.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      border-color: #0ea5e9;
-      box-shadow: 0 6px 18px rgba(14,165,233,0.35);
- 
 
-    /* Modern minimal segmented tabs - final */
+    /* Modern minimal segmented tabs - final (pill style, no animation) */
     .top-tabs {
       display:flex;
       justify-content:center;
@@ -253,19 +244,15 @@
       cursor: pointer;
       color: #0f172a;
       letter-spacing: 0.02em;
-      transition: background 0.2s ease, color 0.2s ease,
-                  box-shadow 0.2s ease, transform 0.15s ease;
+      transition: none;
     }
     .top-tabs .tab-button:hover {
       background: rgba(255,255,255,0.9);
-      box-shadow: 0 3px 10px rgba(15,23,42,0.12);
-      transform: translateY(-1px);
     }
     .top-tabs .tab-button.active {
       background: #0ea5e9;
       color: #ffffff;
       border-color: #0ea5e9;
-      box-shadow: 0 6px 18px rgba(14,165,233,0.35);
     }
 
     .tab-sections {
@@ -273,6 +260,16 @@
     }
     .tab-section {
       width: 100%;
+    }
+
+    /* Tab-specific page visibility:
+       - Home: full site content (except About/Claims dedicated sections)
+       - About: only About tab content
+       - Claims: only Claims tab content
+    */
+    body.tab-about-active .site > :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
+    body.tab-claims-active .site > :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
+      display: none;
     }
 
   </style>
@@ -339,7 +336,7 @@
           toggleBtn.setAttribute('aria-expanded', String(!expanded));
         });
       }
-      // Door animation
+      // Door animation + ensure floating menu visible on all tabs
       document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           const left = document.querySelector(".left-door");
@@ -349,6 +346,20 @@
           if (right) right.style.transform = "rotateY(90deg)";
           if (brand) brand.style.opacity = 1;
         }, 500);
+
+        // Move floating menu & toggle to top-level inside .site so they are visible on all tabs
+        const site = document.querySelector('.site');
+        const floatMenu = document.getElementById('floatingMenu');
+        const floatToggle = document.getElementById('menuToggle');
+        if (site && floatMenu && floatMenu.parentElement !== site) {
+          site.appendChild(floatMenu);
+        }
+        if (site && floatToggle && floatToggle.parentElement !== site) {
+          site.appendChild(floatToggle);
+        }
+
+        // Set initial tab state
+        document.body.classList.add('tab-home-active');
       });
     </script>
 
@@ -517,7 +528,8 @@
         <div style="flex:1;">
           <h3>3CTool — Crop • Compress • Convert</h3>
           <p class="muted">Crop, compress images/videos & convert images to PDF. Tools are hosted on free tiers; links open in a new tab.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+          <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
         </div>
         <div style="text-align:center;">
           <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
@@ -535,7 +547,8 @@
       <div id="PMTOOL" class="card">
         <h3>PDF Merger Tool</h3>
         <p class="muted">Select multiple PDF files to merge into one document.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
         <input type="file" id="pdf-files" accept="application/pdf" multiple>
         <div style="margin-top:12px;"><button id="merge-btn" class="btn">Merge PDFs</button></div>
         <div id="merge-loader" style="display:none; margin-top:12px;">Processing... <span aria-hidden="true">⏳</span></div>
@@ -546,7 +559,8 @@
       <div id="CMPRSTOOL" class="card">
         <h3>PDF Compression Tool</h3>
         <p class="muted">Choose quality and compress PDF pages to images embedded in a new PDF (client-side).</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
         <input type="file" id="pdf-file" accept="application/pdf">
         <div style="margin-top:8px;">Quality: <span id="quality-value">60%</span></div>
         <input type="range" id="quality-slider" min="10" max="90" value="60">
@@ -560,7 +574,8 @@
       <div id="SORTERTOOL" class="card">
         <h3>PDF Page Sorter Tool</h3>
         <p class="muted">Upload a PDF, preview page thumbnails, drag to sort, rotate, then download a new ordered PDF.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+        <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
         <input type="file" id="pdf-sorter-file" accept="application/pdf">
         <div id="page-preview" style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap;"></div>
         <button id="download-sorted" style="display:none;" class="btn">Download Sorted PDF</button>
@@ -572,7 +587,8 @@
     <section id="GPSTOOL" class="card center">
       <h3>GPS Camera Pro</h3>
       <p class="muted">Capture images with GPS tags — convert or merge to PDF, download.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
       <a class="btn ghost" href="https://pdf-relay.onrender.com" target="_blank" rel="noopener">Open GPS Tool</a>
     </section>
 
@@ -581,10 +597,13 @@
       <img src="{{ url_for('static', filename='ZzpDwn.png') }}" alt="ZzpDwn" style="height:72px; display:block; margin:0 auto 8px;">
       <h3>ZzpDwn — ZIP Extractor Tool</h3>
       <p class="muted">Preview images & PDFs inside a ZIP without downloading everything. Right-click any preview to save the file.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL · No Ads · No Installation Required · Runs in your browser.</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
       <div style="margin-top:10px;">
         <input type="file" id="zipFileInput" accept=".zip">
-        <label style="margin-left:8px;"><input type="checkbox" id="selectAll"> Select All Images</label>
+        <label id="selectAllWrapper" style="display:none; margin-left:8px;">
+          <input type="checkbox" id="selectAll"> Select All Images
+        </label>
       </div>
       <div id="container" style="display:flex; gap:18px; margin-top:12px;">
         <ul id="fileList" style="flex:0 0 260px; list-style:none; padding:10px; background:#fff; border-radius:8px; max-height:400px; overflow:auto;"></ul>
@@ -819,7 +838,7 @@
       </p>
       <p>
         From time to time, we may accept voluntary donations or contributions to help with maintenance and hosting
-        costs. Such donations are generally non‑refundable, except where required by applicable law or in exceptional
+        costs. Such donations are generally non-refundable, except where required by applicable law or in exceptional
         cases at our discretion.
       </p>
       <p>
@@ -1103,7 +1122,13 @@
         }).catch(err => console.error('Preview error:', err));
       }
       document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-        const file = event.target.files[0]; if (!file) return;
+        const file = event.target.files[0];
+        const selectAllWrapper = document.getElementById('selectAllWrapper');
+        if (!file) {
+          if (selectAllWrapper) selectAllWrapper.style.display = 'none';
+          return;
+        }
+        if (selectAllWrapper) selectAllWrapper.style.display = 'inline-block';
         const name = file.name.toLowerCase();
         const arrayBuffer = await file.arrayBuffer();
         const fileList = document.getElementById('fileList'); const previewContainer = document.getElementById('previewContainer');
@@ -1152,18 +1177,33 @@
 
 
   <script>
-    // Top tab switching
+    // Top tab switching (instant, no animation, Option A-2: Home = full site except About/Claims content)
     (function(){
       var buttons = document.querySelectorAll('.top-tabs .tab-button');
       var sections = document.querySelectorAll('.tab-section');
+
+      // Initial state
+      document.body.classList.add('tab-home-active');
+
       buttons.forEach(function(btn){
         btn.addEventListener('click', function(){
           var target = btn.getAttribute('data-target');
+
           sections.forEach(function(sec){
             sec.style.display = (sec.id === target) ? 'block' : 'none';
           });
+
           buttons.forEach(function(b){ b.classList.remove('active'); });
           btn.classList.add('active');
+
+          document.body.classList.remove('tab-home-active','tab-about-active','tab-claims-active');
+          if (target === 'tab-home') {
+            document.body.classList.add('tab-home-active');
+          } else if (target === 'tab-about') {
+            document.body.classList.add('tab-about-active');
+          } else if (target === 'tab-claims') {
+            document.body.classList.add('tab-claims-active');
+          }
         });
       });
     })();
