@@ -308,23 +308,53 @@ div.card {
       width: 100%;
     }
 
-    /* Show only the selected tab content on About and Claims */
-body.tab-about-active .site > *:not(header):not(.top-tabs):not(.tab-sections),
-body.tab-claims-active .site > *:not(header):not(.top-tabs):not(.tab-sections) {
+    /* Default state: hide all tab sections */
+.tab-section {
   display: none !important;
 }
 
-/* Always keep floating quick menu visible */
-body.tab-about-active #floatingMenu,
-body.tab-claims-active #floatingMenu {
+/* Active tab displays its content */
+.tab-section.active {
   display: block !important;
 }
 
-/* Always keep the toggle button visible */
-body.tab-about-active #menuToggle,
-body.tab-claims-active #menuToggle {
+/* --- TAB VISIBILITY CONTROL --- */
+
+/* HOME TAB → show full content */
+body.tab-home-active #privacy-policy,
+body.tab-home-active #refund-policy,
+body.tab-home-active #CONTACT,
+body.tab-home-active .tool,
+body.tab-home-active .door-container {
   display: block !important;
 }
+
+/* ABOUT TAB → only show About content */
+body.tab-about-active #privacy-policy,
+body.tab-about-active #refund-policy,
+body.tab-about-active #CONTACT,
+body.tab-about-active .tool,
+body.tab-about-active .door-container {
+  display: none !important;
+}
+
+/* CLAIMS TAB → same as About */
+body.tab-claims-active #privacy-policy,
+body.tab-claims-active #refund-policy,
+body.tab-claims-active #CONTACT,
+body.tab-claims-active .tool,
+body.tab-claims-active .door-container {
+  display: none !important;
+}
+
+/* Elements always visible */
+header,
+.top-tabs,
+#floatingMenu,
+#menuToggle {
+  display: block !important;
+}
+
 
 
 
@@ -1235,37 +1265,31 @@ body.tab-claims-active #menuToggle {
 
 
 
-  <script>
-    // Top tab switching (instant, no animation, Option A-2: Home = full site except About/Claims content)
-    (function(){
-      var buttons = document.querySelectorAll('.top-tabs .tab-button');
-      var sections = document.querySelectorAll('.tab-section');
+<script>
+(function(){
+  const buttons = document.querySelectorAll('.tab-button');
+  const sections = document.querySelectorAll('.tab-section');
 
-      // Initial state
-      document.body.classList.add('tab-home-active');
+  // Home default
+  document.body.classList.add('tab-home-active');
+  document.getElementById('tab-home')?.classList.add('active');
 
-      buttons.forEach(function(btn){
-        btn.addEventListener('click', function(){
-          var target = btn.getAttribute('data-target');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
 
-          sections.forEach(function(sec){
-            sec.style.display = (sec.id === target) ? 'block' : 'none';
-          });
+      buttons.forEach(b => b.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
 
-          buttons.forEach(function(b){ b.classList.remove('active'); });
-          btn.classList.add('active');
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
 
-          document.body.classList.remove('tab-home-active','tab-about-active','tab-claims-active');
-          if (target === 'tab-home') {
-            document.body.classList.add('tab-home-active');
-          } else if (target === 'tab-about') {
-            document.body.classList.add('tab-about-active');
-          } else if (target === 'tab-claims') {
-            document.body.classList.add('tab-claims-active');
-          }
-        });
-      });
-    })();
-  </script>
+      document.body.className = "";
+      document.body.classList.add(`tab-${target.replace("tab-","")}-active`);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
