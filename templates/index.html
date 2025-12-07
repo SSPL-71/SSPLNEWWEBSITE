@@ -153,7 +153,7 @@
 
     /* Responsive */
     @media (max-width:900px){
-      .floating-menu{display:none;}
+      
       .site{padding:12px;}
       header{flex-direction:column; align-items:flex-start; gap:8px;}
       .brand img{height:64px;}
@@ -269,24 +269,68 @@
       </div>
     </section>
 
-    <!-- Video area (GenTrac & GPS Camera Pro) -->
-    <section class="card video-embed">
-      <div style="display:flex; gap:24px; flex-wrap:wrap;">
-        <div style="flex:1 1 320px;">
-          <h3>🎥 GenTrac Demo</h3>
-          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
-            <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
-          </div>
+    
+    <!-- VIDEO SECTION (from original, wrapped for modern layout) -->
+    <section class="card video-embed" style="background:#f4f4f4;">
+      GenTrac & GPS Camera Pro Videos -->
+<section style="background-color: #f4f4f4; padding: 50px 20px;">
+  <div style="max-width: 1100px; margin: auto; font-family: Arial, sans-serif;">
+
+    <!-- First Row: GenTrac & GPS Camera Pro -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+      
+      <!-- GenTrac Demo Video -->
+      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
+        <h2 style="color: #333;">🎥 Watch the GenTrac Case Management Demo</h2>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+          <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                  allowfullscreen></iframe>
         </div>
-        <div style="flex:1 1 320px;">
-          <h3>📸 GPS Camera Pro</h3>
-          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
-            <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
-          </div>
-          <p class="center" style="margin-top:10px;"><a class="btn ghost" href="https://pdf-relay.onrender.com" target="_blank" rel="noopener">Open GPSTOOL</a></p>
-        </div>
+        <h2 style="margin-top: 20px;">👍 Like • Subscribe • Comment on YouTube</h2>
       </div>
+
+      <!-- GPS Camera Pro Video -->
+      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
+        <h2 style="color: #333;">📸 Try GPS Camera Pro – No Ads, No Installation</h2>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+          <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                  allowfullscreen></iframe>
+        </div>
+        <h2 style="margin-top: 20px;">🌐 Visit <a href="https://pdf-relay.onrender.com" target="_blank" style="color: #4CAF50; text-decoration: underline;">GPSTOOL</a></h2>
+      </div>
+    </div>
+
+    <!-- Second Row: 3CTool Video -->
+    <div style="margin-top: 60px; text-align: center;">
+      <h2 style="color: #333;">🛠️ Explore 3CTool – Crop, Compress, Convert !</h2>
+      <div style="max-width: 300px; margin: auto;">
+        <video controls playsinline style="width: 100%; border-radius: 10px;">
+          <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+<!-- Third Row: ZIP Extractor Tool Video -->
+<div style="margin-top: 60px; text-align: center;">
+  <h2 style="color: #333;">🗜️ Try ZzpDwn ! Our ZIP Extractor Tool – No Ads, No Installation</h2>
+  <div style="max-width: 560px; margin: auto;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/QC9ax2I_ctg?si=WGglnIn8UlwqE44B"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+            style="border-radius: 10px; width: 100%; height: 315px;">
+    </iframe>
+  </div>
+  
+</div>
+  </div>
+</section>
+<!-- END SECTION -->
     </section>
+
 
     <!-- Tools highlights (3CTool card) -->
     <section id="3CTool" class="card">
@@ -364,29 +408,177 @@
     </section>
 
     <!-- Donate -->
-    <section id="Donate" class="card center">
-      <h3>Tools are free — Wish to help?</h3>
-      <p class="muted">Support development with a small donation.</p>
-      <img src="https://img1.wsimg.com/isteam/ip/3313c4f3-2554-4adb-a588-9d9124283128/blob-8edbb2b.png/:/rs=h:300,m" alt="QR" style="width:180px; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
-      <div style="margin-top:12px;">
-        <form action="https://www.paypal.com/ncp/payment/G885MQJTUY6FN" method="post" target="_blank">
-          <input type="submit" value="DONATE" style="padding:10px 18px; background:#ffd140; border:none; border-radius:8px; font-weight:700;">
-        </form>
+    
+    <section id="Donate" class="card">
+      <h3 class="center">Tools are free to use! Wish to help? Donate $1</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:24px; margin-top:20px; align-items:flex-start; justify-content:center;">
+        <!-- Left column: QR -->
+        <div style="flex:1 1 260px; min-width:240px; text-align:center;">
+          <span style="font-weight:bold; font-size:1.1rem; display:block; margin-bottom:10px;">SCAN THIS QR</span>
+          <img src="https://img1.wsimg.com/isteam/ip/3313c4f3-2554-4adb-a588-9d9124283128/blob-8edbb2b.png/:/rs=h:300,m"
+               alt="Pay via QR Code"
+               style="width:200px; max-width:100%; border:2px solid #e5e7eb; border-radius:10px;">
+          <p class="muted" style="margin-top:10px; font-size:0.9rem;">
+            You can scan the QR using supported UPI / wallet apps.
+          </p>
+        </div>
+
+        <!-- Right column: PayPal + Info -->
+        <div style="flex:1 1 260px; min-width:260px;">
+          <div style="border-radius:10px; padding:16px; background:#f9fafb; box-shadow:0 1px 3px rgba(15,23,42,0.06);">
+            <p style="margin-top:0; margin-bottom:10px;">
+              Prefer PayPal? You can also support us with a small contribution using the button below.
+            </p>
+            <form action="https://www.paypal.com/ncp/payment/G885MQJTUY6FN" method="post" target="_blank">
+              <input type="submit" value="Donate via PayPal"
+                     style="padding:10px 18px; background:#ffd140; border:none; border-radius:8px; font-weight:700; cursor:pointer;">
+            </form>
+          </div>
+
+          <div style="margin-top:16px; font-size:0.9rem;" class="muted">
+            <p style="margin:0 0 8px 0;">
+              Donations are completely voluntary and are used only to support hosting and development of tools like
+              3CTool, PDF Merger, PDF Compressor, PDF Sorter, GPS Camera Pro and ZzpDwn.
+            </p>
+
+            <!-- Terms hover like original -->
+            <div class="terms-container" style="display:inline-block; position:relative; cursor:pointer; margin-top:4px;">
+              <span style="text-decoration:underline; font-weight:600;">Terms & Notes</span>
+              <div class="terms-content"
+                   style="display:none; position:absolute; left:0; top:120%; background:white; border-radius:8px;
+                          box-shadow:0 8px 20px rgba(15,23,42,0.18); padding:12px; width:260px; z-index:10; font-size:0.8rem;">
+                <p style="margin-top:0;">
+                  Donations are non-refundable, except where required by law or in exceptional cases at our discretion.
+                  Tools are provided on a best-effort basis; please always keep a backup of your original files.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.9rem; margin-top:10px;" class="muted">All donations are voluntary and support site maintenance.</p>
     </section>
+    <script>
+      // Tooltip behavior for Terms & Notes (mirrors original logic)
+      (function(){
+        const termsContainer = document.querySelector('.terms-container');
+        const termsContent = document.querySelector('.terms-content');
+        if (termsContainer && termsContent) {
+          termsContainer.addEventListener('mouseover', () => termsContent.style.display = 'block');
+          termsContainer.addEventListener('mouseout', () => termsContent.style.display = 'none');
+        }
+      })();
+    </script>
+
 
     <!-- Blog links -->
-    <section id="BLOG" class="card">
-      <h3>Blogs</h3>
-      <div style="max-height:240px; overflow:auto; padding-right:8px; font-size:0.95rem;">
-        <ul style="padding-left:18px;">
-          <li><a href="https://medium.com/@ksriyengar71/how-search-engines-get-it-wrong-detective-agencies-insurance-claim-investigators-70c29bdb7f05" target="_blank" rel="noopener">How Search Engines Get It Wrong: Detective Agencies ≠ Insurance Claim Investigators</a></li>
-          <li><a href="https://medium.com/@ksriyengar71/gps-camera-pro-capture-tag-convert-no-app-or-download-needed-the-gps-tool-for-ea07d0f9fba6" target="_blank" rel="noopener">GPS CAMERA PRO — Capture, Tag, Convert</a></li>
-          <li><a href="https://medium.com/@ksriyengar71/unlocking-productivity-with-sspls-free-online-tools-3c-tool-pdf-merger-pdf-compressor-and-d82964252ba2" target="_blank" rel="noopener">Unlocking Productivity with SSPL's Free Online Tools</a></li>
-        </ul>
+    
+    <!-- BLOGS (scrollable, from original, wrapped in card for modern layout) -->
+    <section id="BLOG" class="card" style="padding:0; background:transparent; box-shadow:none;">
+      <!-- SECTION: BLOGS -->
+
+  <section id="BLOG" style="background-color: #f4f4f4; padding: 50px 20px;">
+    <div style="margin: auto; max-width: 800px; padding: 0 20px; background-color: #f4f4f4;">
+      <div class="blog-banner">
+        <h2 class="blog-title">BLOGS</h2>
+        <div class="floating-shapes">
+          <span></span><span></span><span></span>
+        </div>
       </div>
+
+      <!-- ✅ Entire scrollable content starts here -->
+<div style="max-height: 300px; overflow-y: auto; padding-right: 10px; margin-top: 20px;">
+  <ul style="padding-left: 20px; text-align: justify; list-style-position: outside;">
+    <li style="margin-bottom: 15px;">
+      <a href="https://medium.com/@ksriyengar71/how-search-engines-get-it-wrong-detective-agencies-insurance-claim-investigators-70c29bdb7f05" target="_blank" rel="noopener noreferrer">
+        How Search Engines Get It Wrong: Detective Agencies ≠ Insurance Claim Investigators
+      </a>
+    </li>
+    <li style="margin-bottom: 15px;">
+      <a href="https://medium.com/@ksriyengar71/gps-camera-pro-capture-tag-convert-no-app-or-download-needed-the-gps-tool-for-ea07d0f9fba6" target="_blank" rel="noopener noreferrer">
+        GPS CAMERA PRO — “Capture, Tag, Convert” — No App or Download Needed: The GPS Tool for Professionals
+      </a>
+    </li>
+    <li style="margin-bottom: 15px;">
+      <a href="https://medium.com/@ksriyengar71/unlocking-productivity-with-sspls-free-online-tools-3c-tool-pdf-merger-pdf-compressor-and-d82964252ba2" target="_blank" rel="noopener noreferrer">
+        Unlocking Productivity with SSPL's Free Online Tools
+      </a>
+    </li>
+    <li style="margin-bottom: 15px;">
+      <a href="https://medium.com/@ksriyengar71/extract-zip-files-easily-with-this-free-online-tool-no-ads-no-hassle-59ad77f1d994" target="_blank" rel="noopener noreferrer">
+        Extract ZIP Files Easily with This Free Online Tool
+      </a>
+    </li>
+    <li style="margin-bottom: 15px;">
+      <a href="https://medium.com/@ksriyengar71/from-marathon-to-sprint-how-ai-automation-slashed-myworkflow-by-75-33273ffe40ae" target="_blank" rel="noopener noreferrer">
+        From Marathon to Sprint: How AI Automation Slashed My Workflow by 75%
+      </a>
+    </li>
+  </ul>
+
+  <!-- ✅ Legal Insight block inside scrollable container -->
+  <div style="margin-bottom: 15px;">
+    <h3 style="margin-bottom: 5px;">Legal Insight of the Week</h3>
+
+    <p>The <strong>Karnataka High Court</strong> recently clarified that <em>the burden of proof lies with the claimant</em> when seeking insurance payouts — not the insurer. This ruling stems from a 2011 accident case involving a disputed policy document.</p>
+    <p><a href="https://www.deccanherald.com/india/karnataka/to-claim-insurance-policy-burden-of-proof-lies-with-owner-or-claimant-not-the-insurance-company-karnataka-hc-3638677" target="_blank" rel="noopener noreferrer">Read the full story on Deccan Herald →</a></p>
+
+    <p><strong>The Insurance Company Can Be Asked To Pay Compensation To Motor Accident Claimants & Thereafter Recover The Same In Case Of Policy Cancellation: Supreme Court</strong></p>
+    <p><a href="https://www.verdictum.in/court-updates/supreme-court/national-insurance-company-limited-v-sunita-devi-2025-insc-951-insurance-company-compensation-motor-accident-claimants-policy-cancellation-1588062" target="_blank" rel="noopener noreferrer">Read the full story on Verdictum.in →</a></p>
+
+    <p><strong>The Insurance firm not liable to pay compensation for death of persons driving rashly: Supreme Court</strong></p>
+    <p><a href="https://www.thehindu.com/news/national/insurance-firm-not-liable-to-pay-compensation-for-death-of-persons-driving-rashly-supreme-court/article69767541.ece" target="_blank" rel="noopener noreferrer">Read the full story on The Hindu →</a></p>
+  </div>
+</div>
+<!-- ✅ End of scrollable content -->
+    </div>
+
+    <style>
+      .blog-banner {
+        position: relative;
+        height: 100px;
+        background-color: #f4f4f4;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .blog-title {
+        font-size: 32px;
+        color: #333;
+        font-family: 'Georgia', serif;
+        z-index: 2;
+        text-shadow: 1px 1px 2px #ccc;
+      }
+
+      .floating-shapes span {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: rgba(100, 100, 255, 0.2);
+        border-radius: 50%;
+        animation: floatUp 6s infinite ease-in-out;
+      }
+
+      .floating-shapes span:nth-child(1) { left: 10%; animation-delay: 0s; }
+      .floating-shapes span:nth-child(2) { left: 50%; animation-delay: 2s; }
+      .floating-shapes span:nth-child(3) { left: 80%; animation-delay: 4s; }
+
+      @keyframes floatUp {
+        0% { bottom: -20px; opacity: 0; }
+        50% { opacity: 1; }
+        100% { bottom: 100%; opacity: 0; }
+      }
+    </style>
+  </section>
+</div>
+<!-- END SECTION: BLOGS -->
     </section>
+
 
     <!-- Footer small -->
     
@@ -401,7 +593,7 @@
         PDF Sorter, GPS Camera Pro, ZzpDwn), you can reach us using the details below.
       </p>
       <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">
-        <li><strong>Email:</strong> <a href="mailto:sspl.claims@gmail.com">sspl.claims@gmail.com</a></li>
+        <li><strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a></li>
         <li><strong>Location:</strong> Karnataka, India</li>
       </ul>
       <p class="muted" style="font-size:0.9rem;">
@@ -430,7 +622,7 @@
       </p>
       <p>
         If you have privacy-related questions, you may contact us at
-        <a href="mailto:sspl.claims@gmail.com">sspl.claims@gmail.com</a>.
+        <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a>.
       </p>
     </section>
 
