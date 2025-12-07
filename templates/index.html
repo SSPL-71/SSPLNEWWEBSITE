@@ -114,6 +114,13 @@
       transition:opacity 1.2s ease-in-out;
       color:var(--brand);
     }
+/* Match Door Reveal section width with the rest of the site */
+.door-container {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
     .brand img{height:88px; display:block; margin:0 auto 8px;}
     .brand h2{margin:6px 0 0; font-family: "Georgia", serif; font-weight:600; font-size:1rem; color:var(--brand);}
 
@@ -235,6 +242,16 @@ div.card {
   margin-right: auto;
 }
 
+/* Ensure all tool cards visually center inside page width */
+.tool,
+.tool-card,
+.card {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
     /* Floating menu refinement */
     @media (max-width:900px){
@@ -291,17 +308,24 @@ div.card {
       width: 100%;
     }
 
-    /* Tab-specific page visibility:
-   - Home: full site content (except About/Claims dedicated sections)
-   - About: only About tab content
-   - Claims: only Claims tab content
-*/
-
-/* Hide all non-tab content when About or Claims is active */
-body.tab-about-active .site :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
-body.tab-claims-active .site :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
+    /* Show only the selected tab content on About and Claims */
+body.tab-about-active .site > *:not(header):not(.top-tabs):not(.tab-sections),
+body.tab-claims-active .site > *:not(header):not(.top-tabs):not(.tab-sections) {
   display: none !important;
 }
+
+/* Always keep floating quick menu visible */
+body.tab-about-active #floatingMenu,
+body.tab-claims-active #floatingMenu {
+  display: block !important;
+}
+
+/* Always keep the toggle button visible */
+body.tab-about-active #menuToggle,
+body.tab-claims-active #menuToggle {
+  display: block !important;
+}
+
 
 
 
@@ -494,7 +518,8 @@ body.tab-claims-active .site :not(header):not(.top-tabs):not(.tab-sections):not(
     
     <!-- VIDEO SECTION (from original, wrapped for modern layout) -->
     <section class="card video-embed" style="background:#f4f4f4;">
-      GenTrac & GPS Camera Pro Videos -->
+      <!-- GenTrac & GPS Camera Pro Videos -->
+
 <section style="background-color: #f4f4f4; padding: 50px 20px;">
   <div style="max-width: 1100px; margin: auto; font-family: Arial, sans-serif;">
 
@@ -559,8 +584,9 @@ body.tab-claims-active .site :not(header):not(.top-tabs):not(.tab-sections):not(
       <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center;">
         <img src="{{ url_for('static', filename='3CTool.png') }}" alt="3CTool" style="height:72px;">
         <div style="flex:1;">
-          <h3>3CTool — Crop • Compress • Convert</h3>
-          <p class="muted">Crop, compress images/videos & convert images to PDF. Tools are hosted on free tiers; links open in a new tab.</p>
+          <h3>3CTool — Crop • Compress • Convert • </h3>
+          <p class="muted">Crop, compress Images/Videos & Convert Images to PDF.</p> 
+          <p Tools are hosted on free tiers; links open in a new tab.</p>
           <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
           <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
         </div>
