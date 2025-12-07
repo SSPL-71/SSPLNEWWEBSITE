@@ -121,8 +121,8 @@
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 22px;
+  padding-right: 22px;
 }
 
 
@@ -270,7 +270,7 @@ div.card {
         opacity: 0;
         transition: transform 0.25s ease, opacity 0.25s ease;
       }
-      .floating-menu.show {
+      .floating-menu.open {
         display: block;
         transform: translateY(0);
         opacity: 1;
@@ -423,7 +423,7 @@ header,
       const menu = document.getElementById('floatingMenu');
       if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
-          menu.classList.toggle('show');
+          menu.classList.toggle('open');
           const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
           toggleBtn.setAttribute('aria-expanded', String(!expanded));
         });
