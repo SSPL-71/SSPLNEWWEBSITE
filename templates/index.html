@@ -169,41 +169,6 @@
     .video-embed{border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(16,24,40,0.06);}
     .scroll-banner{background:#fff3f3; padding:10px; border-radius:8px; color:#b30000; font-weight:700; overflow:hid
 
-    /* Top pill tabs centered */
-    .top-tabs {
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      margin:12px 0 18px;
-    }
-    .top-tabs .tab-button {
-      font-family: inherit;
-      font-size: 0.9rem;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,23,42,0.16);
-      background: rgba(255,255,255,0.85);
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-    }
-    .top-tabs .tab-button:hover {
-      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
-      transform: translateY(-1px);
-    }
-    .top-tabs .tab-button.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      border-color: #0ea5e9;
-      box-shadow: 0 6px 18px rgba(14,165,233,0.35);
-    }
-
-    .tab-sections {
-      margin-top: 4px;
-    }
-    .tab-section {
-      width: 100%;
-    }
-
     /* Match quality slider width to primary button width */
     #quality-slider {
       width: 260px !important;
@@ -246,28 +211,6 @@
       }
  
 
-    /* Strong pill override for top tabs */
-    .top-tabs .tab-button {
-      -webkit-appearance: none;
-      appearance: none;
-      border-radius: 999px;
-      padding: 8px 18px;
-      border: 1px solid rgba(15,23,42,0.18);
-      background: rgba(255,255,255,0.96);
-    }
-    .top-tabs .tab-button.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      border-color: #0ea5e9;
- 
-
-    /* Modern minimal segmented tabs */
-    .top-tabs {
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      margin:12px 0 18px;
-    }
     .top-tabs .tab-button {
       -webkit-appearance:none;
       appearance:none;
@@ -290,6 +233,46 @@
       color: #ffffff;
       border-color: #0ea5e9;
       box-shadow: 0 6px 18px rgba(14,165,233,0.35);
+ 
+
+    /* Modern minimal segmented tabs - final */
+    .top-tabs {
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      margin:16px 0 20px;
+    }
+    .top-tabs .tab-button {
+      -webkit-appearance:none;
+      appearance:none;
+      background: transparent;
+      border-radius: 999px;
+      padding: 6px 18px;
+      border: 1px solid rgba(15,23,42,0.20);
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #0f172a;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease, color 0.2s ease,
+                  box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    .top-tabs .tab-button:hover {
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 3px 10px rgba(15,23,42,0.12);
+      transform: translateY(-1px);
+    }
+    .top-tabs .tab-button.active {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0ea5e9;
+      box-shadow: 0 6px 18px rgba(14,165,233,0.35);
+    }
+
+    .tab-sections {
+      margin-top: 4px;
+    }
+    .tab-section {
+      width: 100%;
     }
 
   </style>
@@ -608,6 +591,20 @@
         <div id="previewContainer" style="flex:1; display:flex; flex-wrap:wrap; gap:12px;"></div>
       </div>
     </section>
+    <div style="text-align:center; margin:20px auto;">
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'd76052090799493fc61caae4a413bb90',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
+    </div>
+
+
 
     <!-- Donate -->
     
@@ -627,7 +624,8 @@
 
         <!-- Right column: PayPal + Info -->
         <div style="flex:1 1 260px; min-width:260px;">
-          <div style="border-radius:10px; padding:16px; background:#f9fafb; box-shadow:0 1px 3px rgba(15,23,42,0.06);">
+          <div style="border-radius:10px; padding:16px; background:#f9fafb; box-shadow:0 1px 3px rgba(15,23,42,0.06); text-align:center;">
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" style="max-width:180px; height:auto; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;">
             <p style="margin-top:0; margin-bottom:10px;">
               Prefer PayPal? You can also support us with a small contribution using the button below.
             </p>
@@ -785,24 +783,7 @@
     <!-- Footer small -->
     
     <!-- Contact Section (added) -->
-    <section id="CONTACT" class="card">
-      <h3>Contact Us</h3>
-      <p class="muted">
-        Sarvasiddhanta Services Private Limited (SSPL)
-      </p>
-      <p>
-        For any queries related to claim investigations or our free online tools (3CTool, PDF Merger, PDF Compressor,
-        PDF Sorter, GPS Camera Pro, ZzpDwn), you can reach us using the details below.
-      </p>
-      <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">
-        <li><strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a></li>
-        <li><strong>Location:</strong> Karnataka, India</li>
-      </ul>
-      <p class="muted" style="font-size:0.9rem;">
-        For detailed address and business discussions, please contact us by email first and we will respond with
-        appropriate contact details.
-      </p>
-    </section>
+    
 
     <!-- Privacy Policy Section (added) -->
     <section id="privacy-policy" class="card">
@@ -882,6 +863,21 @@
 </section>
       </div>
     </div>
+<section id="CONTACT" class="card">
+      <h3>Contact Us</h3>
+      <p class="muted">
+        Sarvasiddhanta Services Private Limited (SSPL)
+      </p>
+      <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">
+        <li><strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a></li>
+        <li><strong>Location:</strong> Bangalore, India</li>
+      </ul>
+      <p class="muted" style="font-size:0.9rem;">
+        For detailed address and business discussions, please contact us by email first and we will respond with
+        appropriate contact details.
+      </p>
+    </section>
+
 <footer class="muted center" style="margin-top:18px; font-size:0.9rem;">
       <p>&copy; Sarvasiddhanta Services Private Limited — All Rights Reserved</p>
     </footer>
@@ -1143,11 +1139,15 @@
     })();
   </script>
 
-  <!-- small ad script preserved -->
+  
+  <div style="text-align:center; margin:20px auto;">
+<!-- small ad script preserved -->
   <script type="text/javascript">
     atOptions = { 'key':'d76052090799493fc61caae4a413bb90','format':'iframe','height':60,'width':468,'params':{} };
   </script>
   <script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
+  </div>
+
 
 
 
