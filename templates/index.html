@@ -435,6 +435,18 @@
       display: block !important;
     }
 
+@media (max-width: 600px) {
+  .tab-section {
+    margin-bottom: 22px;
+  }
+}
+
+/* Add spacing below About and Claims content so feedback doesn't stick to it */
+body.tab-about-active #tab-about,
+body.tab-claims-active #tab-claims {
+  margin-bottom: 32px !important;
+}
+
     /* --- FINAL OVERRIDE: Fix hero/door alignment (no display override) --- */
     .door-container {
       max-width: 900px !important;
