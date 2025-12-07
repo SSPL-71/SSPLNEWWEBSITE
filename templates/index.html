@@ -233,24 +233,26 @@
 }
 
 
-    /* Match quality slider width to primary button width */
+/* Match quality slider width to button alignment */
 #quality-slider {
-  width: 260px !important;
-  max-width: 260px !important;
+  width: auto !important;
+  max-width: 180px;
   display: inline-block !important;
   margin: 10px 0 0 0 !important;
   vertical-align: middle;
 }
 
 
+
 @media (max-width: 480px){
   #quality-slider {
-    width: 90% !important;
-    max-width: 260px !important;
-    display: inline-block !important;
-    margin: 10px 0 0 0 !important;
+    width: 100% !important;
+    max-width: 240px;
+    display: block !important;
+    margin: 10px auto 0 auto !important;
   }
 }
+
 
 
 
@@ -426,6 +428,19 @@ header,
 #menuToggle {
   display: block !important;
 }
+/* Center the top navigation tabs */
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* spacing between tabs */
+}
+
+/* Ensure buttons keep pill look and don't stretch full width */
+.top-tabs .tab-button {
+  flex: 0 0 auto; /* prevents stretching */
+  margin: 0;
+}
+
 
 </style>
 </head>
@@ -698,7 +713,7 @@ header,
       <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
       <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
 
-      <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
+      <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3CTool</a>
     </div>
   </div>
 
