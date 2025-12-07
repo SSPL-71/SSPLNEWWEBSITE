@@ -269,10 +269,11 @@
        - About: only About tab content
        - Claims: only Claims tab content
     */
-    body.tab-about-active .site > :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
-    body.tab-claims-active .site > :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
-      display: none;
-    }
+body.tab-about-active .site > *:not(.top-tabs):not(header):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
+body.tab-claims-active .site > *:not(.top-tabs):not(header):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
+  display: none !important;
+}
+
 
   </style>
 </head>
