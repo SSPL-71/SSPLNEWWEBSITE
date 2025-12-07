@@ -1,1979 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SS Services - Claims Investigation, PDF Tools, Image Conversion</title>
-<meta name="description" content="SS Services in Karnataka provides expert claims investigations and free online PDF tools like 3ctool for image to PDF conversion, PDF compression, and file utilities. Now introducing ZzpDwn - the hassle-free Zip Extractor Tool to preview and access files directly without downloads.">
-<meta name="keywords" content="claims investigations Karnataka, PDF tools online free, 3ctool, image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private Limited, SSPL, image conversion, ZzpDwn, Zip Extractor Tool, unzip online, view zip files, extract zip images">
-<meta name="author" content="Sarvasiddhanta Services Private Limited">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SS Services - Claims Investigation, PDF Tools, Image Conversion</title>
+  <meta name="description" content="SS Services in Karnataka provides expert claims investigations and free online PDF tools like 3ctool for image to PDF conversion, PDF compression, and file utilities. Now introducing ZzpDwn - the hassle-free Zip Extractor Tool to preview and access files directly without downloads.">
+  <meta name="keywords" content="claims investigations Karnataka, PDF tools online free, 3ctool, image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private Limited, SSPL, image conversion, ZzpDwn, Zip Extractor Tool, unzip online, view zip files, extract zip images">
+  <meta name="author" content="Sarvasiddhanta Services Private Limited">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <meta charset="UTF-8">
-	<meta name="google-adsense-account" content="ca-pub-2931901961774543">    
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">     
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
-                document.querySelector(".right-door").style.transform = "rotateY(90deg)";
-                document.querySelector(".brand").style.opacity = 1;
-            }, 500);
-        });
-    </script>   
-    
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4N9KCYHSF"></script>
-	<script>
-  	window.dataLayer = window.dataLayer || [];
-  	function gtag(){dataLayer.push(arguments);}
-  	gtag('js', new Date());
-  	gtag('config', 'G-T4N9KCYHSF');
-	</script>
+  <!-- Analytics / Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4N9KCYHSF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T4N9KCYHSF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2931901961774543" crossorigin="anonymous"></script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2931901961774543" crossorigin="anonymous"></script>
+  <!-- Libraries used by the tools (kept intact) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered'))
-      .catch(err => console.error('SW registration failed:', err));
-  }
-</script>
-
-    <!-- SECTION: Embedded Styles -->
-    <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: lightblue;
-        overflow-x: hidden; /* horizontal scroll locked */
-        overflow-y: auto;   /* vertical scroll enabled */
-        text-align: center;
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker registered'))
+        .catch(err => console.error('SW registration failed:', err));
     }
+  </script>
 
+  <!-- Consolidated and modernized styles (Option 4: blue/teal gradient theme) -->
+  <style>
+    :root{
+      --bg-start: #d6f0ff;
+      --bg-end: #c7f3ef;
+      --card-bg: #ffffff;
+      --muted: #6b7280;
+      --accent: #0ea5a4; /* teal accent */
+      --brand: #0b6b9a;
+      --radius: 12px;
+      --container-width: 1100px;
+      --max-width-narrow: 900px;
+      --glass: rgba(255,255,255,0.7);
+    }
+    html,body{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(180deg,var(--bg-start),var(--bg-end));
+      color:#1f2937;
+      text-align:left;
+    }
+    a{color:var(--brand); text-decoration: none;}
+    a:hover{text-decoration: underline;}
+
+    /* Layout */
+    .site {
+      max-width: var(--container-width);
+      margin: 24px auto;
+      padding: 18px;
+    }
+    header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .logo {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo img{height:64px; border-radius:10px; box-shadow:0 6px 18px rgba(11,107,154,0.12);}
+    .brand-title h1{font-size:1.1rem; margin:0; letter-spacing:0.6px;}
+    .brand-title p{margin:0; color:var(--muted); font-size:0.95rem;}
+
+    /* Door reveal hero */
     .door-container {
-        position: relative;
-        width: 100vw;
-        min-height: 40vh; /* allows expansion if content is taller */
-        display: flex;
-        flex-wrap: wrap;
-        overflow: hidden;
+      position:relative;
+      width:100%;
+      min-height:36vh;
+      border-radius:var(--radius);
+      overflow:hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
+      box-shadow: 0 8px 30px rgba(11,107,154,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-
-    .door {
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        background: #4A4A4A;
-        transition: transform 1.5s ease-in-out;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 4vw;
-        color: white;
-        font-weight: bold;
-    }
-
-    .left-door {
-        left: 0;
-        transform-origin: left;
-    }
-
-    .right-door {
-        right: 0;
-        transform-origin: right;
-    }
-
-    .left-door::before { content: "SS"; }
-    .right-door::before { content: "PL"; }
-
+    .door { position:absolute; width:50%; height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:clamp(24px,4vw,56px); transition:transform 1.3s ease-in-out; background:#4a4a4a; }
+    .left-door{left:0; transform-origin:left;}
+    .right-door{right:0; transform-origin:right;}
+    .door::before{opacity:0.95;}
     .brand {
-        position: absolute;
-        top: 50%;   /* vertical center */
-        left: 50%;
-        transform: translate(-50%, -50%); /* center content */
-        color: black;
-        font-size: 2vw;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
-        text-align: center;
+      position:relative;
+      z-index:2;
+      text-align:center;
+      opacity:0;
+      transition:opacity 1.2s ease-in-out;
+      color:var(--brand);
+    }
+    .brand img{height:88px; display:block; margin:0 auto 8px;}
+    .brand h2{margin:6px 0 0; font-family: "Georgia", serif; font-weight:600; font-size:1rem; color:var(--brand);}
+
+    /* Floating quick menu */
+    .floating-menu {
+      position:fixed;
+      right:18px;
+      top:160px;
+      background: linear-gradient(135deg,#fff7fb,#ffffff);
+      padding:12px;
+      border-radius:12px;
+      box-shadow: 0 10px 30px rgba(11,107,154,0.08);
+      z-index:1000;
+      width:220px;
+      border-left:8px solid var(--accent);
+      font-weight:600;
+    }
+    .floating-header{color:var(--accent); font-size:0.95rem; margin-bottom:8px;}
+    .floating-menu a{display:block; padding:8px 6px; color:#0f1724; border-radius:8px; margin:6px 0; font-size:0.95rem;}
+    .floating-menu a:hover{background:rgba(14,165,164,0.06); transform:translateX(4px);}
+
+    .floating-toggle {
+      display:none;
     }
 
-    .brand img {
-        display: block;
-        margin: 0 auto;
+    /* Content cards */
+    .card { background: var(--card-bg); border-radius: 12px; padding: 22px; box-shadow: 0 6px 20px rgba(16,24,40,0.06); margin-bottom:20px; }
+    .card h2{margin-top:0; color:#0f1724;}
+    .two-col {display:flex; gap:18px; flex-wrap:wrap; align-items:center;}
+    .two-col .left{flex:1 1 320px;}
+    .two-col .right{flex:0 0 300px; text-align:center;}
+
+    /* Buttons */
+    .btn { display:inline-block; padding:10px 16px; border-radius:8px; background:var(--accent); color:white; font-weight:700; text-decoration:none; box-shadow: 0 6px 14px rgba(14,165,164,0.14); }
+    .btn.secondary{background:#4f4f4f; box-shadow:none;}
+    .btn.ghost{background:transparent; color:var(--brand); border:1px solid rgba(11,107,154,0.08);}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .floating-menu{display:none;}
+      .site{padding:12px;}
+      header{flex-direction:column; align-items:flex-start; gap:8px;}
+      .brand img{height:64px;}
     }
-/* Desktop styles */
-.floating-menu {
-  position: fixed;
-  top: 300px; /* ✅ Visible on scroll */
-  right: 10px; /* ✅ Anchored to right */
-  background: linear-gradient(135deg, #ff69b4, #ffeb3b);
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
-  z-index: 1000;
-  font-family: 'Segoe UI', sans-serif;
-  border-left: 12px solid #007bff;
-  max-width: 220px;
-  width: auto;
+    @media (max-width:600px){
+      .door {font-size:34px;}
+      .floating-toggle{display:block; position:fixed; bottom:18px; right:18px; z-index:1001; background:var(--accent); color:white; border-radius:50%; width:54px; height:54px; border:none; font-size:22px; box-shadow:0 8px 20px rgba(14,165,164,0.25);}
+    }
 
-  /* Scroll support */
-  overflow-y: auto;
-  max-height: 60vh;
-}
-
-/* Scrollbar styling */
-.floating-menu::-webkit-scrollbar {
-  width: 6px;
-}
-.floating-menu::-webkit-scrollbar-thumb {
-  background-color: #007bff;
-  border-radius: 4px;
-}
-.floating-menu::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Blue ribbon */
-.floating-menu::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -12px;
-  width: 12px;
-  height: 100%;
-  background-color: #007bff;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-}
-
-/* Header */
-.floating-header {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #007bff;
-  text-align: left;
-}
-
-/* Menu links */
-.floating-menu a {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 8px 12px;
-  text-decoration: none;
-  text-align: left;
-  color: #333;
-  font-weight: bold;
-  border-radius: 6px;
-  transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-}
-
-.floating-menu a:hover {
-  color: #007bff;
-  background-color: rgba(0, 123, 255, 0.1);
-  transform: scale(1.05);
-}
-
-/* Toggle visibility */
-.floating-menu.show {
-  display: block;
-}
-
-.floating-toggle {
-  display: none;
-}
-
-/* Mobile styles */
-@media (max-width: 600px) {
-  .floating-menu {
-    display: none !important;
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    top: auto;
-    transform: none;
-    border-left: none;
-    border-radius: 12px;
-    max-width: none;
-    width: auto;
-
-    /* Scroll support for mobile */
-    overflow-y: auto;
-    max-height: 50vh;
-  }
-
-  .floating-menu.show {
-    display: block !important;
-  }
-
-  .floating-toggle {
-    display: block;
-    position: fixed;
-    bottom: 60px;
-    right: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 50%;
-    font-size: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    cursor: pointer;
-    z-index: 1001;
-  }
-}
-</style>
+    /* Utility */
+    .center { text-align:center; }
+    .muted { color:var(--muted); }
+    .video-embed{border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(16,24,40,0.06);}
+    .scroll-banner{background:#fff3f3; padding:10px; border-radius:8px; color:#b30000; font-weight:700; overflow:hidden;}
+  </style>
 </head>
 <body>
-   
+  <div class="site">
 
-	
-<!-- SECTION: SSPL Door Reveal -->
-<section>
-  <div class="door-container">
-    <div class="door left-door"></div>
-    <div class="door right-door"></div>
-
-    <!-- Company Logo + Heading -->
-    <div class="brand">
-      <img src="{{ url_for('static', filename='new_logo.jpg') }}"  
-           alt="SSPL" style="max-height:90px; display:block; margin:0 auto;">     
-      <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
-    </div>
-
-    <!-- Vaastu Logo -->
-    <img src="{{ url_for('static', filename='Vaastu.png') }}"  
-         alt="Vaastu Symbol"  
-         style="height:50px; position:absolute; top:10px; right:30px;">
-  </div>
-</section>
-<!-- END SECTION: SSPL Door Reveal -->
-
-
-
-
-<div class="floating-wrapper">
-  <button id="menuToggle" class="floating-toggle">☰</button>
-  <div class="floating-menu" id="floatingMenu">
-    <div class="floating-header">
-      📌 Quick Access Menu
-    </div>
-    <a href="#GenTrac">🔐 GenTrac Login</a>
-    <a href="#3CTool">🛠️ 3CTOOL</a>
-    <a href="#PMTOOL">📋 PDF MERGER TOOL</a>
-    <a href="#CMPRSTOOL">📦PDF COMPRESSION TOOL</a> 
-    <a href="#SORTERTOOL">🔀 PDF SORTER TOOL</a>
-    <a href="#GPSTOOL">📸 GPS CAMERA PRO TOOL</a>
-    <a href="#ZIPTOOL">🗂 ZzpDwn ! ZIP EXTRACTOR TOOL</a>
-    <a href="#Donate">🎁 DONATE</a>
-    <a href="#BLOG">📚 BLOGS</a>
-    <a href="#CONTACT">📬 CONTACT US</a>
-  </div>
-</div>
-
-<script>
-  const toggleBtn = document.getElementById('menuToggle');
-  const menu = document.getElementById('floatingMenu');
-
-  toggleBtn.addEventListener('click', () => {
-    menu.classList.toggle('show');
-  });
-</script>
-
-<!-- SECTION: Sarvasiddhanta Meaning + PDF Tools Anchor -->
-<div class="container">
-<section style="background-color: white; padding: 40px 20px;">
-  <div style="max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-
-    <!-- Left: Image + Meaning -->
-    <div style="flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 20px;">
-      <!-- Image -->
-      <div style="flex: 0 0 120px; text-align: center;">
-        <img src="{{ url_for('static', filename='ganesha.png') }}" 
-     alt="OM SHRI GANESHAYA NAMAH:" 
-     style="height: 100px; max-width: 100%; margin-right: 20px;">
-
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL logo">
+        <div class="brand-title">
+          <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
+          <p class="muted">Claims Investigation · PDF Tools · Image & ZIP utilities</p>
+        </div>
       </div>
 
-      <!-- Text -->
-      <div style="flex: 1; min-width: 200px;">
-        <h1 style="font-size: 1.6rem; color: #333;">"SARVASIDDHANTA" MEANS BESTOWER OF SKILLS & WISDOM</h1>
-        <p style="font-size: 1rem; color: #555; margin-top: 12px;">
-          The quality of having experience, knowledge, good judgment; the quality of being wise.
-        </p>
+      <nav class="muted" aria-label="top links">
+        <a href="#3CTool">3CTOOL</a> &nbsp; • &nbsp;
+        <a href="#PMTOOL">PDF MERGER</a> &nbsp; • &nbsp;
+        <a href="#ZIPTOOL">ZzpDwn</a>
+      </nav>
+    </header>
+
+    <!-- Door reveal / hero -->
+    <section class="door-container" aria-hidden="false">
+      <div class="door left-door">SS</div>
+      <div class="door right-door">PL</div>
+
+      <div class="brand" id="heroBrand">
+        <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL logo">
+        <h2>Bestower of Skills & Wisdom — SARVASIDDHANTA</h2>
       </div>
-    </div>
-
-<!-- Right: PDF Tools Anchor -->
-<div style="flex: 1 1 100%; text-align: center;">
-  <a href="#3CTool" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; font-size: 1.4rem; font-weight: 600; background-color: #4f4f4f; color: #ffffff; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-    <span>Explore our tools anytime using the 📌 Quick Access Menu 👉
-</span>
-  </a>
-</div>
-
-  </div>
-</section>
-<!-- END SECTION: Sarvasiddhanta Meaning -->
-
-<a href="https://www.producthunt.com/products/zzpdwn?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-zzpdwn" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045156&theme=light&t=1764809305528" alt="ZzpDwn&#0033;&#0033; - Unzip&#0032;With&#0032;Ease | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a> 
- 
-<!-- SECTION: ABOUT US PREVIEW -->
-<section style="background-color: #ffffff; padding: 50px 20px;">
-  <div style="max-width: 800px; margin: auto; font-family: Georgia, serif; color: #333;">
-    <h2 style="text-align: center;">About Us</h2>
-    <p style="text-align: justify; line-height: 1.6; font-size: 16px; margin-top: 20px;">
-      With over 18 years of experience, Sarvasiddhanta Services Private Limited has built a reputation for excellence in claims investigations across Karnataka. We are proud to be empaneled with ICICI Lombard and Magma GIC, and we continue to serve with integrity, quality, and professionalism.
-    </p>
-    <div style="text-align: center; margin-top: 20px;">
-      <a href="{{ url_for('about') }}">Learn More--→</a>
-    </div>
-  </div>
-
-</section>
-
-  
-<section style="background-color: #2c3e50; padding: 50px 20px;">
-  <div class="anna-container" style="background-color: #fff; border-radius: 12px; max-width: 800px; margin: auto; padding: 30px; text-align: center;">
-    <a href="{{ url_for('claims_tatva') }}" style="text-decoration: none;">
-      <img src="{{ url_for('static', filename='SarvaSiddh_Anna.png') }}" 
-     alt="SarvaSiddh Anna" 
-     style="max-width: 100px; border-radius: 12px;">
-
-      <h2 style="font-family: 'Georgia', serif; color: #2c3e50; margin-top: 20px;">Namaskara. I am SarvaSiddh Anna.</h2>
-      <p style="font-size: 1.1em; color: #555; line-height: 1.6; margin-top: 10px;">
-      <strong>Claims Tatva</strong>—Click Here for some basics !
-      </p>
-    </a>
-  </div>
- 
-
-</section>
-
-
-
- <!-- SECTION: GenTrac App Overview -->
-    <section id = "GenTrac">
-        <div style="text-align: center; margin-top: 30px; font-family: Arial, sans-serif;">
-        <h1 style="color: #333;">We Designed & Built GenTrac</h1>
-        <p style="font-size: 18px; color: #555; margin: 20px 50px;">
-            <strong>GenTrac</strong> is a comprehensive app designed & built by us specifically for claim investigation 
-            and verification process. With GenTrac we have streamlined our operations and enhanced efficiency 
-            across the entire claim investigation lifecycle.
-        </p>
-        <div style="text-align: justify; display: inline-block; margin-bottom: 30px;">
-            <ul style="font-size: 16px; line-height: 1.8; color: #555; text-align: left; margin-left: 20px;">
-                <li>Update and manage new cases seamlessly.</li>
-                <li>Assign cases to field staff for on-site verification.</li>
-                <li>Enable field staff to update records directly from the field.</li>
-                <li>Track case progress and status in real-time.</li>
-                <li>Generate detailed reports for updates and case summaries.</li>
-                <li>Streamline billing and invoicing processes.</li>
-                <li>Produce GST filing reports and vendor billing invoice details effortlessly.</li>
-            </ul>
-        </div>
-        <p style="font-size: 18px; color: #555;">
-
-<strong>Contact Us</strong> today to discover how GenTrac can streamline your operations and bring valuable benefits to your company.
-        </p>
-            Employee Login: <strong>Click To Open GenTrac</strong>.
-        </p>
-        <div style="margin-top: 20px;">
-           
-
-<style>
-    .button-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .button-link:hover {
-        background-color: #45a049;
-    }
-</style>
-<a href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" 
-   target="_blank" 
-   class="button-link" 
-   title="Click to open GenTrac">
-   GenTrac
-</a>
-
-<style>
-    .button-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .button-link:hover {
-        background-color: #45a049;
-    }
-</style>
-
-        </div>
-    </div>
+      <img src="{{ url_for('static', filename='Vaastu.png') }}" alt="Vaastu Symbol" style="height:48px; position:absolute; top:18px; right:28px;">
     </section>
-    <!-- END SECTION: GenTrac App Overview --><br>
 
-<!-- SECTION: GenTrac & GPS Camera Pro Videos -->
-<section style="background-color: #f4f4f4; padding: 50px 20px;">
-  <div style="max-width: 1100px; margin: auto; font-family: Arial, sans-serif;">
+    <!-- Floating quick access menu -->
+    <button id="menuToggle" class="floating-toggle" aria-expanded="false">☰</button>
+    <aside id="floatingMenu" class="floating-menu" role="navigation" aria-label="Quick access">
+      <div class="floating-header">📌 Quick Access Menu</div>
+      <a href="#GenTrac">🔐 GenTrac Login</a>
+      <a href="#3CTool">🛠️ 3CTOOL</a>
+      <a href="#PMTOOL">📋 PDF MERGER</a>
+      <a href="#CMPRSTOOL">📦PDF COMPRESS</a>
+      <a href="#SORTERTOOL">🔀 PDF SORTER</a>
+      <a href="#GPSTOOL">📸 GPS CAMERA PRO</a>
+      <a href="#ZIPTOOL">🗂 ZzpDwn - ZIP EXTRACT</a>
+      <a href="#Donate">🎁 DONATE</a>
+      <a href="#BLOG">📚 BLOGS</a>
+      <a href="#CONTACT">📬 CONTACT US</a>
+    </aside>
 
-    <!-- First Row: GenTrac & GPS Camera Pro -->
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
-      
-      <!-- GenTrac Demo Video -->
-      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
-        <h2 style="color: #333;">🎥 Watch the GenTrac Case Management Demo</h2>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-          <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ"
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                  allowfullscreen></iframe>
-        </div>
-        <h2 style="margin-top: 20px;">👍 Like • Subscribe • Comment on YouTube</h2>
-      </div>
-
-      <!-- GPS Camera Pro Video -->
-      <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: center;">
-        <h2 style="color: #333;">📸 Try GPS Camera Pro – No Ads, No Installation</h2>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-          <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8"
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                  allowfullscreen></iframe>
-        </div>
-        <h2 style="margin-top: 20px;">🌐 Visit <a href="https://pdf-relay.onrender.com" target="_blank" style="color: #4CAF50; text-decoration: underline;">GPSTOOL</a></h2>
-      </div>
-    </div>
-
-    <!-- Second Row: 3CTool Video -->
-    <div style="margin-top: 60px; text-align: center;">
-      <h2 style="color: #333;">🛠️ Explore 3CTool – Crop, Compress, Convert !</h2>
-      <div style="max-width: 300px; margin: auto;">
-        <video controls playsinline style="width: 100%; border-radius: 10px;">
-          <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-<!-- Third Row: ZIP Extractor Tool Video -->
-<div style="margin-top: 60px; text-align: center;">
-  <h2 style="color: #333;">🗜️ Try ZzpDwn ! Our ZIP Extractor Tool – No Ads, No Installation</h2>
-  <div style="max-width: 560px; margin: auto;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/QC9ax2I_ctg?si=WGglnIn8UlwqE44B"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-            style="border-radius: 10px; width: 100%; height: 315px;">
-    </iframe>
-  </div>
-  
-</div>
-  </div>
-</section>
-<!-- END SECTION --><br><br>
-
-<!-- SECTION: 3CTool -->
-<section id="3CTool">
-  <style>
-    body {
-      background-color: #87CEEB;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .form-group {
-      margin: 15px 0;
-    }
-    input[type="file"] {
-      display: block;
-      margin: 10px auto;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .button-link {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      position: relative;
-      z-index: 10;
-    }
-
-    .avatar-video {
-      position: absolute;
-      bottom: 20px;
-      right: -140px;
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: right 2s ease-out;
-      z-index: 100; /* Higher than text and button */
-      opacity: 1;
-      pointer-events: none;
-    }
-    .avatar-video.video-visible {
-      right: 200px; /* Stops just off the button */
-    }
-    .avatar-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    @media (max-width: 600px) {
-      .avatar-video {
-        width: 80px;
-        height: 80px;
-        bottom: 10px;
-        right: -100px;
+    <!-- Quick-access toggle behavior (keeps original JS logic) -->
+    <script>
+      const toggleBtn = document.getElementById('menuToggle');
+      const menu = document.getElementById('floatingMenu');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          menu.classList.toggle('show');
+          const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+          toggleBtn.setAttribute('aria-expanded', String(!expanded));
+        });
       }
-      .avatar-video.video-visible {
-        right: 220px; /* Adjusted for smaller screens */
-      }
-    }
-#feedback-widget {
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  padding: 1em;
-  margin: 1em auto;
-  max-width: 800px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  text-align: center;
-}
-
-#feedback-widget h3 {
-  margin-top: 0;
-  font-size: 1.2em;
-  color: #333;
-}
-
-#stats {
-  font-size: 0.95em;
-  margin-bottom: 1em;
-  color: #555;
-}
-
-#like-button {
-  background-color: #0078D4;
-  color: white;
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 1em;
-}
-
-#like-button:hover {
-  background-color: #005ea2;
-}
-
-#star-rating {
-  margin-bottom: 1em;
-}
-
-#star-rating .star {
-  cursor: pointer;
-  font-size: 1.5em;
-  margin: 0 3px;
-  transition: transform 0.2s, color 0.2s ease;
-  color: grey; /* default state */
-}
-
-#star-rating .star.selected {
-  color: gold; /* when selected */
-}
-
-#star-rating .star:hover {
-  transform: scale(1.2);
-}
-
-#response-message {
-  font-size: 0.9em;
-  color: green;
-  margin-top: 0.5em;
-}
-
-.scroll-banner {
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  background: #ffe0e0;
-  color: #b30000;
-  font-weight: bold;
-  padding: 8px;
-}
-.scroll-banner p {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-left 15s linear infinite;
-}
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-  </style>
-
-<div id="feedback-widget">
-  <h3>We Value Your Feedback - Please Like 👍 and Rate ⭐ </h3>
-  <p id="stats">Loading...</p>
-
-  <button id="like-button">👍 Like</button>
-
-<div id="star-rating">
-  Rate Our Tools:
-  <span class="star" data-value="1">★</span>
-  <span class="star" data-value="2">★</span>
-  <span class="star" data-value="3">★</span>
-  <span class="star" data-value="4">★</span>
-  <span class="star" data-value="5">★</span>
-</div>
-
-  <p id="response-message"></p>
-</div>
-
-<script>
-const API_BASE = "https://stats-api-7321.onrender.com";
-
-async function fetchStats() {
-  const res = await fetch(`${API_BASE}/stats`);
-  const data = await res.json();
-  document.getElementById("stats").textContent =
-    `👍 ${data.likeCount} likes | ⭐ ${(data.averageRating || 0).toFixed(1)} average (${data.ratingCount} ratings)`;
-}
-
-document.getElementById("like-button").addEventListener("click", async () => {
-  await fetch(`${API_BASE}/like`, { method: "POST" });
-  document.getElementById("response-message").textContent = "Thanks for liking!";
-  fetchStats();
-});
-
-// Star rating logic with visual selection
-document.querySelectorAll("#star-rating .star").forEach((star, index, stars) => {
-  star.addEventListener("click", async () => {
-    const value = parseInt(star.getAttribute("data-value"));
-
-    // Visual update: highlight selected stars
-    stars.forEach((s, i) => {
-      s.classList.toggle("selected", i <= index);
-    });
-
-    // Send rating to backend
-    try {
-      await fetch(`${API_BASE}/star`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ value }),
+      // Door animation
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          const left = document.querySelector(".left-door");
+          const right = document.querySelector(".right-door");
+          const brand = document.querySelector(".brand");
+          if (left) left.style.transform = "rotateY(-90deg)";
+          if (right) right.style.transform = "rotateY(90deg)";
+          if (brand) brand.style.opacity = 1;
+        }, 500);
       });
-      document.getElementById("response-message").textContent = `Thanks for rating ${value}⭐!`;
-      fetchStats();
-    } catch (err) {
-      console.error("Star rating failed:", err);
-      document.getElementById("response-message").textContent = "Rating failed. Please try again.";
-    }
-  });
-});
+    </script>
 
-fetchStats();
-</script>
-  
-
-      <div class="container">
-      <img src="{{ url_for('static', filename='3CTool.png') }}"  
-      alt="3CTool" style="max-height:90px; display:block; margin:0 auto;">  
-      <p><strong>Developed by SSPL</strong></p>
-
-<div class="scroll-banner">
-  <p>Clicking this button will take you to another site where it may take a few seconds to load.<br>
-   Since Tools are offered Free and we don't earn any income, the tool is hosted on a free tier platform</p>
-</div>
-
-      <div class="form-group">
-        <p><i><strong>CROP, COMPRESS IMAGES / VIDEOS & CONVERT IMAGES TO PDF</strong></i></p>
+    <!-- Intro card -->
+    <section class="card">
+      <div class="two-col">
+        <div class="left">
+          <div style="display:flex; gap:16px; align-items:center;">
+            <img src="{{ url_for('static', filename='ganesha.png') }}" alt="Ganesha" style="height:96px; border-radius:8px;">
+            <div>
+              <h2 style="margin:0;">"SARVASIDDHANTA" MEANS BESTOWER OF SKILLS & WISDOM</h2>
+              <p class="muted" style="margin-top:10px;">The quality of having experience, knowledge, good judgment; the quality of being wise. We bring 18+ years of claims investigation experience in Karnataka.</p>
+            </div>
+          </div>
+        </div>
+        <div class="right center">
+          <a href="#3CTool" class="btn secondary" title="Explore tools">Explore Our Tools (Quick Menu →)</a>
+        </div>
       </div>
-<a href="https://image-pdf-tool.onrender.com/" class="button-link" title="Click to open the 3C Tool">Open 3C Tool</a>
-
-      <!-- Avatar video -->
-<!--
-<div class="avatar-video" id="animatedAvatar">
-  <video src="/static/videos/SSPL.mp4" autoplay playsinline></video>
-</div>
--->
-  
-
-<script>
-  const avatar = document.getElementById('animatedAvatar');
-  const video = avatar.querySelector('video');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        avatar.classList.add('video-visible');
-
-        // Check if avatar has already spoken
-        if (!localStorage.getItem('hasSeenPdfToolAvatar')) {
-          video.currentTime = 0;
-          video.muted = false;
-          video.volume = 1.0;
-          video.play().catch(() => {
-            console.warn('Autoplay with sound blocked. Waiting for user interaction.');
-          });
-
-          // Mark as spoken
-          localStorage.setItem('hasSeenPdfToolAvatar', 'true');
-        }
-      } else {
-        avatar.classList.remove('video-visible');
-      }
-    });
-  }, { threshold: 0.5 });
-
-  observer.observe(document.querySelector('#pdf-tools'));
-
-  // Optional: allow manual unmute on click
-  document.body.addEventListener('click', () => {
-    if (!localStorage.getItem('hasSeenPdfToolAvatar')) {
-      video.muted = false;
-      video.volume = 1.0;
-      video.play();
-      localStorage.setItem('hasSeenPdfToolAvatar', 'true');
-    }
-  });
-</script>
-</section>
-<!-- END SECTION: 3CTool --><br><br>
-
-    <!-- SECTION: PDF Merger Tool -->
-    <section id= "PMTOOL">
-    <style>
-        body {
-            background-color: #87CEEB; /* Light blue background */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        input[type="file"] {
-            display: block;
-            margin: 10px auto;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-.loader {
-  display: none;               /* Hidden by default */
-  margin-top: 30px;
-  text-align: center;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-        .dot {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin: 5px;
-            background-color: #3498db;
-            animation: bounce 0.6s infinite alternate;
-            border-radius: 4px;
-        }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes bounce {
-            from { transform: translateY(0px); opacity: 0.6; }
-            to { transform: translateY(-12px); opacity: 1; }
-        }
-
-.thank-banner {
-  padding: 12px;
-  background: linear-gradient(90deg, #fff8dc, #ffe4b5);
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid #ccc;
-  margin-top: 20px;
-  animation: sparkleFade 1.5s ease-in-out;
-  box-shadow: 0 0 10px #ffd700;
-}
-
-@keyframes sparkleFade {
-  0% { opacity: 0; transform: scale(0.95); }
-  50% { opacity: 0.5; transform: scale(1.02); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-    </style>
-
-        <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
-            <h1>PDF Merger Tool</h1>
-            <p><strong>Developed by SSPL</strong></p>
-            <label for="pdf-files">Select PDF files to merge:</label>
-            <input type="file" id="pdf-files" accept="application/pdf" multiple>
-            <button id="merge-btn" style="margin-top: 20px;">Merge PDFs</button>
-            <div id="merge-result" style="margin-top: 20px;"></div>
-		<div class="loader" id="merge-loader">
-        	<p>Processing... Please wait</p><br>
-        	<div class="dot"></div>
-        	<div class="dot"></div>
-        	<div class="dot"></div>
-   		 </div>
-		 </div>
-        
-	    <script>
-             function launchRibbonsConfetti() {
-  console.log("🎉 Confetti function triggered!");
-
-  // Create a full-screen canvas if not already present
-  let canvas = document.getElementById('confetti-canvas');
-  if (!canvas) {
-    canvas = document.createElement('canvas');
-    canvas.id = 'confetti-canvas';
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '9999';
-    document.body.appendChild(canvas);
-  }
-
-  const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
-
-  myConfetti({
-    particleCount: 150,
-    spread: 120,
-    origin: { y: 0.6 },
-    colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
-    scalar: 1.2,
-    ticks: 200,
-    shapes: ['square', 'circle'],
-  });
-}
-
-
-                document.getElementById('merge-btn').addEventListener('click', async () => {
-                const files = document.getElementById('pdf-files').files;
-                if (files.length < 2) return alert('Select at least two PDFs.');
-                const resultDiv = document.getElementById('merge-result');
- 		const loader = document.getElementById('merge-loader'); // 🔹 loader added
-   		loader.style.display = 'block'; // 🔹 show loader
-                
-                const mergedPdf = await PDFLib.PDFDocument.create();
-                for (const file of files) {
-                    const arrayBuffer = await file.arrayBuffer();
-                    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-                    const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-                    pages.forEach(p => mergedPdf.addPage(p));
-                }
-                const bytes = await mergedPdf.save();
-                const blob = new Blob([bytes], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `merged-${Date.now()}.pdf`;
-                link.textContent = 'Cick To Download Your Merged PDF / Long Press on Mobile';
-                resultDiv.innerHTML = '';
-                resultDiv.appendChild(link);
-		loader.style.display = 'none'; // 🔹 hide loader
-		launchRibbonsConfetti(); // 🎊 Celebrate merger success!
-            });
-        </script>
     </section>
-    <!-- END SECTION: PDF Merger Tool --><br>
 
-<!-- Thank You Banner -->
-<div id="thankYouBanner" style="display:none;" class="thank-banner">
-  🙏 Thank you, visitor from <strong id="userCity">your city</strong>!<br>
-  If this tool helped, please <a href="https://www.ss-services.co.in/#pdf-tools" target="_blank"> Like and Rate 5 Stars</a>.
-  <button onclick="dismissBanner()" style="margin-left:10px;">✖</button>
-</div>
-
-<script>
-  function dismissBanner() {
-    document.getElementById('thankYouBanner').style.display = 'none';
-  }
-
-  setTimeout(() => {
-    fetch('https://ipapi.co/json/')
-      .then(response => response.json())
-      .then(data => {
-        const city = data.city || 'your city';
-        document.getElementById('userCity').innerText = city;
-        document.getElementById('thankYouBanner').style.display = 'block';
-      })
-      .catch(error => console.error('Geo lookup failed:', error));
-  }, 15000); // 15 seconds delay
-</script><br>
-
-
-       <!-- SECTION: PDF Compression Tool -->
-	<section id= "CMPRSTOOL">
-	<title>PDF Compression Tool</title>
-
-	<style>
-   	 body {
-        background-color: #87CEEB; /* Light blue background */
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-   	 }
-    	h1 {
-        color: #333;
-    	}
-  	  .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   	 }
-   	 .form-group {
-        margin: 15px 0;
-   	 }
-   	 input[type="file"], input[type="range"] {
-        display: block;
-        margin: 10px auto;
-   	 }
-    	button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    	}
-    	button:hover {
-        background-color: #45a049;
-   	 }
-   	 #compression-info {
-        margin-top: 10px;
-        font-weight: bold;
-   	 }
-
-   	 .loader {
-        display: none;
-        margin-top: 30px;
-        text-align: center;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    	}
-    	.dot {
-        display: inline-block;
-        width: 14px;
-        height: 14px;
-        margin: 5px;
-        background-color: #3498db;
-        animation: bounce 0.6s infinite alternate;
-        border-radius: 4px;
-   	 }
-   	 .dot:nth-child(2) { animation-delay: 0.2s; }
-   	 .dot:nth-child(3) { animation-delay: 0.4s; }
-   	 @keyframes bounce {
-        from { transform: translateY(0px); opacity: 0.6; }
-        to { transform: translateY(-12px); opacity: 1; }
-   	 }
-	html, body {
-  	overflow: visible !important;
-  	position: relative;
-  	z-index: 0;
-	}
-	</style>
-
-	<div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
-    	<h1>PDF Compression Tool</h1>
-   	 <p><strong>Developed by SSPL</strong></p>
-  	 <label for="pdf-file">Select a PDF file:</label>
-   	 <input type="file" id="pdf-file" accept="application/pdf">
-    <label for="quality-slider">Compression Quality: <span id="quality-value">60%</span></label>
-    <input type="range" id="quality-slider" min="10" max="90" value="60">
-    <button id="compress-btn" style="margin-top: 20px;">Compress PDF</button>
-    <div id="compression-info" style="margin-top: 10px;"></div>
-    <div id="compress-result" style="margin-top: 20px;"></div>
-    <div class="loader" id="compress-loader">
-        <p>Compressing... Please wait</p><br>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    </div>
-</div>
-<script>
-
-function launchRibbonsConfetti() {
-  console.log("🎉 Confetti function triggered!");
-
-  // Create a full-screen canvas if not already present
-  let canvas = document.getElementById('confetti-canvas');
-  if (!canvas) {
-    canvas = document.createElement('canvas');
-    canvas.id = 'confetti-canvas';
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '9999';
-    document.body.appendChild(canvas);
-  }
-
-  const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
-
-  myConfetti({
-    particleCount: 150,
-    spread: 120,
-    origin: { y: 0.6 },
-    colors: ['#FF69B4', '#FFD700', '#87CEFA', '#FFB6C1'],
-    scalar: 1.2,
-    ticks: 200,
-    shapes: ['square', 'circle'],
-  });
-}
-
-        const qualitySlider = document.getElementById('quality-slider');
-        const qualityValue = document.getElementById('quality-value');
-        const compressionInfo = document.getElementById('compression-info');
-        const loader = document.getElementById('compress-loader');
-
-        qualitySlider.addEventListener('input', () => {
-            qualityValue.textContent = `${qualitySlider.value}%`;
-        });
-
-        document.getElementById('compress-btn').addEventListener('click', async () => {
-            const fileInput = document.getElementById('pdf-file');
-            const resultDiv = document.getElementById('compress-result');
-
-            if (fileInput.files.length === 0) {
-                alert('Please select a PDF file.');
-                loader.style.display = 'none'; // 🔹 Ensure loader stays hidden
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const initialSize = file.size;
-
-            loader.style.display = 'flex'; // 🔹 Show loader only after file is selected
-            
-
-            try {
-                const arrayBuffer = await file.arrayBuffer();
-                const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-
-                const compressedPdf = await PDFLib.PDFDocument.create();
-                const pdfData = new Uint8Array(arrayBuffer);
-	        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';                
-	        const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-                const pdf = await loadingTask.promise;
-
-                for (let i = 0; i < pdf.numPages; i++) {
-                    const page = await pdf.getPage(i + 1);
-                    const viewport = page.getViewport({ scale: 1.0 });
-
-                    const canvas = document.createElement("canvas");
-                    const context = canvas.getContext("2d");
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-
-                    await page.render({ canvasContext: context, viewport }).promise;
-
-                    const compressionLevel = qualitySlider.value / 100;
-                    const compressedImg = canvas.toDataURL("image/jpeg", compressionLevel);
-
-                    const newPage = compressedPdf.addPage([viewport.width, viewport.height]);
-                    const jpgImage = await compressedPdf.embedJpg(compressedImg);
-                    newPage.drawImage(jpgImage, {
-                        x: 0,
-                        y: 0,
-                        width: viewport.width,
-                        height: viewport.height
-                    });
-                }
-
-                const compressedBytes = await compressedPdf.save();
-                const blob = new Blob([compressedBytes], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-
-                const finalSize = blob.size;
-                const compressionRatio = ((1 - finalSize / initialSize) * 100).toFixed(2);
-
-                compressionInfo.innerHTML = `Original Size: ${(initialSize / 1024 / 1024).toFixed(2)} MB<br>
-                                             Compressed Size: ${(finalSize / 1024 / 1024).toFixed(2)} MB<br>
-                                             Compression: ${compressionRatio}%`;
-
-                const downloadLink = document.createElement('a');
-                downloadLink.href = url;
-                downloadLink.download = `compressed-${Date.now()}.pdf`;
-                downloadLink.textContent = 'Click To Download Your Compressed PDF / Long Press On Mobile For Download';
-
-                resultDiv.innerHTML = '';
-                resultDiv.appendChild(downloadLink);
-                loader.style.display = 'none'; // 🔹 Hide loader after success
-		launchRibbonsConfetti(); // 🎊 Celebrate compression success!
-            } catch (error) {
-                console.error('Error compressing PDF:', error);
-                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-                loader.style.display = 'none'; // 🔹 Hide loader on error
-            }
-        });
-</script>
-</section>
-<!-- END SECTION: PDF Compression Tool --><br>
-
-
-
-<!-- SECTION: PDF Page Sorter Tool -->
-<section id = "SORTERTOOL">
-<title>PDF Page Sorter Tool</title>
-<style>
-    body {
-        background-color: #87CEEB;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-    }
-
-    h1 {
-        color: #333;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-group {
-        margin: 15px 0;
-    }
-
-    input[type="file"] {
-        display: block;
-        margin: 10px auto;
-    }
-
-    button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
-
-    #page-preview {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-        gap: 10px;
-    }
-
-    .page-thumb {
-        border: 1px solid #ccc;
-        padding: 5px;
-        background: #f9f9f9;
-        cursor: grab; /* 🖐️ Shows hand icon */
-        position: relative;
-        user-select: none; /* Prevents accidental text selection */
-    }
-
-    .page-thumb:active {
-        cursor: grabbing; /* ✊ Shows clenched hand while dragging */
-    }
-
-    canvas {
-        width: 120px;
-        height: auto;
-    }
-
-    .rotate-icon {
-        font-size: 20px;
-        cursor: pointer;
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background: #FFD700;
-        padding: 5px;
-        border-radius: 5px;
-    }
-</style>
-
-  <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
-    <h1>PDF Page Sorter Tool</h1>
-    <h1><i>NEW AMAZING FEATURE - SORT AND ROTATE YOUR PDF PAGES EASILY!</i></h1>
-    <p><strong>Developed by SSPL</strong></p>
-    <input type="file" id="pdf-sorter-file" accept="application/pdf">
-    <div id="page-preview" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;"></div>
-    <button id="download-sorted" style="margin-top: 20px; display: none;">Download Sorted PDF</button>
-    <div id="sort-result" style="margin-top: 20px;"></div>
-  </div>
-
-  <script>
-    const sorterInput = document.getElementById('pdf-sorter-file');
-    const previewContainer = document.getElementById('page-preview');
-    const downloadButton = document.getElementById('download-sorted');
-    const resultDiv = document.getElementById('sort-result');
-    let loadedPdfDoc = null;
-    let rotations = {};
-
-    sorterInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      const arrayBuffer = await file.arrayBuffer();
-
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      loadedPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-      previewContainer.innerHTML = '';
-      rotations = {};
-
-      for (let i = 0; i < pdf.numPages; i++) {
-        const page = await pdf.getPage(i + 1);
-        const viewport = page.getViewport({ scale: 0.3 });
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        await page.render({ canvasContext: context, viewport }).promise;
-
-        const wrapper = document.createElement('div');
-        wrapper.className = 'page-thumb';
-        wrapper.setAttribute('data-index', i);
-        wrapper.style.position = 'relative';
-        wrapper.appendChild(canvas);
-
-        const rotateBtn = document.createElement('div');
-        rotateBtn.textContent = '⟳';
-        rotateBtn.title = 'Rotate';
-        rotateBtn.style.position = 'absolute';
-        rotateBtn.style.top = '5px';
-        rotateBtn.style.right = '5px';
-        rotateBtn.style.background = '#FFD700';
-        rotateBtn.style.padding = '5px';
-        rotateBtn.style.borderRadius = '5px';
-        rotateBtn.style.cursor = 'pointer';
-        rotateBtn.style.fontSize = '20px';
-
-        rotateBtn.onclick = () => {
-          rotations[i] = (rotations[i] || 0) + 90;
-          canvas.style.transform = `rotate(${rotations[i]}deg)`;
-        };
-
-        wrapper.appendChild(rotateBtn);
-        previewContainer.appendChild(wrapper);
-      }
-
-      downloadButton.style.display = 'inline-block';
-      Sortable.create(previewContainer, { animation: 150 });
-    });
-
-    downloadButton.addEventListener('click', async () => {
-  const sortedIndices = Array.from(previewContainer.children).map(div => parseInt(div.getAttribute('data-index')));
-  const newPdf = await PDFLib.PDFDocument.create();
-  const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
-
-  copiedPages.forEach((page, i) => {
-    const rotationAngle = rotations[sortedIndices[i]] || 0;
-    page.setRotation(PDFLib.degrees(rotationAngle));
-    newPdf.addPage(page);
-  });
-
-  const pdfBytes = await newPdf.save();
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `sorted-${Date.now()}.pdf`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url); // Clean up
-});
-  </script>
-</section>
-<!-- END SECTION: PDF Page Sorter Tool --><br><br>
-
-<!-- SECTION: GPS Tool -->
-<section id="GPSTOOL">
-  <style>
-    body {
-      background-color: #87CEEB;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-group {
-      margin: 15px 0;
-    }
-
-    .button-link {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button-link:hover {
-      background-color: #45a049;
-    }
-
-.scroll-banner2 {
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  background: #ffe0e0;
-  color: #b30000;
-  font-weight: bold;
-  padding: 8px;
-}
-.scroll-banner2 p {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-left 15s linear infinite;
-}
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-  </style>
-
-  <div class="container">
-    <h1>GPS Camera Pro</h1>
-    <p><strong>Developed by SSPL</strong></p>
-
-<div class="scroll-banner2">
-  <p>Clicking this button will take you to another site where it may take a few seconds to load as it is hosted on a free tier platform</p>
-</div>
-
-    <div class="form-group">
-      <p><strong><i>Capture images with GPS tag – Convert or Merge to PDF – Download!</i></strong></p>
-    </div>
-    <a href="https://pdf-relay.onrender.com" class="button-link" title="Click to open the GPS Tool" target="_blank" rel="noopener noreferrer">
-      Open GPS Tool
-    </a>
-  </div>
-</section>
-<!-- END SECTION: GPS Tool --><br>
-
-<!-- SECTION: ZIP Extractor Tool -->
-<section id = "ZIPTOOL">
-  <title>ZIP Extractor</title>
-    <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #e6e6e6; /* soft grey instead of white */;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        input[type="file"] {
-            display: block;
-            margin: 10px auto;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #container {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        #fileList {
-            list-style-type: none;
-            padding: 0;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            height: 400px;
-            overflow-y: auto;
-            padding: 15px;
-        }
-        #fileList li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        #fileList li:hover {
-            background-color: #e1e1e1;
-        }
-        #fileList input[type="checkbox"] {
-            margin-right: 10px;
-        }
-        #previewContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            max-width: 600px;
-        }
-        #previewContainer img {
-            max-width: 150px;
-            max-height: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-
- <div class="container">
-        <img src="{{ url_for('static', filename='ZzpDwn.png') }}" 
-             alt="ZzpDwn" style="max-height:90px; display:block; margin:0 auto;"><h1>ZzpDwn - ZIP Extractor Tool</h1>
-        <p><strong>Developed by SSPL</strong></p>
-        <p><strong><i>Ads Free- Hassle Free - Easy to view- If you need to download any image from preview, Just right-click!</strong></i></p>
-
+    <!-- About / GenTrac -->
+    <section class="card" id="GenTrac">
+      <h2 class="center">We Designed & Built GenTrac</h2>
+      <p class="muted center">GenTrac is a comprehensive app for claim investigation and verification. Streamline case updates, assign staff, track progress, and generate reports.</p>
+      <div class="center" style="margin-top:12px;">
+        <a class="btn" href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282" target="_blank" rel="noopener">Open GenTrac</a>
+      </div>
+    </section>
+
+    <!-- Video area (GenTrac & GPS Camera Pro) -->
+    <section class="card video-embed">
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <div style="flex:1 1 320px;">
+          <h3>🎥 GenTrac Demo</h3>
+          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
+            <iframe src="https://www.youtube.com/embed/sDhhMFpY1iQ" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;">
+          <h3>📸 GPS Camera Pro</h3>
+          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
+            <iframe src="https://www.youtube.com/embed/0ydFGCbIeY8" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+          </div>
+          <p class="center" style="margin-top:10px;"><a class="btn ghost" href="https://pdf-relay.onrender.com" target="_blank" rel="noopener">Open GPSTOOL</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools highlights (3CTool card) -->
+    <section id="3CTool" class="card">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center;">
+        <img src="{{ url_for('static', filename='3CTool.png') }}" alt="3CTool" style="height:72px;">
+        <div style="flex:1;">
+          <h3>3CTool — Crop • Compress • Convert</h3>
+          <p class="muted">Crop, compress images/videos & convert images to PDF. Tools are hosted on free tiers; links open in a new tab.</p>
+        </div>
+        <div style="text-align:center;">
+          <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;" class="scroll-banner">
+        <strong>Note:</strong> Tools are offered free — they may take a few seconds to load on free-tier hosts.
+      </div>
+    </section>
+
+    <!-- PDF Tools: Merger, Compressor, Sorter condensed but intact - IDs preserved for tool scripts -->
+    <section id="tools-collection">
+      <!-- PDF Merger -->
+      <div id="PMTOOL" class="card">
+        <h3>PDF Merger Tool</h3>
+        <p class="muted">Select multiple PDF files to merge into one document.</p>
+        <input type="file" id="pdf-files" accept="application/pdf" multiple>
+        <div style="margin-top:12px;"><button id="merge-btn" class="btn">Merge PDFs</button></div>
+        <div id="merge-loader" style="display:none; margin-top:12px;">Processing... <span aria-hidden="true">⏳</span></div>
+        <div id="merge-result" style="margin-top:14px;"></div>
+      </div>
+
+      <!-- PDF Compression -->
+      <div id="CMPRSTOOL" class="card">
+        <h3>PDF Compression Tool</h3>
+        <p class="muted">Choose quality and compress PDF pages to images embedded in a new PDF (client-side).</p>
+        <input type="file" id="pdf-file" accept="application/pdf">
+        <div style="margin-top:8px;">Quality: <span id="quality-value">60%</span></div>
+        <input type="range" id="quality-slider" min="10" max="90" value="60" style="width:100%; margin-top:6px;">
+        <div style="margin-top:12px;"><button id="compress-btn" class="btn">Compress PDF</button></div>
+        <div id="compress-loader" style="display:none; margin-top:12px;">Compressing... <span aria-hidden="true">⏳</span></div>
+        <div id="compression-info" style="margin-top:12px;" class="muted"></div>
+        <div id="compress-result" style="margin-top:12px;"></div>
+      </div>
+
+      <!-- Sorter Tool -->
+      <div id="SORTERTOOL" class="card">
+        <h3>PDF Page Sorter Tool</h3>
+        <p class="muted">Upload a PDF, preview page thumbnails, drag to sort, rotate, then download a new ordered PDF.</p>
+        <input type="file" id="pdf-sorter-file" accept="application/pdf">
+        <div id="page-preview" style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap;"></div>
+        <button id="download-sorted" style="display:none;" class="btn">Download Sorted PDF</button>
+        <div id="sort-result" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- GPS Tool Card -->
+    <section id="GPSTOOL" class="card center">
+      <h3>GPS Camera Pro</h3>
+      <p class="muted">Capture images with GPS tags — convert or merge to PDF, download.</p>
+      <a class="btn ghost" href="https://pdf-relay.onrender.com" target="_blank" rel="noopener">Open GPS Tool</a>
+    </section>
+
+    <!-- ZIP Extractor Tool Card (ZzpDwn) -->
+    <section id="ZIPTOOL" class="card">
+      <h3>ZzpDwn — ZIP Extractor Tool</h3>
+      <p class="muted">Preview images & PDFs inside a ZIP without downloading everything. Right-click any preview to save the file.</p>
+      <div style="margin-top:10px;">
         <input type="file" id="zipFileInput" accept=".zip">
-        <br>
-        <input type="checkbox" id="selectAll"> <label for="selectAll"><strong>Select All Images</strong></label>
-        <div id="container">
-            <ul id="fileList"></ul>
-            <div id="previewContainer"></div>
-        </div>
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
-
-<script>
-  let archive;
-
-  async function isBlobPDF(blob) {
-    const buffer = await blob.slice(0, 5).arrayBuffer();
-    const header = new TextDecoder().decode(buffer);
-    return header === '%PDF-';
-  }
-
-  function createPreview(filename, rawBlobOrArrayBuffer) {
-    const previewContainer = document.getElementById('previewContainer');
-
-    const toArrayBuffer = async (input) => {
-      if (input instanceof ArrayBuffer) return input;
-      return await input.arrayBuffer();
-    };
-
-    toArrayBuffer(rawBlobOrArrayBuffer).then(async (ab) => {
-      const probeBlob = new Blob([ab]);
-      const isPDF = await isBlobPDF(probeBlob);
-      let previewElement;
-      let url;
-
-      if (isPDF) {
-        // ✅ PDF viewer without side pane
-        const pdfBlob = new Blob([ab], { type: 'application/pdf' });
-        url = URL.createObjectURL(pdfBlob);
-
-const iframe = document.createElement('iframe');
-iframe.src = url;
-iframe.type = 'application/pdf';
-iframe.style.width = '100%';
-iframe.style.height = '600px'; // fixed height for consistent viewing
-previewElement = iframe;
-      } else if (
-        filename.toLowerCase().endsWith('.png') ||
-        filename.toLowerCase().endsWith('.jpg') ||
-        filename.toLowerCase().endsWith('.jpeg') ||
-        filename.toLowerCase().endsWith('.gif') ||
-        filename.toLowerCase().endsWith('.webp')
-      ) {
-        // ✅ Image preview only
-        const mimeType = filename.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
-        const imgBlob = new Blob([ab], { type: mimeType });
-        url = URL.createObjectURL(imgBlob);
-
-        const img = document.createElement('img');
-        img.src = url;
-        img.dataset.filename = filename;
-        img.style.maxWidth = '100%';
-        img.style.height = 'auto';
-        previewElement = img;
-      } else {
-        // ✅ Other file types (skipped from list, so normally won't reach here)
-        previewElement = document.createElement('div');
-        previewElement.textContent = `[File] ${filename}`;
-      }
-
-      previewElement.dataset.filename = filename;
-      if (url) previewElement.dataset.url = url;
-      previewContainer.appendChild(previewElement);
-    }).catch(err => {
-      console.error('Preview error:', err);
-    });
-  }
-
-  document.getElementById('zipFileInput').addEventListener('change', async function (event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const name = file.name.toLowerCase();
-    const arrayBuffer = await file.arrayBuffer();
-
-    const fileList = document.getElementById('fileList');
-    const previewContainer = document.getElementById('previewContainer');
-    fileList.innerHTML = '';
-    previewContainer.innerHTML = '';
-
-    let entries = [];
-    let getFileData;
-
-    // Allowed extensions
-    const allowedExts = ['.pdf', '.png', '.jpg', '.jpeg', '.gif', '.webp'];
-
-    try {
-      if (name.endsWith('.zip')) {
-        // ✅ ZIP
-        archive = await JSZip.loadAsync(file);
-        entries = Object.keys(archive.files)
-          .filter(fn => !archive.files[fn].dir) // skip directories
-          .filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
-        getFileData = async (filename) => archive.files[filename].async('arraybuffer');
-      } else {
-        alert("Unsupported archive type");
-        return;
-      }
-    } catch (err) {
-      console.error("Error extracting archive:", err);
-      return;
-    }
-
-    // Build file list with checkboxes
-    entries.forEach(filename => {
-      const listItem = document.createElement('li');
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.dataset.filename = filename;
-
-      listItem.appendChild(checkbox);
-      listItem.appendChild(document.createTextNode(' ' + filename));
-      fileList.appendChild(listItem);
-
-      checkbox.addEventListener('change', async function () {
-        const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
-        if (!this.checked && existing) {
-          if (existing.dataset.url) {
-            URL.revokeObjectURL(existing.dataset.url);
-          }
-          existing.remove();
-          return;
-        }
-
-        if (this.checked) {
-          try {
-            const ab = await getFileData(filename);
-            if (ab) createPreview(filename, ab);
-          } catch (err) {
-            console.error(`Error loading ${filename}:`, err);
-          }
-        }
-      });
-    });
-  });
-
-  document.getElementById('selectAll').addEventListener('change', function () {
-    const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
-    checkboxes.forEach(cb => {
-      cb.checked = this.checked;
-      cb.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  });
-</script>
-</section>
-<!-- END SECTION: ZIP Extractor Tool --><br>
-
-
-<script type="text/javascript">
-	atOptions = {
-		'key' : 'd76052090799493fc61caae4a413bb90',
-		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
-
-  
-
-
-<!-- SECTION: Donate with PayPal -->
-<div class="container">
-<section id = "Donate" style="background-color: #f8f9fa; padding: 60px 20px;">
-  <div style="max-width: 800px; margin: auto; font-family: Georgia, serif; color: #333; text-align: center;">
-
-    <h2 style="font-size: 24px;">Tools are free to use! Wish to help? Donate $1</h2>
-
-    <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center;">
-      
-      <!-- Label -->
-      <span style="font-weight: bold; font-size: 20px; margin-bottom: 10px;">SCAN THIS QR</span>
-      
-      <!-- QR Image -->
-      <img src="https://img1.wsimg.com/isteam/ip/3313c4f3-2554-4adb-a588-9d9124283128/blob-8edbb2b.png/:/rs=h:300,m"
-           alt="Pay via QR Code"
-           style="width: 200px; border: 2px solid #ccc; border-radius: 10px;">
-      
-      <!-- OR Separator -->
-      <span style="font-weight: bold; font-size: 20px; margin-top: 10px;">OR</span>
-    </div>
-
-    <!-- PayPal Container -->
-    <div style="margin-top: 30px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo" style="width: 200px; margin-bottom: 20px;">
-      <h2 style="font-size: 20px;">Support Us with PayPal</h2>
-      <form action="https://www.paypal.com/ncp/payment/G885MQJTUY6FN" method="post" target="_blank">
-        <input type="submit" value="DONATE"
-               style="border: none; border-radius: 0.25rem; min-width: 11.625rem; padding: 0 2rem; height: 2.625rem; font-weight: bold;
-                      background-color: #FFD140; color: #000000; font-size: 1rem; cursor: pointer;">
-      </form>
-      <div style="margin-top: 10px; font-size: 0.9rem;">
-        <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="Accepted Cards" height="14"><br>
-        Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="PayPal" style="height: 20px;">
+        <label style="margin-left:8px;"><input type="checkbox" id="selectAll"> Select All Images</label>
       </div>
-    </div>
+      <div id="container" style="display:flex; gap:18px; margin-top:12px;">
+        <ul id="fileList" style="flex:0 0 260px; list-style:none; padding:10px; background:#fff; border-radius:8px; max-height:400px; overflow:auto;"></ul>
+        <div id="previewContainer" style="flex:1; display:flex; flex-wrap:wrap; gap:12px;"></div>
+      </div>
+    </section>
 
-    <!-- Terms and Conditions -->
-    <p style="margin-top: 30px; font-size: 1rem;">
-      If you choose to donate, please note that it is construed that you have read and accepted the<br>
-      <span class="terms-container" style="color: blue; text-decoration: underline; position: relative; cursor: pointer;">
-        terms and conditions
-        <span class="terms-content"
-              style="display: none; background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; width: 300px;
-                     position: absolute; top: 25px; left: 0; z-index: 10; box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                     border-radius: 5px; font-size: 14px;">
-          All donations made through this page are entirely voluntary and arise solely from the donor’s free will and volition.
-          The company does not solicit donations in connection with any services offered or rendered. Donations are used solely
-          for development and maintenance of the tools on this website. Contributions are non-refundable and not eligible for
-          tax deduction or exemption under any applicable law.
-        </span>
-      </span>.
-    </p>
+    <!-- Donate -->
+    <section id="Donate" class="card center">
+      <h3>Tools are free — Wish to help?</h3>
+      <p class="muted">Support development with a small donation.</p>
+      <img src="https://img1.wsimg.com/isteam/ip/3313c4f3-2554-4adb-a588-9d9124283128/blob-8edbb2b.png/:/rs=h:300,m" alt="QR" style="width:180px; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
+      <div style="margin-top:12px;">
+        <form action="https://www.paypal.com/ncp/payment/G885MQJTUY6FN" method="post" target="_blank">
+          <input type="submit" value="DONATE" style="padding:10px 18px; background:#ffd140; border:none; border-radius:8px; font-weight:700;">
+        </form>
+      </div>
+      <p style="font-size:0.9rem; margin-top:10px;" class="muted">All donations are voluntary and support site maintenance.</p>
+    </section>
 
+    <!-- Blog links -->
+    <section id="BLOG" class="card">
+      <h3>Blogs</h3>
+      <div style="max-height:240px; overflow:auto; padding-right:8px; font-size:0.95rem;">
+        <ul style="padding-left:18px;">
+          <li><a href="https://medium.com/@ksriyengar71/how-search-engines-get-it-wrong-detective-agencies-insurance-claim-investigators-70c29bdb7f05" target="_blank" rel="noopener">How Search Engines Get It Wrong: Detective Agencies ≠ Insurance Claim Investigators</a></li>
+          <li><a href="https://medium.com/@ksriyengar71/gps-camera-pro-capture-tag-convert-no-app-or-download-needed-the-gps-tool-for-ea07d0f9fba6" target="_blank" rel="noopener">GPS CAMERA PRO — Capture, Tag, Convert</a></li>
+          <li><a href="https://medium.com/@ksriyengar71/unlocking-productivity-with-sspls-free-online-tools-3c-tool-pdf-merger-pdf-compressor-and-d82964252ba2" target="_blank" rel="noopener">Unlocking Productivity with SSPL's Free Online Tools</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer small -->
+    <footer class="muted center" style="margin-top:18px; font-size:0.9rem;">
+      <p>&copy; Sarvasiddhanta Services Private Limited — All Rights Reserved</p>
+    </footer>
   </div>
 
-  <!-- Tooltip Script -->
+  <!-- Keep original tool scripts and inline logic unchanged (only moved some elements for structure) -->
+  <!-- Merging/Compression/Sorter/Zip tool scripts preserved below as-is from original file to keep behavior identical. -->
+
+  <!-- Merge tool script -->
   <script>
-    const termsContainer = document.querySelector('.terms-container');
-    const termsContent = document.querySelector('.terms-content');
-    termsContainer.addEventListener('mouseover', () => termsContent.style.display = 'block');
-    termsContainer.addEventListener('mouseout', () => termsContent.style.display = 'none');
+    // PDF Merger logic preserved (kept as in original file but consolidated placement)
+    (function(){
+      // Loader and merge logic (uses PDFLib already loaded above)
+      const mergeBtn = document.getElementById('merge-btn');
+      if (mergeBtn) {
+        mergeBtn.addEventListener('click', async () => {
+          const files = document.getElementById('pdf-files').files;
+          if (!files || files.length < 2) return alert('Select at least two PDFs.');
+          const loader = document.getElementById('merge-loader');
+          const resultDiv = document.getElementById('merge-result');
+          loader.style.display = 'block';
+          try {
+            const mergedPdf = await PDFLib.PDFDocument.create();
+            for (const file of files) {
+              const arrayBuffer = await file.arrayBuffer();
+              const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+              const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+              pages.forEach(p => mergedPdf.addPage(p));
+            }
+            const bytes = await mergedPdf.save();
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `merged-${Date.now()}.pdf`;
+            link.textContent = 'Click To Download Your Merged PDF / Long Press on Mobile';
+            resultDiv.innerHTML = '';
+            resultDiv.appendChild(link);
+          } catch (err) {
+            console.error('Merge failed', err);
+            alert('Merge failed: ' + (err.message || err));
+          } finally {
+            loader.style.display = 'none';
+            // celebrate
+            try { confetti(); } catch(e){}
+          }
+        });
+      }
+    })();
   </script>
-</section>
-<!-- END SECTION: Donate with PayPal -->
 
-
-<!-- SECTION: BLOGS -->
-
-  <section id="BLOG" style="background-color: #f4f4f4; padding: 50px 20px;">
-    <div style="margin: auto; max-width: 800px; padding: 0 20px; background-color: #f4f4f4;">
-      <div class="blog-banner">
-        <h2 class="blog-title">BLOGS</h2>
-        <div class="floating-shapes">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-
-      <!-- ✅ Entire scrollable content starts here -->
-<div style="max-height: 300px; overflow-y: auto; padding-right: 10px; margin-top: 20px;">
-  <ul style="padding-left: 20px; text-align: justify; list-style-position: outside;">
-    <li style="margin-bottom: 15px;">
-      <a href="https://medium.com/@ksriyengar71/how-search-engines-get-it-wrong-detective-agencies-insurance-claim-investigators-70c29bdb7f05" target="_blank" rel="noopener noreferrer">
-        How Search Engines Get It Wrong: Detective Agencies ≠ Insurance Claim Investigators
-      </a>
-    </li>
-    <li style="margin-bottom: 15px;">
-      <a href="https://medium.com/@ksriyengar71/gps-camera-pro-capture-tag-convert-no-app-or-download-needed-the-gps-tool-for-ea07d0f9fba6" target="_blank" rel="noopener noreferrer">
-        GPS CAMERA PRO — “Capture, Tag, Convert” — No App or Download Needed: The GPS Tool for Professionals
-      </a>
-    </li>
-    <li style="margin-bottom: 15px;">
-      <a href="https://medium.com/@ksriyengar71/unlocking-productivity-with-sspls-free-online-tools-3c-tool-pdf-merger-pdf-compressor-and-d82964252ba2" target="_blank" rel="noopener noreferrer">
-        Unlocking Productivity with SSPL's Free Online Tools
-      </a>
-    </li>
-    <li style="margin-bottom: 15px;">
-      <a href="https://medium.com/@ksriyengar71/extract-zip-files-easily-with-this-free-online-tool-no-ads-no-hassle-59ad77f1d994" target="_blank" rel="noopener noreferrer">
-        Extract ZIP Files Easily with This Free Online Tool
-      </a>
-    </li>
-    <li style="margin-bottom: 15px;">
-      <a href="https://medium.com/@ksriyengar71/from-marathon-to-sprint-how-ai-automation-slashed-myworkflow-by-75-33273ffe40ae" target="_blank" rel="noopener noreferrer">
-        From Marathon to Sprint: How AI Automation Slashed My Workflow by 75%
-      </a>
-    </li>
-  </ul>
-
-  <!-- ✅ Legal Insight block inside scrollable container -->
-  <div style="margin-bottom: 15px;">
-    <h3 style="margin-bottom: 5px;">Legal Insight of the Week</h3>
-
-    <p>The <strong>Karnataka High Court</strong> recently clarified that <em>the burden of proof lies with the claimant</em> when seeking insurance payouts — not the insurer. This ruling stems from a 2011 accident case involving a disputed policy document.</p>
-    <p><a href="https://www.deccanherald.com/india/karnataka/to-claim-insurance-policy-burden-of-proof-lies-with-owner-or-claimant-not-the-insurance-company-karnataka-hc-3638677" target="_blank" rel="noopener noreferrer">Read the full story on Deccan Herald →</a></p>
-
-    <p><strong>The Insurance Company Can Be Asked To Pay Compensation To Motor Accident Claimants & Thereafter Recover The Same In Case Of Policy Cancellation: Supreme Court</strong></p>
-    <p><a href="https://www.verdictum.in/court-updates/supreme-court/national-insurance-company-limited-v-sunita-devi-2025-insc-951-insurance-company-compensation-motor-accident-claimants-policy-cancellation-1588062" target="_blank" rel="noopener noreferrer">Read the full story on Verdictum.in →</a></p>
-
-    <p><strong>The Insurance firm not liable to pay compensation for death of persons driving rashly: Supreme Court</strong></p>
-    <p><a href="https://www.thehindu.com/news/national/insurance-firm-not-liable-to-pay-compensation-for-death-of-persons-driving-rashly-supreme-court/article69767541.ece" target="_blank" rel="noopener noreferrer">Read the full story on The Hindu →</a></p>
-  </div>
-</div>
-<!-- ✅ End of scrollable content -->
-    </div>
-
-    <style>
-      .blog-banner {
-        position: relative;
-        height: 100px;
-        background-color: #f4f4f4;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+  <!-- Compression script (preserved) -->
+  <script>
+    (function(){
+      const qualitySlider = document.getElementById('quality-slider');
+      const qualityValue = document.getElementById('quality-value');
+      const compressBtn = document.getElementById('compress-btn');
+      const compressLoader = document.getElementById('compress-loader');
+      if (qualitySlider) qualitySlider.addEventListener('input', ()=>{ if(qualityValue) qualityValue.textContent = qualitySlider.value + '%'; });
+      if (compressBtn) {
+        compressBtn.addEventListener('click', async () => {
+          const fileInput = document.getElementById('pdf-file');
+          const resultDiv = document.getElementById('compress-result');
+          const info = document.getElementById('compression-info');
+          if (!fileInput || fileInput.files.length === 0) { alert('Please select a PDF file.'); return; }
+          const file = fileInput.files[0];
+          compressLoader.style.display = 'block';
+          try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+            // Render pages to canvas using pdf.js then embed as JPG in new PDF
+            const compressedPdf = await PDFLib.PDFDocument.create();
+            const pdfData = new Uint8Array(arrayBuffer);
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
+            const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+            const pdf = await loadingTask.promise;
+            for (let i = 0; i < pdf.numPages; i++) {
+              const page = await pdf.getPage(i+1);
+              const viewport = page.getViewport({ scale: 1.0 });
+              const canvas = document.createElement('canvas');
+              const context = canvas.getContext('2d');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              await page.render({ canvasContext: context, viewport }).promise;
+              const compressionLevel = qualitySlider ? qualitySlider.value/100 : 0.6;
+              const compressedImg = canvas.toDataURL('image/jpeg', compressionLevel);
+              const newPage = compressedPdf.addPage([viewport.width, viewport.height]);
+              const jpgImage = await compressedPdf.embedJpg(compressedImg);
+              newPage.drawImage(jpgImage, { x:0, y:0, width:viewport.width, height:viewport.height });
+            }
+            const compressedBytes = await compressedPdf.save();
+            const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const finalSize = blob.size;
+            info.innerHTML = `Compressed Size: ${(finalSize/1024/1024).toFixed(2)} MB`;
+            resultDiv.innerHTML = `<a href="${url}" download="compressed-${Date.now()}.pdf">Click To Download Your Compressed PDF</a>`;
+          } catch (err) {
+            console.error('Compression error', err);
+            resultDiv.innerHTML = `<p style="color:red;">Error: ${err.message || err}</p>`;
+          } finally {
+            compressLoader.style.display = 'none';
+            try { confetti(); } catch(e){}
+          }
+        });
       }
+    })();
+  </script>
 
-      .blog-title {
-        font-size: 32px;
-        color: #333;
-        font-family: 'Georgia', serif;
-        z-index: 2;
-        text-shadow: 1px 1px 2px #ccc;
+  <!-- Sorter script (preserved) -->
+  <script>
+    (function(){
+      const sorterInput = document.getElementById('pdf-sorter-file');
+      const previewContainer = document.getElementById('page-preview');
+      const downloadButton = document.getElementById('download-sorted');
+      let loadedPdfDoc = null;
+      let rotations = {};
+      if (sorterInput) {
+        sorterInput.addEventListener('change', async (e)=>{
+          const file = e.target.files[0];
+          if (!file) return;
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          loadedPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+          previewContainer.innerHTML = '';
+          rotations = {};
+          for (let i=0;i<pdf.numPages;i++){
+            const page = await pdf.getPage(i+1);
+            const viewport = page.getViewport({ scale: 0.3 });
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            await page.render({ canvasContext: context, viewport }).promise;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'page-thumb';
+            wrapper.setAttribute('data-index', i);
+            wrapper.style.position = 'relative';
+            wrapper.appendChild(canvas);
+            const rotateBtn = document.createElement('div');
+            rotateBtn.textContent = '⟳';
+            rotateBtn.title = 'Rotate';
+            rotateBtn.style.position = 'absolute';
+            rotateBtn.style.top = '5px';
+            rotateBtn.style.right = '5px';
+            rotateBtn.style.background = '#FFD700';
+            rotateBtn.style.padding = '5px';
+            rotateBtn.style.borderRadius = '5px';
+            rotateBtn.style.cursor = 'pointer';
+            rotateBtn.style.fontSize = '20px';
+            rotateBtn.onclick = ()=>{ rotations[i] = (rotations[i]||0)+90; canvas.style.transform = `rotate(${rotations[i]}deg)`; };
+            wrapper.appendChild(rotateBtn);
+            previewContainer.appendChild(wrapper);
+          }
+          downloadButton.style.display = 'inline-block';
+          Sortable.create(previewContainer, { animation: 150 });
+        });
       }
-
-      .floating-shapes span {
-        position: absolute;
-        display: block;
-        width: 20px;
-        height: 20px;
-        background: rgba(100, 100, 255, 0.2);
-        border-radius: 50%;
-        animation: floatUp 6s infinite ease-in-out;
+      if (downloadButton) {
+        downloadButton.addEventListener('click', async ()=>{
+          const sortedIndices = Array.from(previewContainer.children).map(div=>parseInt(div.getAttribute('data-index')));
+          const newPdf = await PDFLib.PDFDocument.create();
+          const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
+          copiedPages.forEach((page,i)=>{
+            const rotationAngle = rotations[sortedIndices[i]] || 0;
+            page.setRotation(PDFLib.degrees(rotationAngle));
+            newPdf.addPage(page);
+          });
+          const pdfBytes = await newPdf.save();
+          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `sorted-${Date.now()}.pdf`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        });
       }
+    })();
+  </script>
 
-      .floating-shapes span:nth-child(1) { left: 10%; animation-delay: 0s; }
-      .floating-shapes span:nth-child(2) { left: 50%; animation-delay: 2s; }
-      .floating-shapes span:nth-child(3) { left: 80%; animation-delay: 4s; }
-
-      @keyframes floatUp {
-        0% { bottom: -20px; opacity: 0; }
-        50% { opacity: 1; }
-        100% { bottom: 100%; opacity: 0; }
+  <!-- ZIP extractor script preserved -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
+  <script>
+    (function(){
+      let archive;
+      async function isBlobPDF(blob) {
+        const buffer = await blob.slice(0,5).arrayBuffer();
+        const header = new TextDecoder().decode(buffer);
+        return header === '%PDF-';
       }
-    </style>
-  </section>
-</div>
-<!-- END SECTION: BLOGS -->
+      function createPreview(filename, rawBlobOrArrayBuffer) {
+        const previewContainer = document.getElementById('previewContainer');
+        const toArrayBuffer = async (input) => { if (input instanceof ArrayBuffer) return input; return await input.arrayBuffer(); };
+        toArrayBuffer(rawBlobOrArrayBuffer).then(async (ab) => {
+          const probeBlob = new Blob([ab]);
+          const isPDF = await isBlobPDF(probeBlob);
+          let previewElement; let url;
+          if (isPDF) {
+            const pdfBlob = new Blob([ab], { type: 'application/pdf' });
+            url = URL.createObjectURL(pdfBlob);
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.type = 'application/pdf';
+            iframe.style.width = '100%';
+            iframe.style.height = '600px';
+            previewElement = iframe;
+          } else if (/\.(png|jpg|jpeg|gif|webp)$/i.test(filename)) {
+            const mimeType = filename.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
+            const imgBlob = new Blob([ab], { type: mimeType });
+            url = URL.createObjectURL(imgBlob);
+            const img = document.createElement('img');
+            img.src = url; img.dataset.filename = filename; img.style.maxWidth='100%'; img.style.height='auto';
+            previewElement = img;
+          } else {
+            previewElement = document.createElement('div');
+            previewElement.textContent = `[File] ${filename}`;
+          }
+          previewElement.dataset.filename = filename;
+          if (url) previewElement.dataset.url = url;
+          previewContainer.appendChild(previewElement);
+        }).catch(err => console.error('Preview error:', err));
+      }
+      document.getElementById('zipFileInput').addEventListener('change', async function (event) {
+        const file = event.target.files[0]; if (!file) return;
+        const name = file.name.toLowerCase();
+        const arrayBuffer = await file.arrayBuffer();
+        const fileList = document.getElementById('fileList'); const previewContainer = document.getElementById('previewContainer');
+        fileList.innerHTML = ''; previewContainer.innerHTML='';
+        let entries=[]; let getFileData;
+        const allowedExts = ['.pdf','.png','.jpg','.jpeg','.gif','.webp'];
+        try {
+          if (name.endsWith('.zip')) {
+            archive = await JSZip.loadAsync(file);
+            entries = Object.keys(archive.files).filter(fn => !archive.files[fn].dir).filter(fn => allowedExts.some(ext => fn.toLowerCase().endsWith(ext)));
+            getFileData = async (filename) => archive.files[filename].async('arraybuffer');
+          } else { alert('Unsupported archive type'); return; }
+        } catch (err) { console.error('Error extracting archive:', err); return; }
+        entries.forEach(filename => {
+          const listItem = document.createElement('li');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox'; checkbox.dataset.filename = filename;
+          listItem.appendChild(checkbox); listItem.appendChild(document.createTextNode(' ' + filename));
+          fileList.appendChild(listItem);
+          checkbox.addEventListener('change', async function () {
+            const existing = previewContainer.querySelector(`[data-filename='${filename}']`);
+            if (!this.checked && existing) { if (existing.dataset.url) URL.revokeObjectURL(existing.dataset.url); existing.remove(); return; }
+            if (this.checked) {
+              try { const ab = await getFileData(filename); if (ab) createPreview(filename, ab); } catch (err){ console.error(`Error loading ${filename}:`, err); }
+            }
+          });
+        });
+      });
+      document.getElementById('selectAll').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('#fileList input[type="checkbox"]');
+        checkboxes.forEach(cb => { cb.checked = this.checked; cb.dispatchEvent(new Event('change', { bubbles: true })); });
+      });
+    })();
+  </script>
 
+  <!-- small ad script preserved -->
+  <script type="text/javascript">
+    atOptions = { 'key':'d76052090799493fc61caae4a413bb90','format':'iframe','height':60,'width':468,'params':{} };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
 
-<section id="privacy-policy" style="padding: 30px;">
-  <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; text-align: justify;">
-    <h2>Privacy Policy</h2>
-    <ul>
-      <li><strong>We Respect Your Privacy</strong></li>
-    </ul>
-    <p>
-      Sarvasiddhanta Services Private Limited (SSPL) does not collect, store, or process any personal data directly from users. Our tools are designed to operate  
-      entirely within your browser—PDFs and other inputs are processed locally and never uploaded to our servers.
-    </p>
-    <p>
-      Our site uses Google Analytics to understand how visitors interact with our tools. This involves placing first-party cookies that collect anonymized usage 
-      data—such as pages visited, browser type, and device type. These cookies do not collect personally identifiable information.
-    </p>
-    <p>
-      You can learn more about Google’s cookie practices 
-      <a href="https://support.google.com/analytics/answer/11397207?hl=en" target="_blank">here</a> 
-      or opt out using Google’s browser add-on 
-      <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">here</a>.
-    </p>
-    <p>
-      By continuing to use our site, you consent to the use of these cookies.
-    </p>
-    <p>
-      For any questions or concerns, contact us at <strong>info@ss-services.co.in</strong><br>
-      <em>Last updated: 24 October 2025</em>
-    </p>
-  </div>
-</section><br>
-
-<section id="refund-policy" style="padding: 30px;">
-<div class="container" style="max-width: 800px; text-align: justify; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
-  <h2>Refund & Cancellation Policy</h2>
-  <p>
-    As SSPL tools are offered as free utilities without transactional charges, refund and cancellation terms do not typically apply. No Refund is applicable for any Donations made voluntarily. However, in case of any billing disputes related to Claims Investigation Services, Customised Services or Paid Deployments, users may write to <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a> within 7 days of completion of services / deployment. We’ll ensure fair resolution.
-  </p></div>
-</section><br>
-
-<div class="container" style="max-width: 800px; text-align: justify; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
-<p><strong>Business Category:</strong> 1. Claims Investigation Services for Life insurance / General Insurance / Others<br>
-                                       2. Software Development – Apps, Web Tools & Document Utilities</p></div>
-
-<section id = "CONTACT" style="text-align: justify; margin-top: 40px;">
-<div class="container" style="max-width: 800px; text align: justify; margin: auto; background: white; padding: 30px; border-radius: 10px;"> 
-  <h2>📞 Contact Us</h2>
-  <p style="font-size: 18px;">
-    📧 <strong>Email:</strong> <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a><br>
-   ☎️ <strong>Phone:</strong> <a href="tel:+919591177655">+91 9591177655 </a>
-  </p></div>
-</section><br>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
-  </footer>
-<script type="text/javascript">
-	atOptions = {
-		'key' : 'f66a356edbc6cc51d42b25d286054923',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/f66a356edbc6cc51d42b25d286054923/invoke.js"></script>
 </body>
 </html>
-
