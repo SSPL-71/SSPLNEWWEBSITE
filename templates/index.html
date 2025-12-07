@@ -284,6 +284,39 @@ div.card {
   margin-right: auto;
 }
 
+/* Fix layout for 3CTool card */
+.tool-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: nowrap;
+}
+
+.tool-icon {
+  height: 72px;
+}
+
+.tool-text {
+  flex: 1;
+  text-align: left;
+}
+
+.tool-action {
+  flex-shrink: 0;
+  text-align: left;
+}
+
+/* Mobile stack behavior */
+@media (max-width: 600px){
+  .tool-row {
+    flex-direction: column;
+    text-align: center;
+  }
+  .tool-action {
+    text-align: center;
+    width: 100%;
+  }
+}
 
 
     /* Floating menu refinement */
@@ -389,11 +422,7 @@ header,
   display: block !important;
 }
 
-
-
-
-
-  </style>
+</style>
 </head>
 <body>
   <div class="site">
@@ -654,26 +683,27 @@ header,
 
 
 
-    <!-- Tools highlights (3CTool card) -->
-    <section id="3CTool" class="card">
-      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center;">
-        <img src="{{ url_for('static', filename='3CTool.png') }}" alt="3CTool" style="height:72px;">
-        <div style="flex:1;">
-          <h3>3CTool — Crop • Compress • Convert • </h3>
-          <p class="muted">Crop, compress Images/Videos & Convert Images to PDF.</p> 
-          <p Tools are hosted on free tiers; links open in a new tab.</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
-          <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
-        </div>
-        <div style="text-align:center;">
-          <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
-        </div>
-      </div>
+<section id="3CTool" class="card">
+  <div class="tool-row">
+    <img src="{{ url_for('static', filename='3CTool.png') }}" alt="3CTool" class="tool-icon">
 
-      <div style="margin-top:14px;" class="scroll-banner">
-        <strong>Note:</strong> Tools are offered free — they may take a few seconds to load on free-tier hosts.
-      </div>
-    </section>
+    <div class="tool-text">
+      <h3>3CTool — Crop • Compress • Convert</h3>
+      <p class="muted">Crop, compress images/videos & convert images to PDF.</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:4px;">Developed by SSPL</p>
+      <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
+    </div>
+
+    <div class="tool-action">
+      <a class="btn" href="https://image-pdf-tool.onrender.com/" target="_blank" rel="noopener">Open 3C Tool</a>
+    </div>
+  </div>
+
+  <div class="scroll-banner" style="margin-top:14px;">
+    <strong>Note:</strong> Tools are free — they may take a few seconds to load.
+  </div>
+</section>
+
 
     <!-- PDF Tools: Merger, Compressor, Sorter condensed but intact - IDs preserved for tool scripts -->
     <section id="tools-collection">
