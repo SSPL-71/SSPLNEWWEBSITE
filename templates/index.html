@@ -161,6 +161,25 @@
     .two-col .left{flex:1 1 320px;}
     .two-col .right{flex:0 0 300px; text-align:center;}
 
+/* Thank You Banner Styling */
+.thank-banner {
+  background: linear-gradient(90deg, #fff8dc, #ffe4b5);
+  padding: 18px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
+  animation: sparkleFade 1.5s ease-in-out;
+  font-size: 1rem;
+}
+
+@keyframes sparkleFade {
+  0% { opacity: 0; transform: scale(0.95); }
+  60% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
 /* Feedback section styling aligned with cards */
 #feedback {
   max-width: 900px;
@@ -622,6 +641,16 @@ header,
 </section>
 <!-- END SECTION -->
     </section>
+
+
+<section id="thank-banner-section" class="card" style="display:none;">
+  <div id="thankYouBanner" class="thank-banner">
+    🙏 Thank you, visitor from <strong id="userCity">your city</strong>!<br>
+    If this tool helped, please ❤️ Like and ⭐ Rate 5 Stars.
+    <button id="dismissBanner" style="margin-left:10px;">Close</button>
+  </div>
+</section>
+
 
 
     <!-- Tools highlights (3CTool card) -->
@@ -1368,6 +1397,31 @@ fetchStats();
   <script type="text/javascript" src="//www.highperformanceformat.com/d76052090799493fc61caae4a413bb90/invoke.js"></script>
   </div>
 
+<script>
+function showThankYouBanner() {
+  const banner = document.getElementById("thank-banner-section");
+  setTimeout(async () => {
+    try {
+      const res = await fetch("https://ipapi.co/json/");
+      const data = await res.json();
+      document.getElementById("userCity").innerText = data.city || "your city";
+    } catch {
+      document.getElementById("userCity").innerText = "your area";
+    }
+    banner.style.display = "block";
+  }, 4000);
+}
+
+function dismissBanner() {
+  document.getElementById("thank-banner-section").style.display = "none";
+}
+
+/* Run only once per session */
+if (!sessionStorage.getItem("bannerShown")) {
+  showThankYouBanner();
+  sessionStorage.setItem("bannerShown", "yes");
+}
+</script>
 
 
 
