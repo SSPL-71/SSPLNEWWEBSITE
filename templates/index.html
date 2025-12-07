@@ -4,16 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SS Services - Claims Investigation, PDF Tools, Image Conversion</title>
-    <!-- Modern font + small layout overrides -->
+    <!-- Modern gradient + card UI via global CSS (content/structure untouched) -->
     <style>
+      :root {
+        --bg-start: #d6f0ff;
+        --bg-end: #c7f3ef;
+        --card-bg: #ffffff;
+        --text-main: #111827;
+        --text-muted: #4b5563;
+        --accent: #0ea5e9;
+        --radius-lg: 14px;
+        --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
+        --max-width: 1100px;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+      }
+
       body {
         font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background: radial-gradient(circle at top, #f9fafb 0, var(--bg-start) 35%, var(--bg-end) 100%);
+        color: var(--text-main);
       }
-      /* Make compression quality slider compact */
-      #quality-slider, #quality-slider-range {
+
+      /* Global section as card */
+      body > section {
+        max-width: var(--max-width);
+        margin: 24px auto;
+        padding: 20px;
+        border-radius: var(--radius-lg);
+        background: var(--card-bg);
+        box-shadow: var(--shadow-soft);
+      }
+
+      /* Hero door reveal section: keep full-bleed feel */
+      body > section:first-of-type {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      .door-container {
+        max-width: var(--max-width);
+        margin: 24px auto;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.55));
+      }
+
+      .brand h1 {
+        letter-spacing: 0.06em;
+      }
+
+      /* Compression slider: compact width */
+      #quality-slider {
         max-width: 320px;
+      }
+
+      /* Buttons general polish (without breaking existing inline colors) */
+      button,
+      input[type="submit"] {
+        font-family: inherit;
+        border-radius: 8px;
+      }
+
+      /* Quick access menu: keep desktop floating but soften */
+      .floating-menu {
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+        border-radius: 16px;
+      }
+
+      /* Ensure ads are centered */
+      .ad-center,
+      .ad-container {
+        text-align: center;
+        margin: 20px auto;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 768px) {
+        body > section {
+          margin: 16px 8px;
+          padding: 16px;
+        }
+        .door-container {
+          margin: 16px 8px;
+        }
       }
     </style>
 
@@ -270,6 +353,9 @@
       <img src="{{ url_for('static', filename='new_logo.jpg') }}"  
            alt="SSPL" style="max-height:90px; display:block; margin:0 auto;">     
       <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
+      <p style="margin:5px 0 0; font-size:16px; font-weight:500;">
+        Claims Investigations · App Development · SaaS Tools
+      </p>
     </div>
 
     <!-- Vaastu Logo -->
