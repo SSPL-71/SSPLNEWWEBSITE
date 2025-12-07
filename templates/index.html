@@ -194,18 +194,25 @@
 
 
     /* Match quality slider width to primary button width */
-    #quality-slider {
-      width: 260px !important;
-      max-width: 260px !important;
-      display: block;
-      margin: 10px auto 0 auto;
-    }
-    @media (max-width: 480px){
-      #quality-slider {
-        width: 90% !important;
-        max-width: 260px !important;
-      }
-    }
+#quality-slider {
+  width: 260px !important;
+  max-width: 260px !important;
+  display: inline-block !important;
+  margin: 10px 0 0 0 !important;
+  vertical-align: middle;
+}
+
+
+@media (max-width: 480px){
+  #quality-slider {
+    width: 90% !important;
+    max-width: 260px !important;
+    display: inline-block !important;
+    margin: 10px 0 0 0 !important;
+  }
+}
+
+
 
     /* Policies & contact width alignment */
 	#privacy-policy,
@@ -273,14 +280,17 @@
     }
 
     /* Tab-specific page visibility:
-       - Home: full site content (except About/Claims dedicated sections)
-       - About: only About tab content
-       - Claims: only Claims tab content
-    */
-body.tab-about-active .site > *:not(.top-tabs):not(header):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
-body.tab-claims-active .site > *:not(.top-tabs):not(header):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
+   - Home: full site content (except About/Claims dedicated sections)
+   - About: only About tab content
+   - Claims: only Claims tab content
+*/
+
+/* Hide all non-tab content when About or Claims is active */
+body.tab-about-active .site :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle),
+body.tab-claims-active .site :not(header):not(.top-tabs):not(.tab-sections):not(#floatingMenu):not(#menuToggle) {
   display: none !important;
 }
+
 
 
   </style>
