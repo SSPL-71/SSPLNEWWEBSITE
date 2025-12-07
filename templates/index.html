@@ -345,34 +345,43 @@ div.card {
       }
     }
 
-    /* Modern minimal segmented tabs - final (pill style, no animation) */
-    .top-tabs {
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      margin:16px 0 20px;
-    }
-    .top-tabs .tab-button {
-      -webkit-appearance:none;
-      appearance:none;
-      background: transparent;
-      border-radius: 999px;
-      padding: 6px 18px;
-      border: 1px solid rgba(15,23,42,0.20);
-      font-size: 0.9rem;
-      cursor: pointer;
-      color: #0f172a;
-      letter-spacing: 0.02em;
-      transition: none;
-    }
-    .top-tabs .tab-button:hover {
-      background: rgba(255,255,255,0.9);
-    }
-    .top-tabs .tab-button.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      border-color: #0ea5e9;
-    }
+/* FINAL TAB STYLING (no animation, centered, pill style) */
+.top-tabs {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin: 16px 0 20px;
+  text-align: center;
+}
+
+.top-tabs .tab-button {
+  -webkit-appearance:none;
+  appearance:none;
+  flex: 0 0 auto !important; /* prevents stretching */
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px 18px;
+  border: 1px solid rgba(15,23,42,0.20);
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #0f172a;
+  letter-spacing: 0.02em;
+  transition: none;
+  margin: 0 !important;
+}
+
+.top-tabs .tab-button:hover {
+  background: rgba(255,255,255,0.9);
+}
+
+.top-tabs .tab-button.active {
+  background: #0ea5e9;
+  color: #ffffff;
+  border-color: #0ea5e9;
+}
+
 
     .tab-sections {
       margin-top: 4px;
@@ -390,6 +399,7 @@ div.card {
 .tab-section.active {
   display: block !important;
 }
+
 
 /* --- TAB VISIBILITY CONTROL --- */
 
@@ -427,18 +437,6 @@ header,
 #floatingMenu,
 #menuToggle {
   display: block !important;
-}
-/* Center the top navigation tabs */
-.top-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px; /* spacing between tabs */
-}
-
-/* Ensure buttons keep pill look and don't stretch full width */
-.top-tabs .tab-button {
-  flex: 0 0 auto; /* prevents stretching */
-  margin: 0;
 }
 
 
