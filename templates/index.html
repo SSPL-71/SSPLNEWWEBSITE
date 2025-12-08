@@ -439,27 +439,34 @@ html, body {
     margin: 0 auto;
   }
 
-  /* Mobile floating menu behavior – prevent ghost taps */
-  @media (max-width:900px){
-    .floating-menu {
-      right: 16px;
-      left: 16px;
-      top: auto;
-      bottom: 80px;
-      max-height: 60vh;
-      transform: translateY(10px);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
+ /* Mobile floating menu behavior – fixed and non-blocking when hidden */
+@media (max-width: 900px){
+  .floating-menu {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    max-height: 60vh;
+    width: 220px;
+    transform: translateY(10px);
+    opacity: 0;
 
-.floating-menu.open {
-  display: block !important;
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+    /* 👇 essential fixes */
+    display: none;
+    pointer-events: none;
+
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 9998;
+  }
+
+  .floating-menu.open {
+    /* 👇 becomes fully active and clickable */
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
 
-  }
 
   /* FINAL TAB STYLING (no animation, centered, pill style) */
   .top-tabs {
