@@ -477,6 +477,28 @@ body.tab-claims-active #tab-claims {
     display:block !important;
   }
 }
+/* FINAL FORCE: Correct position of mobile toggle button */
+@media (max-width: 900px) {
+  #menuToggle {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    z-index: 99999 !important;
+  }
+}
+.tab-section:not(.active) {
+  display: none !important;
+  pointer-events: none !important;
+}
+.tool[hidden],
+.card[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
 
   </style>
 </head>
