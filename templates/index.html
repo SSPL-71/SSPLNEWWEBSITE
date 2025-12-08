@@ -137,7 +137,11 @@
       box-sizing: border-box;
       /* no display override here so flex from first rule stays */
     }
-
+/* Prevent invisible doors from blocking touch/clicks */
+.left-door,
+.right-door {
+  pointer-events: none !important;
+}
     .brand img{height:88px; display:block; margin:0 auto 8px;}
     .brand h2{margin:6px 0 0; font-family: "Georgia", serif; font-weight:600; font-size:1rem; color:var(--brand);}
 
