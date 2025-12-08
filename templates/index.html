@@ -214,24 +214,37 @@
       header{flex-direction:column; align-items:flex-start; gap:8px;}
       .brand img{height:64px;}
     }
-    @media (max-width:600px){
-      .door {font-size:34px;}
-      .floating-toggle{
-        display:block;
-        position:fixed;
-        bottom:18px;
-        right:18px;
-        z-index:1001;
-        background:var(--accent);
-        color:white;
-        border-radius:50%;
-        width:54px;
-        height:54px;
-        border:none;
-        font-size:22px;
-        box-shadow:0 8px 20px rgba(14,165,164,0.25);
-      }
-    }
+    /* MOBILE ONLY: toggle visible */
+@media (max-width: 900px) {
+  #menuToggle {
+    display:block;
+    position:fixed;
+    bottom:18px;
+    right:18px;
+    z-index:9999;
+    background:var(--accent);
+    color:white;
+    border-radius:50%;
+    width:54px;
+    height:54px;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(14,165,164,0.25);
+  }
+}
+
+/* DESKTOP: toggle hidden, menu always visible */
+@media (min-width: 901px) {
+  #menuToggle {
+    display:none !important;
+  }
+
+  #floatingMenu {
+    display:block !important;
+  }
+}
+
 
     /* Utility */
     .center { text-align:center; }
