@@ -54,17 +54,22 @@
     --glass: rgba(255,255,255,0.7);
   }
 
-  html,body{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    background: linear-gradient(180deg,var(--bg-start),var(--bg-end));
-    color:#1f2937;
-    text-align:left;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+  color: #1f2937;
+  text-align: left;
+
+  /* 👇 The important additions */
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 
   a{
     color:var(--brand);
