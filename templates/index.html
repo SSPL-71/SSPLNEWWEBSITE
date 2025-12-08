@@ -662,15 +662,19 @@ html, body {
 
         <!-- Quick-access toggle behavior (keeps original JS logic) -->
         <script>
-          const toggleBtn = document.getElementById('menuToggle');
-          const menu = document.getElementById('floatingMenu');
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-              menu.classList.toggle('open');
-              const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-              toggleBtn.setAttribute('aria-expanded', String(!expanded));
-            });
-          }
+const toggleBtn = document.getElementById('menuToggle');
+const menu = document.getElementById('floatingMenu');
+
+if (toggleBtn && menu) {
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('open');
+
+    // accessibility state update
+    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', String(!expanded));
+  });
+}
+
           // Door animation + ensure floating menu visible on all tabs
           document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
