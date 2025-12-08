@@ -41,466 +41,570 @@
 
   <!-- Consolidated and modernized styles -->
   <style>
-    :root{
-      --bg-start: #d6f0ff;
-      --bg-end: #c7f3ef;
-      --card-bg: #ffffff;
-      --muted: #6b7280;
-      --accent: #0ea5a4; /* teal accent */
-      --brand: #0b6b9a;
-      --radius: 12px;
-      --container-width: 1100px;
-      --max-width-narrow: 900px;
-      --glass: rgba(255,255,255,0.7);
-    }
-    html,body{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background: linear-gradient(180deg,var(--bg-start),var(--bg-end));
-      color:#1f2937;
-      text-align:left;
-    }
-    a{color:var(--brand); text-decoration: none;}
-    a:hover{text-decoration: underline;}
-
-    /* Layout */
-    .site {
-      max-width: var(--container-width);
-      margin: 24px auto;
-      padding: 18px;
-    }
-    header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:18px;
-    }
-    .logo {
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .logo img{height:64px; border-radius:10px; box-shadow:0 6px 18px rgba(11,107,154,0.12);}
-    .brand-title h1{font-size:1.1rem; margin:0; letter-spacing:0.6px;}
-    .brand-title p{margin:0; color:var(--muted); font-size:0.95rem;}
-
-    /* Door reveal hero */
-    .door-container {
-      position:relative;
-      width:100%;
-      min-height:36vh;
-      border-radius:var(--radius);
-      overflow:hidden;
-      background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
-      box-shadow: 0 8px 30px rgba(11,107,154,0.08);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .door {
-      position:absolute;
-      width:50%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:white;
-      font-weight:700;
-      font-size:clamp(24px,4vw,56px);
-      transition:transform 1.3s ease-in-out;
-      background:#4a4a4a;
-    }
-    .left-door{left:0; transform-origin:left;}
-    .right-door{right:0; transform-origin:right;}
-    .door::before{opacity:0.95;}
-    .brand {
-      position:relative;
-      z-index:2;
-      text-align:center;
-      opacity:0;
-      transition:opacity 1.2s ease-in-out;
-      color:var(--brand);
-    }
-
-    /* Make hero follow same layout padding as the site wrapper */
-    .door-container {
-      max-width: 900px;
-      width: 100%;
-      margin: 0 auto 30px auto;
-      padding-left: 18px;
-      padding-right: 18px;
-      box-sizing: border-box;
-      /* no display override here so flex from first rule stays */
-    }
-/* Prevent invisible doors from blocking touch/clicks */
-.left-door,
-.right-door {
-  pointer-events: none !important;
-}
-    .brand img{height:88px; display:block; margin:0 auto 8px;}
-    .brand h2{margin:6px 0 0; font-family: "Georgia", serif; font-weight:600; font-size:1rem; color:var(--brand);}
-
-    /* Floating quick menu */
-    .floating-menu {
-      position:fixed;
-      right:18px;
-      top:160px;
-      background: linear-gradient(135deg,#fff7fb,#ffffff);
-      padding:12px;
-      border-radius:12px;
-      box-shadow: 0 10px 30px rgba(11,107,154,0.08);
-      z-index:1000;
-      width:220px;
-      border-left:8px solid var(--accent);
-      font-weight:600;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-    .floating-header{color:var(--accent); font-size:0.95rem; margin-bottom:8px;}
-    .floating-menu a{display:block; padding:8px 6px; color:#0f1724; border-radius:8px; margin:6px 0; font-size:0.95rem;}
-    .floating-menu a:hover{background:rgba(14,165,164,0.06); transform:translateX(4px);}
-
-    .floating-toggle {
-      display:none;
-    }
-
-    /* Content cards */
-    .card { background: var(--card-bg); border-radius: 12px; padding: 22px; box-shadow: 0 6px 20px rgba(16,24,40,0.06); margin-bottom:20px; }
-    .card h2{margin-top:0; color:#0f1724;}
-    .two-col {display:flex; gap:18px; flex-wrap:wrap; align-items:center;}
-    .two-col .left{flex:1 1 320px;}
-    .two-col .right{flex:0 0 300px; text-align:center;}
-
-    /* Thank You Banner Styling */
-    .thank-banner {
-      background: linear-gradient(90deg, #fff8dc, #ffe4b5);
-      padding: 18px;
-      text-align: center;
-      font-weight: 600;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
-      animation: sparkleFade 1.5s ease-in-out;
-      font-size: 1rem;
-    }
-
-    @keyframes sparkleFade {
-      0% { opacity: 0; transform: scale(0.95); }
-      60% { opacity: 1; transform: scale(1.02); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Feedback section styling aligned with cards */
-    #feedback {
-      max-width: 900px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    /* Buttons */
-    .btn { display:inline-block; padding:10px 16px; border-radius:8px; background:var(--accent); color:white; font-weight:700; text-decoration:none; box-shadow: 0 6px 14px rgba(14,165,164,0.14); }
-    .btn.secondary{background:#4f4f4f; box-shadow:none;}
-    .btn.ghost{background:transparent; color:var(--brand); border:1px solid rgba(11,107,154,0.08);}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .site{padding:12px;}
-      header{flex-direction:column; align-items:flex-start; gap:8px;}
-      .brand img{height:64px;}
-    }
-
-
-
-    /* Utility */
-    .center { text-align:center; }
-    .muted { color:var(--muted); }
-    .video-embed{border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(16,24,40,0.06);}
-    .scroll-banner{
-      background:#fff3f3;
-      padding:10px;
-      border-radius:8px;
-      color:#b30000;
-      font-weight:700;
-      overflow:hidden;
-    }
-
-    /* Match quality slider width to button alignment */
-    #quality-slider {
-      width: auto !important;
-      max-width: 180px;
-      display: inline-block !important;
-      margin: 10px 0 0 0 !important;
-      vertical-align: middle;
-    }
-
-    @media (max-width: 480px){
-      #quality-slider {
-        width: 100% !important;
-        max-width: 240px;
-        display: block !important;
-        margin: 10px auto 0 auto !important;
-      }
-    }
-
-    /* Policies & contact width alignment */
-    #privacy-policy,
-    #refund-policy,
-    #CONTACT {
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Standard width for all major content blocks */
-    .card,
-    .tool,
-    .tool-card,
-    section.card,
-    div.card {
-      max-width: 900px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Ensure all tool cards visually center inside page width */
-    .tool,
-    .tool-card,
-    .card {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Fix layout for 3CTool card (legacy – not used now but harmless) */
-    .tool-row {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: nowrap;
-    }
-    .tool-icon {
-      height: 72px;
-    }
-    .tool-text {
-      flex: 1;
-      text-align: left;
-    }
-    .tool-action {
-      flex-shrink: 0;
-      text-align: left;
-    }
-    @media (max-width: 600px){
-      .tool-row {
-        flex-direction: column;
-        text-align: center;
-      }
-      .tool-action {
-        text-align: center;
-        width: 100%;
-      }
-    }
-    #3CTool .tool-row {
-      max-width: 900px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    /* Floating menu refinement */
-    @media (max-width:900px){
-      .floating-menu {
-        display: none;
-        right: 16px;
-        left: 16px;
-        top: auto;
-        bottom: 80px;
-        transform: translateY(20px);
-        opacity: 0;
-        transition: transform 0.25s ease, opacity 0.25s ease;
-      }
-      .floating-menu.open {
-        display: block;
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    /* FINAL TAB STYLING (no animation, centered, pill style) */
-    .top-tabs {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      margin: 16px 0 20px;
-      text-align: center;
-    }
-
-    .top-tabs .tab-button {
-      -webkit-appearance:none;
-      appearance:none;
-      flex: 0 0 auto !important; /* prevents stretching */
-      background: transparent;
-      border-radius: 999px;
-      padding: 6px 18px;
-      border: 1px solid rgba(15,23,42,0.20);
-      font-size: 0.9rem;
-      cursor: pointer;
-      color: #0f172a;
-      letter-spacing: 0.02em;
-      transition: none;
-      margin: 0 !important;
-    }
-
-    .top-tabs .tab-button:hover {
-      background: rgba(255,255,255,0.9);
-    }
-
-    .top-tabs .tab-button.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      border-color: #0ea5e9;
-    }
-
-    .tab-sections {
-      margin-top: 4px;
-    }
-    .tab-section {
-      width: 100%;
-    }
-
-    /* Default state: hide all tab sections */
-    .tab-section {
-      display: none !important;
-    }
-
-    /* Active tab displays its content */
-    .tab-section.active {
-      display: block !important;
-    }
-
-    /* --- TAB VISIBILITY CONTROL --- */
-
-    /* HOME TAB → show full content */
-    body.tab-home-active #privacy-policy,
-    body.tab-home-active #refund-policy,
-    body.tab-home-active #CONTACT,
-    body.tab-home-active #feedback,
-    body.tab-home-active .tool,
-    body.tab-home-active .door-container {
-      display: block !important;
-    }
-
-    /* ABOUT TAB → only show About content */
-    body.tab-about-active #privacy-policy,
-    body.tab-about-active #refund-policy,
-    body.tab-about-active #CONTACT,
-    body.tab-about-active .tool,
-    body.tab-about-active .door-container {
-      display: none !important;
-    }
-
-    /* CLAIMS TAB → same as About */
-    body.tab-claims-active #privacy-policy,
-    body.tab-claims-active #refund-policy,
-    body.tab-claims-active #CONTACT,
-    body.tab-claims-active .tool,
-    body.tab-claims-active .door-container {
-      display: none !important;
-    }
-
-    /* Elements always visible */
-header,
-.top-tabs,
-#floatingMenu {
-  display: block !important;
-}
-
-
-@media (max-width: 600px) {
-  .tab-section {
-    margin-bottom: 22px;
+  :root{
+    --bg-start: #d6f0ff;
+    --bg-end: #c7f3ef;
+    --card-bg: #ffffff;
+    --muted: #6b7280;
+    --accent: #0ea5a4; /* teal accent */
+    --brand: #0b6b9a;
+    --radius: 12px;
+    --container-width: 1100px;
+    --max-width-narrow: 900px;
+    --glass: rgba(255,255,255,0.7);
   }
-}
 
-/* Add spacing below About and Claims content so feedback doesn't stick to it */
-body.tab-about-active #tab-about,
-body.tab-claims-active #tab-claims {
-  margin-bottom: 32px !important;
-}
+  html,body{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    background: linear-gradient(180deg,var(--bg-start),var(--bg-end));
+    color:#1f2937;
+    text-align:left;
+  }
 
-    /* --- FINAL OVERRIDE: Fix hero/door alignment (no display override) --- */
-    .door-container {
-      max-width: 900px !important;
-      width: 100% !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      margin-bottom: 32px !important;
-      box-sizing: border-box !important;
-      padding-left: 18px !important;
-      padding-right: 18px !important;
-    }
+  a{
+    color:var(--brand);
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
 
-    /* MOBILE ONLY: toggle visible */
-@media (max-width: 900px) {
-  #menuToggle {
+  /* Layout */
+  .site {
+    max-width: var(--container-width);
+    margin: 24px auto;
+    padding: 18px;
+  }
+
+  header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+  }
+
+  .logo {
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .logo img{
+    height:64px;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(11,107,154,0.12);
+  }
+
+  .brand-title h1{
+    font-size:1.1rem;
+    margin:0;
+    letter-spacing:0.6px;
+  }
+
+  .brand-title p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+
+  /* Door reveal hero (single unified definition) */
+  .door-container {
+    position:relative;
+    width:100%;
+    min-height:36vh;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
+    box-shadow: 0 8px 30px rgba(11,107,154,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    /* Align with main content width */
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    padding: 0 18px;
+    box-sizing: border-box;
+  }
+
+  .door {
+    position:absolute;
+    width:50%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+    font-size:clamp(24px,4vw,56px);
+    transition:transform 1.3s ease-in-out;
+    background:#4a4a4a;
+  }
+
+  .left-door{
+    left:0;
+    transform-origin:left;
+  }
+
+  .right-door{
+    right:0;
+    transform-origin:right;
+  }
+
+  .door::before{
+    opacity:0.95;
+  }
+
+  .brand {
+    position:relative;
+    z-index:2;
+    text-align:center;
+    opacity:0;
+    transition:opacity 1.2s ease-in-out;
+    color:var(--brand);
+  }
+
+  /* Prevent invisible doors from blocking touch/clicks */
+  .left-door,
+  .right-door {
+    pointer-events: none !important;
+  }
+
+  .brand img{
+    height:88px;
     display:block;
+    margin:0 auto 8px;
+  }
+
+  .brand h2{
+    margin:6px 0 0;
+    font-family: "Georgia", serif;
+    font-weight:600;
+    font-size:1rem;
+    color:var(--brand);
+  }
+
+  /* Floating quick menu – desktop default */
+  .floating-menu {
     position:fixed;
-    bottom:18px;
     right:18px;
-    z-index:9999;
+    top:160px;
+    background: linear-gradient(135deg,#fff7fb,#ffffff);
+    padding:12px;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(11,107,154,0.08);
+    z-index:1000;
+    width:220px;
+    border-left:8px solid var(--accent);
+    font-weight:600;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .floating-header{
+    color:var(--accent);
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+
+  .floating-menu a{
+    display:block;
+    padding:8px 6px;
+    color:#0f1724;
+    border-radius:8px;
+    margin:6px 0;
+    font-size:0.95rem;
+  }
+
+  .floating-menu a:hover{
+    background:rgba(14,165,164,0.06);
+    transform:translateX(4px);
+  }
+
+  /* Legacy class on button, id handles visibility */
+  .floating-toggle {
+    display:none;
+  }
+
+  /* Content cards */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(16,24,40,0.06);
+    margin-bottom:20px;
+  }
+
+  .card h2{
+    margin-top:0;
+    color:#0f1724;
+  }
+
+  .two-col {
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .two-col .left{
+    flex:1 1 320px;
+  }
+
+  .two-col .right{
+    flex:0 0 300px;
+    text-align:center;
+  }
+
+  /* Thank You Banner Styling */
+  .thank-banner {
+    background: linear-gradient(90deg, #fff8dc, #ffe4b5);
+    padding: 18px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
+    animation: sparkleFade 1.5s ease-in-out;
+    font-size: 1rem;
+  }
+
+  @keyframes sparkleFade {
+    0% { opacity: 0; transform: scale(0.95); }
+    60% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Feedback section styling aligned with cards */
+  #feedback {
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  /* Buttons */
+  .btn {
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:8px;
     background:var(--accent);
     color:white;
-    border-radius:50%;
-    width:54px;
-    height:54px;
-    border:none;
-    font-size:22px;
-    cursor:pointer;
-    box-shadow:0 8px 20px rgba(14,165,164,0.25);
-  }
-}
-
-/* DESKTOP: toggle hidden, menu always visible */
-@media (min-width: 901px) {
-  #menuToggle {
-    display:none !important;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow: 0 6px 14px rgba(14,165,164,0.14);
   }
 
+  .btn.secondary{
+    background:#4f4f4f;
+    box-shadow:none;
+  }
+
+  .btn.ghost{
+    background:transparent;
+    color:var(--brand);
+    border:1px solid rgba(11,107,154,0.08);
+  }
+
+  /* Responsive base adjustments */
+  @media (max-width:900px){
+    .site{
+      padding:12px;
+    }
+    header{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
+    }
+    .brand img{
+      height:64px;
+    }
+  }
+
+  /* Utility */
+  .center { text-align:center; }
+  .muted { color:var(--muted); }
+
+  .video-embed{
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(16,24,40,0.06);
+  }
+
+  .scroll-banner{
+    background:#fff3f3;
+    padding:10px;
+    border-radius:8px;
+    color:#b30000;
+    font-weight:700;
+    overflow:hidden;
+  }
+
+  /* Match quality slider width to button alignment */
+  #quality-slider {
+    width: auto !important;
+    max-width: 180px;
+    display: inline-block !important;
+    margin: 10px 0 0 0 !important;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 480px){
+    #quality-slider {
+      width: 100% !important;
+      max-width: 240px;
+      display: block !important;
+      margin: 10px auto 0 auto !important;
+    }
+  }
+
+  /* Policies & contact width alignment */
+  #privacy-policy,
+  #refund-policy,
+  #CONTACT {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Standard width for all major content blocks */
+  .card,
+  .tool,
+  .tool-card,
+  section.card,
+  div.card {
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Ensure all tool cards visually center inside page width */
+  .tool,
+  .tool-card,
+  .card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Legacy 3CTool layout helpers (harmless) */
+  .tool-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .tool-icon {
+    height: 72px;
+  }
+
+  .tool-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .tool-action {
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  @media (max-width: 600px){
+    .tool-row {
+      flex-direction: column;
+      text-align: center;
+    }
+    .tool-action {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  #3CTool .tool-row {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Mobile floating menu behavior – prevent ghost taps */
+  @media (max-width:900px){
+    .floating-menu {
+      right: 16px;
+      left: 16px;
+      top: auto;
+      bottom: 80px;
+      max-height: 60vh;
+      transform: translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .floating-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* FINAL TAB STYLING (no animation, centered, pill style) */
+  .top-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    margin: 16px 0 20px;
+    text-align: center;
+  }
+
+  .top-tabs .tab-button {
+    -webkit-appearance:none;
+    appearance:none;
+    flex: 0 0 auto !important; /* prevents stretching */
+    background: transparent;
+    border-radius: 999px;
+    padding: 6px 18px;
+    border: 1px solid rgba(15,23,42,0.20);
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #0f172a;
+    letter-spacing: 0.02em;
+    transition: none;
+    margin: 0 !important;
+  }
+
+  .top-tabs .tab-button:hover {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .top-tabs .tab-button.active {
+    background: #0ea5e9;
+    color: #ffffff;
+    border-color: #0ea5e9;
+  }
+
+  .tab-sections {
+    margin-top: 4px;
+  }
+
+  .tab-section {
+    width: 100%;
+  }
+
+  /* Default state: hide all tab sections, only .active shows */
+  .tab-section {
+    display: none !important;
+  }
+
+  .tab-section.active {
+    display: block !important;
+  }
+
+  /* --- TAB VISIBILITY CONTROL --- */
+
+  /* HOME TAB → show full content */
+  body.tab-home-active #privacy-policy,
+  body.tab-home-active #refund-policy,
+  body.tab-home-active #CONTACT,
+  body.tab-home-active #feedback,
+  body.tab-home-active .tool,
+  body.tab-home-active .door-container {
+    display: block !important;
+  }
+
+  /* ABOUT TAB → only show About content */
+  body.tab-about-active #privacy-policy,
+  body.tab-about-active #refund-policy,
+  body.tab-about-active #CONTACT,
+  body.tab-about-active .tool,
+  body.tab-about-active .door-container {
+    display: none !important;
+  }
+
+  /* CLAIMS TAB → same as About */
+  body.tab-claims-active #privacy-policy,
+  body.tab-claims-active #refund-policy,
+  body.tab-claims-active #CONTACT,
+  body.tab-claims-active .tool,
+  body.tab-claims-active .door-container {
+    display: none !important;
+  }
+
+  /* Elements always visible */
+  header,
+  .top-tabs,
   #floatingMenu {
-    display:block !important;
+    display: block !important;
   }
-}
-/* FINAL FORCE: Correct position of mobile toggle button */
-@media (max-width: 900px) {
-  #menuToggle {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    z-index: 99999 !important;
+
+  /* Mobile tab spacing */
+  @media (max-width: 600px) {
+    .tab-section {
+      margin-bottom: 22px;
+    }
   }
-}
-.tab-section:not(.active) {
-  display: none !important;
-  pointer-events: none !important;
-}
-.tool[hidden],
-.card[hidden] {
-  display: none !important;
-  pointer-events: none !important;
-}
 
+  /* Add spacing below About and Claims content so feedback doesn't stick to it */
+  body.tab-about-active #tab-about,
+  body.tab-claims-active #tab-claims {
+    margin-bottom: 32px !important;
+  }
 
-  </style>
+  /* Prevent hidden tab content from remaining clickable */
+  .tab-section:not(.active) {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  .tool[hidden],
+  .card[hidden] {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  /* MOBILE ONLY: toggle visible — bottom-left always */
+  @media (max-width: 900px) {
+    #menuToggle {
+      display:block;
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      left:auto;
+      z-index:9999;
+      background:var(--accent);
+      color:white;
+      border-radius:50%;
+      width:54px;
+      height:54px;
+      border:none;
+      font-size:22px;
+      cursor:pointer;
+      box-shadow:0 8px 20px rgba(14,165,164,0.25);
+      min-width:44px;
+      min-height:44px;
+    }
+  }
+
+  /* DESKTOP: toggle hidden, menu always visible */
+  @media (min-width: 901px) {
+    #menuToggle {
+      display:none !important;
+    }
+    #floatingMenu {
+      display:block !important;
+      pointer-events:auto;
+    }
+  }
+</style>
+
 </head>
 <body>
   <div class="site">
