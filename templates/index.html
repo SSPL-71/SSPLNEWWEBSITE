@@ -572,26 +572,27 @@
 
   /* MOBILE ONLY: toggle visible — bottom-left always */
   @media (max-width: 900px) {
-    #menuToggle {
-      display:block;
-      position:fixed;
-      bottom:18px;
-      right:18px;
-      left:auto;
-      z-index:9999;
-      background:var(--accent);
-      color:white;
-      border-radius:50%;
-      width:54px;
-      height:54px;
-      border:none;
-      font-size:22px;
-      cursor:pointer;
-      box-shadow:0 8px 20px rgba(14,165,164,0.25);
-      min-width:44px;
-      min-height:44px;
-    }
+  #menuToggle {
+    display:block;
+    position:fixed;
+    bottom: calc(env(safe-area-inset-bottom) + 20px);
+    right: calc(env(safe-area-inset-right) + 20px);
+    left:auto;
+    z-index:9999;
+    background:var(--accent);
+    color:white;
+    border-radius:50%;
+    width:54px;
+    height:54px;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(14,165,164,0.25);
+    min-width:44px;
+    min-height:44px;
   }
+}
+
 
   /* DESKTOP: toggle hidden, menu always visible */
   @media (min-width: 901px) {
