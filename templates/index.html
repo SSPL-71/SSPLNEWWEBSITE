@@ -570,40 +570,38 @@
     pointer-events: none !important;
   }
 
-  /* MOBILE ONLY: toggle visible — bottom-left always */
-  @media (max-width: 900px) {
+  /* Mobile toggle button — fixed to screen */
+#menuToggle {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 20px);
+  right: calc(env(safe-area-inset-right) + 20px);
+  z-index: 99999;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(14,165,164,0.25);
+  display: none; /* hidden on desktop */
+}
+
+/* Mobile: toggle visible */
+@media (max-width: 900px) {
   #menuToggle {
-    display:block;
-    position:fixed;
-    bottom: calc(env(safe-area-inset-bottom) + 20px);
-    right: calc(env(safe-area-inset-right) + 20px);
-    left:auto;
-    z-index:9999;
-    background:var(--accent);
-    color:white;
-    border-radius:50%;
-    width:54px;
-    height:54px;
-    border:none;
-    font-size:22px;
-    cursor:pointer;
-    box-shadow:0 8px 20px rgba(14,165,164,0.25);
-    min-width:44px;
-    min-height:44px;
+    display: block !important;
   }
 }
 
-
-  /* DESKTOP: toggle hidden, menu always visible */
-  @media (min-width: 901px) {
-    #menuToggle {
-      display:none !important;
-    }
-    #floatingMenu {
-      display:block !important;
-      pointer-events:auto;
-    }
+/* Desktop: floating menu visible, toggle hidden */
+@media (min-width: 901px) {
+  #menuToggle {
+    display: none !important;
   }
+}
+
 </style>
 
 </head>
@@ -642,7 +640,7 @@
         </section>
 
         <!-- Floating quick access menu -->
-        <button id="menuToggle" class="floating-toggle" aria-expanded="false">☰</button>
+        
         <aside id="floatingMenu" class="floating-menu" role="navigation" aria-label="Quick access">
           <div class="floating-header">📌 Quick Access Menu</div>
           <a href="#GenTrac">🔐 GenTrac Login</a>
@@ -682,13 +680,11 @@
             // Move floating menu & toggle to top-level inside .site so they are visible on all tabs
             const site = document.querySelector('.site');
             const floatMenu = document.getElementById('floatingMenu');
-            const floatToggle = document.getElementById('menuToggle');
+            
             if (site && floatMenu && floatMenu.parentElement !== site) {
               site.appendChild(floatMenu);
             }
-            if (site && floatToggle && floatToggle.parentElement !== site) {
-              site.appendChild(floatToggle);
-            }
+  
 
             // Set initial tab state
             document.body.classList.add('tab-home-active');
@@ -1628,5 +1624,6 @@
       });
     })();
   </script>
+<button id="menuToggle" aria-expanded="false">☰</button>
 </body>
 </html>
