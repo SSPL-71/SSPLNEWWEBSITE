@@ -23,17 +23,16 @@
 
     body {
       margin: 0;
-      padding: 0;
       font-family: system-ui, sans-serif;
       background: var(--bg-light);
       color: var(--text-dark);
       overflow-x: hidden;
     }
 
-    /* FIXED HEADER DOOR REVEAL */
+    /* REDUCED DOOR HEIGHT + FIXED POSITION */
     .door-container {
       width: 100%;
-      height: 30vh;
+      height: 22vh; /* smaller */
       position: fixed;
       top: 0;
       left: 0;
@@ -53,30 +52,48 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 4vw;
-      color: #fff;
+      font-size: 3.4vw;
+      color: white;
       font-weight: bold;
     }
 
-    .left-door { left: 0; transform-origin: left; }
-    .right-door { right: 0; transform-origin: right; }
+    .left-door { transform-origin: left; left: 0; }
+    .right-door { transform-origin: right; right: 0; }
 
     .brand {
       position: absolute;
       text-align: center;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
-      color: white; /* FIXED VISIBILITY */
+      color: white;
     }
 
     .brand img {
-      height: 55px;
-      margin-bottom: 8px;
+      height: 45px;
+      margin-bottom: 6px;
     }
 
-    /* MAIN CONTENT BELOW DOORS */
+    /* NEW FIXED BACK LINK BELOW DOOR REVEAL */
+    .sticky-nav {
+      position: fixed;
+      top: 22vh; /* aligned right under doors */
+      width: 100%;
+      text-align: center;
+      background: #ffffff;
+      padding: 10px 0;
+      z-index: 999;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sticky-nav a {
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
     .content-area {
-      margin-top: 32vh;
+      margin-top: 30vh;
     }
 
     .container {
@@ -85,15 +102,15 @@
       padding: 30px;
       margin: 30px auto;
       border-radius: var(--radius);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
       text-align: center;
     }
 
     video {
       width: 90%;
-      max-width: 420px; /* smaller + centered */
-      margin: auto;
+      max-width: 400px;
       display: block;
+      margin: 20px auto;
       border-radius: 10px;
     }
 
@@ -115,21 +132,17 @@
       transform: scale(1.04);
     }
 
-    .back-link {
-      display: block;
-      margin-bottom: 15px;
-      font-size: 16px;
-      color: #333;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
     footer {
       text-align: center;
       padding: 20px;
       font-size: 14px;
       color: #444;
       margin-top: 30px;
+    }
+
+    @media(max-width:600px) {
+      .brand img { height: 40px; }
+      .brand h1 { font-size: 4vw; }
     }
   </style>
 
@@ -146,7 +159,7 @@
 
 <body>
 
-  <!-- Fixed Door Reveal -->
+  <!-- Door Reveal -->
   <section class="door-container">
     <div class="door left-door">SS</div>
     <div class="door right-door">PL</div>
@@ -156,11 +169,14 @@
     </div>
   </section>
 
+  <!-- Sticky Navigation -->
+  <div class="sticky-nav">
+    <a href="https://ss-services.co.in">← Back to Main Page</a>
+  </div>
+
   <!-- Scrollable Content -->
   <div class="content-area">
     <div class="container">
-
-      <a href="https://ss-services.co.in" class="back-link">← Back to Main Page</a>
 
       <img src="{{ url_for('static', filename='3CTool.png') }}" style="max-height:90px" alt="3CTool">
       <p><strong>Developed by SSPL</strong></p>
@@ -174,7 +190,6 @@
       </video>
 
       <a href="https://image-pdf-tool.onrender.com/" class="button-link">Open 3C Tool</a>
-
     </div>
   </div>
 
