@@ -12,122 +12,126 @@
   <meta name="google-adsense-account" content="ca-pub-2931901961774543">    
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="canonical" href="https://ss-services.co.in/3ctool">
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "3ctool",
-    "operatingSystem": "Web",
-    "applicationCategory": "Utility",
-    "description": "3ctool is a free online tool to crop, compress, and convert images to PDF.",
-    "url": "https://ss-services.co.in/3ctool",
-    "author": {
-      "@type": "Organization",
-      "name": "Sarvasiddhanta Services Private Limited"
-    }
-  }
-  </script>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4N9KCYHSF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-T4N9KCYHSF');
-  </script>
-
-  <!-- Ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2931901961774543" crossorigin="anonymous"></script>
-
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('Service Worker registered'))
-        .catch(err => console.error('SW registration failed:', err));
-    }
-  </script>
-
-  <!-- Styles -->
   <style>
+    :root {
+      --primary: #4CAF50;
+      --bg-light: #F5F9FF;
+      --text-dark: #222;
+      --radius: 10px;
+      --max-width: 900px;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #87CEEB; /* Light blue */
-      text-align: center;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
       overflow-x: hidden;
-      overflow-y: auto;
     }
+
+    /* HEADER ANIMATION */
     .door-container {
-      position: relative;
       width: 100vw;
-      height: 40vh;
+      height: 30vh;
+      position: relative;
+      background: #1e1e1e;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
     }
+
     .door {
       position: absolute;
       width: 50%;
       height: 100%;
-      background: #4A4A4A;
+      background: #333;
       transition: transform 1.5s ease-in-out;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       font-size: 4vw;
-      color: white;
       font-weight: bold;
+      color: #fff;
     }
+
     .left-door { left: 0; transform-origin: left; }
     .right-door { right: 0; transform-origin: right; }
+
     .left-door::before { content: "SS"; }
     .right-door::before { content: "PL"; }
+
     .brand {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: black;
-      font-size: 2vw;
+      text-align: center;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
-    @media (max-width: 600px) {
-      .brand { font-size: 4vw; }
+
+    .brand img {
+      height: 60px;
+      margin-bottom: 10px;
     }
+
     .container {
-      max-width: 800px;
+      max-width: var(--max-width);
+      background: #fff;
+      padding: 30px;
       margin: 30px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
     }
+
+    .container img {
+      display: block;
+      margin: auto;
+    }
+
+    video {
+      width: 100%;
+      max-width: 550px;
+      border-radius: var(--radius);
+      margin: 20px auto;
+    }
+
     .button-link {
       display: inline-block;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    .button-link:hover { background-color: #45a049; }
-    .back-link {
-      display: block;
-      margin-top: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #333;
-      text-decoration: underline;
-    }
-    footer {
       margin-top: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: var(--radius);
+      transition: 0.2s;
+      font-size: 18px;
+    }
+
+    .button-link:hover {
+      background: #3a9b42;
+      transform: scale(1.04);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #444;
+      text-decoration: underline;
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
       font-size: 14px;
-      color: #333;
+      color: #444;
+    }
+
+    @media(max-width:600px) {
+      .brand img { height: 45px; }
+      .brand h1 { font-size: 4vw; }
     }
   </style>
 
@@ -137,58 +141,48 @@
         document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
         document.querySelector(".right-door").style.transform = "rotateY(90deg)";
         document.querySelector(".brand").style.opacity = 1;
-      }, 500);
+      }, 400);
     });
   </script>
 </head>
 
 <body>
-  <!-- Door Reveal -->
-  <section>
-    <div class="door-container">
-      <div class="door left-door"></div>
-      <div class="door right-door"></div>
-      <div class="brand">
-        <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:50px;">
-        <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
-      </div>
+
+  <!-- Animated Intro -->
+  <section class="door-container">
+    <div class="door left-door"></div>
+    <div class="door right-door"></div>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL">
+      <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
     </div>
   </section>
 
-  <!-- 3CTool Section -->
-  <section id="pdf-tools">
+
+  <!-- MAIN CONTENT -->
+  <section>
     <div class="container">
-            <img src="{{ url_for('static', filename='3CTool.png') }}"  
-      alt="3CTool" style="max-height:90px; display:block; margin:0 auto;">  
+
+      <img src="{{ url_for('static', filename='3CTool.png') }}" style="max-height:90px" alt="3CTool">
       <p><strong>Developed by SSPL</strong></p>
       <p><i><strong>CROP, COMPRESS IMAGES / VIDEOS & CONVERT IMAGES TO PDF</strong></i></p>
-      
 
-<!-- 3CTool Video -->
-<div style="width: 100%; text-align: center; margin: 40px 0;">
-  <h2 style="color: #333;">🛠️ Explore 3CTool – Crop, Compress, Convert</h2>
-  <div style="max-width: 500px; margin: 0 auto; border-radius: 10px;">
-    <video controls playsinline style="width: 100%; border-radius: 10px;">
-      <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</div>
+      <h2>🛠️ Explore 3CTool – Crop, Compress, Convert</h2>
 
+      <video controls playsinline>
+        <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
 
+      <a href="https://image-pdf-tool.onrender.com/" class="button-link">Open 3C Tool</a>
 
-<a href="https://image-pdf-tool.onrender.com/" class="button-link" title="Click to open the 3C Tool">Open 3C Tool</a>
-        
-      
-
-      <!-- Back to Main Page -->
       <a href="https://ss-services.co.in" class="back-link">← Back to Main Page</a>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     © 2025 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
   </footer>
+
 </body>
 </html>
