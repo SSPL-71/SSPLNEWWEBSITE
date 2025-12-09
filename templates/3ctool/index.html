@@ -9,16 +9,15 @@
   <meta name="keywords" content="3ctool, claims investigations Karnataka, PDF tools online free, 3ctool image to PDF, PDF compression, SS Services, Sarvasiddhanta Services Private Limited, SSPL, image conversion">
   <meta name="author" content="Sarvasiddhanta Services Private Limited">
 
-  <meta name="google-adsense-account" content="ca-pub-2931901961774543">    
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="canonical" href="https://ss-services.co.in/3ctool">
 
   <style>
     :root {
       --primary: #4CAF50;
-      --bg-light: #F5F9FF;
+      --bg-light: #F9FBFF;
       --text-dark: #222;
-      --radius: 10px;
+      --radius: 12px;
       --max-width: 900px;
     }
 
@@ -31,15 +30,18 @@
       overflow-x: hidden;
     }
 
-    /* HEADER ANIMATION */
+    /* FIXED HEADER DOOR REVEAL */
     .door-container {
-      width: 100vw;
+      width: 100%;
       height: 30vh;
-      position: relative;
-      background: #1e1e1e;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #1b1b1b;
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 1000;
     }
 
     .door {
@@ -49,34 +51,37 @@
       background: #333;
       transition: transform 1.5s ease-in-out;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-size: 4vw;
-      font-weight: bold;
       color: #fff;
+      font-weight: bold;
     }
 
     .left-door { left: 0; transform-origin: left; }
     .right-door { right: 0; transform-origin: right; }
-
-    .left-door::before { content: "SS"; }
-    .right-door::before { content: "PL"; }
 
     .brand {
       position: absolute;
       text-align: center;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
+      color: white; /* FIXED VISIBILITY */
     }
 
     .brand img {
-      height: 60px;
-      margin-bottom: 10px;
+      height: 55px;
+      margin-bottom: 8px;
+    }
+
+    /* MAIN CONTENT BELOW DOORS */
+    .content-area {
+      margin-top: 32vh;
     }
 
     .container {
       max-width: var(--max-width);
-      background: #fff;
+      background: white;
       padding: 30px;
       margin: 30px auto;
       border-radius: var(--radius);
@@ -84,16 +89,12 @@
       text-align: center;
     }
 
-    .container img {
-      display: block;
-      margin: auto;
-    }
-
     video {
-      width: 100%;
-      max-width: 550px;
-      border-radius: var(--radius);
-      margin: 20px auto;
+      width: 90%;
+      max-width: 420px; /* smaller + centered */
+      margin: auto;
+      display: block;
+      border-radius: 10px;
     }
 
     .button-link {
@@ -110,16 +111,17 @@
     }
 
     .button-link:hover {
-      background: #3a9b42;
+      background: #3a963f;
       transform: scale(1.04);
     }
 
     .back-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: #444;
-      text-decoration: underline;
+      display: block;
+      margin-bottom: 15px;
       font-size: 16px;
+      color: #333;
+      text-decoration: underline;
+      font-weight: bold;
     }
 
     footer {
@@ -127,11 +129,7 @@
       padding: 20px;
       font-size: 14px;
       color: #444;
-    }
-
-    @media(max-width:600px) {
-      .brand img { height: 45px; }
-      .brand h1 { font-size: 4vw; }
+      margin-top: 30px;
     }
   </style>
 
@@ -148,20 +146,21 @@
 
 <body>
 
-  <!-- Animated Intro -->
+  <!-- Fixed Door Reveal -->
   <section class="door-container">
-    <div class="door left-door"></div>
-    <div class="door right-door"></div>
+    <div class="door left-door">SS</div>
+    <div class="door right-door">PL</div>
     <div class="brand">
       <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL">
       <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
     </div>
   </section>
 
-
-  <!-- MAIN CONTENT -->
-  <section>
+  <!-- Scrollable Content -->
+  <div class="content-area">
     <div class="container">
+
+      <a href="https://ss-services.co.in" class="back-link">← Back to Main Page</a>
 
       <img src="{{ url_for('static', filename='3CTool.png') }}" style="max-height:90px" alt="3CTool">
       <p><strong>Developed by SSPL</strong></p>
@@ -176,9 +175,8 @@
 
       <a href="https://image-pdf-tool.onrender.com/" class="button-link">Open 3C Tool</a>
 
-      <a href="https://ss-services.co.in" class="back-link">← Back to Main Page</a>
     </div>
-  </section>
+  </div>
 
   <footer>
     © 2025 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
