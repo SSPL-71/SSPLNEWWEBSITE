@@ -40,19 +40,19 @@
   </script>
 
   <!-- Consolidated and modernized styles -->
-  <style>
-:root{
+ <style>
+  :root{
     --bg-start: #d6f0ff;
     --bg-end: #c7f3ef;
     --card-bg: #ffffff;
     --muted: #6b7280;
-    --accent: #0ea5a4;
+    --accent: #0ea5a4; /* teal accent */
     --brand: #0b6b9a;
     --radius: 12px;
     --container-width: 1100px;
     --max-width-narrow: 900px;
     --glass: rgba(255,255,255,0.7);
-}
+  }
 
 html, body {
   margin: 0;
@@ -64,359 +64,562 @@ html, body {
   background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
   color: #1f2937;
   text-align: left;
+
+  /* 👇 The important additions */
   max-width: 100vw;
   overflow-x: hidden;
 }
 
-a{
+
+  a{
     color:var(--brand);
     text-decoration: none;
-}
-a:hover{
+  }
+  a:hover{
     text-decoration: underline;
-}
-
-/* Layout */
-.site {
-  max-width: var(--container-width);
-  margin: 24px auto;
-  padding: 18px;
-}
-
-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin-bottom:18px;
-}
-
-.logo {
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.logo img{
-  height:64px;
-  border-radius:10px;
-  box-shadow:0 6px 18px rgba(11,107,154,0.12);
-}
-
-.brand-title h1{
-  font-size:1.1rem;
-  margin:0;
-  letter-spacing:0.6px;
-}
-
-.brand-title p{
-  margin:0;
-  color:var(--muted);
-  font-size:0.95rem;
-}
-
-/* Door reveal */
-.door-container {
-  position:relative;
-  width:100%;
-  min-height:36vh;
-  border-radius:var(--radius);
-  overflow:hidden;
-  background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
-  box-shadow: 0 8px 30px rgba(11,107,154,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  max-width: 900px;
-  margin: 0 auto 32px auto;
-  padding: 0 18px;
-}
-
-.door {
-  position:absolute;
-  width:50%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-weight:700;
-  font-size:clamp(24px,4vw,56px);
-  transition:transform 1.3s ease-in-out;
-  background:#4a4a4a;
-}
-
-.left-door{ left:0; transform-origin:left; }
-.right-door{ right:0; transform-origin:right; }
-.door::before { opacity:0.95; }
-
-.brand {
-  position:relative;
-  z-index:2;
-  text-align:center;
-  opacity:0;
-  transition:opacity 1.2s ease-in-out;
-  color:var(--brand);
-}
-
-.brand img{
-  height:88px;
-  display:block;
-  margin:0 auto 8px;
-}
-
-/* Prevent invisible doors blocking taps */
-.left-door,
-.right-door {
-  pointer-events:none !important;
-}
-
-/* Floating Menu – Desktop default */
-.floating-menu {
-  position:fixed;
-  right:18px;
-  top:160px;
-  background: linear-gradient(135deg,#fff7fb,#ffffff);
-  padding:12px;
-  border-radius:12px;
-  box-shadow: 0 10px 30px rgba(11,107,154,0.08);
-  z-index:1000;
-  width:220px;
-  border-left:8px solid var(--accent);
-  font-weight:600;
-  max-height: 70vh;
-  overflow-y: auto;
-  pointer-events:auto !important;
-}
-
-.floating-header{ color:var(--accent); font-size:0.95rem; margin-bottom:8px; }
-
-.floating-menu a{
-  display:block;
-  padding:8px 6px;
-  color:#0f1724;
-  border-radius:8px;
-  margin:6px 0;
-  font-size:0.95rem;
-}
-
-.floating-menu a:hover{
-  background:rgba(14,165,164,0.06);
-  transform:translateX(4px);
-}
-
-/* Hide legacy class */
-.floating-toggle { display:none; }
-
-/* Content Cards */
-.card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 22px;
-  box-shadow: 0 6px 20px rgba(16,24,40,0.06);
-  margin-bottom:20px;
-}
-
-.card h2{ margin-top:0; color:#0f1724; }
-
-.two-col {
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-
-.two-col .left { flex:1 1 320px; }
-.two-col .right { flex:0 0 300px; text-align:center; }
-
-.thank-banner {
-  background: linear-gradient(90deg, #fff8dc, #ffe4b5);
-  padding: 18px;
-  text-align: center;
-  font-weight: 600;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
-  animation: sparkleFade 1.5s ease-in-out;
-  font-size: 1rem;
-}
-
-@keyframes sparkleFade {
-  0% { opacity:0; transform:scale(0.95); }
-  60% { opacity:1; transform:scale(1.02); }
-  100% { opacity:1; transform:scale(1); }
-}
-
-#feedback {
-  max-width:900px;
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
-
-.btn {
-  padding:10px 16px;
-  border-radius:8px;
-  background:var(--accent);
-  color:white;
-  font-weight:700;
-  text-decoration:none;
-  box-shadow:0 6px 14px rgba(14,165,164,0.14);
-}
-
-.btn.secondary{ background:#4f4f4f; box-shadow:none; }
-.btn.ghost{
-  background:transparent;
-  color:var(--brand);
-  border:1px solid rgba(11,107,154,0.08);
-}
-
-/* Responsive */
-@media (max-width:900px){
-  .site{ padding:12px; }
-  header{ flex-direction:column; align-items:flex-start; gap:8px; }
-  .brand img{ height:64px; }
-}
-
-.center { text-align:center; }
-.muted { color:var(--muted); }
-
-.video-embed{
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 6px 18px rgba(16,24,40,0.06);
-}
-
-.scroll-banner{
-  background:#fff3f3;
-  padding:10px;
-  border-radius:8px;
-  color:#b30000;
-  font-weight:700;
-}
-
-#quality-slider {
-  max-width:180px;
-  display:inline-block !important;
-  margin:10px 0 0 0 !important;
-}
-
-@media (max-width:480px){
-  #quality-slider {
-    max-width:240px;
-    display:block !important;
-    margin:10px auto 0 auto !important;
   }
-}
 
-#privacy-policy,
-#refund-policy,
-#CONTACT {
-  max-width:900px;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.card,
-.tool,
-.tool-card,
-section.card,
-div.card {
-  max-width:900px;
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.tool-row {
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-.tool-icon { height:72px; }
-.tool-text { flex:1; text-align:left; }
-.tool-action { flex-shrink:0; }
-
-/* Mobile responsive tool row */
-@media (max-width:600px){
-  .tool-row{
-    flex-direction:column;
-    text-align:center;
+  /* Layout */
+  .site {
+    max-width: var(--container-width);
+    margin: 24px auto;
+    padding: 18px;
   }
-  .tool-action{
+
+  header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+  }
+
+  .logo {
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .logo img{
+    height:64px;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(11,107,154,0.12);
+  }
+
+  .brand-title h1{
+    font-size:1.1rem;
+    margin:0;
+    letter-spacing:0.6px;
+  }
+
+  .brand-title p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+
+  /* Door reveal hero (single unified definition) */
+  .door-container {
+    position:relative;
     width:100%;
+    min-height:36vh;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
+    box-shadow: 0 8px 30px rgba(11,107,154,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    /* Align with main content width */
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    padding: 0 18px;
+    box-sizing: border-box;
+  }
+
+  .door {
+    position:absolute;
+    width:50%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+    font-size:clamp(24px,4vw,56px);
+    transition:transform 1.3s ease-in-out;
+    background:#4a4a4a;
+  }
+
+  .left-door{
+    left:0;
+    transform-origin:left;
+  }
+
+  .right-door{
+    right:0;
+    transform-origin:right;
+  }
+
+  .door::before{
+    opacity:0.95;
+  }
+
+  .brand {
+    position:relative;
+    z-index:2;
+    text-align:center;
+    opacity:0;
+    transition:opacity 1.2s ease-in-out;
+    color:var(--brand);
+  }
+
+  /* Prevent invisible doors from blocking touch/clicks */
+  .left-door,
+  .right-door {
+    pointer-events: none !important;
+  }
+
+  .brand img{
+    height:88px;
+    display:block;
+    margin:0 auto 8px;
+  }
+
+  .brand h2{
+    margin:6px 0 0;
+    font-family: "Georgia", serif;
+    font-weight:600;
+    font-size:1rem;
+    color:var(--brand);
+  }
+
+  /* Floating quick menu – desktop default */
+  .floating-menu {
+    position:fixed;
+    right:18px;
+    top:160px;
+    background: linear-gradient(135deg,#fff7fb,#ffffff);
+    padding:12px;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(11,107,154,0.08);
+    z-index:1000;
+    width:220px;
+    border-left:8px solid var(--accent);
+    font-weight:600;
+    max-height: 70vh;
+    overflow-y: auto;
+    pointer-events: auto !important;
+  }
+
+  .floating-header{
+    color:var(--accent);
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+
+  .floating-menu a{
+    display:block;
+    padding:8px 6px;
+    color:#0f1724;
+    border-radius:8px;
+    margin:6px 0;
+    font-size:0.95rem;
+  }
+
+  .floating-menu a:hover{
+    background:rgba(14,165,164,0.06);
+    transform:translateX(4px);
+  }
+
+  /* Legacy class on button, id handles visibility */
+  .floating-toggle {
+    display:none;
+  }
+
+  /* Content cards */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(16,24,40,0.06);
+    margin-bottom:20px;
+  }
+
+  .card h2{
+    margin-top:0;
+    color:#0f1724;
+  }
+
+  .two-col {
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .two-col .left{
+    flex:1 1 320px;
+  }
+
+  .two-col .right{
+    flex:0 0 300px;
     text-align:center;
   }
-}
 
-#3CTool .tool-row {
-  max-width:900px;
-  width:100%;
-  margin:0 auto;
-}
+  /* Thank You Banner Styling */
+  .thank-banner {
+    background: linear-gradient(90deg, #fff8dc, #ffe4b5);
+    padding: 18px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
+    animation: sparkleFade 1.5s ease-in-out;
+    font-size: 1rem;
+  }
 
-/* ------------------------------------------- */
-/* ✅ FIXED FLOATING-MENU — FINAL CORRECT VERSION */
-/* ------------------------------------------- */
+  @keyframes sparkleFade {
+    0% { opacity: 0; transform: scale(0.95); }
+    60% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+  }
 
-@media (max-width: 900px) {
+  /* Feedback section styling aligned with cards */
+  #feedback {
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 
-  /* CLOSED STATE (fully non-interactive) */
-  .floating-menu {
-    position: fixed;
-    right: 20px;
-    bottom: 90px;
-    width: 220px;
-    max-height: 60vh;
+  /* Buttons */
+  .btn {
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:8px;
+    background:var(--accent);
+    color:white;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow: 0 6px 14px rgba(14,165,164,0.14);
+  }
 
+  .btn.secondary{
+    background:#4f4f4f;
+    box-shadow:none;
+  }
+
+  .btn.ghost{
+    background:transparent;
+    color:var(--brand);
+    border:1px solid rgba(11,107,154,0.08);
+  }
+
+  /* Responsive base adjustments */
+  @media (max-width:900px){
+    .site{
+      padding:12px;
+    }
+    header{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
+    }
+    .brand img{
+      height:64px;
+    }
+  }
+
+  /* Utility */
+  .center { text-align:center; }
+  .muted { color:var(--muted); }
+
+  .video-embed{
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(16,24,40,0.06);
+  }
+
+  .scroll-banner{
+    background:#fff3f3;
+    padding:10px;
+    border-radius:8px;
+    color:#b30000;
+    font-weight:700;
+    overflow:hidden;
+  }
+
+  /* Match quality slider width to button alignment */
+  #quality-slider {
+    width: auto !important;
+    max-width: 180px;
+    display: inline-block !important;
+    margin: 10px 0 0 0 !important;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 480px){
+    #quality-slider {
+      width: 100% !important;
+      max-width: 240px;
+      display: block !important;
+      margin: 10px auto 0 auto !important;
+    }
+  }
+
+  /* Policies & contact width alignment */
+  #privacy-policy,
+  #refund-policy,
+  #CONTACT {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Standard width for all major content blocks */
+  .card,
+  .tool,
+  .tool-card,
+  section.card,
+  div.card {
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Ensure all tool cards visually center inside page width */
+  .tool,
+  .tool-card,
+  .card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Legacy 3CTool layout helpers (harmless) */
+  .tool-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .tool-icon {
+    height: 72px;
+  }
+
+  .tool-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .tool-action {
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  @media (max-width: 600px){
+    .tool-row {
+      flex-direction: column;
+      text-align: center;
+    }
+    .tool-action {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  #3CTool .tool-row {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Mobile floating menu behavior – fixed and non-blocking when hidden */
+  @media (max-width: 900px) {
+
+    /* CLOSED STATE (fully non-interactive) */
+    .floating-menu {
+      position: fixed;
+      right: 20px;
+      bottom: 90px;
+      width: 220px;
+      max-height: 60vh;
+
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+
+      transform: translateY(10px);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      z-index: 9998;
+    }
+
+    /* OPEN STATE */
+    .floating-menu.open {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+      transform: translateY(0);
+    }
+  }
+
+  /* FINAL TAB STYLING (no animation, centered, pill style) */
+  .top-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    margin: 16px 0 20px;
+    text-align: center;
+  }
+
+  .top-tabs .tab-button {
+    -webkit-appearance:none;
+    appearance:none;
+    flex: 0 0 auto !important; /* prevents stretching */
+    background: transparent;
+    border-radius: 999px;
+    padding: 6px 18px;
+    border: 1px solid rgba(15,23,42,0.20);
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #0f172a;
+    letter-spacing: 0.02em;
+    transition: none;
+    margin: 0 !important;
+  }
+
+  .top-tabs .tab-button:hover {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .top-tabs .tab-button.active {
+    background: #0ea5e9;
+    color: #ffffff;
+    border-color: #0ea5e9;
+  }
+
+  .tab-sections {
+    margin-top: 4px;
+  }
+
+  .tab-section {
+    width: 100%;
+  }
+
+  /* Default state: hide all tab sections, only .active shows */
+  .tab-section {
     display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-
-    transform: translateY(10px);
-    transition: transform 0.25s ease, opacity 0.25s ease;
-    z-index: 9998;
   }
 
-  /* OPEN STATE */
-  .floating-menu.open {
+  .tab-section.active {
     display: block !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    visibility: visible !important;
-    transform: translateY(0);
   }
-}
 
-/* Mobile Toggle Button */
+  /* --- TAB VISIBILITY CONTROL --- */
+
+  /* HOME TAB → show full content */
+  body.tab-home-active #privacy-policy,
+  body.tab-home-active #refund-policy,
+  body.tab-home-active #CONTACT,
+  body.tab-home-active #feedback,
+  body.tab-home-active .tool,
+  body.tab-home-active .door-container {
+    display: block !important;
+  }
+
+  /* ABOUT TAB → only show About content */
+  body.tab-about-active #privacy-policy,
+  body.tab-about-active #refund-policy,
+  body.tab-about-active #CONTACT,
+  body.tab-about-active .tool,
+  body.tab-about-active .door-container {
+    display: none !important;
+  }
+
+  /* CLAIMS TAB → same as About */
+  body.tab-claims-active #privacy-policy,
+  body.tab-claims-active #refund-policy,
+  body.tab-claims-active #CONTACT,
+  body.tab-claims-active .tool,
+  body.tab-claims-active .door-container {
+    display: none !important;
+  }
+
+  /* Elements always visible */
+  header,
+  .top-tabs,
+  #floatingMenu {
+    display: block !important;
+  }
+
+  /* Mobile tab spacing */
+  @media (max-width: 600px) {
+    .tab-section {
+      margin-bottom: 22px;
+    }
+  }
+
+  /* Add spacing below About and Claims content so feedback doesn't stick to it */
+  body.tab-about-active #tab-about,
+  body.tab-claims-active #tab-claims {
+    margin-bottom: 32px !important;
+  }
+
+  /* Prevent hidden tab content from remaining clickable */
+  .tab-section:not(.active) {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  .tool[hidden],
+  .card[hidden] {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+ /* Mobile toggle button — fixed to screen */
 #menuToggle {
   position: fixed;
   bottom: calc(env(safe-area-inset-bottom) + 20px);
   right: calc(env(safe-area-inset-right) + 20px);
   z-index: 99999;
   background: var(--accent);
-  color:white;
-  border-radius:50%;
-  width:56px;
-  height:56px;
-  border:none;
-  font-size:22px;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(14,165,164,0.25);
-  display:none;
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(14,165,164,0.25);
+  display: none; /* hidden on desktop */
 }
 
-@media (max-width:900px){
-  #menuToggle { display:block !important; margin:20px auto; }
+/* Mobile: toggle visible */
+@media (max-width: 900px) {
+  #menuToggle {
+    display: block !important;
+    margin: 20px auto;     /* If you intended this */
+  }
 }
-@media (min-width:901px){
-  #menuToggle { display:none !important; }
+
+/* Desktop: floating menu visible, toggle hidden */
+@media (min-width: 901px) {
+  #menuToggle {
+    display: none !important;
+  }
 }
-
-
-
 </style>
+
 
 </head>
 <body>
