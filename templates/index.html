@@ -458,6 +458,12 @@ html, body {
     z-index: 9998;
   }
 
+.floating-menu {
+    display: none;           /* hidden */
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;    /* 🔥 FIX — not clickable when closed */
+}
   .floating-menu.open {
     /* 👇 becomes fully active and clickable */
     display: block;
@@ -465,12 +471,7 @@ html, body {
     transform: translateY(0);
     pointer-events: auto;
   }
-.floating-menu {
-    display: none;           /* hidden */
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;    /* 🔥 FIX — not clickable when closed */
-}
+
 
 
 
@@ -685,19 +686,13 @@ const menu = document.getElementById('floatingMenu');
 
 if (toggleBtn && menu) {
   toggleBtn.addEventListener('click', () => {
-
-    // If menu is open → close it fully
     if (menu.classList.contains('open')) {
       menu.classList.remove('open');
-      menu.style.pointerEvents = "none";   // 🔥 ensures menu cannot block touches
-    } 
-    // If menu is closed → open it
-    else {
+      menu.style.pointerEvents = "none";
+    } else {
       menu.classList.add('open');
       menu.style.pointerEvents = "auto";
     }
-
-    // accessibility update
     const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
     toggleBtn.setAttribute('aria-expanded', String(!expanded));
   });
