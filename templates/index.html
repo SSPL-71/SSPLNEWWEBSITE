@@ -679,44 +679,53 @@ margin:20px auto;
         </aside>
 
         <!-- Quick-access toggle behavior (keeps original JS logic) -->
-        <script>
+       <script>
 const toggleBtn = document.getElementById('menuToggle');
 const menu = document.getElementById('floatingMenu');
 
 if (toggleBtn && menu) {
   toggleBtn.addEventListener('click', () => {
-    menu.classList.toggle('open');
 
-    // accessibility state update
+    // If menu is open → close it fully
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      menu.style.pointerEvents = "none";   // 🔥 ensures menu cannot block touches
+    } 
+    // If menu is closed → open it
+    else {
+      menu.classList.add('open');
+      menu.style.pointerEvents = "auto";
+    }
+
+    // accessibility update
     const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
     toggleBtn.setAttribute('aria-expanded', String(!expanded));
   });
 }
 
-          // Door animation + ensure floating menu visible on all tabs
-          document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-              const left = document.querySelector(".left-door");
-              const right = document.querySelector(".right-door");
-              const brand = document.querySelector(".brand");
-              if (left) left.style.transform = "rotateY(-90deg)";
-              if (right) right.style.transform = "rotateY(90deg)";
-              if (brand) brand.style.opacity = 1;
-            }, 500);
+          
+// Leave the rest EXACTLY as-is
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    const left = document.querySelector(".left-door");
+    const right = document.querySelector(".right-door");
+    const brand = document.querySelector(".brand");
+    if (left) left.style.transform = "rotateY(-90deg)";
+    if (right) right.style.transform = "rotateY(90deg)";
+    if (brand) brand.style.opacity = 1;
+  }, 500);
 
-            // Move floating menu & toggle to top-level inside .site so they are visible on all tabs
-            const site = document.querySelector('.site');
-            const floatMenu = document.getElementById('floatingMenu');
-            
-            if (site && floatMenu && floatMenu.parentElement !== site) {
-              site.appendChild(floatMenu);
-            }
+  const site = document.querySelector('.site');
+  const floatMenu = document.getElementById('floatingMenu');
   
+  if (site && floatMenu && floatMenu.parentElement !== site) {
+    site.appendChild(floatMenu);
+  }
 
-            // Set initial tab state
-            document.body.classList.add('tab-home-active');
-          });
-        </script>
+  document.body.classList.add('tab-home-active');
+});
+</script>
+
 
         <!-- Intro card -->
         <section class="card">
