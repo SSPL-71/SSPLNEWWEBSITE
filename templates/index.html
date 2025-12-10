@@ -465,7 +465,14 @@ html, body {
     transform: translateY(0);
     pointer-events: auto;
   }
+.floating-menu {
+    display: none;           /* hidden */
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;    /* 🔥 FIX — not clickable when closed */
 }
+
+
 
 
   /* FINAL TAB STYLING (no animation, centered, pill style) */
