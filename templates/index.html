@@ -439,40 +439,34 @@ html, body {
     margin: 0 auto;
   }
 
- /* Mobile floating menu behavior – fixed and non-blocking when hidden */
-@media (max-width: 900px){
+/* Mobile floating menu behavior – fixed and non-blocking when hidden */
+@media (max-width: 900px) {
+
+  /* CLOSED state */
   .floating-menu {
     position: fixed;
     right: 20px;
     bottom: 90px;
     max-height: 60vh;
     width: 220px;
-    transform: translateY(10px);
-    opacity: 0;
 
-    /* 👇 essential fixes */
-    display: none;
-    pointer-events: none;
+    display: none;          /* removed from layout */
+    opacity: 0;
+    pointer-events: none;   /* cannot block touches */
+    transform: translateY(10px);
 
     transition: transform 0.25s ease, opacity 0.25s ease;
     z-index: 9998;
   }
 
-.floating-menu {
-    display: none;           /* hidden */
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;    /* 🔥 FIX — not clickable when closed */
-}
+  /* OPEN state — must come AFTER closed state */
   .floating-menu.open {
-    /* 👇 becomes fully active and clickable */
-    display: block;
+    display: block;         /* visible & layout-active */
     opacity: 1;
+    pointer-events: auto;   /* clickable */
     transform: translateY(0);
-    pointer-events: auto;
   }
-
-
+}
 
 
 
@@ -592,7 +586,7 @@ html, body {
     pointer-events: none !important;
   }
 
-  /* Mobile toggle button — fixed to screen */
+ /* Mobile toggle button — fixed to screen */
 #menuToggle {
   position: fixed;
   bottom: calc(env(safe-area-inset-bottom) + 20px);
@@ -614,6 +608,7 @@ html, body {
 @media (max-width: 900px) {
   #menuToggle {
     display: block !important;
+    margin: 20px auto;     /* If you intended this */
   }
 }
 
@@ -623,8 +618,7 @@ html, body {
     display: none !important;
   }
 }
-display:block; 
-margin:20px auto;
+
 
 </style>
 
