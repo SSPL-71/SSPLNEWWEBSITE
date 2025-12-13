@@ -612,6 +612,34 @@ html, body {
   }
 }
 
+/* Modern inline loader – replaces hourglass */
+.modern-loader {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #ccc;
+    border-top-color: #4A4A4A; /* matches your existing theme */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader-text {
+    font-size: 14px;
+    color: #333;
+}
+
+
+
 /* Desktop: floating menu visible, toggle hidden */
 @media (min-width: 901px) {
   #menuToggle {
@@ -906,7 +934,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <p class="muted" style="font-size:0.9rem; margin-top:2px;">No Ads · No Installation Required · Quick & Easy</p>
             <input type="file" id="pdf-files" accept="application/pdf" multiple>
             <div style="margin-top:12px;"><button id="merge-btn" class="btn">Merge PDFs</button></div>
-            <div id="merge-loader" style="display:none; margin-top:12px;">Processing... <span aria-hidden="true">⏳</span></div>
+            <div id="merge-loader" style="display:none; margin-top:12px;">
+    <div class="modern-loader">
+        <span class="spinner"></span>
+        <span class="loader-text">Processing…</span>
+    </div>
+</div>
+
             <div id="merge-result" style="margin-top:14px;"></div>
           </div>
 
@@ -920,7 +954,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <div style="margin-top:8px;">Quality: <span id="quality-value">60%</span></div>
             <input type="range" id="quality-slider" min="10" max="90" value="60">
             <div style="margin-top:12px;"><button id="compress-btn" class="btn">Compress PDF</button></div>
-            <div id="compress-loader" style="display:none; margin-top:12px;">Compressing... <span aria-hidden="true">⏳</span></div>
+            <div id="compress-loader" style="display:none; margin-top:12px;">
+    <div class="modern-loader">
+        <span class="spinner"></span>
+        <span class="loader-text">Compressing…</span>
+    </div>
+</div>
+
             <div id="compression-info" style="margin-top:12px;" class="muted"></div>
             <div id="compress-result" style="margin-top:12px;"></div>
           </div>
@@ -1440,77 +1480,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <!-- Sorter script -->
   <script>
-    (function(){
-      const sorterInput = document.getElementById('pdf-sorter-file');
-      const previewContainer = document.getElementById('page-preview');
-      const downloadButton = document.getElementById('download-sorted');
-      let loadedPdfDoc = null;
-      let rotations = {};
-      if (sorterInput) {
-        sorterInput.addEventListener('change', async (e)=>{
-          const file = e.target.files[0];
-          if (!file) return;
-          const arrayBuffer = await file.arrayBuffer();
-          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-          loadedPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-          previewContainer.innerHTML = '';
-          rotations = {};
-          for (let i=0;i<pdf.numPages;i++){
-            const page = await pdf.getPage(i+1);
-            const viewport = page.getViewport({ scale: 0.3 });
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            await page.render({ canvasContext: context, viewport }).promise;
-            const wrapper = document.createElement('div');
-            wrapper.className = 'page-thumb';
-            wrapper.setAttribute('data-index', i);
-            wrapper.style.position = 'relative';
-            wrapper.appendChild(canvas);
-            const rotateBtn = document.createElement('div');
-            rotateBtn.textContent = '⟳';
-            rotateBtn.title = 'Rotate';
-            rotateBtn.style.position = 'absolute';
-            rotateBtn.style.top = '5px';
-            rotateBtn.style.right = '5px';
-            rotateBtn.style.background = '#FFD700';
-            rotateBtn.style.padding = '5px';
-            rotateBtn.style.borderRadius = '5px';
-            rotateBtn.style.cursor = 'pointer';
-            rotateBtn.style.fontSize = '20px';
-            rotateBtn.onclick = ()=>{ rotations[i] = (rotations[i]||0)+90; canvas.style.transform = `rotate(${rotations[i]}deg)`; };
-            wrapper.appendChild(rotateBtn);
-            previewContainer.appendChild(wrapper);
-          }
-          downloadButton.style.display = 'inline-block';
-          Sortable.create(previewContainer, { animation: 150 });
-        });
+(function(){
+  const sorterInput = document.getElementById('pdf-sorter-file');
+  const previewContainer = document.getElementById('page-preview');
+  const downloadButton = document.getElementById('download-sorted');
+  let loadedPdfDoc = null;
+  let rotations = {};
+
+  if (sorterInput) {
+    sorterInput.addEventListener('change', async (e)=>{
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      loadedPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+
+      previewContainer.innerHTML = '';
+      rotations = {};
+
+      for (let i=0;i<pdf.numPages;i++){
+        const page = await pdf.getPage(i+1);
+        const viewport = page.getViewport({ scale: 0.3 });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({ canvasContext: context, viewport }).promise;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'page-thumb';
+        wrapper.setAttribute('data-index', i);
+        wrapper.style.position = 'relative';
+
+        wrapper.appendChild(canvas);
+
+        const rotateBtn = document.createElement('div');
+        rotateBtn.textContent = '⟳';
+        rotateBtn.title = 'Rotate';
+        rotateBtn.style.position = 'absolute';
+        rotateBtn.style.top = '5px';
+        rotateBtn.style.right = '5px';
+        rotateBtn.style.background = '#FFD700';
+        rotateBtn.style.padding = '5px';
+        rotateBtn.style.borderRadius = '5px';
+        rotateBtn.style.cursor = 'pointer';
+        rotateBtn.style.fontSize = '20px';
+
+        rotateBtn.onclick = ()=>{
+          rotations[i] = (rotations[i] || 0) + 90;
+          canvas.style.transform = `rotate(${rotations[i]}deg)`;
+        };
+
+        wrapper.appendChild(rotateBtn);
+        previewContainer.appendChild(wrapper);
       }
-      if (downloadButton) {
-        downloadButton.addEventListener('click', async ()=>{
-          const sortedIndices = Array.from(previewContainer.children).map(div=>parseInt(div.getAttribute('data-index')));
-          const newPdf = await PDFLib.PDFDocument.create();
-          const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
-          copiedPages.forEach((page,i)=>{
-            const rotationAngle = rotations[sortedIndices[i]] || 0;
-            page.setRotation(PDFLib.degrees(rotationAngle));
-            newPdf.addPage(page);
-          });
-          const pdfBytes = await newPdf.save();
-          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `sorted-${Date.now()}.pdf`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        });
-      }
-    })();
-  </script>
+
+      downloadButton.style.display = 'inline-block';
+      Sortable.create(previewContainer, { animation: 150 });
+    });
+  }
+
+  if (downloadButton) {
+    downloadButton.addEventListener('click', async ()=>{
+      const sortedIndices = Array.from(previewContainer.children)
+        .map(div => parseInt(div.getAttribute('data-index')));
+
+      const newPdf = await PDFLib.PDFDocument.create();
+      const copiedPages = await newPdf.copyPages(loadedPdfDoc, sortedIndices);
+
+      copiedPages.forEach((page, i)=>{
+        const rotationAngle = rotations[sortedIndices[i]] || 0;
+        page.setRotation(PDFLib.degrees(rotationAngle));
+        newPdf.addPage(page);
+      });
+
+      const pdfBytes = await newPdf.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `sorted-${Date.now()}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      /* 🎉 Confetti – visual only, completely safe */
+      try { confetti(); } catch(e){}
+    });
+  }
+})();
+</script>
+
 
   <!-- ZIP extractor script -->
   <script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
