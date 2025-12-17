@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snap2PDF – Convert Multiple Screenshots to PDF Instantly | SS Services</title>
+
+  <meta name="description" content="Snap2PDF converts multiple screenshots into a single PDF instantly. A fast, offline Windows tool by SS Services (SSPL). Simple, secure, and built for professionals.">
+  <meta name="keywords" content="Snap2PDF, screenshot to PDF, Windows PDF tool, SS Services, SSPL, desktop PDF converter, image to PDF, offline PDF tool">
+  <meta name="author" content="Sarvasiddhanta Services Private Limited">
+  <meta name="google-adsense-account" content="ca-pub-2931901961774543">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ss-services.co.in/snap2pdf">
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Snap2PDF",
+    "operatingSystem": "Windows",
+    "applicationCategory": "Utility",
+    "description": "Snap2PDF converts multiple screenshots into a single PDF instantly.",
+    "url": "https://ss-services.co.in/snap2pdf",
+    "author": {
+      "@type": "Organization",
+      "name": "Sarvasiddhanta Services Private Limited"
+    }
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4N9KCYHSF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T4N9KCYHSF');
+  </script>
+
+  <!-- Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2931901961774543" crossorigin="anonymous"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
+
+  <!-- Styles -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #87CEEB;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .door-container {
+      position: relative;
+      width: 100vw;
+      height: 40vh;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .door {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: #4A4A4A;
+      transition: transform 1.5s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4vw;
+      color: white;
+      font-weight: bold;
+    }
+    .left-door { left: 0; transform-origin: left; }
+    .right-door { right: 0; transform-origin: right; }
+    .left-door::before { content: "SS"; }
+    .right-door::before { content: "PL"; }
+
+    .brand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: black;
+      font-size: 2vw;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .logo {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    @media (max-width: 600px) {
+      .brand { font-size: 4vw; }
+      .logo { max-width: 80%; }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .button-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .button-link:hover { background-color: #45a049; }
+    .back-link {
+      display: block;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
+        document.querySelector(".right-door").style.transform = "rotateY(90deg)";
+        document.querySelector(".brand").style.opacity = 1;
+      }, 500);
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Door Reveal -->
+  <section>
+    <div class="door-container">
+      <div class="door left-door"></div>
+      <div class="door right-door"></div>
+      <div class="brand">
+        <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:50px;">
+        <h2>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Snap2PDF Section -->
+  <main id="snap2pdf">
+    <div class="container">
+      <h1>Snap2PDF – Convert Multiple Screenshots to PDF Instantly</h1>
+      <p><strong>Developed by SSPL</strong></p>
+      <p style="font-weight: 600; font-style: italic; margin-top: 10px;">
+        Capture • Paste • Convert • Save
+      </p>
+
+      <!-- Placeholder Video Section -->
+      <div style="margin: 30px 0;">
+        <h2 style="color: #333;">🎥 Snap2PDF Demo Video (Coming Soon)</h2>
+        <div style="width: 100%; height: 200px; background: #ddd; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #555; font-size: 18px;">
+          Video Placeholder – Demo will be added before launch
+        </div>
+      </div>
+
+      <!-- Features -->
+      <h2>✨ Features</h2>
+      <ul style="text-align: left; max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.6;">
+        <li>Convert multiple screenshots into a single PDF</li>
+        <li>Fast, offline, secure — no internet required</li>
+        <li>Simple copy–paste workflow</li>
+        <li>Clean, distraction‑free interface</li>
+        <li>Works on any Windows machine</li>
+      </ul>
+
+      <!-- Coming Soon -->
+      <h2 style="margin-top: 30px;">🚀 Coming Soon</h2>
+      <ul style="text-align: left; max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.6;">
+        <li>Add comments between screenshots</li>
+        <li>Auto‑orientation</li>
+        <li>OCR text extraction</li>
+        <li>Annotation tools</li>
+      </ul>
+
+      <!-- Testimonial Placeholder -->
+      <h2 style="margin-top: 30px;">💬 User Feedback</h2>
+      <p style="font-style: italic; color: #444;">
+        “Installed perfectly and works fantastic for screenshot conversion.” – Early Tester
+      </p>
+
+      <!-- Download Button (UPDATED) -->
+      <a href="https://drive.google.com/uc?export=download&id=11_eIOPpF9IpPHG6sruWlUtXQ7aPjUWpV"
+         class="button-link"
+         title="Download Snap2PDF">
+        Download Snap2PDF for Windows
+      </a>
+
+      <a href="https://ss-services.co.in" class="back-link">← Back to Main Page</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
+  </footer>
+</body>
+</html>
