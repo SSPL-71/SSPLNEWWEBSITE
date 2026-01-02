@@ -36,7 +36,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/snapit2pdf')
-def snap2pdf():
+def snapit2pdf():
     return render_template('snap2pdf/index.html')
 
 @app.route('/sw.js')
