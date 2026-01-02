@@ -35,7 +35,7 @@ def claims_tatva():
 def about():
     return render_template('about.html')
 
-@app.route('/snap2pdf')
+@app.route('/snapit2pdf')
 def snap2pdf():
     return render_template('snap2pdf/index.html')
 
