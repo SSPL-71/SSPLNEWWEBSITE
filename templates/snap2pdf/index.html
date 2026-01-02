@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snap2PDF – Convert Multiple Screenshots to PDF Instantly | SS Services</title>
+  <title>SnapIt2PDF – Convert Multiple Screenshots to PDF Instantly | SSPL</title>
 
-  <meta name="description" content="Snap2PDF converts multiple screenshots into a single PDF instantly. A fast, offline Windows tool by SS Services (SSPL). Simple, secure, and built for professionals.">
-  <meta name="keywords" content="Snap2PDF, screenshot to PDF, Windows PDF tool, SS Services, SSPL, desktop PDF converter, image to PDF, offline PDF tool">
+  <meta name="description" content="SnapIt2PDF converts multiple screenshots into a single PDF instantly. A fast, offline Windows tool by SS Services (SSPL). Simple, secure, and built for professionals.">
+  <meta name="keywords" content="SnapIt2PDF, snapit2pdf, screenshot to PDF, Windows PDF tool, SS Services, SSPL, desktop PDF converter, image to PDF, offline PDF tool">
   <meta name="author" content="Sarvasiddhanta Services Private Limited">
   <meta name="google-adsense-account" content="ca-pub-2931901961774543">
-  <link rel="canonical" href="https://ss-services.co.in/snap2pdf">
+  <link rel="canonical" href="https://snapit2pdf-landing.onrender.com">
 
   <!-- Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Snap2PDF",
+    "name": "SnapIt2PDF",
     "operatingSystem": "Windows",
     "applicationCategory": "Utility",
-    "description": "Snap2PDF converts multiple screenshots into a single PDF instantly.",
-    "url": "https://ss-services.co.in/snap2pdf",
+    "description": "SnapIt2PDF converts multiple screenshots into a single PDF instantly.",
+    "url": "https://snapit2pdf-landing.onrender.com",
     "author": {
       "@type": "Organization",
       "name": "Sarvasiddhanta Services Private Limited"
@@ -60,19 +60,19 @@
       overflow-y: auto;
     }
 
-    /* FIXED HEADER */
+    /* FIXED BACK LINK (TOP RIGHT) */
     .fixed-header {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #ffffff;
-      padding: 12px 0;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       z-index: 9999;
     }
     .fixed-header a {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       color: #333;
       text-decoration: none;
@@ -81,18 +81,24 @@
       text-decoration: underline;
     }
 
-    /* Push content down so header doesn't overlap */
-    .page-content {
-      margin-top: 70px;
+    /* HERO DOOR SECTION FIXED */
+    .hero {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 40vh;
+      z-index: 5000;
+      background: #87CEEB;
     }
 
     .door-container {
       position: relative;
-      width: 100vw;
-      height: 40vh;
+      width: 100%;
+      height: 100%;
       display: flex;
-      flex-wrap: wrap;
     }
+
     .door {
       position: absolute;
       width: 50%;
@@ -121,6 +127,11 @@
       font-size: 2vw;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
+    }
+
+    /* CONTENT SCROLLS UNDER HERO */
+    .page-content {
+      margin-top: 40vh;
     }
 
     .container {
@@ -164,34 +175,34 @@
 
 <body>
 
-  <!-- FIXED HEADER -->
+  <!-- FIXED BACK LINK -->
   <div class="fixed-header">
     <a href="https://ss-services.co.in">← Back to Main Page</a>
   </div>
 
+  <!-- FIXED HERO DOOR SECTION -->
+  <section class="hero">
+    <div class="door-container">
+      <div class="door left-door"></div>
+      <div class="door right-door"></div>
+      <div class="brand">
+        <img src="/static/new_logo.jpg" alt="SSPL" style="height:50px;">
+        <h2>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLLABLE CONTENT -->
   <div class="page-content">
 
-    <!-- Door Reveal -->
-    <section>
-      <div class="door-container">
-        <div class="door left-door"></div>
-        <div class="door right-door"></div>
-        <div class="brand">
-          <img src="{{ url_for('static', filename='new_logo.jpg') }}" alt="SSPL" style="height:50px;">
-          <h2>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h2>
-        </div>
-      </div>
-    </section>
-
-    <!-- Snap2PDF Section -->
-    <main id="snap2pdf">
+    <main id="snapit2pdf">
       <div class="container">
 
         <h1>
-          <img src="{{ url_for('static', filename='icon.ico') }}"
-               alt="Snap2PDF Icon"
+          <img src="/static/icon.ico"
+               alt="SnapIt2PDF Icon"
                style="height:40px; vertical-align:middle; margin-right:10px;">
-          Snap2PDF – Convert Multiple Screenshots to PDF Instantly
+          SnapIt2PDF – Convert Multiple Screenshots to PDF Instantly
         </h1>
 
         <p><strong>Developed by SSPL</strong></p>
@@ -200,7 +211,7 @@
         </p>
 
         <div style="margin: 30px 0;">
-          <h2 style="color: #333;">🎥 Snap2PDF Demo Video (Coming Soon)</h2>
+          <h2 style="color: #333;">🎥 SnapIt2PDF Demo Video (Coming Soon)</h2>
           <div style="width: 100%; height: 200px; background: #ddd; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #555; font-size: 18px;">
             Video Placeholder – Demo will be added before launch
           </div>
@@ -232,13 +243,12 @@
         <a href="https://f005.backblazeb2.com/file/Snap2PDF/SnapIt2PDF_Setup_1.0.0.exe"
            class="button-link"
            title="Download Snap2PDF">
-          Download Snap2PDF for Windows
+          Download SnapIt2PDF for Windows
         </a>
-        <!-- Windows-only note -->
-        <p style="margin-top: 12px; font-size: 14px; color: #333;">
-          <strong>Note:</strong> Snap2PDF works only on Windows 10/11 (64‑bit).
-        </p>
 
+        <p style="margin-top: 12px; font-size: 14px; color: #333;">
+          <strong>Note:</strong> SnapIt2PDF works only on Windows 10/11 (64‑bit).
+        </p>
 
       </div>
     </main>
