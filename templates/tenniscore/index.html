@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TenniScore – Tennis Tournament Management Platform | SS Services</title>
+
+  <meta
+    name="description"
+    content="TenniScore by Sarvasiddhanta Services Private Limited is a professional tennis tournament management platform for organizers. Create tournaments, manage registrations, score matches, and publish live brackets."
+  />
+  <meta
+    name="keywords"
+    content="TenniScore, tennis tournament software, tennis scoring app, live tennis brackets, tournament management platform, SS Services, Sarvasiddhanta Services Private Limited, SSPL"
+  />
+  <meta name="author" content="Sarvasiddhanta Services Private Limited" />
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="canonical" href="https://ss-services.co.in/tenniscore" />
+
+  <style>
+    :root {
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --text-light: #f9fafb;
+      --text-muted: #94a3b8;
+      --radius: 16px;
+      --max-width: 960px;
+      --hero-height: 22vh;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #e6f0ff 0%, #e6f7f3 100%);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO ===== */
+    .door-container {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--max-width);
+      height: var(--hero-height);
+      background: #020617;
+      border-radius: 0 0 16px 16px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .door {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: #020617;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.4vw;
+      color: #e5e7eb;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      transition: transform 1.5s ease-in-out;
+    }
+
+    .left-door { left: 0; transform-origin: left; }
+    .right-door { right: 0; transform-origin: right; }
+
+    /* ✅ FIXED SPACING HERE */
+    .brand {
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      position: relative;
+      z-index: 2;
+      padding-top: 28px;   /* 👈 two lines of space above company name */
+    }
+
+    .brand h1 {
+      margin: 0 0 6px 0;
+    }
+
+    .brand img {
+      height: 120px;
+      margin-top: 10px;
+    }
+
+    .presents {
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #cbd5f5;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .floating-logo {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .floating-logo.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-back {
+      position: absolute;
+      bottom: 16px;
+      right: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5f5;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(203, 213, 245, 0.25);
+      backdrop-filter: blur(4px);
+    }
+
+    /* ===== SPACER ===== */
+    .hero-spacer {
+      height: calc(var(--hero-height) + 24px);
+    }
+
+    /* ===== CONTENT ===== */
+    .container {
+      max-width: var(--max-width);
+      background: var(--card-bg);
+      padding: 36px 28px;
+      margin: 40px auto;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .muted {
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    ul.features {
+      text-align: left;
+      max-width: 640px;
+      margin: 26px auto;
+      padding-left: 20px;
+      line-height: 1.7;
+    }
+
+    ul.features li {
+      margin-bottom: 10px;
+    }
+
+    .pricing {
+      margin-top: 30px;
+      padding: 18px;
+      background: rgba(2, 6, 23, 0.85);
+      border-radius: 14px;
+      border: 1px solid #1e293b;
+    }
+
+    .button-link {
+      display: inline-block;
+      margin-top: 26px;
+      background: radial-gradient(circle at top left, rgba(56,189,248,1), rgba(37,99,235,1));
+      color: #f9fafb;
+      padding: 14px 30px;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      font-size: 18px;
+      box-shadow: 0 16px 40px rgba(37,99,235,0.6);
+    }
+<style>
+  .faq-master {
+    background: rgba(2, 6, 23, 0.75);
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    max-width: 760px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .faq-master summary {
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .faq-master summary::marker {
+    display: none;
+  }
+
+  .faq-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: #94a3b8;
+  }
+
+  .faq-master[open] .faq-subtitle {
+    display: none;
+  }
+
+  .faq-content {
+    padding: 20px;
+    border-top: 1px solid #1e293b;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #cbd5f5;
+text-align: left;
+  }
+
+  .faq-content h4 {
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #f9fafb;
+    font-size: 15px;
+  }
+
+  .faq-content ul {
+    padding-left: 22px;
+    margin-top: 6px;
+  }
+
+  .faq-content li {
+    margin-bottom: 6px;
+  }
+
+.button-link.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+</style>
+
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
+        document.querySelector(".right-door").style.transform = "rotateY(90deg)";
+        document.querySelector(".brand").style.opacity = 1;
+      }, 400);
+
+      setTimeout(() => {
+        document.querySelector(".presents").style.opacity = 1;
+      }, 900);
+
+      setTimeout(() => {
+        document.querySelector(".floating-logo").classList.add("show");
+      }, 1300);
+    });
+  </script>
+</head>
+
+<body>
+
+  <section class="door-container">
+    <a href="https://ss-services.co.in" class="hero-back">← Back to Main Page</a>
+    <div class="door left-door">SS</div>
+    <div class="door right-door">PL</div>
+    <div class="brand">
+      <h1>SARVASIDDHANTA SERVICES PRIVATE LIMITED</h1>
+      <div class="presents">Presents</div>
+      <img src="../static/tenniscore.png" alt="TenniScore Logo" class="floating-logo" />
+    </div>
+  </section>
+
+  <div class="hero-spacer"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <img src="../static/tenniscore.png" alt="TenniScore Logo" style="max-height:100px; opacity:0.9;" />
+
+    <p class="muted">
+      Developed by <strong>Sarvasiddhanta Services Private Limited (SSPL)</strong>
+    </p>
+
+    <h2>🎾 TenniScore — Home To Your Tennis Tournaments</h2>
+    <p><strong>Tournament Management • Scoring • Live Brackets</strong></p>
+
+    <p style="text-align:justify; line-height:1.65; margin:16px auto; max-width:760px;">
+      TenniScore is a premium, unified platform to create tennis tournaments, 
+      manage registrations, generate automated brackets, deliver accurate scoring, 
+      and track live match progress with precision.
+    </p>
+
+    <ul class="features">
+      <li>Create and manage tennis tournaments effortlessly</li>
+      <li>Player registrations with strict capacity control</li>
+      <li>Automated draw generation (32-player knockout)</li>
+      <li>Live match scoring with walkover & retirement handling</li>
+      <li>Automatic winner propagation across rounds</li>
+      <li>Public live bracket and score viewing</li>
+      <li>Secure organizer access with entitlement-based creation</li>
+    </ul>
+
+    <div class="pricing">
+      <strong>💰 Pricing</strong>
+      <ul style="margin-top:10px;">
+        <li><strong>India:</strong> ₹1499 + GST (Per Tournament)</li>
+        <li><strong>International:</strong> USD $19.99 (Per Tournament)</li>
+      </ul>
+      <p class="muted">
+        One-time payment • No subscriptions • Players & viewers access free
+      </p>
+    </div>
+
+    <!-- FAQ -->
+    <section class="container" style="margin-top:40px;">
+      <details class="faq-master">
+        <summary>
+          ❓ Frequently Asked Questions (Read Before You Check The App!)
+          <span class="faq-subtitle">Click to expand</span>
+        </summary>
+
+        <div class="faq-content">
+          <h4>What is TenniScore?</h4>
+          <p>
+            TenniScore is a professional tennis tournament management platform that
+            allows organizers to create tournaments, manage registrations,
+            score matches, and publish live brackets.
+          </p>
+
+          <h4>Who is TenniScore meant for?</h4>
+          <ul>
+            <li>Tennis clubs</li>
+            <li>Tennis academies</li>
+            <li>Residential and sports communities</li>
+            <li>Independent tournament organizers</li>
+          </ul>
+
+          <h4>Why is payment required to create a tournament?</h4>
+          <p>
+            TenniScore is a paid tournament management platform.
+            The one-time fee covers secure tournament creation, automated draws,
+            scoring, live brackets, and ongoing platform maintenance.
+          </p>
+
+          <h4>Do players or viewers need to pay?</h4>
+          <p>No. Only the organizer pays.</p>
+
+          <h4>What happens if payment succeeds but tournament creation fails?</h4>
+          <p>
+            An unused organizer entitlement remains linked to your email,
+            allowing tournament creation later without paying again.
+          </p>
+
+          <h4>What payment methods are supported?</h4>
+          <p><strong>India:</strong> Razorpay<br><strong>International:</strong> PayPal</p>
+
+          <h4>How can I get support?</h4>
+          <p><strong>info@ss-services.co.in</strong></p>
+        </div>
+      </details>
+    </section>
+
+<a
+  href="javascript:void(0)"
+  class="button-link disabled"
+  aria-disabled="true"
+>
+  Launching on 15 Jan 2026
+</a>
+
+
+  <footer>
+    © 2026 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
+  </footer>
+
+</body>
+</html>

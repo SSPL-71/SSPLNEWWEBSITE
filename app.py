@@ -122,6 +122,10 @@ def serve_3ctool():
 def serve_gpstool():
     return render_template('gpstool/index.html')
 
+@app.route('/tenniscore')
+def serve_tenniscore():
+    return render_template('tenniscore/index.html')
+
 
 @app.route("/pdf2excel", methods=["POST"])
 def pdf_to_excel():

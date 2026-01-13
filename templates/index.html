@@ -333,6 +333,63 @@ html, body {
     }
   }
 
+/* === NEW BADGE FOR TENNISCORE TAB === */
+.new-badge {
+  position: absolute;
+  top: -6px;
+  right: -18px;
+  background: #ff3b3b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 0 0 rgba(255, 59, 59, 0.6);
+  animation: pulseBadge 1.6s infinite;
+}
+
+/* Subtle pulse animation */
+@keyframes pulseBadge {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 59, 59, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
+  }
+}
+@media (max-width: 600px) {
+  .new-badge {
+    top: -4px;
+    right: -14px;
+    font-size: 9px;
+  }
+}
+
+/* ===== TENNISCORE TAB HIGHLIGHT ===== */
+.tenniscore-tab {
+  font-weight: 700;                 /* bold */
+  border: 2px solid #0ea5e9;         /* blue border */
+  border-radius: 999px;
+  padding: 6px 18px;
+  color: #0f172a;
+  background: rgba(14, 165, 233, 0.08);
+}
+
+/* Hover effect */
+.tenniscore-tab:hover {
+  background: rgba(14, 165, 233, 0.15);
+  text-decoration: none;
+}
+
+/* Make sure NEW badge stays positioned correctly */
+.tenniscore-tab {
+  position: relative;
+}
+
   /* Utility */
   .center { text-align:center; }
   .muted { color:var(--muted); }
@@ -664,6 +721,19 @@ html, body {
       <button class="tab-button active" data-target="tab-home">Home</button>
       <button class="tab-button" data-target="tab-about">About Us</button>
       <button class="tab-button" data-target="tab-claims">Claims Tatva</button>
+<a
+  href="/tenniscore"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="tab-button tenniscore-tab"
+  style="text-decoration:none; position:relative;"
+>
+  TenniScore
+  <span class="new-badge">NEW</span>
+</a>
+
+
+
     </nav>
 
     <div class="tab-sections">
@@ -1194,54 +1264,126 @@ document.addEventListener("DOMContentLoaded", () => {
         </section>
 
         <!-- Privacy Policy Section -->
-        <section id="privacy-policy" class="card">
-          <h3>Privacy Policy</h3>
-          <p>
-            Sarvasiddhanta Services Private Limited (SSPL) respects your privacy. Our PDF and image tools are designed to
-            work entirely in your browser using client-side processing technologies. Files you open or process in the tools
-            (PDFs, images, ZIP archives, etc.) are not uploaded to our own servers for conversion or storage.
-          </p>
-          <p>
-            We may use third-party analytics services (such as Google Analytics) and advertising networks (such as Google
-            AdSense) that use cookies or similar technologies to understand general usage patterns (for example: pages
-            visited, approximate region, device type and browser). These cookies do not collect information that directly
-            identifies you by name.
-          </p>
-          <p>
-            You can learn more about Google’s cookie practices
-            <a href="https://support.google.com/analytics/answer/11397207?hl=en" target="_blank">here</a>
-            or opt out using Google’s browser add-on
-            <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">here</a>.
-          </p>
-          <p>
-            By using this site and its tools you consent to this limited usage-data collection for analytics and advertising
-            purposes. You can manage or clear cookies from your browser settings at any time.
-          </p>
-          <p>
-            If you have privacy-related questions, you may contact us at
-            <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a>.
-            <em>Last updated: 07 December 2025</em>
-          </p>
-        </section>
+<section id="privacy-policy" class="card">
+  <h3>Privacy Policy</h3>
 
-        <!-- Refund / Disclaimer Section -->
-        <section id="refund-policy" class="card">
-          <h3>Refund & Usage Policy</h3>
-          <p>
-            SSPL offers the 3CTool, PDF Merger, PDF Compressor, PDF Sorter, GPS Camera Pro and ZzpDwn tools free of charge
-            as a productivity aid. Because these tools are free to use and are provided on a best-effort basis, there is no
-            warranty of uninterrupted availability or fitness for a particular purpose.
-          </p>
-          <p>
-            From time to time, we may accept voluntary donations or contributions to help with maintenance and hosting
-            costs. Such donations are generally non-refundable, except where required by applicable law or in exceptional
-            cases at our discretion.
-          </p>
-          <p>
-            Always keep a copy of your original files. While our tools are designed to manipulate copies in memory, SSPL is
-            not responsible for accidental loss, corruption, or misuse of files on your own devices.
-          </p>
-        </section>
+  <p>
+    Sarvasiddhanta Services Private Limited (SSPL) respects your privacy.
+    This Privacy Policy applies to SSPL-operated websites and services,
+    including <strong>TenniScore</strong>, a tennis tournament management platform.
+  </p>
+
+  <p>
+    TenniScore allows tournament organizers to create tournaments, manage player
+    registrations, collect entry fees, and score matches. To provide these services,
+    we may collect limited personal information such as email address, tournament
+    details, and payment references.
+  </p>
+
+  <p>
+    Payment processing on TenniScore is handled by third-party payment gateways
+    (such as Razorpay and PayPal). SSPL does not store users’ card, bank, or wallet
+    details. All payment information is securely processed directly by the respective
+    payment service providers in accordance with their privacy policies.
+  </p>
+
+  <p>
+    Some SSPL tools and services, including PDF and image utilities on our websites,
+    operate entirely using client-side processing technologies. Files opened or processed
+    in those tools are not uploaded to our servers for conversion or storage.
+  </p>
+
+  <p>
+    We may use third-party analytics services (such as Google Analytics) and advertising
+    networks (such as Google AdSense) to understand general usage patterns, including
+    pages visited, approximate region, device type, and browser information.
+    These technologies may use cookies or similar mechanisms but do not collect
+    information that directly identifies individuals by name.
+  </p>
+
+  <p>
+    You can learn more about Google’s cookie practices
+    <a href="https://support.google.com/analytics/answer/11397207?hl=en" target="_blank" rel="noopener noreferrer">here</a>
+    or opt out using Google’s browser add-on
+    <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">here</a>.
+  </p>
+
+  <p>
+    By using our websites and services, including TenniScore, you consent to this limited
+    usage-data collection for analytics, operational, and security purposes.
+    You may manage or clear cookies through your browser settings at any time.
+  </p>
+
+  <p>
+    If you have privacy-related questions, you may contact us at
+    <a href="mailto:info@ss-services.co.in">info@ss-services.co.in</a>.
+  </p>
+
+  <p>
+    <em>Last updated: 13 January 2026</em>
+  </p>
+</section>
+
+
+<!-- Refund / Usage Policy Section -->
+<section id="refund-policy" class="card">
+  <h3>Refund & Usage Policy</h3>
+
+  <p>
+    Sarvasiddhanta Services Private Limited (SSPL) provides multiple digital tools and services,
+    including <strong>TenniScore</strong>, a tennis tournament management platform, as well as
+    other productivity utilities such as 3CTool, PDF Merger, PDF Compressor, PDF Sorter,
+    GPS Camera Pro, and ZzpDwn.
+  </p>
+
+  <p>
+    Many SSPL productivity tools are offered free of charge and are provided on a best-effort
+    basis, without any warranty of uninterrupted availability or fitness for a particular
+    purpose.
+  </p>
+
+  <p>
+    <strong>TenniScore</strong> is a paid service intended for tournament organizers. Payments
+    made on TenniScore are for the creation and management of a specific tournament and grant
+    access to the platform’s features for that tournament.
+  </p>
+
+  <p>
+    <strong>Payments made for TenniScore are non-refundable.</strong>
+  </p>
+
+  <p>
+    To protect organizers from payment-related issues, TenniScore includes an
+    <strong>entitlement mechanism</strong>. In the event that a payment is successfully
+    completed but a tournament cannot be created due to a technical or network issue,
+    the organizer’s entitlement is preserved and can be used to create the tournament
+    later without making another payment.
+  </p>
+
+  <p>
+    If an organizer experiences a technical issue where payment is deducted and the service
+    cannot be accessed or delivered despite the entitlement mechanism, they may contact
+    SSPL for assistance. Such cases will be reviewed on a case-by-case basis, and appropriate
+    resolution may be provided.
+  </p>
+
+  <p>
+    From time to time, SSPL may accept voluntary donations or contributions to support the
+    maintenance and hosting of free tools. Such contributions are non-refundable, except
+    where required by applicable law.
+  </p>
+
+  <p>
+    Users are responsible for maintaining copies of their own data and files. While SSPL
+    takes reasonable care in providing its services, it is not responsible for accidental
+    loss, corruption, or misuse of data or files on users’ own devices or accounts.
+  </p>
+
+  <p>
+    <em>Last updated: 13 January 2026</em>
+  </p>
+</section>
+
 
       </div> <!-- end tab-home -->
 
@@ -1276,6 +1418,26 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </section>
       </div>
+
+<!-- TenniScore tab content -->
+<div id="tab-tenniscore" class="tab-section" style="display:none;">
+  <section class="card" style="padding:0;">
+    <iframe
+      src="/tenniscore"
+      title="TenniScore – Tennis Tournament Platform"
+      style="
+        width:100%;
+        height:85vh;
+        border:none;
+        border-radius:12px;
+        background:#ffffff;
+      "
+      loading="lazy"
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </section>
+</div>
+
     </div> <!-- end tab-sections -->
 
     <!-- Feedback section -->
