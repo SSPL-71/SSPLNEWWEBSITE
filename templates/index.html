@@ -695,6 +695,28 @@ html, body {
     color: #333;
 }
 
+/* Mobile spacing fix for top navigation / tabs */
+@media (max-width: 768px) {
+  .nav,
+  .nav-tabs,
+  .tabs,
+  .menu,
+  nav ul,
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;              /* 👈 KEY FIX */
+    justify-content: center;
+  }
+
+  .nav a,
+  .nav-tabs a,
+  nav a {
+    padding: 8px 14px;     /* 👈 TOUCH-FRIENDLY */
+    margin: 4px 0;
+    display: inline-block;
+  }
+}
 
 
 /* Desktop: floating menu visible, toggle hidden */
