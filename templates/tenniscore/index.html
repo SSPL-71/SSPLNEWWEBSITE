@@ -92,6 +92,21 @@
       padding-top: 28px;   /* 👈 two lines of space above company name */
     }
 
+.brand h1 {
+  margin: 0 0 6px 0;
+  text-align: center;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+/* ✅ Mobile-specific fix */
+@media (max-width: 480px) {
+  .brand h1 {
+    font-size: 4.5vw;   /* scales with screen */
+    padding: 0 12px;    /* prevents edge clipping */
+  }
+}
+
     .brand h1 {
       margin: 0 0 6px 0;
     }
