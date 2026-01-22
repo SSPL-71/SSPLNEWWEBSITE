@@ -546,6 +546,23 @@ text-align: left;
     />
   </div>
 </div>
+<script>
+  function openAdminFlow() {
+    const modal = document.getElementById("adminFlowModal");
+    if (modal) {
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeAdminFlow() {
+    const modal = document.getElementById("adminFlowModal");
+    if (modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  }
+</script>
 
 
   <footer>
