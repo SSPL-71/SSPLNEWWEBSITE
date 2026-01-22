@@ -283,6 +283,31 @@ text-align: left;
   color: #000;
 }
 
+.admin-flow-trigger {
+  margin: 32px auto;
+  text-align: center;
+  cursor: pointer;
+  max-width: 300px;
+}
+
+.admin-flow-icon {
+  font-size: 42px;
+}
+
+.admin-flow-text {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.admin-flow-subtext {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
 </style>
 
 
@@ -351,6 +376,18 @@ text-align: left;
       <li>Public live bracket and score viewing</li>
       <li>Secure organizer access with entitlement-based creation</li>
     </ul>
+
+<div
+  class="admin-flow-trigger"
+  onclick="openAdminFlow()"
+>
+  <div class="admin-flow-icon">🧩</div>
+  <div class="admin-flow-text">What Should Admin Do?</div>
+  <div class="admin-flow-subtext">
+    One link · Zero coordination overhead
+  </div>
+</div>
+
 
     <div class="pricing">
       <strong>💰 Pricing</strong>
@@ -456,6 +493,59 @@ text-align: left;
   Launch TenniScore
 </a>
 
+<div
+  id="adminFlowModal"
+  onclick="closeAdminFlow()"
+  style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  "
+>
+  <div
+    onclick="event.stopPropagation()"
+    style="
+      position:relative;
+      background:#fff;
+      border-radius:12px;
+      padding:12px;
+      max-width:95%;
+      max-height:95%;
+    "
+  >
+    <button
+      onclick="closeAdminFlow()"
+      style="
+        position:absolute;
+        top:6px;
+        right:10px;
+        border:none;
+        background:none;
+        font-size:22px;
+        cursor:pointer;
+      "
+      aria-label="Close"
+    >
+      ✕
+    </button>
+
+    <img
+      src="/static/assets/Adminwork.png"
+      alt="What Should Admin Do - TenniScore Flow"
+      style="
+        max-width:100%;
+        max-height:80vh;
+        display:block;
+        margin:auto;
+      "
+    />
+  </div>
+</div>
 
 
   <footer>
