@@ -404,6 +404,23 @@ text-align: left;
       <li>Public live bracket and score viewing</li>
       <li>Secure organizer access with entitlement-based creation</li>
     </ul>
+<hr style="margin: 36px 0; opacity: 0.2;" />
+
+<h3 style="margin-bottom: 10px;">🏆 Built for Real Tournament Pressure</h3>
+
+<p style="max-width:760px; margin: 0 auto 18px; line-height:1.65; text-align:justify;">
+  Designed for real-world tennis tournaments where mistakes happen,
+  formats vary, and match flow must remain uninterrupted.
+</p>
+
+<ul class="features">
+  <li><strong>Undo Last Action</strong> — Instantly correct the most recent scoring entry without disrupting match flow.</li>
+
+  <li><strong>Scorer-Controlled Match Completion</strong> — Once the final point is played, the scorer can complete the match directly for immediate bracket progression.</li>
+
+  <li><strong>Manual Match Completion</strong> — Handle Walkovers, Retirements, Defaults, or special format-based finishes with proper winner selection and automatic bracket propagation.</li>
+</ul>
+
 
 <div
   class="admin-flow-trigger"
@@ -415,6 +432,19 @@ text-align: left;
 <div class="admin-flow-subtext highlight-line">
   One Link · Zero Coordination Overhead !
 </div>
+
+</div>
+
+<div
+  class="admin-flow-trigger"
+  onclick="openScorerFlow(); trackEvent('scorer_flow_modal_opened')"
+>
+
+  <div class="admin-flow-icon">🎾</div>
+  <div class="admin-flow-text">WHAT DOES THE SCORER DO ? - EVEN SIMPLER !</div>
+  <div class="admin-flow-subtext highlight-line">
+    Score · Undo · Complete · Done.
+  </div>
 
 </div>
 
@@ -612,6 +642,65 @@ text-align: left;
   "
 />
 
+<div
+  id="scorerFlowModal"
+  onclick="closeScorerFlow()"
+  style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  "
+>
+  <div
+    onclick="event.stopPropagation()"
+    style="
+      position:relative;
+      background:#fff;
+      border-radius:12px;
+      padding:16px;
+      max-width:95vw;
+      max-height:90vh;
+      overflow:auto;
+    "
+  >
+
+    <button
+      onclick="closeScorerFlow()"
+      style="
+        position:absolute;
+        top:6px;
+        right:10px;
+        border:none;
+        background:none;
+        font-size:22px;
+        cursor:pointer;
+      "
+      aria-label="Close"
+    >
+      ✕
+    </button>
+
+    <img
+      src="../static/Scorerwork1.png"
+      alt="What Does Scorer Do – TenniScore Flow"
+      style="
+        width:100%;
+        max-width:1100px;
+        height:auto;
+        display:block;
+        margin:auto;
+        cursor: zoom-in;
+      "
+    />
+
+  </div>
+</div>
+
 
 
   </div>
@@ -636,6 +725,22 @@ function closeAdminFlow() {
 
 </script>
 
+function openScorerFlow() {
+  const modal = document.getElementById("scorerFlowModal");
+  if (modal) {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeScorerFlow() {
+  const modal = document.getElementById("scorerFlowModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+    trackEvent("scorer_flow_modal_closed");
+  }
+}
 
   <footer>
     © 2026 Sarvasiddhanta Services Private Limited (SSPL). All rights reserved.
