@@ -126,8 +126,8 @@ def serve_gpstool():
 def serve_tenniscore():
     return render_template('tenniscore/index.html')
 
-@app.route('/tenniscore')
-def serve_tenniscore():
+@app.route('/tenniscorepro')
+def serve_tenniscorepro():
     return render_template('tenniscorepro/index.html')
 
 
