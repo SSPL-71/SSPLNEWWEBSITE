@@ -730,6 +730,27 @@ html, body {
 
 </head>
 <body>
+
+<!-- Theta Splash Screen -->
+<div id="thetaSplash">
+    <div class="theta-glow"></div>
+
+    <img
+        src="{{ url_for('static', filename='ThetaLogo.png') }}"
+        alt="Theta"
+        class="theta-logo"
+    >
+
+    <div class="theta-spinner">
+        <div class="spinner-one"></div>
+        <div class="spinner-two"></div>
+    </div>
+
+    <h1>Theta</h1>
+
+    <p>Investigations Reimagined</p>
+</div>
+
   <div class="site">
 
     <!-- Header -->
@@ -826,6 +847,13 @@ if (toggleBtn && menu) {
           
 // Leave the rest EXACTLY as-is
 document.addEventListener("DOMContentLoaded", () => {
+
+const splash = document.getElementById("thetaSplash");
+
+setTimeout(() => {
+    splash.classList.add("fade-out");
+}, 2200);
+
   setTimeout(() => {
     const left = document.querySelector(".left-door");
     const right = document.querySelector(".right-door");
@@ -910,6 +938,111 @@ document.addEventListener("DOMContentLoaded", () => {
         .button-link:hover {
           background-color: #45a049;
         }
+
+/* ===========================
+   THETA SPLASH SCREEN
+=========================== */
+
+#thetaSplash{
+    position:fixed;
+    inset:0;
+    background:#020617;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+    overflow:hidden;
+}
+
+.theta-glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(6,182,212,.12);
+    border-radius:50%;
+    filter:blur(80px);
+}
+
+.theta-logo{
+    width:170px;
+    height:auto;
+    position:relative;
+    z-index:2;
+    animation:pulseLogo 2s infinite;
+}
+
+.theta-spinner{
+    position:relative;
+    width:54px;
+    height:54px;
+    margin-top:30px;
+    z-index:2;
+}
+
+.spinner-one,
+.spinner-two{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+}
+
+.spinner-one{
+    border:4px solid #22d3ee;
+    border-top-color:transparent;
+    animation:spin 1s linear infinite;
+}
+
+.spinner-two{
+    inset:5px;
+    border:4px solid white;
+    border-bottom-color:transparent;
+    animation:spinReverse 1s linear infinite;
+}
+
+#thetaSplash h1{
+    margin-top:34px;
+    color:white;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:1px;
+    z-index:2;
+}
+
+#thetaSplash p{
+    margin-top:12px;
+    color:#94a3b8;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    font-size:13px;
+    z-index:2;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes spinReverse{
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+@keyframes pulseLogo{
+    50%{
+        transform:scale(1.05);
+    }
+}
+
+#thetaSplash.fade-out{
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .8s ease, visibility .8s ease;
+}
+
+
       </style>
       <a href="https://www.appsheet.com/Account/Login?FullScope=False&SpecificDomain=&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Fadb4f63a-262c-43b5-a8e0-58d53d726da8%3Fplatform%3Ddesktop&LimitedFullScope=&partner=&appName=SSPLGEN&externalFailure=&domainOnly=#vss=H4sIAAAAAAAAA62PywrCMBBFf6XMOl-QbXEhYjc-NsbF2Ewh2CalSa0l5N-d-EBwWVzmDOdwE-FmaNoFrK8gT_H72tAMEqKC_dyTAqmgdDYMrlUgFFTYveCh1xioqGgqSvTMEqSz-GQCeZBxUUX-ZYsAo8kG0xgacjIHOPXW-ZxlBj8qJAHdGPDS0vMXrKbErHH16EkfedjyQX5tV_cerd46zeUGW0_pAay9rOuIAQAA&view=Update%20New%20Case&appName=SSPLGEN-1724282"
          target="_blank"
@@ -1485,7 +1618,7 @@ TenniScore and Theta, you agree to these Terms & Conditions.
   </p>
 
 <p>
-  Theta may operate on subscription-based or usage-based access models depending
+  Theta may operate on subscription-based and/or usage-based access models depending
   on the services and organisational plans provided by SSPL.
 </p>
 
