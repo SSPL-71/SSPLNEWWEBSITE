@@ -846,6 +846,26 @@ html, body {
     margin-top:0;
 }
 
+/* ===== THETA TAB ===== */
+.theta-tab {
+  font-weight: 700;
+  border: 2px solid #06b6d4;
+  border-radius: 999px;
+  padding: 6px 18px;
+  color: #0f172a;
+  background: rgba(6, 182, 212, 0.08);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.theta-tab:hover {
+  background: rgba(6, 182, 212, 0.16);
+  border-color: #0891b2;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.20);
+}
+
 </style>
 
 
@@ -891,7 +911,7 @@ html, body {
     <nav class="top-tabs" aria-label="Primary">
       <button class="tab-button active" data-target="tab-home">Home</button>
       <button class="tab-button" data-target="tab-about">About Us</button>
-      <!-- <button class="tab-button" data-target="tab-claims">Claims Tatva</button> -->
+      <button class="tab-button" data-target="tab-claims">Claims Tatva</button>
 
 <a
   href="/snapit2pdf"
@@ -915,7 +935,16 @@ html, body {
   <span class="new-badge">NEW</span>
 </a>
 
-
+<a
+  href="https://theta.ss-services.co.in"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="tab-button theta-tab"
+  style="text-decoration:none; position:relative;"
+>
+  Theta
+  <span class="new-badge">NEW</span>
+</a>
 
     </nav>
 
