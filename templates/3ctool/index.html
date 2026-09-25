@@ -44,31 +44,22 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
-    document.querySelector(".right-door").style.transform = "rotateY(90deg)";
-    document.querySelector(".brand").style.opacity = 1;
-  }, 400);
-});
 
-function open3CTool() {
-    document.getElementById("thetaSplash").style.display = "flex";
-
+    // Door animation
     setTimeout(() => {
-        window.location.href = "https://image-pdf-tool.onrender.com/";
-    }, 300);
-}
-</script>
+        document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
+        document.querySelector(".right-door").style.transform = "rotateY(90deg)";
+        document.querySelector(".brand").style.opacity = 1;
+    }, 400);
 
-document.addEventListener("DOMContentLoaded", () => {
-
+    // Video toggle
     const btn = document.getElementById("toggleVideoBtn");
     const container = document.getElementById("introVideoContainer");
 
-    if(btn && container){
+    if (btn && container) {
         btn.addEventListener("click", () => {
 
-            if(container.style.display === "none" || !container.style.display){
+            if (container.style.display === "none" || container.style.display === "") {
                 container.style.display = "block";
                 btn.innerHTML = "▼ Hide Quick Start Video";
             } else {
@@ -80,6 +71,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// Open 3CTool with splash screen
+function open3CTool() {
+    document.getElementById("thetaSplash").style.display = "flex";
+
+    setTimeout(() => {
+        window.location.href = "https://image-pdf-tool.onrender.com/";
+    }, 300);
+}
+</script>
 
 
   <link rel="icon" href="https://ss-services.co.in/favicon.ico" type="image/x-icon">
