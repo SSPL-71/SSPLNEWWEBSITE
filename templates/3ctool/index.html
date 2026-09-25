@@ -42,6 +42,23 @@
 }
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
+    document.querySelector(".right-door").style.transform = "rotateY(90deg)";
+    document.querySelector(".brand").style.opacity = 1;
+  }, 400);
+});
+
+function open3CTool() {
+    document.getElementById("thetaSplash").style.display = "flex";
+
+    setTimeout(() => {
+        window.location.href = "https://image-pdf-tool.onrender.com/";
+    }, 300);
+}
+</script>
 
 
   <link rel="icon" href="https://ss-services.co.in/favicon.ico" type="image/x-icon">
@@ -179,6 +196,127 @@
       .brand img { height: 40px; }
       .brand h1 { font-size: 4vw; }
     }
+
+/* ===========================
+   THETA SPLASH SCREEN
+=========================== */
+
+#thetaSplash{
+    position:fixed;
+    inset:0;
+    background:#020617;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+    overflow:hidden;
+}
+
+.theta-glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(6,182,212,.12);
+    border-radius:50%;
+    filter:blur(80px);
+}
+
+.theta-logo{
+    width:170px;
+    height:auto;
+    position:relative;
+    z-index:2;
+    animation:pulseLogo 2s infinite;
+}
+
+.theta-spinner{
+    position:relative;
+    width:54px;
+    height:54px;
+    margin-top:30px;
+    z-index:2;
+}
+
+.spinner-one,
+.spinner-two{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+}
+
+.spinner-one{
+    border:4px solid #22d3ee;
+    border-top-color:transparent;
+    animation:spin 1s linear infinite;
+}
+
+.spinner-two{
+    inset:5px;
+    border:4px solid white;
+    border-bottom-color:transparent;
+    animation:spinReverse 1s linear infinite;
+}
+
+#thetaSplash h1{
+    margin-top:34px;
+    color:white;
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:1px;
+    z-index:2;
+}
+
+#thetaSplash p{
+    margin-top:12px;
+    color:#94a3b8;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    font-size:13px;
+    z-index:2;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes spinReverse{
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+@keyframes pulseLogo{
+    50%{
+        transform:scale(1.05);
+    }
+}
+
+#thetaSplash.fade-out{
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .8s ease, visibility .8s ease;
+}
+
+.company-credit{
+    margin-top:12px;
+    margin-bottom:22px;
+    color:#cbd5e1;
+    font-size:15px;
+    line-height:1.4;
+    font-style:italic;
+}
+
+.tagline{
+    color:#94a3b8;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    font-size:20px;
+    margin-top:0;
+}
+
   </style>
 
   <script>
@@ -193,6 +331,33 @@
 </head>
 
 <body>
+<!-- Theta Splash Screen -->
+<div id="thetaSplash">
+    <div class="theta-glow"></div>
+
+    <img
+        src="{{ url_for('static', filename='logo.png') }}"
+        alt="Theta"
+        class="theta-logo"
+    >
+
+    <div class="theta-spinner">
+        <div class="spinner-one"></div>
+        <div class="spinner-two"></div>
+    </div>
+
+<h1>3CTool</h1>
+
+<p class="company-credit">
+    <i>The Latest Star in SSPL's Expanding Sky<br>
+    </i>
+</p>
+
+<p class="tagline">
+    Crop • Compress • Convert
+</p>
+</div>
+
 
   <!-- Door Reveal -->
   <section class="door-container">
@@ -224,7 +389,9 @@
         Your browser does not support the video tag.
       </video>
 
-      <a href="https://image-pdf-tool.onrender.com/" class="button-link">Open 3C Tool</a>
+      <a href="#" onclick="open3CTool(); return false;" class="button-link">
+    Open 3C Tool
+</a>
     </div>
   </div>
 
