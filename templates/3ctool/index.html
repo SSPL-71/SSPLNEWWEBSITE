@@ -384,10 +384,53 @@ function open3CTool() {
 
       <h2>🛠️ Explore 3CTool – Crop, Compress, Convert</h2>
 
-      <video controls playsinline>
-        <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+<!-- 3CTool Intro Video -->
+<div class="box" style="max-width:700px;margin:30px auto;">
+
+    <button
+        id="toggleVideoBtn"
+        type="button"
+        style="
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            background:#111827;
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+        ">
+        ▶ New to 3CTool? Watch the 2-minute Quick Start
+    </button>
+
+    <div
+        id="introVideoContainer"
+        style="
+            display:none;
+            margin-top:20px;
+            text-align:center;
+        ">
+
+        <div style="aspect-ratio:9/16;max-width:300px;margin:auto;">
+            <video
+                controls
+                playsinline
+                style="
+                    width:100%;
+                    height:100%;
+                    border-radius:12px;
+                    object-fit:cover;
+                ">
+                <source src="{{ url_for('static', filename='videos/3CTool.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+    </div>
+
+</div>
+
 
       <a href="#" onclick="open3CTool(); return false;" class="button-link">
     Open 3C Tool
