@@ -60,6 +60,27 @@ function open3CTool() {
 }
 </script>
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btn = document.getElementById("toggleVideoBtn");
+    const container = document.getElementById("introVideoContainer");
+
+    if(btn && container){
+        btn.addEventListener("click", () => {
+
+            if(container.style.display === "none" || !container.style.display){
+                container.style.display = "block";
+                btn.innerHTML = "▼ Hide Quick Start Video";
+            } else {
+                container.style.display = "none";
+                btn.innerHTML = "▶ New to 3CTool? Watch the 2-minute Quick Start";
+            }
+
+        });
+    }
+
+});
+
 
   <link rel="icon" href="https://ss-services.co.in/favicon.ico" type="image/x-icon">
   <link rel="canonical" href="https://ss-services.co.in/3ctool">
