@@ -95,13 +95,17 @@ function open3CTool() {
       --max-width: 900px;
     }
 
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background:
+        radial-gradient(circle at top,
+        #dbeafe 0%,
+        #eff6ff 35%,
+        #f8fafc 100%);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
 
     /* REDUCED DOOR HEIGHT + FIXED POSITION */
     .door-container {
@@ -172,7 +176,8 @@ function open3CTool() {
 
     .container {
       max-width: var(--max-width);
-      background: white;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
       padding: 30px;
       margin: 30px auto;
       border-radius: var(--radius);
@@ -341,15 +346,7 @@ function open3CTool() {
 
   </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.querySelector(".left-door").style.transform = "rotateY(-90deg)";
-        document.querySelector(".right-door").style.transform = "rotateY(90deg)";
-        document.querySelector(".brand").style.opacity = 1;
-      }, 400);
-    });
-  </script>
+
 </head>
 
 <body>
@@ -393,7 +390,7 @@ function open3CTool() {
 
   <!-- Sticky Navigation -->
   <div class="sticky-nav">
-    <a href="https://ss-services.co.in">← Back to Main Page</a>
+    <a href="https://ss-services.co.in">← Home Page</a>
   </div>
 
   <!-- Scrollable Content -->
