@@ -308,7 +308,7 @@ body {
             text-align:center;
         ">
 
-        <div style="aspect-ratio:9/16;max-width:300px;margin:auto;">
+        <div style="aspect-ratio:16/9;max-width:300px;margin:auto;">
             <video
                 controls
                 playsinline
@@ -316,7 +316,7 @@ body {
                     width:100%;
                     height:100%;
                     border-radius:12px;
-                    object-fit:cover;
+                    object-fit:contain;
                 ">
                 <source src="{{ url_for('static', filename='videos/thetasign.mp4') }}" type="video/mp4">
                 Your browser does not support the video tag.
