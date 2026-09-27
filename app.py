@@ -40,7 +40,7 @@ def snapit2pdf():
     return render_template('snapit2pdf/index.html')
 
 @app.route('/thetasign')
-def snapit2pdf():
+def thetasign():
     return render_template('thetasign/index.html')
 
 @app.route('/sw.js')
