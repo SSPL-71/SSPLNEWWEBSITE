@@ -1,4 +1,4 @@
-# Updated 29 Sept 2025 — clarity restored
+# Updated 03 Oct 2026 — clarity restored
 
 User-agent: *
 Disallow:
