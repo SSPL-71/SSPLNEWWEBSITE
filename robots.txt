@@ -3,4 +3,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.ss-services.co.in/sitemap.xml
+Sitemap: https://ss-services.co.in/sitemap.xml
