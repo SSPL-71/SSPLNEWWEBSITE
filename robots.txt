@@ -1,6 +1,6 @@
-# Updated 03 Oct 2026 — updated today
+# Updated 07 Oct 2026 — updated today
 
 User-agent: *
 Disallow:
 
-Sitemap: https://ss-services.co.in/sitemap.xml
+Sitemap: https://www.ss-services.co.in/sitemap.xml
