@@ -35,6 +35,70 @@
 
 <h1><center>SARVASIDDHANTA SERVICES PRIVATE LIMITED</center></h1>
 
+
+
+<!-- PTS Framework Intro Video -->
+<div class="box" style="max-width:700px;margin:30px auto;">
+
+    <button
+        id="togglePTSVideoBtn"
+        type="button"
+        style="
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            background:#111827;
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+        ">
+        ▶ Discover Our PTS Investigative Framework
+    </button>
+
+    <div
+        id="PTSVideoContainer"
+        style="
+            display:none;
+            margin-top:20px;
+            text-align:center;
+        ">
+
+        <div style="aspect-ratio:16/9;width:100%;">
+            <iframe
+                src="https://www.youtube.com/embed/wgWO8c0FCDo"
+                title="SSPL - PTS Investigative Framework"
+                style="
+                    width:100%;
+                    height:100%;
+                    border:0;
+                    border-radius:12px;
+                "
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+</div>
+
+<script>
+document.getElementById("togglePTSVideoBtn").addEventListener("click", function () {
+    const videoContainer = document.getElementById("PTSVideoContainer");
+
+    if (videoContainer.style.display === "none") {
+        videoContainer.style.display = "block";
+        this.innerHTML = "▼ Hide PTS Framework Video";
+    } else {
+        videoContainer.style.display = "none";
+        this.innerHTML = "▶ Discover Our PTS Investigative Framework";
+    }
+});
+</script>
+
+
+
 <!-- SECTION: MEANING + PHILOSOPHY -->
 
 <section style="background-color: #f4f4f4; padding: 50px 20px;">
@@ -84,41 +148,6 @@
       </div>
 
     </div>
-  </div>
-</section>
-
-
-<!-- PTS INVESTIGATIVE FRAMEWORK -->
-<section style="background-color: #172D43; padding: 40px 20px;">
-  <div style="max-width: 1000px; margin: auto; text-align: center;">
-
-    <!-- PTS Video -->
-    <div style="
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    ">
-      <iframe
-        src="https://www.youtube.com/embed/wgWO8c0FCDo"
-        title="SSPL - PTS Investigative Framework"
-        style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: 0;
-        "
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
-    </div>
-
   </div>
 </section>
 
